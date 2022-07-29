@@ -1,13 +1,20 @@
 import { useState } from 'react'
+import { Button, Input } from 'components'
 import { User } from 'modules'
 import { useGetUserQuery } from 'modules/users/hooks'
 
 export const Search: React.FC = () => {
-  const [searchInput, setSearchInput] = useState<number>(1)
-  const { data: userData, isLoading, refetch } = useGetUserQuery(searchInput)
+  const [searchInput, setSearchInput] = useState('')
+  const {
+    data: userData,
+    isLoading,
+    refetch
+  } = useGetUserQuery({
+    id: searchInput
+  })
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value as unknown as number)
+    setSearchInput(e.target.value)
   }
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,14 +24,19 @@ export const Search: React.FC = () => {
 
   return (
     <div style={{ marginBottom: '100px' }}>
-      <form onSubmit={submit}>
-        <input
+      <form
+        onSubmit={submit}
+        style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}
+      >
+        <Input
           type="numeric"
           placeholder="ID"
-          value={searchInput}
+          value={searchInput ?? ''}
           onChange={handleSearchInputChange}
         />
-        <button type="submit">Search</button>
+        <Button type="submit" disabled={isLoading}>
+          Search
+        </Button>
       </form>
 
       {isLoading ? (

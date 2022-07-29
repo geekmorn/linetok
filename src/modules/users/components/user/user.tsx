@@ -1,14 +1,23 @@
-type UserProps = {
-  id: number
-  name: string
-  age: number
-  isActive: boolean
+import { IUser } from 'common/interfaces'
+
+interface UserProps extends IUser {
+  onClick?: () => void
 }
 
-export const User: React.FC<UserProps> = ({ id, name, age, isActive }) => (
+export const User: React.FC<UserProps> = ({
+  // IUser
+  id,
+  name,
+  age,
+  isActive,
+  // Props
+  onClick
+}) => (
   <div
+    onClick={onClick}
     style={{
       border: '1px solid black',
+      padding: '25px 55px',
       maxWidth: '300px',
       display: 'grid',
       placeItems: 'center',

@@ -1,32 +1,37 @@
 import { User } from 'modules'
-import { Search } from './components'
 import { useGetUsersQuery } from './hooks'
 
 export const Users: React.FC = () => {
   const { data, isLoading } = useGetUsersQuery()
 
-  const isEmpty = !data || data.length === 0
+  const noUsersDataReceived = !data || data.length === 0
+
+  const clickUser = (id: string, name: string) => {
+    alert(`User with ${id} was named ${name} clicked`)
+  }
 
   return (
-    <>
-      <>
-        <Search />
-      </>
+    <div
+      style={{
+        display: 'grid',
+        placeItems: 'center'
+      }}
+    >
       {isLoading ? (
-        <div>LOADING USERS.......</div>
-      ) : isEmpty ? (
-        <div>No users found.</div>
+        <div style={{ fontSize: '75px' }}>
+          <h1>🫥</h1>
+        </div>
+      ) : noUsersDataReceived ? (
+        <div>No products found. Please, come later! 🤩</div>
       ) : (
         data?.map((user) => (
           <User
+            onClick={() => clickUser(user.id, user.name)}
             key={user.id}
-            id={user.id}
-            name={user.name}
-            age={user.age}
-            isActive={user.isActive}
+            {...user}
           />
         ))
       )}
-    </>
+    </div>
   )
 }

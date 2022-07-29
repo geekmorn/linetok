@@ -1,5 +1,5 @@
 import { httpClient } from 'common/client'
-import { IUser } from 'common/types'
+import { IUser } from 'common/interfaces'
 
 export class UsersService {
   public static async getAll() {
@@ -11,10 +11,12 @@ export class UsersService {
     }
   }
 
-  public static async get(id: number) {
+  public static async get(id: string) {
     try {
-      const response = await httpClient.get<IUser>(`/users/${id}`)
-      return response.data
+      if (id) {
+        const response = await httpClient.get<IUser>(`/users/${id}`)
+        return response.data
+      }
     } catch (e) {
       console.error(e)
     }

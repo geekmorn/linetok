@@ -1,4 +1,4 @@
-import { UsersService } from 'common/services'
+import { UsersService } from 'modules/users/services'
 import { useQuery } from '@tanstack/react-query'
 
 export const useGetUsersQuery = () => {

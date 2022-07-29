@@ -1,6 +1,11 @@
-import { UsersService } from 'common/services'
+import { UsersService } from 'modules/users/services'
 import { useQuery } from '@tanstack/react-query'
 
-export const useGetUserQuery = (id: number) => {
+interface Parameters {
+  id: string
+}
+
+export const useGetUserQuery = (parameters: Parameters) => {
+  const { id } = parameters
   return useQuery(['Get user by ID'], () => UsersService.get(id))
 }
