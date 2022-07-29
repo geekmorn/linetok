@@ -1,4 +1,5 @@
 import { IProduct } from 'common/interfaces'
+import { Heading, Stack, Text } from '@chakra-ui/react'
 
 interface ProductProps extends IProduct {
   onClick?: () => void
@@ -13,9 +14,9 @@ export const Product: React.FC<ProductProps> = ({
   // Props
   onClick
 }) => (
-  <div
+  <Stack
     onClick={onClick}
-    style={{
+    sx={{
       border: '1px solid black',
       padding: '25px 55px',
       maxWidth: '300px',
@@ -24,10 +25,12 @@ export const Product: React.FC<ProductProps> = ({
       marginBottom: '5px'
     }}
   >
-    <h1>Product</h1>
-    <span>ID: {id}</span>
-    <span>Name: {name}</span>
-    <span>Price: {price}</span>
-    <span>Is Available: {isAvailable ? 'Yes' : 'No'}</span>
-  </div>
+    <Stack>
+      <Heading>Product</Heading>
+      <Text>ID: {id}</Text>
+      <Text>Name: {name}</Text>
+      <Text>Price: {price}</Text>
+      <Text>Is Available: {isAvailable ? 'Yes' : 'No'}</Text>
+    </Stack>
+  </Stack>
 )

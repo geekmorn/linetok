@@ -16,12 +16,15 @@ export const User: React.FC<UserProps> = ({
   <div
     onClick={onClick}
     style={{
-      border: '1px solid black',
-      padding: '25px 55px',
-      maxWidth: '300px',
-      display: 'grid',
+      border: '3px solid black',
+      padding: '50px',
+      maxWidth: '400px',
+      width: '100%',
+      display: 'flex',
       placeItems: 'center',
-      marginBottom: '5px'
+      flexDirection: 'column',
+      gap: '15px',
+      marginBottom: '15px'
     }}
   >
     <h1>User</h1>

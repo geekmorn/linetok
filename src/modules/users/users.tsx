@@ -13,8 +13,10 @@ export const Users: React.FC = () => {
   return (
     <div
       style={{
-        display: 'grid',
-        placeItems: 'center'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginBottom: '100px'
       }}
     >
       {isLoading ? (
@@ -25,11 +27,9 @@ export const Users: React.FC = () => {
         <div>No products found. Please, come later! 🤩</div>
       ) : (
         data?.map((user) => (
-          <User
-            onClick={() => clickUser(user.id, user.name)}
-            key={user.id}
-            {...user}
-          />
+          <div key={user.id} style={{ display: 'flex', width: '100%' }}>
+            <User onClick={() => clickUser(user.id, user.name)} {...user} />
+          </div>
         ))
       )}
     </div>
