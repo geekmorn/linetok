@@ -1,2 +1,5 @@
-export * from './input'
+export * from './box'
 export * from './button'
+export * from './center'
+export * from './input'
+export * from './text'

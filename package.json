@@ -11,18 +11,18 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.0.10",
+    "axios": "^0.27.2",
+    "classnames": "^2.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
     "@tanstack/react-query-devtools": "^4.0.10",
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@types/node": "^16.11.46",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "axios": "^0.27.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.7.4"
-  },
-  "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "eslint": "^8.20.0",
@@ -31,7 +31,10 @@
     "eslint-plugin-react": "^7.30.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "sass": "^1.54.0",
+    "typescript": "^4.7.4",
+    "typescript-plugin-css-modules": "^3.4.0"
   },
   "browserslist": {
     "production": [

@@ -7,7 +7,7 @@ export const Users: React.FC = () => {
   const noUsersDataReceived = !data || data.length === 0
 
   const clickUser = (id: string, name: string) => {
-    alert(`User with ${id} was named ${name} clicked`)
+    alert(`User with id '${id}' and name '${name}' clicked`)
   }
 
   return (
@@ -19,7 +19,7 @@ export const Users: React.FC = () => {
     >
       {isLoading ? (
         <div style={{ fontSize: '75px' }}>
-          <h1>🫥</h1>
+          <h1>🫥 Loading..</h1>
         </div>
       ) : noUsersDataReceived ? (
         <div>No products found. Please, come later! 🤩</div>

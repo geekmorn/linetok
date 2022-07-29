@@ -1,6 +1,8 @@
-import { ProductsService } from 'modules/products/services'
+import { useId } from 'react'
+import { products } from 'modules/products/services'
 import { useQuery } from '@tanstack/react-query'
 
 export const useGetProductsQuery = () => {
-  return useQuery(['Get all products'], () => ProductsService.getAll())
+  const uid = useId()
+  return useQuery(['Get all products', uid], () => products.getAll())
 }

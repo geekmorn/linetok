@@ -7,14 +7,14 @@ export const Products: React.FC = () => {
   const noProductsDataReceived = !data || data.length === 0
 
   const clickProduct = (id: string, name: string) => {
-    alert(`Product with ${id} was named ${name} clicked`)
+    alert(`Product with id '${id}' and name '${name}' clicked`)
   }
 
   return (
     <div style={{ display: 'grid', placeItems: 'center' }}>
       {isLoading ? (
         <div style={{ fontSize: '75px' }}>
-          <h1>🫥</h1>
+          <h1>🫥 Loading..</h1>
         </div>
       ) : noProductsDataReceived ? (
         <div>No products found. Please, come later! 🤩</div>

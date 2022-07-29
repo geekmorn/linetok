@@ -1,6 +1,8 @@
-import { UsersService } from 'modules/users/services'
+import { useId } from 'react'
+import { users } from 'modules/users/services'
 import { useQuery } from '@tanstack/react-query'
 
 export const useGetUsersQuery = () => {
-  return useQuery(['Get all users'], () => UsersService.getAll())
+  const uid = useId()
+  return useQuery(['Get all users', uid], () => users.getAll())
 }

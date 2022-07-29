@@ -16,9 +16,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
-  "include": ["src",  "**/*.ts", "**/*.tsx"],
+  "include": ["src",  "**/*.ts", "**/*.tsx", "**/*.d.ts"],
   "exclude": [
     "node_modules"
   ],

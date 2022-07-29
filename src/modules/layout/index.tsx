@@ -1,14 +1,13 @@
 import { PropsWithChildren } from 'react'
+import { Center } from 'components'
 
 export const MainLayout: React.FC<PropsWithChildren> = ({ children }) => (
-  <div
-    style={{
-      display: 'flex',
-      alignContent: 'center',
-      justifyContent: 'center',
-      gap: '50px'
+  <Center
+    sx={{
+      gap: '50px',
+      flexDirection: 'column'
     }}
   >
     {children}
-  </div>
+  </Center>
 )
