@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import { IProduct } from 'common/interfaces'
-import { products } from 'modules/products/services'
+import { products } from 'modules/products/service'
 import { useMutation } from '@tanstack/react-query'
 
 export const useAddProductMutation = () => {

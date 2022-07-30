@@ -11,6 +11,7 @@ export const Products: React.FC = () => {
   const clickProduct = (id: string, name: string) => {
     alert(`Product with id '${id}' and name '${name}' clicked`)
   }
+
   return (
     <Center>
       <Stack>
