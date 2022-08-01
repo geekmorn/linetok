@@ -1,6 +1,7 @@
 {
   "name": "linetok-frontend",
   "version": "0.1.0",
+  "proxy": "http://backend:8080/",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
