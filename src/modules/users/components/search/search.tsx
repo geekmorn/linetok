@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Button, Input } from 'components'
 import { User } from 'modules'
 import { useGetUserQuery } from 'modules/users/hooks'
+import { Button, Input } from '@chakra-ui/react'
 
 export const Search: React.FC = () => {
   const [searchInput, setSearchInput] = useState('')

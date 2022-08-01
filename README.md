@@ -56,6 +56,7 @@ Example: runs prettier, eslint before you pushed your changes to git.
 **pages** - `/src/pages/` is a place for Pages, which are built by modules. Example: HomePage, WeatherPage, CartPage.
 
 ## API queries
+
 ## `/src/common/service`
 
 Service is a part of the app, which is responsible for fetching data from the server.

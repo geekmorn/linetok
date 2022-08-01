@@ -17,11 +17,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ]
+    "noUnusedParameters": true,
   },
   "include": ["src",  "**/*.ts", "**/*.tsx", "**/*.d.ts"],
   "exclude": [

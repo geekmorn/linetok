@@ -1,6 +1,5 @@
 import { Product } from 'modules'
 import { Center, Stack, Text } from '@chakra-ui/react'
-import { ProductCreationForm } from './components'
 import { useGetProductsQuery } from './hooks'
 
 export const Products: React.FC = () => {

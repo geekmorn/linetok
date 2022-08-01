@@ -5,7 +5,7 @@ import { HomePage, ProductsPage, UsersPage } from 'pages'
 import { routes } from './routes'
 
 export const RootRouter: React.FC = () => (
-  <Suspense fallback={<span>loading...</span>}>
+  <Suspense fallback={<span>loading page...</span>}>
     <Routes>
       <Route element={<MainLayout />}>
         <Route path={routes.home} element={<HomePage />} />

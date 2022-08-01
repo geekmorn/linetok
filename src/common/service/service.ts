@@ -1,4 +1,4 @@
-import { httpClient } from 'common/client'
+import { httpClient } from 'common/clients'
 
 export class Service<T extends { id: string }> {
   constructor(private endpoint: string) {}

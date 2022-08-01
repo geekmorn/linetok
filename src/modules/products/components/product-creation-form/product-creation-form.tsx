@@ -1,26 +1,40 @@
-import { useCallback, useId, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IProduct } from 'common/interfaces'
 import {
   useAddProductMutation,
   useGetProductsQuery
 } from 'modules/products/hooks'
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Stack,
+  useId
+} from '@chakra-ui/react'
 
 export const ProductCreationForm: React.FC = () => {
   const uid = useId()
 
-  const [formData, setFormData] = useState<IProduct>({ id: uid } as IProduct)
+  const [formData, setFormData] = useState<IProduct>({
+    id: uid,
+    name: '',
+    price: 0,
+    isAvailable: true
+  })
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm({
-    defaultValues: formData
-  })
+  } = useForm<IProduct>()
 
-  const { data: products, refetch: productsRefetch } = useGetProductsQuery()
+  const { data: products, refetch } = useGetProductsQuery()
   const { mutateAsync, isLoading: isMutationLoading } = useAddProductMutation()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,62 +45,81 @@ export const ProductCreationForm: React.FC = () => {
   }
 
   const onSubmit = useCallback(
-    async (data: IProduct) => {
-      await mutateAsync(data)
+    async (payload: IProduct) => {
+      await mutateAsync(payload)
       reset()
-      productsRefetch()
+      refetch()
       alert('Product added successfully!')
     },
     [products]
   )
 
-  const onError = useCallback((error: typeof errors) => {
-    console.error(error)
-  }, [])
-
   return (
-    <form
-      onSubmit={handleSubmit(
-        (formData) => onSubmit(formData as IProduct),
-        onError
-      )}
+    <FormControl
+      as="form"
+      onSubmit={handleSubmit((formData) => onSubmit(formData))}
+      sx={{
+        maxWidth: '250px',
+        margin: '0 auto'
+      }}
     >
-      <label htmlFor="name">Product name</label>
-      <input
-        {...register('name', { required: true })}
+      <FormLabel htmlFor="name">Product name</FormLabel>
+      <Input
+        {...register('name', {
+          required: true,
+          minLength: {
+            value: 3,
+            message: 'Name must be at least 3 characters long'
+          },
+          maxLength: {
+            value: 20,
+            message: 'Name must be at most 20 characters long'
+          }
+        })}
         name="name"
-        id="name"
-        placeholder="Papuga!"
+        id={`product--${uid}--name`}
+        placeholder="Papuga"
         onChange={handleChange}
         value={formData.name}
       />
-      <label htmlFor="price">Price</label>
-      <input
-        {...register('price', { required: true })}
-        name="price"
-        id="price"
-        type="number"
-        placeholder="$6"
-        onChange={handleChange}
-        value={formData.price}
-      />
-
-      <label htmlFor="isAvailable">Is product available?</label>
-      <input
-        {...register('isAvailable')}
-        id="isAvailable"
-        type="checkbox"
-        placeholder="true"
-        onChange={handleChange}
-      />
-
-      <button type="submit" disabled={isMutationLoading}>
-        Submit
-      </button>
-
       {errors.name && <p>Name is required</p>}
+
+      <FormLabel htmlFor="price">Price</FormLabel>
+      <InputGroup>
+        <InputLeftElement>$</InputLeftElement>
+        <Input
+          {...register('price', { required: true })}
+          id={`product--${uid}--price`}
+          type="number"
+          placeholder="666"
+          onChange={handleChange}
+          value={formData.price}
+        />
+      </InputGroup>
       {errors.price && <p>Price is required</p>}
-      {errors.isAvailable && <p>Is Available is required</p>}
-    </form>
+
+      <Checkbox
+        {...register('isAvailable')}
+        name="isAvailable"
+        id={`product--${uid}--isAvailable`}
+        type="checkbox"
+        defaultChecked={true}
+        onChange={handleChange}
+        checked={formData.isAvailable}
+        sx={{
+          display: 'flex',
+          width: '100%',
+          margin: '15px 0'
+        }}
+      >
+        Available
+      </Checkbox>
+
+      <Stack>
+        <Button type="submit" disabled={isMutationLoading}>
+          Submit
+        </Button>
+      </Stack>
+    </FormControl>
   )
 }
