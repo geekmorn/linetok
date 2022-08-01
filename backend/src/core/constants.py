@@ -9,7 +9,7 @@ DEBUG = True
 
 ROUTE_PREFIX = "/api"
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DB_URL")
 
 
 class ROLE:

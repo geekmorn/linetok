@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field
 from pydantic import BaseModel
-from src.core.constans import ROLE
+from src.core.constants import ROLE
 
 
 class User(SQLModel, table=True):

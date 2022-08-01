@@ -1,5 +1,5 @@
 import uvicorn
-from src.core.constans import HOST, PORT, DEBUG
+from src.core.constants import HOST, PORT, DEBUG
 
 
 def start_app():
