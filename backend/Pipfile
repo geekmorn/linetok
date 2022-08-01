@@ -4,13 +4,22 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = "*"
-uvicorn = "*"
-sqlalchemy = "*"
-python-dotenv = "*"
-sqlmodel = "*"
-aiosqlite = "*"
-greenlet = "*"
+fastapi = "==0.79.0"
+uvicorn = "==0.18.2"
+sqlalchemy = "==1.4.39"
+python-dotenv = "==0.20.0"
+sqlmodel = "==0.0.6"
+aiosqlite = "==0.17.0"
+greenlet = "==1.1.2"
+anyio = "==3.6.1"
+click = "==8.1.3"
+h11 = "==0.13.0"
+idna = "==3.3"
+pydantic = "==1.9.1"
+sniffio = "==1.2.0"
+sqlalchemy2-stubs = "==0.0.2a24"
+starlette = "==0.19.1"
+typing-extensions = "==4.3.0"
 
 [dev-packages]
 
