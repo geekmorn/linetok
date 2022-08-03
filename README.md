@@ -1,13 +1,15 @@
 # Linetok Monorepo
 
 ## Run
+
 *todo...*
 
 ## Deploy
+
 *todo...*
 
-
 ## Frontend tech stack
+
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [React](https://reactjs.org/)
 - *todo...*
@@ -19,5 +21,6 @@
 - *todo...*
 
 ## Database
+
 - [PostgreSQL](https://www.postgresql.org/)
 - *todo...*
