@@ -1,11 +1,11 @@
-import { IUser } from 'common/interfaces'
+import { UserType } from 'common/types'
 
-interface UserProps extends IUser {
+type UserProps = UserType & {
   onClick?: () => void
 }
 
 export const User: React.FC<UserProps> = ({
-  // IUser
+  // UserType
   id,
   name,
   age,

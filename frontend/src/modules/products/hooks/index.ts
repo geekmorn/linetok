@@ -1,3 +1,2 @@
-export * from './use-get-products.query'
-
-export * from './use-add-product.mutation'
+export * from './mutations'
+export * from './queries'

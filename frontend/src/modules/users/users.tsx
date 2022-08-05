@@ -1,37 +1,33 @@
-import { User } from 'modules'
+import { Stack, Text } from '@chakra-ui/react'
+import { User } from './components'
 import { useGetUsersQuery } from './hooks'
 
 export const Users: React.FC = () => {
   const { data, isLoading } = useGetUsersQuery()
 
-  const noUsersDataReceived = !data || data.length === 0
+  const noDataReceived = !data || data.length === 0
 
-  const clickUser = (id: string, name: string) => {
+  const openUser = (id: string, name: string) => {
     alert(`User with id '${id}' and name '${name}' clicked`)
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginBottom: '100px'
-      }}
-    >
+    <>
       {isLoading ? (
-        <div style={{ fontSize: '75px' }}>
-          <h1>🫥 Loading..</h1>
-        </div>
-      ) : noUsersDataReceived ? (
-        <div>No products found. Please, come later! 🤩</div>
+        <Stack style={{ fontSize: '75px' }}>
+          <Text>🫥 Loading..</Text>
+        </Stack>
+      ) : noDataReceived ? (
+        <Text>No users found :(</Text>
       ) : (
         data?.map((user) => (
-          <div key={user.id} style={{ display: 'flex', width: '100%' }}>
-            <User onClick={() => clickUser(user.id, user.name)} {...user} />
-          </div>
+          <User
+            onClick={() => openUser(user.id, user.name)}
+            key={user.id}
+            {...user}
+          />
         ))
       )}
-    </div>
+    </>
   )
 }

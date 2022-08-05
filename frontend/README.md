@@ -57,6 +57,18 @@ Example: runs prettier, eslint before you pushed your changes to git.
 
 ## API queries
 
-## `/src/common/service`
+### `/src/common/hooks/use-api.hook.ts`
 
-Service is a part of the app, which is responsible for fetching data from the server.
+The useApi is a useful helper, which allows you to make API queries.
+
+Example usage:
+
+```ts
+import { useApi } from 'common/hooks';
+
+const { get } = useApi<UserType>('/users')
+
+useQuery(
+  ['Get user by ID'],
+  () => get(id)
+)

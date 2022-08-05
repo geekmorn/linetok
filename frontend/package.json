@@ -8,7 +8,7 @@
     "build": "react-scripts build",
     "lint": "eslint . --fix --max-warnings=0",
     "format": "prettier . --write",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install front/.husky"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.4",

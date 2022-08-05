@@ -1,2 +1,2 @@
-export * from './use-get-users.query'
-export * from './use-get-user.query'
+export * from './mutations'
+export * from './queries'

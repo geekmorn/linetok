@@ -1,12 +1,12 @@
-import { IProduct } from 'common/interfaces'
+import { ProductType } from 'common/types'
 import { Heading, Stack, Text } from '@chakra-ui/react'
 
-interface ProductProps extends IProduct {
+type ProductProps = ProductType & {
   onClick?: () => void
 }
 
 export const Product: React.FC<ProductProps> = ({
-  // IProduct
+  // ProductType
   id,
   name,
   price,

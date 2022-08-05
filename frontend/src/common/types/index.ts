@@ -1,11 +1,11 @@
-export interface IUser {
+export type UserType = {
   id: string
   name: string
   age: number
   isActive: boolean
 }
 
-export interface IProduct {
+export type ProductType = {
   id: string
   name: string
   price: number

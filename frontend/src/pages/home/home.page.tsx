@@ -1,10 +1,9 @@
-import { Users } from 'modules'
-import { Center } from '@chakra-ui/react'
+import { Center, Text } from '@chakra-ui/react'
 
 export const HomePage: React.FC = () => {
   return (
     <Center>
-      <Users />
+      <Text>Welcome</Text>
     </Center>
   )
 }

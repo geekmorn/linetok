@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { IProduct } from 'common/interfaces'
+import { ProductType } from 'common/types'
 import {
-  useAddProductMutation,
+  useCreateProductMutation,
   useGetProductsQuery
 } from 'modules/products/hooks'
 import {
@@ -20,7 +20,7 @@ import {
 export const ProductCreationForm: React.FC = () => {
   const uid = useId()
 
-  const [formData, setFormData] = useState<IProduct>({
+  const [formData, setFormData] = useState<ProductType>({
     id: uid,
     name: '',
     price: 0,
@@ -32,10 +32,11 @@ export const ProductCreationForm: React.FC = () => {
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<IProduct>()
+  } = useForm<ProductType>()
 
   const { data: products, refetch } = useGetProductsQuery()
-  const { mutateAsync, isLoading: isMutationLoading } = useAddProductMutation()
+  const { mutateAsync, isLoading: isMutationLoading } =
+    useCreateProductMutation()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -45,7 +46,7 @@ export const ProductCreationForm: React.FC = () => {
   }
 
   const onSubmit = useCallback(
-    async (payload: IProduct) => {
+    async (payload: ProductType) => {
       await mutateAsync(payload)
       reset()
       refetch()
@@ -77,7 +78,7 @@ export const ProductCreationForm: React.FC = () => {
           }
         })}
         name="name"
-        id={`product--${uid}--name`}
+        id={`product_name_${uid}`}
         placeholder="Papuga"
         onChange={handleChange}
         value={formData.name}
@@ -89,7 +90,7 @@ export const ProductCreationForm: React.FC = () => {
         <InputLeftElement>$</InputLeftElement>
         <Input
           {...register('price', { required: true })}
-          id={`product--${uid}--price`}
+          id={`product_price_${uid}`}
           type="number"
           placeholder="666"
           onChange={handleChange}
@@ -101,7 +102,7 @@ export const ProductCreationForm: React.FC = () => {
       <Checkbox
         {...register('isAvailable')}
         name="isAvailable"
-        id={`product--${uid}--isAvailable`}
+        id={`product_isAvailable_${uid}`}
         type="checkbox"
         defaultChecked={true}
         onChange={handleChange}

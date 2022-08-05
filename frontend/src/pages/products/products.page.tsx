@@ -1,12 +1,12 @@
 import { Products } from 'modules'
 import { ProductCreationForm } from 'modules/products/components'
-import { Stack } from '@chakra-ui/react'
+import { Center } from '@chakra-ui/react'
 
 export const ProductsPage: React.FC = () => {
   return (
-    <Stack>
+    <Center sx={{ flexDirection: 'column', gap: '15px' }}>
       <ProductCreationForm />
       <Products />
-    </Stack>
+    </Center>
   )
 }
