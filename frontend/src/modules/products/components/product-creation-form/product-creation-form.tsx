@@ -5,6 +5,7 @@ import {
   useCreateProductMutation,
   useGetProductsQuery
 } from 'modules/products/hooks'
+import { useSnackbar } from 'notistack'
 import {
   Button,
   Checkbox,
@@ -19,6 +20,8 @@ import {
 
 export const ProductCreationForm: React.FC = () => {
   const uid = useId()
+
+  const { enqueueSnackbar } = useSnackbar()
 
   const [formData, setFormData] = useState<ProductType>({
     id: uid,
@@ -48,9 +51,9 @@ export const ProductCreationForm: React.FC = () => {
   const onSubmit = useCallback(
     async (payload: ProductType) => {
       await mutateAsync(payload)
-      reset()
+      reset(formData)
       refetch()
-      alert('Product added successfully!')
+      enqueueSnackbar('Product created.', { variant: 'success' })
     },
     [products]
   )

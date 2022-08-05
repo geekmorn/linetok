@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { queryClient } from 'common/clients'
+import { SnackbarProvider } from 'notistack'
 import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -12,10 +13,12 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
-          <App />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </ChakraProvider>
+        <SnackbarProvider maxSnack={3}>
+          <ChakraProvider>
+            <App />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ChakraProvider>
+        </SnackbarProvider>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>

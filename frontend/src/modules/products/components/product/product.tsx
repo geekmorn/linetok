@@ -3,6 +3,7 @@ import { AlertButton, Card, EditableInput } from 'components'
 import { Heading, Stack, Text } from '@chakra-ui/react'
 
 type ProductProps = ProductType & {
+  loading?: boolean
   onClick?: () => void
   onRemove?: () => void
 }
@@ -14,6 +15,7 @@ export const Product: React.FC<ProductProps> = ({
   price,
   isAvailable,
   // Props
+  loading,
   onClick,
   onRemove
 }) => (
@@ -21,6 +23,7 @@ export const Product: React.FC<ProductProps> = ({
     <Stack>
       <Stack sx={{ alignSelf: 'flex-end' }}>
         <AlertButton
+          loading={loading}
           onYes={onRemove}
           buttonHeader="X"
           alertHeader="Remove this product?"
