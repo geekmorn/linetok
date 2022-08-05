@@ -2,7 +2,7 @@ import { useApi } from 'common/hooks'
 import { UserType } from 'common/types'
 import { useQuery } from '@tanstack/react-query'
 
-interface Parameters {
+type Parameters = {
   id: string
 }
 
