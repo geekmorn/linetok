@@ -16,19 +16,18 @@ export const User: React.FC<UserProps> = ({
   <div
     onClick={onClick}
     style={{
-      border: '3px solid black',
-      padding: '50px',
-      maxWidth: '400px',
-      width: '100%',
+      border: '1px solid black',
       display: 'flex',
       placeItems: 'center',
       flexDirection: 'column',
+      padding: '10px',
       gap: '15px',
-      marginBottom: '15px'
+      minWidth: '200px'
     }}
   >
-    <h1>User</h1>
-    <span>ID: {id}</span>
+    <h1>
+      User <span>{id}</span>
+    </h1>
     <span>Name: {name}</span>
     <span>Age: {age}</span>
     <span>Is Active: {isActive ? 'Yes' : 'No'}</span>

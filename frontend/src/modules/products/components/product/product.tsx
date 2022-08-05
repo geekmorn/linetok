@@ -1,8 +1,9 @@
 import { ProductType } from 'common/types'
-import { Heading, Stack, Text } from '@chakra-ui/react'
+import { CloseButton, Heading, Stack, Text } from '@chakra-ui/react'
 
 type ProductProps = ProductType & {
   onClick?: () => void
+  onRemove?: () => void
 }
 
 export const Product: React.FC<ProductProps> = ({
@@ -12,25 +13,28 @@ export const Product: React.FC<ProductProps> = ({
   price,
   isAvailable,
   // Props
-  onClick
+  onClick,
+  onRemove
 }) => (
   <Stack
     onClick={onClick}
     sx={{
       border: '1px solid black',
-      padding: '25px 55px',
-      maxWidth: '300px',
-      display: 'grid',
-      placeItems: 'center',
-      marginBottom: '5px'
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '10px',
+      gap: '15px',
+      minWidth: '300px'
     }}
   >
     <Stack>
-      <Heading>Product</Heading>
-      <Text>ID: {id}</Text>
+      <Stack sx={{ alignSelf: 'flex-end' }} onClick={onRemove}>
+        <CloseButton size="sm" />
+      </Stack>
+      <Heading>Product {id}</Heading>
       <Text>Name: {name}</Text>
       <Text>Price: {price}</Text>
-      <Text>Is Available: {isAvailable ? 'Yes' : 'No'}</Text>
+      <Text>Available: {isAvailable ? 'Yes' : 'No'}</Text>
     </Stack>
   </Stack>
 )

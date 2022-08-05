@@ -1,4 +1,4 @@
-import { Stack, Text } from '@chakra-ui/react'
+import { Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react'
 import { User } from './components'
 import { useGetUsersQuery } from './hooks'
 
@@ -15,18 +15,18 @@ export const Users: React.FC = () => {
     <>
       {isLoading ? (
         <Stack style={{ fontSize: '75px' }}>
-          <Text>🫥 Loading..</Text>
+          <Spinner />
         </Stack>
       ) : noDataReceived ? (
         <Text>No users found :(</Text>
       ) : (
-        data?.map((user) => (
-          <User
-            onClick={() => openUser(user.id, user.name)}
-            key={user.id}
-            {...user}
-          />
-        ))
+        <Wrap>
+          {data.map((user) => (
+            <WrapItem key={user.id}>
+              <User onClick={() => openUser(user.id, user.name)} {...user} />
+            </WrapItem>
+          ))}
+        </Wrap>
       )}
     </>
   )
