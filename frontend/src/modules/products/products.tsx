@@ -13,7 +13,6 @@ export const Products: React.FC = () => {
     async (id: string) => {
       await mutateAsync(id)
       refetch()
-      alert('Product removed successfully!')
     },
     [products]
   )

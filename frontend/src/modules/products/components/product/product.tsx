@@ -1,6 +1,6 @@
 import { ProductType } from 'common/types'
-import { Card, EditableInput } from 'components'
-import { CloseButton, Heading, Stack, Text } from '@chakra-ui/react'
+import { AlertButton, Card, EditableInput } from 'components'
+import { Heading, Stack, Text } from '@chakra-ui/react'
 
 type ProductProps = ProductType & {
   onClick?: () => void
@@ -19,8 +19,13 @@ export const Product: React.FC<ProductProps> = ({
 }) => (
   <Card onClick={onClick}>
     <Stack>
-      <Stack sx={{ alignSelf: 'flex-end' }} onClick={onRemove}>
-        <CloseButton size="sm" />
+      <Stack sx={{ alignSelf: 'flex-end' }}>
+        <AlertButton
+          onYes={onRemove}
+          buttonHeader="X"
+          alertHeader="Remove this product?"
+          alertBody="This action can not be undone."
+        />
       </Stack>
       <Heading sx={{ textAlign: 'center' }}>Product {id}</Heading>
       <EditableInput value={name} />

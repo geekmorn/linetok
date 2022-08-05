@@ -64,11 +64,9 @@ The useApi is a useful helper, which allows you to make API queries.
 Example usage:
 
 ```ts
-import { useApi } from 'common/hooks';
+import { useApi } from 'common/hooks'
 
 const { get } = useApi<UserType>('/users')
 
-useQuery(
-  ['Get user by ID'],
-  () => get(id)
-)
+useQuery(['Get user by ID'], () => get(id))
+```
