@@ -1,11 +1,9 @@
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ProductType } from 'common/types'
-import {
-  useCreateProductMutation,
-  useGetProductsQuery
-} from 'modules/products/hooks'
+import { useCreateProductMutation } from 'modules/products/hooks'
 import { useSnackbar } from 'notistack'
+import { ProductsProps } from 'pages/admin/products'
 import {
   Button,
   Checkbox,
@@ -18,7 +16,10 @@ import {
   useId
 } from '@chakra-ui/react'
 
-export const ProductCreationForm: React.FC = () => {
+export const ProductCreationForm: React.FC<ProductsProps> = ({
+  data,
+  refetch
+}) => {
   const uid = useId()
 
   const { enqueueSnackbar } = useSnackbar()
@@ -37,7 +38,6 @@ export const ProductCreationForm: React.FC = () => {
     formState: { errors }
   } = useForm<ProductType>()
 
-  const { data: products, refetch } = useGetProductsQuery()
   const { mutateAsync, isLoading: isMutationLoading } =
     useCreateProductMutation()
 
@@ -55,13 +55,13 @@ export const ProductCreationForm: React.FC = () => {
       refetch()
       enqueueSnackbar('Product created.', { variant: 'success' })
     },
-    [products]
+    [data]
   )
 
   return (
     <FormControl
       as="form"
-      onSubmit={handleSubmit((formData) => onSubmit(formData))}
+      onSubmit={handleSubmit((formData: ProductType) => onSubmit(formData))}
       sx={{
         maxWidth: '250px',
         margin: '0 auto'

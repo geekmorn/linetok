@@ -1,6 +1,6 @@
 # Linetok **Frontend**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
 ## Available Scripts
 
@@ -54,6 +54,12 @@ Example: runs prettier, eslint before you pushed your changes to git.
 **modules** - `/src/modules/` are modules, which we use to implement a part of Page, for example: WeatherWidget, Layout, Router, Cart. Modules can build Pages either by implementing modules's logic or or by visualizing UI of Page.
 
 **pages** - `/src/pages/` is a place for Pages, which are built by modules. Example: HomePage, WeatherPage, CartPage.
+
+## Storage / state
+
+We use [Context API](https://reactjs.org/docs/context.html) to share state of the app.
+
+If you're looking for some data in the app, `/src/pages/` is an entry point for this, because the app uses SSR.
 
 ## API queries
 

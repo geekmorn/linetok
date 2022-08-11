@@ -1,15 +1,20 @@
 import { useCallback } from 'react'
+import { ProductType } from 'common/types'
 import { useSnackbar } from 'notistack'
+import { ProductsProps } from 'pages/admin/products'
 import { Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react'
 import { Product } from './components'
-import { useGetProductsQuery, useRemoveProductMutation } from './hooks'
+import { useRemoveProductMutation } from './hooks'
 
-export const Products: React.FC = () => {
+export const Products: React.FC<ProductsProps> = ({
+  data,
+  isLoading,
+  refetch
+}) => {
   const { enqueueSnackbar } = useSnackbar()
-  const { data: products, isLoading, refetch } = useGetProductsQuery()
   const { mutateAsync, isLoading: isRemoveLoading } = useRemoveProductMutation()
 
-  const noDataReceived = !products || products.length === 0
+  const noDataReceived = !data || data.length === 0
 
   const remove = useCallback(
     async (id: string) => {
@@ -17,7 +22,7 @@ export const Products: React.FC = () => {
       refetch()
       enqueueSnackbar('Product removed.', { variant: 'success' })
     },
-    [products]
+    [data]
   )
 
   return (
@@ -30,7 +35,7 @@ export const Products: React.FC = () => {
         <Text>No products found. Please, come later! 🤩</Text>
       ) : (
         <Wrap>
-          {products.map((product) => (
+          {data.map((product: ProductType) => (
             <WrapItem key={product.id}>
               <Product
                 onRemove={() => remove(product.id)}

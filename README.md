@@ -12,6 +12,7 @@
 
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) + [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
 
 ## Backend tech stack
 

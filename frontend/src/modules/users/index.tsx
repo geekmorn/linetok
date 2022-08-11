@@ -1,10 +1,9 @@
+import { UserType } from 'common/types'
+import { UsersProps } from 'pages/admin/users'
 import { Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react'
 import { User } from './components'
-import { useGetUsersQuery } from './hooks'
 
-export const Users: React.FC = () => {
-  const { data, isLoading } = useGetUsersQuery()
-
+export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
   const noDataReceived = !data || data.length === 0
 
   const openUser = (id: string, name: string) => {
@@ -21,7 +20,7 @@ export const Users: React.FC = () => {
         <Text>No users found :(</Text>
       ) : (
         <Wrap>
-          {data.map((user) => (
+          {data.map((user: UserType) => (
             <WrapItem key={user.id}>
               <User onClick={() => openUser(user.id, user.name)} {...user} />
             </WrapItem>

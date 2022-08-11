@@ -6,6 +6,8 @@ export const useApi = <T>(endpoint: string) => {
 
    Usage:
    const { get, getAll, create, update, remove } = useApi<UserType>("/users")
+
+   const users = getAll() 
   */
 
   const get = async (id: string) => {

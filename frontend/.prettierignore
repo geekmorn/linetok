@@ -1,4 +1,6 @@
 /build
+/dist
 /mock
 tsconfig.json
 /node_modules
+*.d.ts
