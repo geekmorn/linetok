@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ProductType } from 'common/types'
 import { useCreateProductMutation } from 'modules/products/hooks'
@@ -12,8 +12,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Stack,
-  useId
+  Stack
 } from '@chakra-ui/react'
 
 export const ProductCreationForm: React.FC<ProductsProps> = ({
@@ -21,7 +20,6 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({
   refetch
 }) => {
   const uid = useId()
-
   const { enqueueSnackbar } = useSnackbar()
 
   const [formData, setFormData] = useState<ProductType>({

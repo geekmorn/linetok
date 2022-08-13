@@ -16,14 +16,12 @@ export const routes = [
   }
 ] as const
 
-export const Navigation: React.FC = () => {
-  return (
-    <Center sx={{ gap: '30px', padding: '30px' }}>
-      {routes.map((route) => (
-        <Link key={route.path} href={route.path}>
-          {route.name}
-        </Link>
-      ))}
-    </Center>
-  )
-}
+export const Navigation: React.FC = () => (
+  <Center sx={{ gap: '30px', padding: '30px' }}>
+    {routes.map((route) => (
+      <Link key={route.path} href={route.path}>
+        {route.name}
+      </Link>
+    ))}
+  </Center>
+)

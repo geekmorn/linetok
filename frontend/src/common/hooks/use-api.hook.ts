@@ -1,18 +1,18 @@
 import { httpClient } from 'common/clients'
 
-export const useApi = <T>(endpoint: string) => {
+export const useApi = <Interface>(endpoint: string) => {
   /*
    The useApi is a custom hook that allows to easily use fetcher functions.
 
    Usage:
    const { get, getAll, create, update, remove } = useApi<UserType>("/users")
 
-   const users = getAll() 
+   const users = getAll()
   */
 
   const get = async (id: string) => {
     try {
-      const response = await httpClient.get<T>(`${endpoint}/${id}`)
+      const response = await httpClient.get<Interface>(`${endpoint}/${id}`)
       return response.data
     } catch (e) {
       console.error(e)
@@ -21,25 +21,28 @@ export const useApi = <T>(endpoint: string) => {
 
   const getAll = async () => {
     try {
-      const response = await httpClient.get<T[]>(endpoint)
+      const response = await httpClient.get<Interface[]>(endpoint)
       return response.data
     } catch (e) {
       console.error(e)
     }
   }
 
-  const create = async (payload: T) => {
+  const create = async (payload: Interface) => {
     try {
-      const response = await httpClient.post<T>(endpoint, payload)
+      const response = await httpClient.post<Interface>(endpoint, payload)
       return response.data
     } catch (e) {
       console.error(e)
     }
   }
 
-  const update = async (id: string, payload: T) => {
+  const update = async (id: string, payload: Interface) => {
     try {
-      const response = await httpClient.put<T>(`${endpoint}/${id}`, payload)
+      const response = await httpClient.put<Interface>(
+        `${endpoint}/${id}`,
+        payload
+      )
       return response.data
     } catch (e) {
       console.error(e)
@@ -48,7 +51,7 @@ export const useApi = <T>(endpoint: string) => {
 
   const remove = async (id: string) => {
     try {
-      const response = await httpClient.delete<T>(`${endpoint}/${id}`)
+      const response = await httpClient.delete<Interface>(`${endpoint}/${id}`)
       return response.data
     } catch (e) {
       console.error(e)
