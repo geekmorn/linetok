@@ -4,7 +4,7 @@ from src.core.constants import HOST, PORT, DEBUG
 
 def start_app():
     uvicorn.run(
-        "src.app:app",
+        "src.main:app",
         host=HOST,
         port=PORT,
         reload=DEBUG

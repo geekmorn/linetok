@@ -1,21 +1,14 @@
-from xml.etree.ElementInclude import include
 from fastapi import APIRouter
-from ..core.constants import ROUTE_PREFIX
-# from .category import category_router
-# from .product import product_router
-from .user import user_router
+from src.core.constants import ROUTE_PREFIX
+from src.core.db import Base, engine
 from .auth import auth_router
+from .user import user_router
 
 api_router = APIRouter(
     prefix=ROUTE_PREFIX
 )
 
-routers = [
-    # category_router,
-    # product_router,
-    user_router,
-    auth_router,
-]
+Base.metadata.create_all(bind=engine)
 
-for router in routers:
-    api_router.include_router(router)
+api_router.include_router(auth_router)
+api_router.include_router(user_router)

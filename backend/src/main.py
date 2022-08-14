@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from .core.db import connection_db
 
 
 def create_app() -> FastAPI:
@@ -21,7 +20,3 @@ def _include_routers(app_: FastAPI):
 
 app = create_app()
 
-
-@app.on_event("startup")
-async def on_startup():
-    await connection_db()

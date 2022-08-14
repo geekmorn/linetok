@@ -11,7 +11,5 @@ ROUTE_PREFIX = "/api"
 
 DATABASE_URL = os.getenv("DB_URL")
 
+JWT_SECRET = os.getenv("JWT_SECRET")
 
-class ROLE:
-    USER = "user"
-    ADMIN = "admin"
