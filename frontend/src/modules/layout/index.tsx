@@ -29,7 +29,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     <header>
       <Navigation />
     </header>
-    <Container maxW={1280} minH="100vh">
+    <Container maxW={1280} minH="100vh" as="section">
       {children}
     </Container>
     <footer>

@@ -6,7 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
+const Linetok = ({ Component, pageProps }: AppProps) => (
   <QueryClientProvider client={queryClient}>
     <SnackbarProvider maxSnack={3}>
       <ChakraProvider>
@@ -19,4 +19,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
   </QueryClientProvider>
 )
 
-export default MyApp
+export default Linetok
