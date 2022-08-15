@@ -36,7 +36,7 @@ export const Products: React.FC<ProductsProps> = ({
       ) : (
         <Wrap>
           {data.map((product: ProductType) => (
-            <WrapItem key={product.id}>
+            <WrapItem key={`${product.id} <Product />`}>
               <Product
                 onRemove={() => remove(product.id)}
                 loading={isRemoveLoading}

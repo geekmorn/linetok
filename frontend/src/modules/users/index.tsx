@@ -21,7 +21,7 @@ export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
       ) : (
         <Wrap>
           {data.map((user: UserType) => (
-            <WrapItem key={user.id}>
+            <WrapItem key={`${user.id} <User />`}>
               <User onClick={() => openUser(user.id, user.name)} {...user} />
             </WrapItem>
           ))}
