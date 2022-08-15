@@ -3,5 +3,6 @@
 /mock
 tsconfig.json
 /node_modules
-*.config.ts
 *.d.ts
+.next
+_

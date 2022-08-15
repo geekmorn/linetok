@@ -15,10 +15,7 @@ import {
   Stack
 } from '@chakra-ui/react'
 
-export const ProductCreationForm: React.FC<ProductsProps> = ({
-  data,
-  refetch
-}) => {
+export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
   const uid = useId()
   const { enqueueSnackbar } = useSnackbar()
 
@@ -53,7 +50,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({
       refetch()
       enqueueSnackbar('Product created.', { variant: 'success' })
     },
-    [data]
+    [enqueueSnackbar, formData, mutateAsync, refetch, reset]
   )
 
   return (

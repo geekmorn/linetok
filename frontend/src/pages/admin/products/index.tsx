@@ -30,6 +30,7 @@ const ProductsPage: NextPage<ProductsProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { getAll } = useApi<ProductType>('/products')
   const data = await getAll()
 

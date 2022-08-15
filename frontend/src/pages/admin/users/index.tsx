@@ -28,6 +28,7 @@ const UsersPage: NextPage<UsersProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { getAll } = useApi<UserType>('/users')
   const data = await getAll()
 

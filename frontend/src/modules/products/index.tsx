@@ -22,7 +22,7 @@ export const Products: React.FC<ProductsProps> = ({
       refetch()
       enqueueSnackbar('Product removed.', { variant: 'success' })
     },
-    [data]
+    [enqueueSnackbar, mutateAsync, refetch]
   )
 
   return (
