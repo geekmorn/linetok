@@ -1,12 +1,11 @@
 from fastapi import HTTPException
 
 
-def not_found(name: str) -> HTTPException:
+def not_found(message: str) -> HTTPException:
     raise HTTPException(
         status_code=404,
-        detail=f"{name} not found"
+        detail=f"{message} not found"
     )
-
 
 def unauthorized(message="You are not authorized to access this resource") -> HTTPException:
     raise HTTPException(
@@ -14,9 +13,8 @@ def unauthorized(message="You are not authorized to access this resource") -> HT
         detail=message
     )
 
-
-def conflict(name: str) -> HTTPException:
+def conflict(message: str) -> HTTPException:
     raise HTTPException(
         status_code=409,
-        detail=name
+        detail=message
     )

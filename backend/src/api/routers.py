@@ -10,5 +10,7 @@ api_router = APIRouter(
 
 Base.metadata.create_all(bind=engine)
 
-api_router.include_router(auth_router)
-api_router.include_router(user_router)
+ROUTERS = [auth_router, user_router]
+
+for router in ROUTERS:
+    api_router.include_router(router)

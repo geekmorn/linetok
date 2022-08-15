@@ -8,7 +8,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
     password = Column(String(128))
-    is_active = Column(Boolean, default=True)
+    active = Column(Boolean, default=True)
     role = Column(String(10), default='moderator')
 
     def verify_password(self, password):

@@ -15,7 +15,7 @@ class UserUpdate(UserBase):
 
 class User(UserBase):
     id: int
-    is_active: bool
+    active: bool
     role: str
 
     class Config:

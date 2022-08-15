@@ -38,7 +38,5 @@ async def remove(id: int, db: Session = Depends(get_db)):
 
 @router.put('/{id}', response_model=schemas.User, dependencies=[Depends(get_current_user)])
 async def update(id: int, user: schemas.UserUpdate, db: Session = Depends(get_db)):
-    user = User(
-        name=user.name
-    )
+    user = User(name=user.name)
     return crud.update(db=db, id=id, record=user, model=User)

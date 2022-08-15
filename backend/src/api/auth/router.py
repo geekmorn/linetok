@@ -18,14 +18,13 @@ router = APIRouter(
 async def authenticate(db: Session, name: str, password: str):
     user: _User = crud.get(
         db,
-        variant="name",
+        by="name",
         value=name,
         model=User
     )
-    is_authenticated = user and user.verify_password(password)
-    if not is_authenticated:
+    authenticated = user and user.verify_password(password)
+    if not authenticated:
         return Exception.unauthorized("Incorrect name or password")
-
     return user
 
 

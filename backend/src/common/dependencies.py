@@ -4,7 +4,9 @@ from fastapi.security import OAuth2PasswordBearer
 from ..core import User, JWT_SECRET
 from sqlalchemy.orm import Session
 from ..core.db import SessionLocal
-from src.common import crud, exceptions as Exception
+from . import crud
+from . import exceptions as Exception
+
 
 tokenUrl = "api/auth/token"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=tokenUrl)
@@ -27,6 +29,8 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
             model=User
         )
     except:
-        return Exception.unauthorized()
+        return Exception.unauthorized(message="Invalid token")
+        # TODO:
+        # raise or return Exception(variant="unauthorized", message="Invalid token")
 
     return user
