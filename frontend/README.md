@@ -63,16 +63,18 @@ If you're looking for some data in the app, `/src/pages/` is an entry point for 
 
 ## API queries
 
-### `/src/common/hooks/use-api.hook.ts`
+### `/src/common/utils/crud.ts`
 
-The useApi is a useful helper, which allows you to make API queries.
+We use CRUD to call to API.
 
 Example usage:
 
 ```ts
-import { useApi } from 'common/hooks'
-
-const { get } = useApi<UserType>('/users')
-
-useQuery(['Get user by ID'], () => get(id))
+export const useCreateProductMutation = () =>
+  useMutation(
+    ['Create a product'],
+    async (product: ProductType) =>
+      // Here we are
+      await create<ProductType>(API_ENDPOINTS.products)(product)
+  )
 ```

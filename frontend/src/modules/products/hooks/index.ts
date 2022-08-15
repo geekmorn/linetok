@@ -1,2 +1,5 @@
-export * from './mutations'
-export * from './queries'
+export * from './use-create-product.mutation'
+export * from './use-read-product.query'
+export * from './use-read-products.query'
+export * from './use-update-product.mutation'
+export * from './use-destroy-product.mutation'

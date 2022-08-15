@@ -29,7 +29,7 @@ const UsersPage: NextPage<UsersProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const data = await read<UserType>(API_ENDPOINTS.users)()
+  const data = (await read<UserType>(API_ENDPOINTS.users)()) ?? null
 
   return { props: { data } }
 }

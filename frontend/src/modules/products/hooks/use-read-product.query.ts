@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from 'common/constants'
+import { ProductType } from 'common/types'
 import { read } from 'common/utils'
 import { useQuery } from '@tanstack/react-query'
 
@@ -9,5 +10,5 @@ type ParametersType = {
 export const useReadProductQuery = ({ id }: ParametersType) =>
   useQuery(
     ['Get product by ID'],
-    async () => await read(API_ENDPOINTS.products)(id)
+    async () => await read<ProductType>(API_ENDPOINTS.products)(id)
   )
