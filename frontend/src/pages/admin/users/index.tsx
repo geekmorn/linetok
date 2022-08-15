@@ -1,7 +1,8 @@
-import { useApi } from 'common/hooks'
+import { API_ENDPOINTS } from 'common/constants'
 import { UserType } from 'common/types'
+import { read } from 'common/utils'
 import { Users } from 'modules'
-import { useGetUsersQuery } from 'modules/users/hooks'
+import { useReadUsersQuery } from 'modules/users/hooks'
 import { GetServerSideProps, NextPage } from 'next'
 import { Center } from '@chakra-ui/react'
 
@@ -12,7 +13,7 @@ export type UsersProps = {
 }
 
 const UsersPage: NextPage<UsersProps> = ({ data: initialData }) => {
-  const { data, isLoading, refetch } = useGetUsersQuery({ initialData })
+  const { data, isLoading, refetch } = useReadUsersQuery({ initialData })
 
   const state = {
     data,
@@ -28,15 +29,9 @@ const UsersPage: NextPage<UsersProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { getAll } = useApi<UserType>('/users')
-  const data = await getAll()
+  const data = await read<UserType>(API_ENDPOINTS.users)()
 
-  return {
-    props: {
-      data
-    }
-  }
+  return { props: { data } }
 }
 
 export default UsersPage

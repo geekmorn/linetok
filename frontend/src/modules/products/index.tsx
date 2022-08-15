@@ -4,7 +4,7 @@ import { useSnackbar } from 'notistack'
 import { ProductsProps } from 'pages/admin/products'
 import { Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react'
 import { Product } from './components'
-import { useRemoveProductMutation } from './hooks'
+import { useDestroyProductMutation } from './hooks'
 
 export const Products: React.FC<ProductsProps> = ({
   data,
@@ -12,7 +12,8 @@ export const Products: React.FC<ProductsProps> = ({
   refetch
 }) => {
   const { enqueueSnackbar } = useSnackbar()
-  const { mutateAsync, isLoading: isRemoveLoading } = useRemoveProductMutation()
+  const { mutateAsync, isLoading: isRemoveLoading } =
+    useDestroyProductMutation()
 
   const noDataReceived = !data || data.length === 0
 

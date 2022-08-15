@@ -1,13 +1,10 @@
-import { useApi } from 'common/hooks'
+import { API_ENDPOINTS } from 'common/constants'
 import { UserType } from 'common/types'
+import { create } from 'common/utils'
 import { useMutation } from '@tanstack/react-query'
 
-export const useCreateUserMutation = () => {
-  const { create } = useApi<UserType>('/users')
-
-  return useMutation(
-    //
+export const useCreateUserMutation = () =>
+  useMutation(
     ['Create a user'],
-    (user: UserType) => create(user)
+    async (user: UserType) => await create<UserType>(API_ENDPOINTS.users)(user)
   )
-}

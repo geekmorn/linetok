@@ -1,8 +1,9 @@
-import { useApi } from 'common/hooks'
+import { API_ENDPOINTS } from 'common/constants'
 import { ProductType } from 'common/types'
+import { read } from 'common/utils'
 import { Products } from 'modules'
 import { ProductCreationForm } from 'modules/products/components'
-import { useGetProductsQuery } from 'modules/products/hooks'
+import { useReadProductsQuery } from 'modules/products/hooks'
 import { GetServerSideProps, NextPage } from 'next'
 import { Center } from '@chakra-ui/react'
 
@@ -13,7 +14,7 @@ export type ProductsProps = {
 }
 
 const ProductsPage: NextPage<ProductsProps> = ({ data: initialData }) => {
-  const { data, isLoading, refetch } = useGetProductsQuery({ initialData })
+  const { data, isLoading, refetch } = useReadProductsQuery({ initialData })
 
   const state = {
     data,
@@ -30,15 +31,9 @@ const ProductsPage: NextPage<ProductsProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { getAll } = useApi<ProductType>('/products')
-  const data = await getAll()
+  const data = await read<ProductType>(API_ENDPOINTS.products)()
 
-  return {
-    props: {
-      data
-    }
-  }
+  return { props: { data } }
 }
 
 export default ProductsPage

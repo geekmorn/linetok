@@ -1,2 +1,2 @@
-export * from './use-get-product.query'
-export * from './use-get-products.query'
+export * from './use-read-product.query'
+export * from './use-read-products.query'
