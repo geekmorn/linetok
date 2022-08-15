@@ -23,7 +23,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
     id: uid,
     name: '',
     price: 0,
-    isAvailable: true
+    available: true
   })
 
   const {
@@ -98,13 +98,13 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
       {errors.price && <p>Price is required</p>}
 
       <Checkbox
-        {...register('isAvailable')}
-        name="isAvailable"
-        id={`product_isAvailable_${uid}`}
+        {...register('available')}
+        name="available"
+        id={`product_available_${uid}`}
         type="checkbox"
         defaultChecked={true}
         onChange={handleChange}
-        checked={formData.isAvailable}
+        checked={formData.available}
         sx={{
           display: 'flex',
           width: '100%',

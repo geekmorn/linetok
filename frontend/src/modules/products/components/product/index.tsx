@@ -13,7 +13,7 @@ export const Product: React.FC<ProductProps> = ({
   id,
   name,
   price,
-  isAvailable,
+  available,
   // Props
   loading,
   onClick,
@@ -33,7 +33,7 @@ export const Product: React.FC<ProductProps> = ({
       <Heading sx={{ textAlign: 'center' }}>Product {id}</Heading>
       <EditableInput value={name} />
       <EditableInput value={price} />
-      <Text>Available: {isAvailable ? 'Yes' : 'No'}</Text>
+      <Text>Available: {available ? 'Yes' : 'No'}</Text>
     </Stack>
   </Card>
 )

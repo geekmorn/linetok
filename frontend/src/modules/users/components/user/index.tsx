@@ -9,7 +9,7 @@ export const User: React.FC<UserProps> = ({
   id,
   name,
   age,
-  isActive,
+  active,
   // Props
   onClick
 }) => (
@@ -30,6 +30,6 @@ export const User: React.FC<UserProps> = ({
     </h1>
     <span>Name: {name}</span>
     <span>Age: {age}</span>
-    <span>Is Active: {isActive ? 'Yes' : 'No'}</span>
+    <span>Active: {active ? 'Yes' : 'No'}</span>
   </div>
 )
