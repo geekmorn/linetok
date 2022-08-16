@@ -1,9 +1,10 @@
 import jwt
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
-from ..core import User, JWT_SECRET
+from src.core import JWT_SECRET
+from src.common.models import UserModel
 from sqlalchemy.orm import Session
-from ..core.db import SessionLocal
+from src.core.database import SessionLocal
 from . import crud
 from . import exceptions as Exception
 
@@ -26,7 +27,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         user = crud.get(
             db,
             value=payload.get("id"),
-            model=User
+            model=UserModel
         )
     except:
         return Exception.unauthorized(message="Invalid token")

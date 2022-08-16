@@ -1,12 +1,13 @@
 import jwt
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from src.core import JWT_SECRET, User
+from src.core import JWT_SECRET
+from src.common.models import UserModel
 from sqlalchemy.orm import Session
-from src.common.dependencies import get_db
-from src.common import crud, exceptions as Exception
-from .schemas import Token
-from ..user.schemas import User as _User
+from src.common.services.dependencies import get_db
+from src.common.services import crud, exceptions as Exception
+from src.common.schemas.user import *
+from src.common.schemas.token import *
 
 
 router = APIRouter(
@@ -16,11 +17,11 @@ router = APIRouter(
 
 
 async def authenticate(db: Session, name: str, password: str):
-    user: _User = crud.get(
+    user: User = crud.get(
         db,
         by="name",
         value=name,
-        model=User
+        model=UserModel
     )
     authenticated = user and user.verify_password(password)
     if not authenticated:

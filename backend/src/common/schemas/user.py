@@ -1,20 +1,18 @@
+from .base import Base
 from pydantic import BaseModel
 
 
-class UserBase(BaseModel):
+class UserCreate(BaseModel):
     name: str
-
-
-class UserCreate(UserBase):
     password: str
 
 
-class UserUpdate(UserBase):
+class UserUpdate(BaseModel):
     pass
 
 
-class User(UserBase):
-    id: int
+class User(Base):
+    name: str
     active: bool
     role: str
 

@@ -1,4 +1,4 @@
-from .db import Base
+from src.core import Base
 from passlib.hash import bcrypt
 from sqlalchemy import Column, Integer, String, Boolean
 

@@ -1,5 +1,3 @@
-from ast import Tuple
-from typing import Any
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from . import exceptions as Exception
