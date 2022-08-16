@@ -1,12 +1,13 @@
 from fastapi import FastAPI
-from src.api.routers import api_router
+from .api.routers import api_router
+from .core.constants import TITLE, VERSION, DOCS_URL
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        docs_url="/",
-        title="Linetok API",
-        version="1.0",
+        docs_url=DOCS_URL,
+        title=TITLE,
+        version=VERSION,
     )
     app.include_router(api_router)
     
