@@ -9,7 +9,7 @@ type ParametersType = {
 
 export const useReadUsersQuery = ({ initialData }: ParametersType) =>
   useQuery(
-    ['Get all users'],
+    ['Read all users'],
     async () => await read<UserType>(API_ENDPOINTS.users)(),
     { initialData }
   )

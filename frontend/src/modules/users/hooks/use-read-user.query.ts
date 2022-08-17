@@ -9,6 +9,6 @@ type Parameters = {
 
 export const useReadUserQuery = ({ id }: Parameters) =>
   useQuery(
-    ['Get user by ID'],
+    ['Read user by ID'],
     async () => await read<UserType>(API_ENDPOINTS.users)(id)
   )

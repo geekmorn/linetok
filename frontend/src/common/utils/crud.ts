@@ -12,10 +12,10 @@ export const create =
 
 export const read =
   <Interface>(endpoint: string) =>
-  async (parameter?: unknown) => {
-    if (parameter) return await selected<Interface>(endpoint, parameter)
-    return await all<Interface>(endpoint)
-  }
+  async (parameter?: unknown) =>
+    parameter
+      ? await selected<Interface>(endpoint, parameter)
+      : await all<Interface>(endpoint)
 
 export const update =
   <Interface>(endpoint: string) =>

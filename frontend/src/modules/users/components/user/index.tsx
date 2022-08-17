@@ -8,8 +8,8 @@ export const User: React.FC<UserProps> = ({
   // UserType
   id,
   name,
-  age,
   active,
+  role,
   // Props
   onClick
 }) => (
@@ -29,7 +29,7 @@ export const User: React.FC<UserProps> = ({
       User <span>{id}</span>
     </h1>
     <span>Name: {name}</span>
-    <span>Age: {age}</span>
     <span>Active: {active ? 'Yes' : 'No'}</span>
+    <span>Role: {role}</span>
   </div>
 )

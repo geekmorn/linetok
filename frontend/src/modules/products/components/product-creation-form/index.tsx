@@ -33,8 +33,11 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
     formState: { errors }
   } = useForm<ProductType>()
 
-  const { mutateAsync, isLoading: isMutationLoading } =
-    useCreateProductMutation()
+  const {
+    mutateAsync,
+    isLoading: isMutationLoading,
+    isSuccess
+  } = useCreateProductMutation()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -46,11 +49,14 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
   const onSubmit = useCallback(
     async (payload: ProductType) => {
       await mutateAsync(payload)
-      reset(formData)
-      refetch()
-      enqueueSnackbar('Product created.', { variant: 'success' })
+      if (isSuccess) {
+        reset(formData)
+        refetch()
+        enqueueSnackbar('Product created.', { variant: 'success' })
+      }
+      enqueueSnackbar('Product creation failed.', { variant: 'error' })
     },
-    [enqueueSnackbar, formData, mutateAsync, refetch, reset]
+    [enqueueSnackbar, formData, isSuccess, mutateAsync, refetch, reset]
   )
 
   return (

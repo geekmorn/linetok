@@ -9,6 +9,6 @@ type ParametersType = {
 
 export const useReadProductQuery = ({ id }: ParametersType) =>
   useQuery(
-    ['Get product by ID'],
+    ['Read product by ID'],
     async () => await read<ProductType>(API_ENDPOINTS.products)(id)
   )

@@ -1,8 +1,8 @@
 export type UserType = {
   id: string
   name: string
-  age: number
   active: boolean
+  role: string
 }
 
 export type ProductType = {
@@ -10,4 +10,14 @@ export type ProductType = {
   name: string
   price: number
   available: boolean
+}
+
+export type SignUpType = {
+  email: string
+  password: string
+}
+
+export type SignInType = {
+  email: string
+  password: string
 }
