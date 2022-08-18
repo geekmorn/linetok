@@ -1,22 +1,25 @@
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { API_URL } from 'common/constants'
-import { getAccessToken } from 'common/utils'
+import { getToken } from 'common/utils'
+import { compose } from 'common/utils/functional'
 
-const getAuthorizationHeaders = () => {
-  const token = getAccessToken()
-  return { Authorization: `Bearer ${token}` }
-}
+const getAuthorizationHeaders = () => ({
+  Authorization: `Bearer ${getToken()}`
+})
 
-const createClient = (baseURL: string) => {
-  const instance = axios.create({ baseURL })
-
-  instance.interceptors.request.use((config) => {
-    const authHeaders = getAuthorizationHeaders()
-    config.headers = { ...config.headers, ...authHeaders }
+const withRequestInterceptor = (client: AxiosInstance) => {
+  client.interceptors.request.use((config) => {
+    config.headers = {
+      ...config.headers,
+      ...getAuthorizationHeaders()
+    }
     return config
   })
+  return client
+}
 
-  instance.interceptors.response.use(
+const withResponseInterceptor = (client: AxiosInstance) => {
+  client.interceptors.response.use(
     (response) => response,
     (error) => {
       if (error.response.status === 401) {
@@ -25,8 +28,18 @@ const createClient = (baseURL: string) => {
       return Promise.reject(error)
     }
   )
-
-  return instance
+  return client
 }
 
-export const httpClient = createClient(API_URL)
+const withInterceptors = compose(
+  withRequestInterceptor,
+  withResponseInterceptor
+)
+
+const createClient = (baseURL: string) => axios.create({ baseURL })
+
+export const httpClient = withInterceptors(createClient(API_URL))
+
+// Useful:
+//* https://jwt.io/introduction
+//* https://refactoring.guru/design-patterns/singleton

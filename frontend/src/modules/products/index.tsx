@@ -18,7 +18,7 @@ export const Products: React.FC<ProductsProps> = ({
   const noDataReceived = !data || data.length === 0
 
   const remove = useCallback(
-    async (id: string) => {
+    async (id: number) => {
       await mutateAsync(id)
       refetch()
       enqueueSnackbar('Product removed.', { variant: 'success' })

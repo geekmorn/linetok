@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from 'common/constants'
+import { API } from 'common/constants'
 import { UserType } from 'common/types'
 import { read } from 'common/utils'
 import { useQuery } from '@tanstack/react-query'
@@ -8,8 +8,6 @@ type ParametersType = {
 }
 
 export const useReadUsersQuery = ({ initialData }: ParametersType) =>
-  useQuery(
-    ['Read all users'],
-    async () => await read<UserType>(API_ENDPOINTS.users)(),
-    { initialData }
-  )
+  useQuery(['Read all users'], async () => await read<UserType>(API.users), {
+    initialData
+  })

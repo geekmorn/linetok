@@ -71,10 +71,10 @@ Example usage:
 
 ```ts
 export const useCreateProductMutation = () =>
-  useMutation(
-    ['Create a product'],
-    async (product: ProductType) =>
-      // Here we are
-      await create<ProductType>(API_ENDPOINTS.products)(product)
-  )
+    useMutation(
+        ['Create a product'],
+        async (product: ProductType) =>
+            // Here we are
+            await create<ProductType>(API.products)(product)
+    )
 ```

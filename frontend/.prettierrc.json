@@ -1,0 +1,19 @@
+{
+    "useTabs": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "parser": "typescript",
+    "tabWidth": 2,
+    "endOfLine": "auto",
+    "semi": false,
+    "printWidth": 80,
+    "importOrder": [
+        "^react(.*)$",
+        "^\\b(?!react\\b)(.*)$",
+        "^@(.*)/?(.*)$",
+        "^[./]"
+    ],
+    "importOrderSortSpecifiers": true
+}

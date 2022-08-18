@@ -1,23 +1,20 @@
 export type UserType = {
-  id: string
+  id: number
   name: string
   active: boolean
   role: string
 }
 
 export type ProductType = {
-  id: string
+  id: number
   name: string
   price: number
   available: boolean
 }
 
-export type SignUpType = {
+export type AuthorizationType = {
   email: string
   password: string
 }
 
-export type SignInType = {
-  email: string
-  password: string
-}
+export type RegistrationType = AuthorizationType

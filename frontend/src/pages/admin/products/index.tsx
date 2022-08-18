@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from 'common/constants'
+import { API } from 'common/constants'
 import { ProductType } from 'common/types'
 import { read } from 'common/utils'
 import { Products } from 'modules'
@@ -31,7 +31,7 @@ const ProductsPage: NextPage<ProductsProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const data = (await read<ProductType>(API_ENDPOINTS.products)()) ?? null
+  const data = (await read<ProductType>(API.products)) ?? null
 
   return { props: { data } }
 }
