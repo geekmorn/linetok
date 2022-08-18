@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from 'common/constants'
+import { API } from 'common/constants'
 import { UserType } from 'common/types'
 import { read } from 'common/utils'
 import { Users } from 'modules'
@@ -29,7 +29,7 @@ const UsersPage: NextPage<UsersProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const data = (await read<UserType>(API_ENDPOINTS.users)()) ?? null
+  const data = (await read<UserType>(API.users)) ?? null
 
   return { props: { data } }
 }

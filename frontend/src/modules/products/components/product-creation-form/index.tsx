@@ -1,5 +1,6 @@
 import { useCallback, useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
 import { useCreateProductMutation } from 'modules/products/hooks'
 import { useSnackbar } from 'notistack'
@@ -15,12 +16,13 @@ import {
   Stack
 } from '@chakra-ui/react'
 
+type FormDataType = Omit<ProductType, 'id'>
+
 export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
   const uid = useId()
   const { enqueueSnackbar } = useSnackbar()
 
-  const [formData, setFormData] = useState<ProductType>({
-    id: uid,
+  const [formData, setFormData] = useState<FormDataType>({
     name: '',
     price: 0,
     available: true
@@ -39,12 +41,12 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
     isSuccess
   } = useCreateProductMutation()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
-  }
+  })
 
   const onSubmit = useCallback(
     async (payload: ProductType) => {

@@ -14,7 +14,8 @@ type InputProps = ChakraInputProps & {
 export const Input: React.FC<InputProps> = ({ label, type, placeholder }) => {
   const [value, setValue] = useState('')
 
-  const handleInputChange = (e: any) => setValue(e.target.value)
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setValue(e.target.value)
 
   const isError = value === ''
 

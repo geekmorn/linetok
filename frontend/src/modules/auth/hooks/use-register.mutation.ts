@@ -1,11 +1,11 @@
-import { API_ENDPOINTS } from 'common/constants'
-import { SignUpType } from 'common/types'
+import { API } from 'common/constants'
+import { RegistrationType } from 'common/types'
 import { create } from 'common/utils'
 import { useMutation } from '@tanstack/react-query'
 
-export const useCreateUserMutation = () =>
+export const useRegisterMutation = () =>
   useMutation(
-    ['Create a user'],
-    async (payload: SignUpType) =>
-      await create<SignUpType>(API_ENDPOINTS.users)(payload)
+    ['Register current user'],
+    async (payload: RegistrationType) =>
+      await create<RegistrationType>(API.users, payload)
   )

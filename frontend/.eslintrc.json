@@ -1,64 +1,84 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": [
-    "next",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "react",
-    "react-hooks",
-    "@typescript-eslint",
-    "prettier",
-    "unused-imports"
-  ],
-  "rules": {
-    "spaced-comment": ["error", "always", { "markers": ["/"] }],
-    "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
-    "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": [
-      "warn",
-      {
-        "vars": "all",
-        "varsIgnorePattern": "^_",
-        "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
+    "extends": [
+        "next",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
     ],
-    "prettier/prettier": "error",
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "camelcase": "error",
-    "indent": [
-      "error",
-      2,
-      { "SwitchCase": 1, "ignoredNodes": ["ConditionalExpression"] }
-    ],
-    "no-duplicate-imports": "error",
-    "quotes": ["error", "single"],
-    "semi": ["error", "never"]
-  },
-  "settings": {
-    "import/resolver": {
-      "typescript": {}
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
-    "react": {
-      "version": "detect"
-    }
-  }
+    "rules": {
+        "prettier/prettier": ["error", {
+          "useTabs": false,
+          "singleQuote": true,
+          "trailingComma": "none",
+          "arrowParens": "always",
+          "bracketSpacing": true,
+          "parser": "typescript",
+          "tabWidth": 2,
+          "endOfLine": "auto",
+          "semi": false,
+          "printWidth": 80,
+          "importOrder": [
+            "^react(.*)$",
+            "^\\b(?!react\\b)(.*)$",
+            "^@(.*)/?(.*)$",
+            "^[./]"
+          ],
+          "importOrderSortSpecifiers": true
+         }
+        ],
+        "no-tabs": ["error", { "allowIndentationTabs": true }],
+        "spaced-comment": ["error", "always", { "markers": ["/"] }],
+        "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "varsIgnorePattern": "^_",
+                "args": "after-used",
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off",
+        "camelcase": "error",
+        "indent": [
+            "error",
+            2,
+            { "SwitchCase": 1, "ignoredNodes": ["ConditionalExpression"] }
+        ],
+        "no-duplicate-imports": "error",
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"]
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {}
+        },
+        "react": {
+            "version": "detect"
+        }
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "prettier",
+        "unused-imports"
+    ]
 }

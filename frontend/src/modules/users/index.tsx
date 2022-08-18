@@ -6,7 +6,7 @@ import { User } from './components'
 export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
   const noDataReceived = !data || data.length === 0
 
-  const openUser = (id: string, name: string) => {
+  const openUser = (id: number, name: string) => {
     alert(`User with id '${id}' and name '${name}' clicked`)
   }
 

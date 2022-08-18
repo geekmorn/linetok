@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { Eye, EyeSlash } from 'react-bootstrap-icons'
+import { useToggle } from 'common/hooks'
 import {
   Button,
   Input,
@@ -13,8 +13,7 @@ type InputPasswordProps = InputProps
 export const InputPassword: React.FC<InputPasswordProps> = ({
   ...inputProps
 }) => {
-  const [show, set] = useState(false)
-  const handleShowPassword = () => set(!show)
+  const [show, toggle] = useToggle(false)
 
   return (
     <InputGroup size="md">
@@ -25,7 +24,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
         {...inputProps}
       />
       <InputRightElement>
-        <Button mr="5px" size="sm" onClick={handleShowPassword}>
+        <Button mr="5px" size="sm" onClick={toggle}>
           {show ? <EyeSlash /> : <Eye />}
         </Button>
       </InputRightElement>
