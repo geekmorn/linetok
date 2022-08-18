@@ -1,18 +1,16 @@
 from fastapi import APIRouter
-from src.core.constants import ROUTE_PREFIX
-from src.core.database import Base, engine
-from .auth import auth_router
+from ..core.config import ROUTE_PREFIX
 from .user import user_router
+from .auth import auth_router
 
 api_router = APIRouter(
     prefix=ROUTE_PREFIX
 )
 
-Base.metadata.create_all(bind=engine)
 
 ROUTERS = [
-    auth_router, 
-    user_router
+    user_router,
+    auth_router,
 ]
 
 for router in ROUTERS:

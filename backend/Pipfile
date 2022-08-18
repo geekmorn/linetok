@@ -25,6 +25,7 @@ uvicorn = "==0.18.2"
 pyjwt = "*"
 bcrypt = "*"
 passlib = "*"
+autopep8 = "*"
 
 [dev-packages]
 

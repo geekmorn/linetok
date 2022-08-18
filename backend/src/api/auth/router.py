@@ -1,11 +1,9 @@
 import jwt
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from src.core import JWT_SECRET
-from src.common.models import UserModel
-from sqlalchemy.orm import Session
-from src.common.services.dependencies import get_db
-from src.common.services import crud, exceptions as Exception
+from src.core.config import JWT_SECRET
+from src.core.models import UserModel
+from src.common.services import exceptions as Exception
 from src.common.schemas.user import *
 from src.common.schemas.token import *
 
@@ -16,13 +14,8 @@ router = APIRouter(
 )
 
 
-async def authenticate(db: Session, name: str, password: str):
-    user: User = crud.get(
-        db,
-        by="name",
-        value=name,
-        model=UserModel
-    )
+async def authenticate(username: str, password: str):
+    user: User = await UserModel.read_username(username)
     authenticated = user and user.verify_password(password)
     if not authenticated:
         return Exception.unauthorized("Incorrect name or password")
@@ -30,12 +23,12 @@ async def authenticate(db: Session, name: str, password: str):
 
 
 @router.post("/token", response_model=Token)
-async def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = await authenticate(db, form.username, form.password)
+async def login(form: OAuth2PasswordRequestForm = Depends()):
+    user = await authenticate(form.username, form.password)
 
     payload = {
         "id": user.id,
-        "name": user.name,
+        "username": user.username,
     }
 
     return Token(

@@ -3,16 +3,16 @@ from pydantic import BaseModel
 
 
 class UserCreate(BaseModel):
-    name: str
+    username: str
     password: str
 
 
 class UserUpdate(BaseModel):
-    pass
+    username: str
 
 
 class User(Base):
-    name: str
+    username: str
     active: bool
     role: str
 
