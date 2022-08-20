@@ -14,7 +14,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl=tokenUrl)
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=['HS256'])
-        user = UserModel.read_id(payload.get("id"))
+        user = await UserModel.read_id(payload.get("id"))
     except:
         return Exception.unauthorized(message="Invalid token")
         # TODO:

@@ -11,29 +11,31 @@ router = APIRouter(
 
 
 @router.post("/user", response_model=User, status_code=201)
-async def create(user: UserCreate):
-    user = await UserModel.create(
-        username=user.username,
-        password=bcrypt.hash(user.password)
+async def create(new_user: UserCreate):
+    user = await UserModel.read_username(new_user.username)
+    if user:
+        raise HTTPException(status_code=409, detail="User already exists")
+    return await UserModel.create(
+        username=new_user.username,
+        password=bcrypt.hash(new_user.password)
     )
-    return user
 
 
-@router.get("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
+@router.get("/user/{id}", response_model=User)
 async def read_id(id: str):
-    user: User = await UserModel.read_id(id)
+    user = await UserModel.read_id(id)
     if not user:
         raise HTTPException(404, detail="User not found")
     return user
 
 
-@router.get("/users", response_model=list[User], dependencies=[Depends(get_current_user)])
+@router.get("/users", response_model=list[User])
 async def read_all():
-    users = await UserModel.read_all()
+    users: list[User] = await UserModel.read_all()
     return users
 
 
-@router.delete("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
+@router.delete("/user/{id}", response_model=User)
 async def delete(id: str):
     user: User = await UserModel.read_id(id)
     if not user:
@@ -42,6 +44,13 @@ async def delete(id: str):
     return user
 
 
-@router.put("/user/", deprecated=True)
-async def update():
-    return {"status": "in progress..."}
+@router.put("/user/{id}", response_model=User)
+async def update(id: str, new_user: UserUpdate):
+    user: User = await UserModel.read_id(id)
+    if not user:
+        raise HTTPException(404, detail="User not found")
+    await UserModel.update(
+        id=id,
+        username=new_user.username
+    )
+    return user

@@ -1,4 +1,3 @@
-from curses import echo
 from .constants import DATABASE_URL
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
