@@ -1,13 +1,13 @@
 import uvicorn
-from src.core.config.constants import HOST, PORT, DEBUG
+from src.core.config import settings
 
 
 def start_app():
     uvicorn.run(
         "src.main:app",
-        host=HOST,
-        port=PORT,
-        reload=DEBUG
+        host=settings.HOST,
+        port=settings.PORT,
+        reload=settings.DEGUG
     )
 
 

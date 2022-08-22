@@ -1,1 +1,1 @@
-from .user import User as UserModel
+from .user import UserModel

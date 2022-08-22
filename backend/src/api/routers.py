@@ -1,10 +1,10 @@
 from fastapi import APIRouter
-from ..core.config import ROUTE_PREFIX
+from ..core.config import settings
 from .user import user_router
 from .auth import auth_router
 
 api_router = APIRouter(
-    prefix=ROUTE_PREFIX
+    prefix=settings.ROUTE_PREFIX
 )
 
 

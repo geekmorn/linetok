@@ -1,11 +1,11 @@
 import jwt
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from src.core.config import JWT_SECRET
 from src.core.models import UserModel
 from src.common.services import exceptions as Exception
-from src.common.schemas.user import *
-from src.common.schemas.token import *
+from src.core.schemas.user import *
+from src.core.schemas.token import *
+from src.core.config import Search, settings
 
 
 router = APIRouter(
@@ -15,7 +15,7 @@ router = APIRouter(
 
 
 async def authenticate(username: str, password: str):
-    user: User = await UserModel.read_username(username)
+    user: User = await UserModel.read(by=Search.USERNAME, value=username)
     authenticated = user and user.verify_password(password)
     if not authenticated:
         return Exception.unauthorized("Incorrect name or password")
@@ -32,6 +32,6 @@ async def login(form: OAuth2PasswordRequestForm = Depends()):
     }
 
     return Token(
-        access_token=jwt.encode(payload, JWT_SECRET),
+        access_token=jwt.encode(payload, settings.jwt_secret),
         token_type="bearer"
     )

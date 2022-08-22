@@ -1,14 +1,13 @@
 from fastapi import FastAPI
 from .api.routers import api_router
-from .core.config import db
-from .core.config import TITLE, VERSION, DOCS_URL
+from .core.config import settings, db
 
 db.create()
 
 app = FastAPI(
-    docs_url=DOCS_URL,
-    title=TITLE,
-    version=VERSION,
+    docs_url=settings.DOCS_URL,
+    title=settings.TITLE,
+    version=settings.VERSION,
 )
 
 app.include_router(api_router)

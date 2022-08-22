@@ -1,4 +1,4 @@
-from .constants import DATABASE_URL
+from .settings import settings
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
@@ -15,7 +15,7 @@ class AsyncDatabaseSession:
 
     def create(self):
         self._engine = create_async_engine(
-            DATABASE_URL,
+            settings.DB_URL,
             future=True,
             echo=False
         )

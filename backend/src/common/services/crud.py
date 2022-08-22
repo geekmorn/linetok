@@ -1,25 +1,27 @@
-from sqlalchemy import Column, String
 from sqlalchemy.future import select
 from sqlalchemy import delete, update
-from src.core.config import db
+from src.core.config import db, Search
 from uuid import uuid4
 
 
 class Service:
-    id = Column(String, primary_key=True)
 
     @classmethod
-    async def read_all(model):
-        query = select(model)
+    async def read(model, by=Search.ALL, value: str | None = None):
+        match by:
+            case Search.ALL:
+                query = select(model)
+            case Search.ID:
+                field = model.id
+            case Search.USERNAME:
+                field = model.username
+            case Search.NAME:
+                field = model.name
+
+        if value:
+            query = select(model).where(field == value)
         records = await db.execute(query)
-        record = records.scalars().all()
-        return record
-
-    @classmethod
-    async def read_id(model, id):
-        query = select(model).where(model.id == id)
-        record = await db.execute(query)
-        return record.scalars().first()
+        return records.scalars().first() if value else records.scalars().all()
 
     @classmethod
     async def create(model, **kwargs):
@@ -44,8 +46,4 @@ class Service:
             .execution_options(synchronize_session="fetch")
         )
         await db.execute(query)
-        try:
-            await db.commit()
-        except Exception:
-            await db.rollback()
-            raise
+        await db.commit()
