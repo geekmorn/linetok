@@ -81,23 +81,10 @@ async def refresh(Authorize: AuthJWT = Depends()):
     )
 
 
-@router.delete('/logout', dependencies=[Depends(get_current_user)])
+@router.delete('/logout')
 async def logout(Authorize: AuthJWT = Depends()):
     Authorize.jwt_refresh_token_required()
     jwt_id = Authorize.get_raw_jwt()["jti"]
-    await TokenModel.destroy()
+    await TokenModel.destroy(jwt_id)
     Authorize.unset_refresh_cookies()
     return {"message": "Successfully logout"}
-
-
-# @router.get('/protected')
-# def protected(Authorize: AuthJWT = Depends()):
-#     Authorize.jwt_required()
-#     current_user = Authorize.get_jwt_subject()
-
-#     return {"user": current_user}
-
-
-# @router.get("/protected2", response_model=User)
-# def protected2(user: User = Depends(get_current_user)):
-#     return user

@@ -7,45 +7,43 @@ from uuid import uuid4
 class Service:
 
     @classmethod
-    async def read(model, by=Search.ALL, value: str | None = None):
+    async def read(Model, by=Search.ALL, value: str | None = None):
         match by:
             case Search.ALL:
-                query = select(model)
+                query = select(Model)
             case Search.ID:
-                field = model.id
+                field = Model.id
             case Search.USERNAME:
-                field = model.username
+                field = Model.username
             case Search.NAME:
-                field = model.name
+                field = Model.name
             case Search.USER_ID:
-                field = model.user_id
-            case Search.TOKEN_ID:
-                field = model.jwt_id
+                field = Model.user_id
 
         if value:
-            query = select(model).where(field == value)
+            query = select(Model).where(field == value)
         records = await db.execute(query)
         return records.scalars().first() if value else records.scalars().all()
 
     @classmethod
-    async def create(model, **kwargs):
-        record = model(**kwargs)
-        record = model(id=str(uuid4()), **kwargs)
+    async def create(Model, **kwargs):
+        record = Model(**kwargs)
+        record = Model(id=str(uuid4()), **kwargs)
         db.add(record)
         await db.commit()
         return record
 
     @classmethod
-    async def destroy(model, id):
-        query = delete(model).where(model.id == id)
+    async def destroy(Model, id: str):
+        query = delete(Model).where(Model.id == id)
         await db.execute(query)
         await db.commit()
 
     @classmethod
-    async def update(cls, id: str, **kwargs):
+    async def update(Model, id: str, **kwargs):
         query = (
-            update(cls)
-            .where(cls.id == id)
+            update(Model)
+            .where(Model.id == id)
             .values(**kwargs)
             .execution_options(synchronize_session="fetch")
         )
