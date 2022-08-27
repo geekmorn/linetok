@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5e2e27b2f4ad8b4c9b9f9ffc797b03e0c91631bc5409bdd5b9895156aeee7507"
+            "sha256": "3c974980adf25132bf225e7585f1dadab75d69bf10d52403634389211f5277c5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -142,6 +142,14 @@
             "index": "pypi",
             "version": "==0.79.0"
         },
+        "fastapi-jwt-auth": {
+            "hashes": [
+                "sha256:43110a227e36f93b99257a1c79e66df8ed3d4c893291db8f9db2686192011f17",
+                "sha256:d98068a9e828fe5909a1f338efabc3bb53149f11a9d2d395ab9d90fbb486b375"
+            ],
+            "index": "pypi",
+            "version": "==0.5.0"
+        },
         "greenlet": {
             "hashes": [
                 "sha256:0051c6f1f27cb756ffc0ffbac7d2cd48cb0362ac1736871399a739b2885134d3",
@@ -219,6 +227,14 @@
             "index": "pypi",
             "version": "==3.3"
         },
+        "itsdangerous": {
+            "hashes": [
+                "sha256:2c2349112351b88699d8d4b6b075022c0808887cb7ad10069318a8b0bc88db44",
+                "sha256:5dbbc68b317e5e42f327f9021763545dc3fc3bfe22e6deb96aaf1fc38874156a"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==2.1.2"
+        },
         "passlib": {
             "hashes": [
                 "sha256:aa6bca462b8d8bda89c70b382f0c298a20b5560af6cbfa2dce410c0a2fb669f1",
@@ -285,11 +301,11 @@
         },
         "pyjwt": {
             "hashes": [
-                "sha256:72d1d253f32dbd4f5c88eaf1fdc62f3a19f676ccbadb9dbc5d07e951b2b26daf",
-                "sha256:d42908208c699b3b973cbeb01a969ba6a96c821eefb1c5bfe4c390c01d67abba"
+                "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e",
+                "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
             ],
             "index": "pypi",
-            "version": "==2.4.0"
+            "version": "==1.7.1"
         },
         "python-dotenv": {
             "hashes": [
@@ -387,6 +403,13 @@
             ],
             "index": "pypi",
             "version": "==0.19.1"
+        },
+        "starlette-csrf": {
+            "hashes": [
+                "sha256:8db606998b341efc389775009e0d8cbdf8d39dfabf2ea07fa2f28b3f6d37f5b9"
+            ],
+            "index": "pypi",
+            "version": "==1.4.4"
         },
         "toml": {
             "hashes": [

@@ -6,7 +6,7 @@ from src.core.models import UserModel
 from src.core.config.settings import Search
 
 
-tokenUrl = "api/auth/token"
+tokenUrl = "api/auth/login"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=tokenUrl)
 
 
@@ -14,17 +14,17 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(
             token,
-            settings.jwt_secret,
+            settings.JWT_SECRET,
             algorithms=['HS256']
         )
-        value = payload.get(Search.ID)
+        value = payload.get("sub")
         user = await UserModel.read(
             by=Search.ID,
             value=value
         )
     except:
         raise HTTPException(
-            status_code=409,
-            detail="Invalid token"
+            status_code=401,
+            detail="Not authenticated"
         )
     return user

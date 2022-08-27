@@ -2,6 +2,11 @@ from .base import Base
 from pydantic import BaseModel
 
 
+class UserAuth(BaseModel):
+    username: str
+    password: str
+
+
 class UserCreate(BaseModel):
     username: str
     password: str

@@ -26,6 +26,8 @@ pyjwt = "*"
 bcrypt = "*"
 passlib = "*"
 autopep8 = "*"
+fastapi-jwt-auth = "*"
+starlette-csrf = "*"
 
 [dev-packages]
 

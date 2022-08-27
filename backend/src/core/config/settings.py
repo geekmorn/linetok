@@ -1,5 +1,7 @@
 from dotenv import load_dotenv, find_dotenv
-from pydantic import BaseSettings
+from pydantic import BaseSettings, BaseModel
+import datetime
+
 
 load_dotenv(find_dotenv())
 
@@ -24,3 +26,14 @@ class Search:
     ID = "id"
     NAME = "name"
     USERNAME = "username"
+    USER_ID = "user_id"
+    TOKEN_ID = "refresh_token"
+
+
+class AuthConfig(BaseModel):
+    authjwt_secret_key = settings.JWT_SECRET
+    authjwt_token_location: set = {"cookies"}
+    authjwt_cookie_secure = False
+    authjwt_cookie_csrf_protect = False
+    authjwt_access_token_expires = datetime.timedelta(minutes=1)
+    authjwt_refresh_token_expires = datetime.timedelta(days=15)
