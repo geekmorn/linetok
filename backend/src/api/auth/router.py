@@ -32,14 +32,15 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), Authorize: AuthJWT 
     jwt_id = Authorize.get_jti(refresh_token)
 
     token = RefreshToken(
-        user_id=user.id,
-        refresh_token=jwt_id
+        id=jwt_id,
+        user_id=user.id
     )
 
     refresh_token_exists = await TokenModel.read(by=Search.USER_ID, value=user.id)
     if refresh_token_exists:
         id = refresh_token_exists.id
-        await TokenModel.update(id, **token.dict())
+        await TokenModel.destroy(id)
+        await TokenModel.create(**token.dict())
     else:
         await TokenModel.create(**token.dict())
 
@@ -56,19 +57,20 @@ async def refresh(Authorize: AuthJWT = Depends()):
     user_id = Authorize.get_jwt_subject()
     jwt_id = Authorize.get_raw_jwt()["jti"]
 
-    refresh_token_exists = await TokenModel.read(by=Search.TOKEN_ID, value=jwt_id)
+    refresh_token_exists = await TokenModel.read(by=Search.ID, value=jwt_id)
     if refresh_token_exists:
         new_access_token = Authorize.create_access_token(subject=user_id)
         new_refresh_token = Authorize.create_refresh_token(subject=user_id)
         new_jwt_id = Authorize.get_jti(new_refresh_token)
 
         token = RefreshToken(
-            user_id=user_id,
-            refresh_token=new_jwt_id
+            id=new_jwt_id,
+            user_id=user_id
         )
 
         id = refresh_token_exists.id
-        await TokenModel.update(id, **token.dict())
+        await TokenModel.destroy(id)
+        await TokenModel.create(**token.dict())
         Authorize.set_refresh_cookies(new_refresh_token)
     else:
         raise HTTPException(401, "Not authenticated")

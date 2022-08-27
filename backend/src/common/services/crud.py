@@ -20,7 +20,7 @@ class Service:
             case Search.USER_ID:
                 field = model.user_id
             case Search.TOKEN_ID:
-                field = model.refresh_token
+                field = model.jwt_id
 
         if value:
             query = select(model).where(field == value)

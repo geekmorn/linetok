@@ -27,7 +27,6 @@ class Search:
     NAME = "name"
     USERNAME = "username"
     USER_ID = "user_id"
-    TOKEN_ID = "refresh_token"
 
 
 class AuthConfig(BaseModel):

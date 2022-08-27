@@ -7,5 +7,5 @@ class AccessToken(BaseModel):
 
 
 class RefreshToken(BaseModel):
+    id: str
     user_id: str
-    refresh_token: str
