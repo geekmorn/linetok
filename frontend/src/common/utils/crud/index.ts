@@ -1,12 +1,7 @@
-/* eslint-disable indent */
-import { httpClient } from 'common/clients'
-import { all, selected } from 'common/utils/filters'
+import { _delete, all, post, put, selected } from 'common/utils/methods'
 
 export const create = async <Interface>(endpoint: string, payload: Interface) =>
-  await httpClient
-    .post<Interface>(endpoint, payload)
-    .then((response) => response.data)
-    .catch((e) => console.error(e))
+  await post<Interface>(endpoint)(payload)
 
 export const read = async <Interface>(endpoint: string, parameter?: unknown) =>
   parameter
@@ -16,17 +11,10 @@ export const read = async <Interface>(endpoint: string, parameter?: unknown) =>
 export const update = async <Interface extends { id: number }>(
   endpoint: string,
   payload: Interface
-) =>
-  await httpClient
-    .put<Interface>(`${endpoint}/${payload.id}`, payload)
-    .then((response) => response.data)
-    .catch((e) => console.error(e))
+) => await put<Interface>(endpoint)(payload)
 
 export const destroy = async <Interface>(endpoint: string, id: number) =>
-  await httpClient
-    .delete<Interface>(`${endpoint}/${id}`)
-    .then((response) => response.data)
-    .catch((e) => console.error(e))
+  await _delete<Interface>(endpoint)(id)
 
 // Useful:
 //* https://www.codecademy.com/article/what-is-crud
