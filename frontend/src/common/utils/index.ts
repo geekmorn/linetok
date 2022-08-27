@@ -1,4 +1,4 @@
 export * from './crud'
-export * from './filters'
+export * from './methods'
 export * from './local-storage'
 export * from './local-storage/token'
