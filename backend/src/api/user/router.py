@@ -1,4 +1,3 @@
-from xxlimited import new
 from fastapi import APIRouter, HTTPException, Depends
 from src.core.models import UserModel
 from src.core.schemas.user import *

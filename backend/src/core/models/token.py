@@ -1,9 +1,7 @@
-from src.core.config import Base
+from src.core.config import Base, db
 from src.common.services.crud import Service
-from .base import BaseModel
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
-from src.core.config import db
 
 
 class TokenModel(Base, Service):
