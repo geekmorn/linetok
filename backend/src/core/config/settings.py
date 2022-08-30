@@ -21,14 +21,6 @@ class Settings(BaseSettings):
 settings = Settings()
 
 
-class Search:
-    ALL = "all"
-    ID = "id"
-    NAME = "name"
-    USERNAME = "username"
-    USER_ID = "user_id"
-
-
 class AuthConfig(BaseModel):
     authjwt_secret_key = settings.JWT_SECRET
     authjwt_token_location: set = {"cookies"}

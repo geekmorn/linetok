@@ -10,7 +10,7 @@ class TokenModel(Base, Service):
     __tablename__ = "refresh_token"
 
     id = Column(String, primary_key=True, index=True)
-    user_id = Column(String, ForeignKey("user.id"))
+    user_id = Column(String, ForeignKey("user.id"), index=True)
 
     user = relationship(
         "UserModel",
