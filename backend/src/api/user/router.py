@@ -12,9 +12,10 @@ router = APIRouter(
 
 @router.post("/user", response_model=User, status_code=201)
 async def create(new_user: UserCreate):
-    user = await UserModel()._username.read(new_user.username)
+    user: User = await UserModel()._username.read(new_user.username)
     if user:
         raise HTTPException(status_code=409, detail="User already exists")
+
     return await UserModel().create(
         username=new_user.username,
         password=bcrypt.hash(new_user.password)
@@ -26,13 +27,13 @@ async def read_id(id: str):
     user: User = await UserModel()._id.read(id)
     if not user:
         raise HTTPException(404, detail="User not found")
+
     return user
 
 
 @router.get("/users", response_model=list[User])
 async def read_all():
-    users: list[User] = await UserModel().read()
-    return users
+    return await UserModel().read()
 
 
 @router.delete("/user/{id}", response_model=User)
@@ -41,6 +42,7 @@ async def delete(id: str):
     if not user:
         raise HTTPException(404, detail="User not found")
     await UserModel()._id.delete(id)
+
     return user
 
 
@@ -56,4 +58,5 @@ async def update(id: str, new_user: UserUpdate):
         )
     except:
         raise HTTPException(409, detail="Conflict")
+
     return user
