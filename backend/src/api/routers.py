@@ -4,6 +4,7 @@ from .user import user_router
 from .auth import auth_router
 from .parameter import parameter_router
 from .category import category_router
+from .product import product_router
 
 api_router = APIRouter(
     prefix=settings.ROUTE_PREFIX
@@ -15,6 +16,7 @@ ROUTERS = [
     auth_router,
     parameter_router,
     category_router,
+    product_router,
 ]
 
 for router in ROUTERS:

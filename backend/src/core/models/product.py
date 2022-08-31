@@ -12,6 +12,6 @@ class ProductModel(Base, Service, BaseModel):
     price = Column(Float, default=10)
 
     parameter_id = Column(String, ForeignKey("parameter.id"))
-    categody_id = Column(String, ForeignKey("category.id"))
+    category_id = Column(String, ForeignKey("category.id"))
     parameter = relationship("ParameterModel", back_populates="product")
     category = relationship("CategoryModel", back_populates="product")
