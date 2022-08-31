@@ -1,4 +1,4 @@
-from src.common.services.crud import create, read, update, destroy
+from src.common.services import crud
 from fastapi import APIRouter, HTTPException, Depends
 from src.core.models import UserModel
 from src.core.schemas.user import *
@@ -13,49 +13,48 @@ router = APIRouter(
 
 @router.post("/user", response_model=User, status_code=201)
 async def create(payload: UserCreate):
-    user: User = await read(UserModel, payload.username)
+    user: User = await crud.read(UserModel, UserModel.username, payload.username)
     if user:
         raise HTTPException(status_code=409, detail="User already exists")
-
-    return await create(UserModel,
-                        username=payload.username,
-                        password=bcrypt.hash(payload.password)
-                        )
+    return await crud.create(
+        UserModel,
+        username=payload.username,
+        password=bcrypt.hash(payload.password)
+    )
 
 
 @router.get("/user/{id}", response_model=User)
 async def get(id: str):
-    user: User = await read(UserModel, id)
+    user: User = await crud.read(UserModel, UserModel.id, id)
     user_not_found = not user or user is None
     if user_not_found:
         raise HTTPException(404, "User not found")
-
     return user
 
 
 @router.get("/users", response_model=list[User])
-async def get_all(): return await read(UserModel)
+async def get_all(): return await crud.read(UserModel)
 
 
 @router.put("/user/{id}", response_model=User)
 async def update(id: str, payload: UserUpdate):
-    user: User = await read(UserModel, id)
+    user: User = await crud.read(UserModel, UserModel.id, id)
     user_not_found = not user or user is None
     if user_not_found:
         raise HTTPException(404, "User not found")
-
-    return await update(
-        user,
+    await crud.update(
+        UserModel,
         value=id,
         username=payload.username
     )
+    return user
 
 
 @router.delete("/user/{id}", response_model=User)
 async def delete(id: str):
-    user: User = await read(UserModel, id)
+    user: User = await crud.read(UserModel, UserModel.id, id)
     user_not_found = not user or user is None
     if user_not_found:
         raise HTTPException(404, "User not found")
-
-    return await destroy(UserModel, id)
+    await crud.destroy(UserModel, UserModel.id, id)
+    return user

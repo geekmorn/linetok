@@ -1,5 +1,5 @@
 from sqlalchemy.future import select
-from sqlalchemy import delete, update
+from sqlalchemy import delete, update as _update
 from src.core.config import db
 from uuid import uuid4
 
@@ -11,7 +11,7 @@ async def create(Model, **kwargs):
     return record
 
 
-async def read(Model, parameter=None):
+async def read(Model, parameter=None, value=None):
 
     async def all():
         query = select(Model)
@@ -20,7 +20,7 @@ async def read(Model, parameter=None):
         return result
 
     async def selected():
-        query = select(Model).where(Model[parameter] == parameter)
+        query = select(Model).where(parameter == value)
         record = await db.execute(query)
         result = record.scalars().first()
         return result
@@ -32,10 +32,10 @@ async def read(Model, parameter=None):
     )
 
 
-async def update(Model, parameter: str, **kwargs):
+async def update(Model, value, **kwargs):
     query = (
-        update(Model)
-        .where(Model[parameter] == parameter)
+        _update(Model)
+        .where(Model.id == value)
         .values(**kwargs)
         .execution_options(synchronize_session="fetch")
     )
@@ -43,7 +43,7 @@ async def update(Model, parameter: str, **kwargs):
     await db.commit()
 
 
-async def destroy(Model, parameter: str):
-    query = delete(Model).where(Model[parameter] == parameter)
+async def destroy(Model, parameter: str, value: str):
+    query = delete(Model).where(parameter == value)
     await db.execute(query)
     await db.commit()

@@ -1,10 +1,9 @@
-from backend.src.common.services.exceptions import unauthorized
-from src.common.services.crud import create, read, destroy
-from fastapi import APIRouter, Depends, HTTPException
+from src.common.services.exceptions import unauthorized
+from src.common.services import crud
+from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from src.core.config import AuthConfig
 from fastapi_jwt_auth import AuthJWT
-from src.core.schemas.user import *
 from src.core.schemas.token import *
 from src.common.utils import authorize
 from src.core.models import TokenModel
@@ -28,14 +27,15 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), authorizer: AuthJWT
     refresh_token = authorizer.create_refresh_token(subject=user.id)
     access_token = authorizer.create_access_token(subject=user.id)
     jwt_id = authorizer.get_jti(refresh_token)
-    refresh_token = RefreshToken(id=jwt_id, user_id=user.id)
     authorizer.set_refresh_cookies(refresh_token)
-
-    token = await read(TokenModel, user.id)
+    refresh_token = RefreshToken(
+        id=jwt_id,
+        user_id=user.id
+    )
+    token = await crud.read(TokenModel, TokenModel.user_id, user.id)
     if token:
-        await destroy(TokenModel, token.id)
-
-    await create(TokenModel, **refresh_token.dict())
+        await crud.destroy(TokenModel, TokenModel.id, token.id)
+    await TokenModel.create(**refresh_token.dict())
 
     return AccessToken(
         access_token=access_token,
@@ -48,17 +48,18 @@ async def refresh(authorizer: AuthJWT = Depends()):
     authorizer.jwt_refresh_token_required()
     user_id = authorizer.get_jwt_subject()
     jwt_id = authorizer.get_raw_jwt()["jti"]
-
-    token = await read(TokenModel, jwt_id)
-
-    if token:
+    token_exists = await crud.read(TokenModel, TokenModel.id, jwt_id)
+    if token_exists:
         new_access_token = authorizer.create_access_token(subject=user_id)
         new_refresh_token = authorizer.create_refresh_token(subject=user_id)
         new_jwt_id = authorizer.get_jti(new_refresh_token)
-        refresh_token = RefreshToken(id=new_jwt_id, user_id=user_id)
         authorizer.set_refresh_cookies(new_refresh_token)
-        await destroy(TokenModel, refresh_token.id)
-        await create(TokenModel, **refresh_token.dict())
+        refresh_token = RefreshToken(
+            id=new_jwt_id,
+            user_id=user_id
+        )
+        await crud.destroy(TokenModel, TokenModel.id, token_exists.id)
+        await TokenModel.create(**refresh_token.dict())
     else:
         return unauthorized("Invalid refresh token")
 
@@ -73,8 +74,7 @@ async def logout(authorizer: AuthJWT = Depends()):
     authorizer.jwt_refresh_token_required()
     jwt_id = authorizer.get_raw_jwt()["jti"]
     authorizer.unset_refresh_cookies()
-
-    await destroy(TokenModel, jwt_id)
+    await crud.destroy(TokenModel, TokenModel.id, jwt_id)
 
     return {
         "message": "Successfully logout"

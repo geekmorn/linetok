@@ -1,4 +1,4 @@
-from src.common.services.crud import create, read, update, destroy
+from src.common.services import crud
 from fastapi import APIRouter, HTTPException
 from src.core.schemas.product import *
 from src.core.models import ProductModel
@@ -11,52 +11,51 @@ router = APIRouter(
 
 @router.post("/product", response_model=Product)
 async def create(payload: ProductCreate):
-    product: Product = await read(ProductModel, payload.name)
-    product_not_found = not product or product is None
-    if product_not_found:
+    product: Product = await crud.read(ProductModel, ProductModel.name, payload.name)
+    if product:
         raise HTTPException(409, detail="Product already exists")
-
-    return await create(ProductModel,
-                        name=payload.name,
-                        parameter_id=payload.parameter_id,
-                        category_id=payload.category_id
-                        )
+    return await crud.create(
+        ProductModel,
+        name=payload.name,
+        parameter_id=payload.parameter_id,
+        category_id=payload.category_id
+    )
 
 
 @router.get("/product/{id}", response_model=Product)
 async def get(id: str):
-    product: Product = await read(ProductModel, id)
+    product: Product = await crud.read(ProductModel, ProductModel.id, id)
     product_not_found = not product or product is None
     if product_not_found:
         raise HTTPException(404, detail="Product not found")
-
     return product
 
 
 @router.get("/products", response_model=list[Product])
-async def get_all(): return await read(ProductModel)
+async def get_all(): return await crud.read(ProductModel)
 
 
 @router.put("/product/{id}", response_model=Product)
 async def update(id: str, payload: ProductUpdate):
-    product: Product = await read(ProductModel, id)
+    product: Product = await crud.read(ProductModel, ProductModel.id, id)
     product_not_found = not product or product is None
     if product_not_found:
         raise HTTPException(404, "Product not found")
-
-    return await update(product,
-                        value=id,
-                        name=payload.name,
-                        parameter_id=payload.parameter_id,
-                        category_id=payload.category_id
-                        )
+    await crud.update(
+        ProductModel,
+        value=id,
+        name=payload.name,
+        parameter_id=payload.parameter_id,
+        category_id=payload.category_id
+    )
+    return product
 
 
 @router.delete("/product/{id}", response_model=Product)
 async def delete(id: str):
-    product: Product = await read(ProductModel, id)
+    product: Product = await crud.read(ProductModel, ProductModel.id, id)
     product_not_found = not product or product is None
     if product_not_found:
         raise HTTPException(404, "Product not found")
-
-    return await destroy(ProductModel, id)
+    await crud.destroy(ProductModel, ProductModel.id, id)
+    return product

@@ -1,12 +1,11 @@
 from inspect import Parameter
 from .base import BaseModel
 from src.core.config import Base
-from src.common.services.crud import Service
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class CategoryModel(Base, Service, BaseModel):
+class CategoryModel(Base, BaseModel):
     __tablename__ = "category"
 
     name = Column(String(50), unique=True, index=True)

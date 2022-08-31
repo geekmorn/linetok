@@ -1,11 +1,10 @@
 from .base import BaseModel
 from src.core.config import Base
-from src.common.services.crud import Service
 from sqlalchemy import Column, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class ProductModel(Base, Service, BaseModel):
+class ProductModel(Base, BaseModel):
     __tablename__ = "product"
 
     name = Column(String(200), unique=True, index=True)
