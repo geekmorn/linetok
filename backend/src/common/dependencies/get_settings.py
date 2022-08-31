@@ -3,5 +3,5 @@ from src.core.config import Settings
 
 
 @lru_cache()
-async def get_settings():
+def read_settings():
     return Settings()

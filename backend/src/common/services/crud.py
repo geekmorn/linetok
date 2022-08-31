@@ -4,55 +4,46 @@ from src.core.config import db
 from uuid import uuid4
 
 
-class Service:
-    @property
-    def _id(self):
-        self.field = self.__class__.id
-        return self
+async def create(Model, **kwargs):
+    record = Model(id=str(uuid4()), **kwargs)
+    db.add(record)
+    await db.commit()
+    return record
 
-    @property
-    def _username(self):
-        self.field = self.__class__.username
-        return self
 
-    @property
-    def _name(self):
-        self.field = self.__class__.name
-        return self
+async def read(Model, parameter=None):
 
-    @property
-    def _user_id(self):
-        self.field = self.__class__.user_id
-        return self
-
-    async def create(self, **kwargs):
-        record = self.__class__(id=str(uuid4()), **kwargs)
-        db.add(record)
-        await db.commit()
-        return record
-
-    async def read(self, value: str = None):
-        try:
-            query = select(self.__class__).where(self.field == value)
-            records = await db.execute(query)
-            result = records.scalars().first()
-        except AttributeError:
-            query = select(self.__class__)
-            records = await db.execute(query)
-            result = records.scalars().all()
+    async def all():
+        query = select(Model)
+        records = await db.execute(query)
+        result = records.scalars().all()
         return result
 
-    async def update(self, value: str, **kwargs):
-        query = (
-            update(self.__class__)
-            .where(self.field == value)
-            .values(**kwargs)
-            .execution_options(synchronize_session="fetch")
-        )
-        await db.execute(query)
-        await db.commit()
+    async def selected():
+        query = select(Model).where(Model[parameter] == parameter)
+        record = await db.execute(query)
+        result = record.scalars().first()
+        return result
 
-    async def delete(self, value: str):
-        query = delete(self.__class__).where(self.field == value)
-        await db.execute(query)
-        await db.commit()
+    return (
+        await selected()
+        if parameter
+        else await all()
+    )
+
+
+async def update(Model, parameter: str, **kwargs):
+    query = (
+        update(Model)
+        .where(Model[parameter] == parameter)
+        .values(**kwargs)
+        .execution_options(synchronize_session="fetch")
+    )
+    await db.execute(query)
+    await db.commit()
+
+
+async def destroy(Model, parameter: str):
+    query = delete(Model).where(Model[parameter] == parameter)
+    await db.execute(query)
+    await db.commit()

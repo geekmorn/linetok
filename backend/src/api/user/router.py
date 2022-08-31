@@ -1,3 +1,4 @@
+from src.common.services.crud import create, read, update, destroy
 from fastapi import APIRouter, HTTPException, Depends
 from src.core.models import UserModel
 from src.core.schemas.user import *
@@ -11,52 +12,50 @@ router = APIRouter(
 
 
 @router.post("/user", response_model=User, status_code=201)
-async def create(new_user: UserCreate):
-    user: User = await UserModel()._username.read(new_user.username)
+async def create(payload: UserCreate):
+    user: User = await read(UserModel, payload.username)
     if user:
         raise HTTPException(status_code=409, detail="User already exists")
 
-    return await UserModel().create(
-        username=new_user.username,
-        password=bcrypt.hash(new_user.password)
-    )
+    return await create(UserModel,
+                        username=payload.username,
+                        password=bcrypt.hash(payload.password)
+                        )
 
 
 @router.get("/user/{id}", response_model=User)
-async def read_id(id: str):
-    user: User = await UserModel()._id.read(id)
-    if not user:
-        raise HTTPException(404, detail="User not found")
+async def get(id: str):
+    user: User = await read(UserModel, id)
+    user_not_found = not user or user is None
+    if user_not_found:
+        raise HTTPException(404, "User not found")
 
     return user
 
 
 @router.get("/users", response_model=list[User])
-async def read_all():
-    return await UserModel().read()
+async def get_all(): return await read(UserModel)
+
+
+@router.put("/user/{id}", response_model=User)
+async def update(id: str, payload: UserUpdate):
+    user: User = await read(UserModel, id)
+    user_not_found = not user or user is None
+    if user_not_found:
+        raise HTTPException(404, "User not found")
+
+    return await update(
+        user,
+        value=id,
+        username=payload.username
+    )
 
 
 @router.delete("/user/{id}", response_model=User)
 async def delete(id: str):
-    user: User = await UserModel()._id.read(id)
-    if not user:
-        raise HTTPException(404, detail="User not found")
-    await UserModel()._id.delete(id)
+    user: User = await read(UserModel, id)
+    user_not_found = not user or user is None
+    if user_not_found:
+        raise HTTPException(404, "User not found")
 
-    return user
-
-
-@router.put("/user/{id}", response_model=User)
-async def update(id: str, new_user: UserUpdate):
-    user: User = await UserModel()._id.read(id)
-    if not user:
-        raise HTTPException(404, detail="User not found")
-    try:
-        await UserModel()._id.update(
-            value=id,
-            username=new_user.username
-        )
-    except:
-        raise HTTPException(409, detail="Conflict")
-
-    return user
+    return await destroy(UserModel, id)

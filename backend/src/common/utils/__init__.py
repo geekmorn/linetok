@@ -1,1 +1,1 @@
-from .authenticate import authenticate
+from .authorize import authorize
