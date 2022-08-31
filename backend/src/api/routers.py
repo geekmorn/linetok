@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from ..core.config import settings
 from .user import user_router
 from .auth import auth_router
+from .parameter import parameter_router
 
 api_router = APIRouter(
     prefix=settings.ROUTE_PREFIX
@@ -11,6 +12,7 @@ api_router = APIRouter(
 ROUTERS = [
     user_router,
     auth_router,
+    parameter_router,
 ]
 
 for router in ROUTERS:
