@@ -31,7 +31,7 @@ const ProductsPage: NextPage<ProductsProps> = ({ data: initialData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const data = (await read<ProductType>(API.products)) ?? null
+  const data = (await read<ProductType>(API.products)) ?? []
 
   return { props: { data } }
 }

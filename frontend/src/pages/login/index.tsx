@@ -3,12 +3,12 @@ import { AuthorizationForm, RegistrationForm } from 'modules'
 import { NextPage } from 'next'
 import { Button, Center, Stack, Text } from '@chakra-ui/react'
 
-const noAccount = {
+const userHasNoAccount = {
   question: 'У Вас еще нет аккаунта?',
   tip: 'Зарегистрируйтесь'
 } as const
 
-const haveAccount = {
+const userAlreadyHasAccount = {
   question: 'У Вас уже есть аккаунт?',
   tip: 'Войдите'
 } as const
@@ -22,10 +22,14 @@ const LoginPage: NextPage = () => {
         {isRegistrationMode ? <RegistrationForm /> : <AuthorizationForm />}
         <Stack sx={{ textAlign: 'center' }}>
           <Text>
-            {isRegistrationMode ? haveAccount.question : noAccount.question}
+            {isRegistrationMode
+              ? userAlreadyHasAccount.question
+              : userHasNoAccount.question}
           </Text>
           <Button onClick={toggle}>
-            {isRegistrationMode ? haveAccount.tip : noAccount.tip}
+            {isRegistrationMode
+              ? userAlreadyHasAccount.tip
+              : userHasNoAccount.tip}
           </Button>
         </Stack>
       </Stack>
