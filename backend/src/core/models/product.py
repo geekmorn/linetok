@@ -7,8 +7,9 @@ from sqlalchemy.orm import relationship
 class ProductModel(Base, BaseModel):
     __tablename__ = "product"
 
-    name = Column(String(200), unique=True, index=True)
+    title = Column(String(200), unique=True, index=True)
     price = Column(Float, default=10)
+    # TODO Add media, discription and amount fields.
 
     parameter_id = Column(String, ForeignKey("parameter.id"))
     category_id = Column(String, ForeignKey("category.id"))

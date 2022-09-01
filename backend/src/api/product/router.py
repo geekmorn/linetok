@@ -9,14 +9,14 @@ router = APIRouter(
 )
 
 
-@router.post("/product", response_model=Product)
+@router.post("/product", response_model=Product, status_code=201)
 async def create(payload: ProductCreate):
-    product: Product = await crud.read(ProductModel, ProductModel.name, payload.name)
+    product: Product = await crud.read(ProductModel, ProductModel.title, payload.title)
     if product:
         raise HTTPException(409, detail="Product already exists")
     return await crud.create(
         ProductModel,
-        name=payload.name,
+        title=payload.title,
         parameter_id=payload.parameter_id,
         category_id=payload.category_id
     )
@@ -44,7 +44,7 @@ async def update(id: str, payload: ProductUpdate):
     await crud.update(
         ProductModel,
         value=id,
-        name=payload.name,
+        title=payload.title,
         parameter_id=payload.parameter_id,
         category_id=payload.category_id
     )

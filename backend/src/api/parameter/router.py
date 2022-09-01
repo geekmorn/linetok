@@ -11,12 +11,12 @@ router = APIRouter(
 
 @router.post("/parameter", response_model=Parameter, status_code=201)
 async def create(payload: ParameterCreate):
-    parameter: Parameter = await crud.read(ParameterModel, ParameterModel.name, payload.name)
+    parameter: Parameter = await crud.read(ParameterModel, ParameterModel.title, payload.title)
     if parameter:
         raise HTTPException(409, detail="Parameter already exists")
     return await crud.create(
         ParameterModel,
-        name=payload.name
+        title=payload.title
     )
 
 
@@ -38,7 +38,7 @@ async def update(id: str, payload: ParameterUpdate):
     await crud.update(
         ParameterModel,
         value=id,
-        name=payload.name
+        title=payload.title
     )
     return parameter
 

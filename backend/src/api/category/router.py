@@ -11,12 +11,12 @@ router = APIRouter(
 
 @router.post("/category", response_model=Category)
 async def create(payload: CategoryCreate):
-    category: Category = await crud.read(CategoryModel, CategoryModel.name, payload.name)
+    category: Category = await crud.read(CategoryModel, CategoryModel.title, payload.title)
     if category:
         raise HTTPException(409, detail="Category already exists")
     return await crud.create(
         CategoryModel,
-        name=payload.name,
+        title=payload.title,
         parameter_id=payload.parameter_id
     )
 
@@ -43,7 +43,7 @@ async def update(id: str, payload: CategoryUpdate):
     await crud.update(
         CategoryModel,
         value=id,
-        name=payload.name,
+        title=payload.title,
         parameter_id=payload.parameter_id
     )
     return category

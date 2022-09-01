@@ -3,17 +3,17 @@ from .base import Base
 
 
 class CategoryCreate(BaseModel):
-    name: str
+    title: str
     parameter_id: str
 
 
 class CategoryUpdate(BaseModel):
-    name: str
+    title: str
     parameter_id: str
 
 
 class Category(Base):
-    name: str
+    title: str
     parameter_id: str
 
     class Config:
