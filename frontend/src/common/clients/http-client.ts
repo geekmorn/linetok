@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 import { API_URL } from 'common/constants'
 import { getToken } from 'common/utils'
-import { compose } from 'common/utils/functional'
+import { compose } from 'common/utils/fp'
 
 const getAuthorizationHeaders = () => ({
   Authorization: `Bearer ${getToken()}`
