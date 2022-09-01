@@ -1,15 +1,15 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from .api.routers import api_router
-from .core.config import settings, db
+from .core.config import Settings, db
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_jwt_auth.exceptions import AuthJWTException
 
 
 app = FastAPI(
-    docs_url=settings.DOCS_URL,
-    title=settings.TITLE,
-    version=settings.VERSION,
+    docs_url=Settings().DOCS_URL,
+    title=Settings().TITLE,
+    version=Settings().VERSION,
 )
 
 app.add_middleware(

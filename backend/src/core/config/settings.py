@@ -18,11 +18,8 @@ class Settings(BaseSettings):
     VERSION: str
 
 
-settings = Settings()
-
-
 class AuthConfig(BaseModel):
-    authjwt_secret_key = settings.JWT_SECRET
+    authjwt_secret_key = Settings().JWT_SECRET
     authjwt_token_location: set = {"cookies"}
     authjwt_cookie_secure = False
     authjwt_cookie_csrf_protect = False
