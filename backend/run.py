@@ -1,5 +1,5 @@
 import uvicorn
-from src.core.config import Settings
+from src.common.config import Settings
 
 
 def start_app():

@@ -1,7 +1,7 @@
 from src.common.services.crud import create, read, update, destroy
 from fastapi import APIRouter, HTTPException
-from src.core.schemas.category import *
-from src.core.models import CategoryModel
+from src.common.schemas.category import *
+from src.common.models import CategoryModel
 
 
 router = APIRouter(

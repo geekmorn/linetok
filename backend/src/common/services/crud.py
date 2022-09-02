@@ -1,7 +1,7 @@
 from uuid import uuid4
 from sqlalchemy.future import select
 from sqlalchemy import update as _update
-from src.core.config import db
+from src.common.config import db
 
 
 async def create(Model, type_id: str | None = None, **kwargs):

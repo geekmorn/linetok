@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..core.config import Settings
+from ..common.config import Settings
 from .user import user_router
 from .auth import auth_router
 from .parameter import parameter_router

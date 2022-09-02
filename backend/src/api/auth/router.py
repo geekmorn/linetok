@@ -2,11 +2,11 @@ from src.common.services.exceptions import unauthorized
 from src.common.services.crud import create, read, update, destroy
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from src.core.config import AuthConfig
+from src.common.config import AuthConfig
 from fastapi_jwt_auth import AuthJWT
-from src.core.schemas.token import *
+from src.common.schemas.token import *
 from src.common.utils.authorize import authorize
-from src.core.models import TokenModel
+from src.common.models import TokenModel
 
 
 router = APIRouter(

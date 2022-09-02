@@ -1,8 +1,8 @@
 import jwt
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from src.core.config import Settings
-from src.core.models import UserModel
+from src.common.config import Settings
+from src.common.models import UserModel
 
 
 tokenUrl = "api/auth/login"

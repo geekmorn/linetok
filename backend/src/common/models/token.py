@@ -1,4 +1,4 @@
-from src.core.config import Base, db
+from src.common.config import Base, db
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 

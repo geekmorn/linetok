@@ -1,7 +1,7 @@
 from src.common.services.crud import create, read, update, destroy
 from fastapi import APIRouter, HTTPException, Depends
-from src.core.models import UserModel
-from src.core.schemas.user import *
+from src.common.models import UserModel
+from src.common.schemas.user import *
 from passlib.hash import bcrypt
 from src.common.dependencies import get_current_user
 

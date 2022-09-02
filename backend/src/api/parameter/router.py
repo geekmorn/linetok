@@ -1,7 +1,7 @@
 from src.common.services.crud import read, create, update, destroy
 from fastapi import APIRouter, HTTPException
-from src.core.schemas.parameter import *
-from src.core.models import ParameterModel
+from src.common.schemas.parameter import *
+from src.common.models import ParameterModel
 from src.common.dependencies import get_current_user
 
 router = APIRouter(

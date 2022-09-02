@@ -1,5 +1,5 @@
 from .base import BaseModel
-from src.core.config import Base
+from src.common.config import Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 

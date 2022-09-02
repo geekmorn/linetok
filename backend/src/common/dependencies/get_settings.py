@@ -1,5 +1,5 @@
 from functools import lru_cache
-from src.core.config import Settings
+from src.common.config import Settings
 
 
 @lru_cache()

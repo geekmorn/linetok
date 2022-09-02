@@ -1,8 +1,8 @@
 from http.client import HTTPException
 from src.common.services.crud import read
 from src.common.services.exceptions import unauthorized
-from src.core.models import UserModel
-from src.core.schemas.user import *
+from src.common.models import UserModel
+from src.common.schemas.user import *
 
 
 async def authorize(username: str, password: str) -> User | HTTPException:
