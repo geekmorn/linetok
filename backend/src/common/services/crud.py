@@ -1,11 +1,14 @@
+from uuid import uuid4
 from sqlalchemy.future import select
 from sqlalchemy import update as _update
 from src.core.config import db
-from ..utils.generate_id import generate_id
 
 
-async def create(Model, type: str | None = None, **kwargs):
-    record = Model(id=generate_id(type), **kwargs)
+async def create(Model, type_id: str | None = None, **kwargs):
+    if type_id == "token":
+        record = Model(**kwargs)
+    else:
+        record = Model(id=str(uuid4()), **kwargs)
     db.add(record)
     await db.commit()
     return record

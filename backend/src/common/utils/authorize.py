@@ -6,7 +6,10 @@ from src.core.schemas.user import *
 
 
 async def authorize(username: str, password: str) -> User | HTTPException:
-    user: User | None = await read(UserModel, UserModel.username, username)
+    user: User | None = await read(UserModel, {
+        "key": UserModel.username,
+        "value": username
+    })
     authorized = user and user.verify_password(password)
     return (
         user
