@@ -1,17 +1,17 @@
 from sqlalchemy.future import select
-from sqlalchemy import delete, update as _update
+from sqlalchemy import update as _update
 from src.core.config import db
-from uuid import uuid4
+from ..utils.generate_id import generate_id
 
 
-async def create(Model, **kwargs):
-    record = Model(id=str(uuid4()), **kwargs)
+async def create(Model, type: str | None = None, **kwargs):
+    record = Model(id=generate_id(type), **kwargs)
     db.add(record)
     await db.commit()
     return record
 
 
-async def read(Model, parameter=None, value=None):
+async def read(Model, options: dict | None = None):
 
     async def all():
         query = select(Model)
@@ -20,30 +20,30 @@ async def read(Model, parameter=None, value=None):
         return result
 
     async def selected():
-        query = select(Model).where(parameter == value)
+        query = select(Model).where(options["key"] == options["value"])
         record = await db.execute(query)
         result = record.scalars().first()
         return result
 
-    return (
-        await selected()
-        if parameter
-        else await all()
+    return await (
+        selected()
+        if options
+        else all()
     )
 
 
-async def update(Model, value, **kwargs):
-    query = (
+async def update(record, **kwargs):
+    Model = record.__class__
+    await db.execute(
         _update(Model)
-        .where(Model.id == value)
+        .where(Model.id == record.id)
         .values(**kwargs)
-        .execution_options(synchronize_session="fetch")
     )
-    await db.execute(query)
     await db.commit()
+    return record
 
 
-async def destroy(Model, parameter: str, value: str):
-    query = delete(Model).where(parameter == value)
-    await db.execute(query)
+async def destroy(record):
+    await db.delete(record)
     await db.commit()
+    return record

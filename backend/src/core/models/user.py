@@ -11,8 +11,7 @@ class UserModel(Base, BaseModel):
     username = Column(String(50), unique=True, index=True)
     password = Column(String(128))
     role = Column(String(10), default='moderator')
-    refresh_token = relationship(
-        "TokenModel", back_populates="user")
+    refresh_token = relationship("TokenModel", back_populates="user")
 
     def verify_password(self, password):
         return bcrypt.verify(password, self.password)
