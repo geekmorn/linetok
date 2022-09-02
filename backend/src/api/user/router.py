@@ -1,4 +1,4 @@
-from src.common.services.crud import create, read, update, destroy
+from src.common.utils.crud import create, read, update, destroy
 from fastapi import APIRouter, HTTPException, Depends
 from src.common.models import UserModel
 from src.common.schemas.user import *

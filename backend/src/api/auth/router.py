@@ -1,5 +1,5 @@
-from src.common.services.exceptions import unauthorized
-from src.common.services.crud import create, read, update, destroy
+from src.common.utils.exceptions import unauthorized
+from src.common.utils.crud import create, read, update, destroy
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from src.common.config import AuthConfig

@@ -1,6 +1,6 @@
 from http.client import HTTPException
-from src.common.services.crud import read
-from src.common.services.exceptions import unauthorized
+from src.common.utils.crud import read
+from src.common.utils.exceptions import unauthorized
 from src.common.models import UserModel
 from src.common.schemas.user import *
 
