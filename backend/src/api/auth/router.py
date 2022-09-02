@@ -59,10 +59,9 @@ async def refresh(authorizer: AuthJWT = Depends()):
         new_jwt_id = authorizer.get_jti(new_refresh_token)
         authorizer.set_refresh_cookies(new_refresh_token)
 
-        await destroy(token)
-        await create(TokenModel, type_id="token", id=new_jwt_id, user_id=user_id)
+        await update(token, id=new_jwt_id, user_id=user_id)
     else:
-        return unauthorized("Invalid refresh token")
+        return unauthorized()
 
     return AccessToken(
         access_token=new_access_token,
@@ -75,11 +74,12 @@ async def logout(authorizer: AuthJWT = Depends()):
     authorizer.jwt_refresh_token_required()
     jwt_id = authorizer.get_raw_jwt()["jti"]
     authorizer.unset_refresh_cookies()
-
-    await destroy(await read(TokenModel, {
+    token = await read(TokenModel, {
         "key": TokenModel.id,
         "value": jwt_id
-    }))
+    })
+    if token:
+        await destroy(token)
 
     return {
         "message": "Successfully logout"
