@@ -1,4 +1,4 @@
-from src.common.services import crud
+from src.common.services.crud import create, read, update, destroy
 from fastapi import APIRouter, HTTPException
 from src.core.schemas.category import *
 from src.core.models import CategoryModel
@@ -9,51 +9,59 @@ router = APIRouter(
 )
 
 
-@router.post("/category", response_model=Category)
-async def create(payload: CategoryCreate):
-    category: Category = await crud.read(CategoryModel, CategoryModel.title, payload.title)
-    if category:
-        raise HTTPException(409, detail="Category already exists")
-    return await crud.create(
-        CategoryModel,
-        title=payload.title,
-        parameter_id=payload.parameter_id
-    )
-
-
 @router.get("/category/{id}", response_model=Category)
 async def get(id: str):
-    category: Category = await crud.read(CategoryModel, CategoryModel.id, id)
-    category_not_found = not category or category is None
-    if category_not_found:
+    category: Category | None = await read(CategoryModel, {
+        "key": CategoryModel.id,
+        "value": id
+    })
+    if category is None:
         raise HTTPException(404, "Category not found")
+
     return category
 
 
 @router.get("/categories", response_model=list[Category])
-async def get_all(): return await crud.read(CategoryModel)
+async def get_all(): return await read(CategoryModel)
+
+
+@router.post("/category", response_model=Category)
+async def post(payload: CategoryCreate):
+    category: Category | None = await read(CategoryModel, {
+        "key": CategoryModel.title,
+        "value": payload.title
+    })
+    if category:
+        raise HTTPException(409, "Category already exists")
+
+    return await create(
+        CategoryModel,
+        **payload.dict()
+    )
 
 
 @router.put("/category/{id}", response_model=Category)
-async def update(id: str, payload: CategoryUpdate):
-    category: Category = await crud.read(CategoryModel, CategoryModel.id, id)
-    category_not_found = not category or category is None
-    if category_not_found:
+async def put(id: str, payload: CategoryUpdate):
+    category: Category | None = await read(CategoryModel, {
+        "key": CategoryModel.id,
+        "value": id
+    })
+    if category is None:
         raise HTTPException(404, "Category not found")
-    await crud.update(
-        CategoryModel,
-        value=id,
-        title=payload.title,
-        parameter_id=payload.parameter_id
+
+    return await update(
+        category,
+        **payload.dict()
     )
-    return category
 
 
 @router.delete("/category/{id}", response_model=Category)
 async def delete(id: str):
-    category: Category = await crud.read(CategoryModel, CategoryModel.id, id)
-    category_not_found = not category or category is None
-    if category_not_found:
-        raise HTTPException(404, "Category not found")
-    await crud.destroy(CategoryModel, CategoryModel.id, id)
-    return category
+    category: Category | None = await read(CategoryModel, {
+        "key": CategoryModel.id,
+        "value": id
+    })
+    if category is None:
+        raise HTTPException(404, detail="Category not found")
+
+    return await destroy(category)

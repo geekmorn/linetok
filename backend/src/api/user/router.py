@@ -19,6 +19,7 @@ async def get(id: str):
     })
     if user is None:
         raise HTTPException(404, "User not found")
+
     return user
 
 
@@ -33,7 +34,7 @@ async def post(payload: UserCreate):
         "value": payload.username
     })
     if user:
-        raise HTTPException(status_code=409, detail="User already exists")
+        raise HTTPException(409, "User already exists")
 
     return await create(
         UserModel,
