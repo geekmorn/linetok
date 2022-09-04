@@ -1,7 +1,8 @@
 from src.common.utils.crud import create, read, update, destroy
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from src.common.schemas.product import *
 from src.common.models import ProductModel
+from src.common.utils.exceptions import not_found, conflict
 
 
 router = APIRouter(
@@ -16,7 +17,7 @@ async def get(id: str):
         "value": id
     })
     if product is None:
-        raise HTTPException(404, detail="Product not found")
+        raise not_found("Product")
 
     return product
 
@@ -32,12 +33,9 @@ async def post(payload: ProductCreate):
         "value": payload.title
     })
     if product:
-        raise HTTPException(409, "Product already exists")
+        raise conflict("Product")
 
-    return await create(
-        ProductModel,
-        **payload.dict()
-    )
+    return await create(ProductModel, **payload.dict())
 
 
 @router.put("/product/{id}", response_model=Product)
@@ -47,11 +45,9 @@ async def put(id: str, payload: ProductUpdate):
         "value": id
     })
     if product is None:
-        raise HTTPException(404, "Product not found")
-    return await update(
-        product,
-        **payload.dict()
-    )
+        raise not_found("Product")
+
+    return await update(product, **payload.dict())
 
 
 @router.delete("/product/{id}", response_model=Product)
@@ -61,6 +57,6 @@ async def delete(id: str):
         "value": id
     })
     if product is None:
-        raise HTTPException(404, "Product not found")
+        raise not_found("Product")
 
     return await destroy(product)

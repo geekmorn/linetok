@@ -2,15 +2,32 @@ from uuid import uuid4
 from sqlalchemy.future import select
 from sqlalchemy import update as _update
 from src.common.config import db
+from sqlalchemy.exc import IntegrityError, DatabaseError
+from .exceptions import unavailable, HTTPException
+from datetime import datetime
+from passlib.hash import bcrypt
 
 
-async def create(Model, type_id: str | None = None, **kwargs):
-    if type_id == "token":
-        record = Model(**kwargs)
-    else:
-        record = Model(id=str(uuid4()), **kwargs)
+async def commit_changing() -> None:
+    try:
+        await db.commit()
+    except DatabaseError:
+        raise unavailable()
+
+
+async def create(Model, type_id: str | None = None, is_user=False, **kwargs):
+    _id = str(uuid4()) if type_id is None else type_id
+    if is_user:
+        kwargs["password"] = bcrypt.hash(kwargs["password"])
+    record = Model(
+        id=_id,
+        created=datetime.now(),
+        updated=datetime.now(),
+        **kwargs
+    )
     db.add(record)
-    await db.commit()
+    await commit_changing()
+
     return record
 
 
@@ -35,18 +52,30 @@ async def read(Model, options: dict | None = None):
     )
 
 
-async def update(record, **kwargs):
+async def update(record, is_user=False, **kwargs):
     Model = record.__class__
-    await db.execute(
-        _update(Model)
-        .where(Model.id == record.id)
-        .values(**kwargs)
-    )
-    await db.commit()
+    if is_user:
+        kwargs["password"] = bcrypt.hash(kwargs["password"])
+    try:
+        await db.execute(
+            _update(Model)
+            .where(Model.id == record.id)
+            .values(
+                updated=datetime.now(),
+                **kwargs
+            )
+        )
+        await commit_changing()
+    except IntegrityError as e:
+        raise HTTPException(409, {
+            "error": f"{Model.__tablename__} already exists",
+            "field": str(e.orig).split(".")[1]
+        })
+
     return record
 
 
 async def destroy(record):
     await db.delete(record)
-    await db.commit()
+    await commit_changing()
     return record

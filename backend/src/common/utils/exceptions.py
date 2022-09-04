@@ -18,5 +18,12 @@ def unauthorized(message="You are not authorized to access this resource") -> HT
 def conflict(message: str) -> HTTPException:
     raise HTTPException(
         status_code=409,
+        detail=f"{message} already exists"
+    )
+
+
+def unavailable(message="Service is temporarily unavailable") -> HTTPException:
+    raise HTTPException(
+        status_code=503,
         detail=message
     )

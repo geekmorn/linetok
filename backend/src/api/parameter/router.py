@@ -1,8 +1,10 @@
 from src.common.utils.crud import read, create, update, destroy
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from src.common.schemas.parameter import *
 from src.common.models import ParameterModel
 from src.common.dependencies import get_current_user
+from src.common.utils.exceptions import not_found, conflict
+
 
 router = APIRouter(
     tags=["Parameter"]
@@ -16,7 +18,7 @@ async def get(id: str):
         "value": id
     })
     if parameter is None:
-        raise HTTPException(404, "Parameter not found")
+        raise not_found("Parameter")
 
     return parameter
 
@@ -32,12 +34,9 @@ async def post(payload: ParameterCreate):
         "value": payload.title
     })
     if parameter:
-        raise HTTPException(409, "Parameter already exists")
+        raise conflict("Parameter")
 
-    return await create(
-        ParameterModel,
-        **payload.dict()
-    )
+    return await create(ParameterModel, **payload.dict())
 
 
 @router.put("parameter/{id}", response_model=Parameter)
@@ -47,7 +46,7 @@ async def put(id: str, payload: ParameterUpdate):
         "value": id
     })
     if parameter is None:
-        raise HTTPException(404, "Parameter not found")
+        raise not_found("Parameter")
 
     return await update(parameter, **payload.dict())
 
@@ -59,6 +58,6 @@ async def delete(id: str):
         "value": id
     })
     if parameter is None:
-        raise HTTPException(404, "Parameter not found")
+        raise not_found("Parameter")
 
     return await destroy(parameter)

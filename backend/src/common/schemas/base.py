@@ -1,8 +1,10 @@
 from pydantic import BaseModel
-from typing import NewType
-
-UUID = NewType('UUID', str)
+from uuid import UUID
+from datetime import date
 
 
 class Base(BaseModel):
     id: UUID
+    active: bool
+    created: date
+    updated: date

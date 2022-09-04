@@ -9,16 +9,24 @@ class UserAuth(BaseModel):
 
 class UserCreate(BaseModel):
     username: str
+    name: str
+    surname: str
     password: str
 
 
 class UserUpdate(BaseModel):
     username: str
+    name: str
+    surname: str
+    active: bool
+    role: str
+    password: str
 
 
 class User(Base):
     username: str
-    active: bool
+    name: str
+    surname: str
     role: str
 
     class Config:

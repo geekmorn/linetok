@@ -1,9 +1,9 @@
 from src.common.utils.crud import create, read, update, destroy
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends
 from src.common.models import UserModel
 from src.common.schemas.user import *
-from passlib.hash import bcrypt
 from src.common.dependencies import get_current_user
+from src.common.utils.exceptions import not_found, conflict
 
 
 router = APIRouter(
@@ -18,7 +18,7 @@ async def get(id: str):
         "value": id
     })
     if user is None:
-        raise HTTPException(404, "User not found")
+        raise not_found("User")
 
     return user
 
@@ -34,13 +34,9 @@ async def post(payload: UserCreate):
         "value": payload.username
     })
     if user:
-        raise HTTPException(409, "User already exists")
+        raise conflict("User")
 
-    return await create(
-        UserModel,
-        username=payload.username,
-        password=bcrypt.hash(payload.password)
-    )
+    return await create(UserModel, is_user=True, **payload.dict())
 
 
 @router.put("/user/{id}", response_model=User)
@@ -50,9 +46,9 @@ async def put(id: str, payload: UserUpdate):
         "value": id
     })
     if user is None:
-        raise HTTPException(404, "User not found")
+        raise not_found("User")
 
-    return await update(user, **payload.dict())
+    return await update(user, is_user=True, **payload.dict())
 
 
 @router.delete("/user/{id}", response_model=User)
@@ -62,6 +58,6 @@ async def delete(id: str):
         "value": id
     })
     if user is None:
-        raise HTTPException(404, "User not found")
+        raise not_found("User")
 
     return await destroy(user)

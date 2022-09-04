@@ -1,9 +1,10 @@
-from src.common.config import Base, db
+from src.common.config import Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
+from .base import BaseModel
 
 
-class TokenModel(Base):
+class TokenModel(Base, BaseModel):
     __tablename__ = "refresh_token"
 
     id = Column(String, primary_key=True, index=True)
@@ -14,10 +15,3 @@ class TokenModel(Base):
         back_populates="refresh_token",
         uselist=False
     )
-
-    @classmethod
-    async def create(Model,  **kwargs):
-        record = Model(**kwargs)
-        db.add(record)
-        await db.commit()
-        return record

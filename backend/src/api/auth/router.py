@@ -35,7 +35,7 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), authorizer: AuthJWT
     })
     if token:
         await destroy(token)
-    await create(TokenModel, type_id="token", id=jwt_id, user_id=user.id)
+    await create(TokenModel, type_id=jwt_id, user_id=user.id)
 
     return AccessToken(
         access_token=access_token,

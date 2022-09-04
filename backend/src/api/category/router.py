@@ -1,7 +1,8 @@
 from src.common.utils.crud import create, read, update, destroy
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from src.common.schemas.category import *
 from src.common.models import CategoryModel
+from src.common.utils.exceptions import not_found, conflict
 
 
 router = APIRouter(
@@ -16,7 +17,7 @@ async def get(id: str):
         "value": id
     })
     if category is None:
-        raise HTTPException(404, "Category not found")
+        raise not_found("Category")
 
     return category
 
@@ -25,19 +26,16 @@ async def get(id: str):
 async def get_all(): return await read(CategoryModel)
 
 
-@router.post("/category", response_model=Category)
+@router.post("/category", response_model=Category, status_code=201)
 async def post(payload: CategoryCreate):
     category: Category | None = await read(CategoryModel, {
         "key": CategoryModel.title,
         "value": payload.title
     })
     if category:
-        raise HTTPException(409, "Category already exists")
+        raise conflict("Category")
 
-    return await create(
-        CategoryModel,
-        **payload.dict()
-    )
+    return await create(CategoryModel, **payload.dict())
 
 
 @router.put("/category/{id}", response_model=Category)
@@ -47,12 +45,9 @@ async def put(id: str, payload: CategoryUpdate):
         "value": id
     })
     if category is None:
-        raise HTTPException(404, "Category not found")
+        raise not_found("Category")
 
-    return await update(
-        category,
-        **payload.dict()
-    )
+    return await update(category, **payload.dict())
 
 
 @router.delete("/category/{id}", response_model=Category)
@@ -62,6 +57,6 @@ async def delete(id: str):
         "value": id
     })
     if category is None:
-        raise HTTPException(404, detail="Category not found")
+        raise not_found("Category")
 
     return await destroy(category)
