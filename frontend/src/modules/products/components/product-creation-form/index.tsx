@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
 import { useCreateProductMutation } from 'modules/products/hooks'
-import { useSnackbar } from 'notistack'
 import { ProductsProps } from 'pages/admin/products'
 import {
   Button,
@@ -13,14 +12,15 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Stack
+  Stack,
+  useToast
 } from '@chakra-ui/react'
 
 type FormDataType = Omit<ProductType, 'id'>
 
 export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
   const uid = useId()
-  const { enqueueSnackbar } = useSnackbar()
+  const toast = useToast()
 
   const [formData, setFormData] = useState<FormDataType>({
     name: '',
@@ -37,11 +37,11 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
 
   const {
     mutateAsync,
-    isLoading: isMutationLoading,
-    isSuccess
+    isLoading: isCreationLoading,
+    isSuccess: isCreationSuccess
   } = useCreateProductMutation()
 
-  const handleChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -51,14 +51,26 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
   const onSubmit = useCallback(
     async (payload: ProductType) => {
       await mutateAsync(payload)
-      if (isSuccess) {
-        reset(formData)
-        refetch()
-        enqueueSnackbar('Product created.', { variant: 'success' })
+      refetch()
+      if (isCreationSuccess) {
+        reset()
+        toast({
+          title: 'Product created',
+          description: "We've just created the product for you.",
+          status: 'success',
+          isClosable: true
+        })
+        return
       }
-      enqueueSnackbar('Product creation failed.', { variant: 'error' })
+      toast({
+        title: 'Creation failed',
+        description:
+          'Something went wrong when we tried to create the product.',
+        status: 'error'
+      })
+      return
     },
-    [enqueueSnackbar, formData, isSuccess, mutateAsync, refetch, reset]
+    [toast, isCreationSuccess, mutateAsync, refetch, reset]
   )
 
   return (
@@ -86,7 +98,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
         name="name"
         id={`product_name_${uid}`}
         placeholder="Papuga"
-        onChange={handleChange}
+        onChange={onChange}
         value={formData.name}
       />
       {errors.name && <p>Name is required</p>}
@@ -99,7 +111,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
           id={`product_price_${uid}`}
           type="number"
           placeholder="666"
-          onChange={handleChange}
+          onChange={onChange}
           value={formData.price}
         />
       </InputGroup>
@@ -111,7 +123,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
         id={`product_available_${uid}`}
         type="checkbox"
         defaultChecked={true}
-        onChange={handleChange}
+        onChange={onChange}
         checked={formData.available}
         sx={{
           display: 'flex',
@@ -123,7 +135,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
       </Checkbox>
 
       <Stack>
-        <Button type="submit" disabled={isMutationLoading}>
+        <Button type="submit" disabled={isCreationLoading}>
           Submit
         </Button>
       </Stack>

@@ -1,19 +1,14 @@
 import { PropsWithChildren } from 'react'
+import { SEO } from 'common/constants'
 import Head from 'next/head'
 import { Container } from '@chakra-ui/react'
 
-const SEO = {
-  title: 'Интернет-магазин Linetok, г. Рогачев.',
-  description:
-    'Интернет-магазин Linetok.by в г. Рогачев - онлайн площадка бытовой техники, электроники, товаров для дома и дачи. Следите за нашими акциями и промокодами. С нами выгодно!'
-} as const
-
-type LoginLayoutProps = PropsWithChildren & {
+type BaseLayoutProps = PropsWithChildren & {
   title?: string
   description?: string
 }
 
-export const LoginLayout: React.FC<LoginLayoutProps> = ({
+export const BaseLayout: React.FC<BaseLayoutProps> = ({
   children,
   title = SEO.title,
   description = SEO.description

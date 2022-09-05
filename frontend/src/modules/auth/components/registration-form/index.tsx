@@ -21,7 +21,7 @@ export const RegistrationForm: React.FC = () => {
 
   const { mutateAsync, isLoading: isMutationLoading } = useRegisterMutation()
 
-  const handleChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -32,6 +32,7 @@ export const RegistrationForm: React.FC = () => {
     async (payload: RegistrationType) => {
       await mutateAsync(payload)
       reset()
+      return
     },
     [mutateAsync, reset]
   )
@@ -53,7 +54,7 @@ export const RegistrationForm: React.FC = () => {
       <Heading>Регистрация</Heading>
 
       <Inputs
-        handleChange={handleChange}
+        handleChange={onChange}
         formData={formData}
         errors={errors}
         register={register}

@@ -1,4 +1,6 @@
 /build
+*.yaml
+pnpm-lock.yaml
 /dist
 /mock
 tsconfig.json

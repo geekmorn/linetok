@@ -1,3 +1,10 @@
+type Base = {
+  id: string
+  active: boolean
+  created: Date
+  updated: Date
+}
+
 export type UserType = {
   id: number
   name: string

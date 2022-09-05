@@ -1,26 +1,20 @@
-export type Getter = (key: string) => Promise<string>
-export type Setter = (key: string, value: string) => Promise<void>
-export type Remover = (key: string) => Promise<void>
+export type Getter = (key: string) => string | null
+export type Setter = (key: string, value: string) => void
+export type Remover = (key: string) => void
 
-type LocalStorageType = {
-  getItem: Getter
-  setItem: Setter
-  removeItem: Remover
-}
-
-const getItem = async (key: string) =>
+const getItem = (key: string) =>
   // Get item from local storage.
-  await localStorage.getItem(key)
+  localStorage.getItem(key)
 
-const setItem = async (key: string, value: string) =>
+const setItem = (key: string, value: string) =>
   // Set item to local storage.
-  await localStorage.setItem(key, value)
+  localStorage.setItem(key, value)
 
-const removeItem = async (key: string) =>
+const removeItem = (key: string) =>
   // Remove item from local storage.
-  await localStorage.removeItem(key)
+  localStorage.removeItem(key)
 
-export const localStorage: LocalStorageType = {
+export const storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> = {
   getItem,
   setItem,
   removeItem

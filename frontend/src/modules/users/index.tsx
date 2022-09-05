@@ -10,23 +10,25 @@ export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
     alert(`User with id '${id}' and name '${name}' clicked`)
   }
 
+  if (isLoading) {
+    return (
+      <Stack style={{ fontSize: '75px' }}>
+        <Spinner />
+      </Stack>
+    )
+  }
+
+  if (noDataReceived) {
+    return <Text>No users found :(</Text>
+  }
+
   return (
-    <>
-      {isLoading ? (
-        <Stack style={{ fontSize: '75px' }}>
-          <Spinner />
-        </Stack>
-      ) : noDataReceived ? (
-        <Text>No users found :(</Text>
-      ) : (
-        <Wrap>
-          {data.map((user: UserType) => (
-            <WrapItem key={`${user.id} <User />`}>
-              <User onClick={() => openUser(user.id, user.name)} {...user} />
-            </WrapItem>
-          ))}
-        </Wrap>
-      )}
-    </>
+    <Wrap>
+      {data.map((user: UserType) => (
+        <WrapItem key={`${user.id} <User />`}>
+          <User onClick={() => openUser(user.id, user.name)} {...user} />
+        </WrapItem>
+      ))}
+    </Wrap>
   )
 }

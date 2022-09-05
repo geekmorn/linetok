@@ -12,6 +12,8 @@ import {
 type BaseFormBodyProps = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   formData: AuthorizationType
+  // TODO type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errors: any
   register: UseFormRegister<RegistrationType>
 }

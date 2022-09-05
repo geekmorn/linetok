@@ -1,5 +1,5 @@
 // App elements
-export * from './layout'
+export * from './layouts'
 export * from './navigation'
 // Business elements
 export * from './users'

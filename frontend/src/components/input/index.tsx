@@ -14,7 +14,7 @@ type InputProps = ChakraInputProps & {
 export const Input: React.FC<InputProps> = ({ label, type, placeholder }) => {
   const [value, setValue] = useState('')
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value)
 
   const isError = value === ''
@@ -25,7 +25,7 @@ export const Input: React.FC<InputProps> = ({ label, type, placeholder }) => {
       <ChakraInput
         type={type}
         value={value}
-        onChange={handleInputChange}
+        onChange={onChange}
         placeholder={placeholder}
       />
       {isError && <FormErrorMessage>{label} is required.</FormErrorMessage>}
