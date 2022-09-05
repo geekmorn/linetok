@@ -30,7 +30,7 @@ async def get_all(): return await read(ProductModel)
 async def post(payload: ProductCreate):
     product: Product | None = await read(
         ProductModel,
-        by(Product.title, payload.title)
+        by(ProductModel.title, payload.title)
     )
     if product:
         raise conflict("Product")

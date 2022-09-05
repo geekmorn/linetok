@@ -30,7 +30,7 @@ async def get_all(): return await read(CategoryModel)
 async def post(payload: CategoryCreate):
     category: Category | None = await read(
         CategoryModel,
-        by(Category.title, payload.title)
+        by(CategoryModel.title, payload.title)
     )
     if category:
         raise conflict("Category")
