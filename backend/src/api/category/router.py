@@ -1,4 +1,4 @@
-from src.common.utils.crud import create, read, update, destroy
+from src.common.utils.crud import create, read, update, destroy, by
 from fastapi import APIRouter
 from src.common.schemas.category import *
 from src.common.models import CategoryModel
@@ -12,10 +12,10 @@ router = APIRouter(
 
 @router.get("/category/{id}", response_model=Category)
 async def get(id: str):
-    category: Category | None = await read(CategoryModel, {
-        "key": CategoryModel.id,
-        "value": id
-    })
+    category: Category | None = await read(
+        CategoryModel,
+        by(CategoryModel.id, id)
+    )
     if category is None:
         raise not_found("Category")
 
@@ -28,10 +28,10 @@ async def get_all(): return await read(CategoryModel)
 
 @router.post("/category", response_model=Category, status_code=201)
 async def post(payload: CategoryCreate):
-    category: Category | None = await read(CategoryModel, {
-        "key": CategoryModel.title,
-        "value": payload.title
-    })
+    category: Category | None = await read(
+        CategoryModel,
+        by(Category.title, payload.title)
+    )
     if category:
         raise conflict("Category")
 
@@ -40,10 +40,10 @@ async def post(payload: CategoryCreate):
 
 @router.put("/category/{id}", response_model=Category)
 async def put(id: str, payload: CategoryUpdate):
-    category: Category | None = await read(CategoryModel, {
-        "key": CategoryModel.id,
-        "value": id
-    })
+    category: Category | None = await read(
+        CategoryModel,
+        by(CategoryModel.id, id)
+    )
     if category is None:
         raise not_found("Category")
 
@@ -52,10 +52,10 @@ async def put(id: str, payload: CategoryUpdate):
 
 @router.delete("/category/{id}", response_model=Category)
 async def delete(id: str):
-    category: Category | None = await read(CategoryModel, {
-        "key": CategoryModel.id,
-        "value": id
-    })
+    category: Category | None = await read(
+        CategoryModel,
+        by(CategoryModel.id, id)
+    )
     if category is None:
         raise not_found("Category")
 

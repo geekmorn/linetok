@@ -28,6 +28,7 @@ passlib = "*"
 autopep8 = "*"
 fastapi-jwt-auth = "*"
 starlette-csrf = "*"
+aiofiles = "*"
 
 [dev-packages]
 

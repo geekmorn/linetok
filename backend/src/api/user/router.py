@@ -1,4 +1,4 @@
-from src.common.utils.crud import create, read, update, destroy
+from src.common.utils.crud import create, read, update, destroy, by
 from fastapi import APIRouter, Depends
 from src.common.models import UserModel
 from src.common.schemas.user import *
@@ -13,10 +13,10 @@ router = APIRouter(
 
 @router.get("/user/{id}", response_model=User)
 async def get(id: str):
-    user: User | None = await read(UserModel, {
-        "key": UserModel.id,
-        "value": id
-    })
+    user: User | None = await read(
+        UserModel,
+        by(UserModel.id, id)
+    )
     if user is None:
         raise not_found("User")
 
@@ -29,10 +29,10 @@ async def get_all(): return await read(UserModel)
 
 @router.post("/user", response_model=User, status_code=201)
 async def post(payload: UserCreate):
-    user: User | None = await read(UserModel, {
-        "key": UserModel.username,
-        "value": payload.username
-    })
+    user: User | None = await read(
+        UserModel,
+        by(UserModel.username, payload.username)
+    )
     if user:
         raise conflict("User")
 
@@ -41,10 +41,10 @@ async def post(payload: UserCreate):
 
 @router.put("/user/{id}", response_model=User)
 async def put(id: str, payload: UserUpdate):
-    user: User | None = await read(UserModel, {
-        "key": UserModel.id,
-        "value": id
-    })
+    user: User | None = await read(
+        UserModel,
+        by(UserModel.id, id)
+    )
     if user is None:
         raise not_found("User")
 
@@ -53,10 +53,10 @@ async def put(id: str, payload: UserUpdate):
 
 @router.delete("/user/{id}", response_model=User)
 async def delete(id: str):
-    user: User | None = await read(UserModel, {
-        "key": UserModel.id,
-        "value": id
-    })
+    user: User | None = await read(
+        UserModel,
+        by(UserModel.id, id)
+    )
     if user is None:
         raise not_found("User")
 

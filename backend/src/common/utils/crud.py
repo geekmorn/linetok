@@ -8,25 +8,33 @@ from datetime import datetime
 from passlib.hash import bcrypt
 
 
-async def commit_changing() -> None:
+async def commit_change() -> None:
     try:
         await db.commit()
     except DatabaseError:
+        db.rollback()
         raise unavailable()
 
 
+def by(field_name, value) -> dict:
+    return {
+        "field_name": field_name,
+        "value": value
+    }
+
+
 async def create(Model, type_id: str | None = None, is_user=False, **kwargs):
-    _id = str(uuid4()) if type_id is None else type_id
+    id = str(uuid4()) if type_id is None else type_id
     if is_user:
         kwargs["password"] = bcrypt.hash(kwargs["password"])
     record = Model(
-        id=_id,
+        id=id,
         created=datetime.now(),
         updated=datetime.now(),
         **kwargs
     )
     db.add(record)
-    await commit_changing()
+    await commit_change()
 
     return record
 
@@ -40,7 +48,7 @@ async def read(Model, options: dict | None = None):
         return result
 
     async def selected():
-        query = select(Model).where(options["key"] == options["value"])
+        query = select(Model).where(options["field_name"] == options["value"])
         record = await db.execute(query)
         result = record.scalars().first()
         return result
@@ -65,10 +73,10 @@ async def update(record, is_user=False, **kwargs):
                 **kwargs
             )
         )
-        await commit_changing()
+        await commit_change()
     except IntegrityError as e:
         raise HTTPException(409, {
-            "error": f"{Model.__tablename__} already exists",
+            "error": f"A {Model.__tablename__} with the unique field already exists",
             "field": str(e.orig).split(".")[1]
         })
 
@@ -77,5 +85,5 @@ async def update(record, is_user=False, **kwargs):
 
 async def destroy(record):
     await db.delete(record)
-    await commit_changing()
+    await commit_change()
     return record
