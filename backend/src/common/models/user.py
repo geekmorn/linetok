@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 class UserModel(Base, BaseModel):
     __tablename__ = "user"
 
-    username = Column(String(50), unique=True, index=True)
+    email = Column(String(100), unique=True, index=True)
     name = Column(String(50), nullable=False, index=True)
     surname = Column(String(50), nullable=False)
     password = Column(String(128))

@@ -1,21 +1,21 @@
 from .base import Base
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserAuth(BaseModel):
-    username: str
+    email: EmailStr
     password: str
 
 
 class UserCreate(BaseModel):
-    username: str
+    email: EmailStr
     name: str
     surname: str
     password: str
 
 
 class UserUpdate(BaseModel):
-    username: str
+    email: EmailStr
     name: str
     surname: str
     active: bool
@@ -24,7 +24,7 @@ class UserUpdate(BaseModel):
 
 
 class User(Base):
-    username: str
+    email: EmailStr
     name: str
     surname: str
     role: str

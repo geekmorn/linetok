@@ -1,7 +1,6 @@
 from src.common.utils.exceptions import unauthorized
 from src.common.utils.crud import create, read, update, destroy, by
-from fastapi import APIRouter, Depends
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter, Depends, Form
 from src.common.config import AuthConfig
 from fastapi_jwt_auth import AuthJWT
 from src.common.schemas.token import *
@@ -21,8 +20,8 @@ def get_config():
 
 
 @router.post('/login', response_model=AccessToken)
-async def login(form: OAuth2PasswordRequestForm = Depends(), authorizer: AuthJWT = Depends()):
-    user = await authorize(form.username, form.password)
+async def login(email: str = Form(), password: str = Form(), authorizer: AuthJWT = Depends()):
+    user = await authorize(email, password)
 
     refresh_token = authorizer.create_refresh_token(subject=user.id)
     access_token = authorizer.create_access_token(subject=user.id)

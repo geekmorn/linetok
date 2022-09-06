@@ -5,10 +5,10 @@ from src.common.models import UserModel
 from src.common.schemas.user import *
 
 
-async def authorize(username: str, password: str) -> User | HTTPException:
+async def authorize(email: str, password: str) -> User | HTTPException:
     user: User | None = await read(
         UserModel,
-        by(UserModel.username, username)
+        by(UserModel.email, email)
     )
     authorized = user and user.verify_password(password)
     return (

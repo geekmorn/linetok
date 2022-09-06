@@ -11,7 +11,7 @@ router = APIRouter(
 )
 
 
-@router.get("/user/{id}", response_model=User)
+@router.get("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
 async def get(id: str):
     user: User | None = await read(
         UserModel,
@@ -23,7 +23,7 @@ async def get(id: str):
     return user
 
 
-@router.get("/users", response_model=list[User])
+@router.get("/users", response_model=list[User], dependencies=[Depends(get_current_user)])
 async def get_all(): return await read(UserModel)
 
 
@@ -31,7 +31,7 @@ async def get_all(): return await read(UserModel)
 async def post(payload: UserCreate):
     user: User | None = await read(
         UserModel,
-        by(UserModel.username, payload.username)
+        by(UserModel.email, payload.email)
     )
     if user:
         raise conflict("User")
@@ -39,7 +39,7 @@ async def post(payload: UserCreate):
     return await create(UserModel, is_user=True, **payload.dict())
 
 
-@router.put("/user/{id}", response_model=User)
+@router.put("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
 async def put(id: str, payload: UserUpdate):
     user: User | None = await read(
         UserModel,
@@ -51,7 +51,7 @@ async def put(id: str, payload: UserUpdate):
     return await update(user, is_user=True, **payload.dict())
 
 
-@router.delete("/user/{id}", response_model=User)
+@router.delete("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
 async def delete(id: str):
     user: User | None = await read(
         UserModel,
