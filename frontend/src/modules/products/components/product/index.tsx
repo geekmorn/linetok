@@ -20,20 +20,18 @@ export const Product: React.FC<ProductProps> = ({
   onRemove
 }) => (
   <Card onClick={onClick}>
-    <Stack>
-      <Stack sx={{ alignSelf: 'flex-end' }}>
-        <AlertButton
-          loading={loading}
-          onYes={onRemove}
-          buttonHeader="X"
-          alertHeader="Remove this product?"
-          alertBody="This action can not be undone."
-        />
-      </Stack>
-      <Heading sx={{ textAlign: 'center' }}>Product {id}</Heading>
-      <EditableInput value={name} />
-      <EditableInput value={price} />
-      <Text>Available: {available ? 'Yes' : 'No'}</Text>
+    <Stack sx={{ alignSelf: 'flex-end' }}>
+      <AlertButton
+        loading={loading}
+        onYes={onRemove}
+        buttonHeader="X"
+        alertHeader="Remove this product?"
+        alertBody="This action can not be undone."
+      />
     </Stack>
+    <Heading sx={{ textAlign: 'center' }}>Product {id}</Heading>
+    <EditableInput value={name} />
+    <EditableInput value={price} />
+    <Text>Available: {available ? 'Yes' : 'No'}</Text>
   </Card>
 )

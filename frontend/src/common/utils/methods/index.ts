@@ -3,9 +3,12 @@ import { httpClient } from 'common/clients'
 
 export const all = async <Interface>(endpoint: string) =>
   await httpClient
-    .get<Interface[]>(endpoint)
+    .get<Interface>(endpoint)
     .then((response) => response.data)
-    .catch((e) => console.error(e))
+    .catch((e) => {
+      console.log(e)
+      return []
+    })
 
 export const selected =
   <Interface>(endpoint: string) =>
@@ -13,7 +16,10 @@ export const selected =
     await httpClient
       .get<Interface>(`${endpoint}/${parameter}`)
       .then((response) => response.data)
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        console.log(e)
+        return []
+      })
 
 export const post =
   <Interface>(endpoint: string) =>
@@ -21,20 +27,20 @@ export const post =
     httpClient
       .post<Interface>(endpoint, payload)
       .then((response) => response.data)
-      .catch((e) => console.error(e))
+      .catch((e) => e)
 
 export const put =
   <Interface>(endpoint: string) =>
-  (payload: Interface & { id: number }) =>
+  (payload: Interface & { id: string }) =>
     httpClient
       .put<Interface>(`${endpoint}/${payload.id}`, payload)
       .then((response) => response.data)
-      .catch((e) => console.error(e))
+      .catch((e) => e)
 
 export const _delete =
   <Interface>(endpoint: string) =>
-  (id: number) =>
+  (id: string) =>
     httpClient
       .delete<Interface>(`${endpoint}/${id}`)
       .then((response) => response.data)
-      .catch((e) => console.error(e))
+      .catch((e) => e)

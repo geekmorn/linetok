@@ -13,7 +13,7 @@ import { Product } from './components'
 import { useDestroyProductMutation } from './hooks'
 
 export const Products: React.FC<ProductsProps> = ({
-  data,
+  initialData: data,
   isLoading,
   refetch
 }) => {
@@ -25,7 +25,7 @@ export const Products: React.FC<ProductsProps> = ({
   const noDataReceived = !data || data.length === 0
 
   const remove = useCallback(
-    async (id: number) => {
+    async (id: string) => {
       await mutateAsync(id, {
         onSuccess: () => {
           refetch()
@@ -34,15 +34,6 @@ export const Products: React.FC<ProductsProps> = ({
             description: "We've just removed the product for you.",
             status: 'success',
             isClosable: true
-          })
-        },
-        onError: () => {
-          toast({
-            title: 'Remove failed',
-            description:
-              'Something went wrong when we tried to remove the product.',
-            status: 'error',
-            isClosable: false
           })
         }
       })
@@ -64,7 +55,7 @@ export const Products: React.FC<ProductsProps> = ({
 
   return (
     <Wrap>
-      {data.map((product: ProductType) => (
+      {data?.map((product: ProductType) => (
         <WrapItem key={`${product.id} <Product />`}>
           <Product
             onRemove={() => remove(product.id)}

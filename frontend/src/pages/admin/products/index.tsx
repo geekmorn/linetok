@@ -5,37 +5,39 @@ import { Products } from 'modules'
 import { ProductCreationForm } from 'modules/products/components'
 import { useReadProductsQuery } from 'modules/products/hooks'
 import { GetServerSideProps, NextPage } from 'next'
-import { Center } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 
 export type ProductsProps = {
+  initialData?: ProductType[]
   data?: ProductType[]
   isLoading: boolean
   refetch: () => void
 }
 
-const ProductsPage: NextPage<ProductsProps> = ({ data: initialData }) => {
+const ProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
   const { data, isLoading, refetch } = useReadProductsQuery({ initialData })
 
   const state = {
-    data,
+    initialData: data,
     isLoading,
     refetch
   }
 
   return (
-    <Center sx={{ flexDirection: 'column', gap: '15px' }}>
+    <Stack sx={{ flexDirection: 'column', gap: '15px', width: '100%' }}>
       <ProductCreationForm {...state} />
       <Products {...state} />
-    </Center>
+    </Stack>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const data = (await read<ProductType>(API.products)) ?? []
+  const initialData: ProductsProps['initialData'] =
+    (await read<ProductType[]>(API.products)) ?? []
 
   return {
     props: {
-      data
+      initialData
     }
   }
 }

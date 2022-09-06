@@ -1,18 +1,17 @@
-export type Getter = (key: string) => string | null
-export type Setter = (key: string, value: string) => void
-export type Remover = (key: string) => void
+const getItem = (key: string) => {
+  if (typeof window === 'undefined') return null
+  return localStorage.getItem(key)
+}
 
-const getItem = (key: string) =>
-  // Get item from local storage.
-  localStorage.getItem(key)
+const setItem = (key: string, value: string) => {
+  if (typeof window === 'undefined') return null
+  return localStorage.setItem(key, value)
+}
 
-const setItem = (key: string, value: string) =>
-  // Set item to local storage.
-  localStorage.setItem(key, value)
-
-const removeItem = (key: string) =>
-  // Remove item from local storage.
-  localStorage.removeItem(key)
+const removeItem = (key: string) => {
+  if (typeof window === 'undefined') return null
+  return localStorage.removeItem(key)
+}
 
 export const storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> = {
   getItem,

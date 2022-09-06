@@ -6,7 +6,7 @@ import { User } from './components'
 export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
   const noDataReceived = !data || data.length === 0
 
-  const openUser = (id: number, name: string) => {
+  const openUser = (id: string, name: string) => {
     alert(`User with id '${id}' and name '${name}' clicked`)
   }
 
@@ -24,9 +24,9 @@ export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
 
   return (
     <Wrap>
-      {data.map((user: UserType) => (
-        <WrapItem key={`${user.id} <User />`}>
-          <User onClick={() => openUser(user.id, user.name)} {...user} />
+      {data?.map((user: UserType) => (
+        <WrapItem key={`${user.username} <User />`}>
+          <User onClick={() => openUser(user.username, user.name)} {...user} />
         </WrapItem>
       ))}
     </Wrap>

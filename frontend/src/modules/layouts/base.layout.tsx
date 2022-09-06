@@ -1,7 +1,8 @@
 import { PropsWithChildren } from 'react'
 import { SEO } from 'common/constants'
+import { Footer, Navigation } from 'modules'
 import Head from 'next/head'
-import { Container } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 
 type BaseLayoutProps = PropsWithChildren & {
   title?: string
@@ -20,8 +21,15 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Container maxW={1280} minH="100vh" as="section">
-      {children}
-    </Container>
+    <>
+      <Navigation />
+      <header></header>
+      <Stack minH="100vh" w="100%">
+        {children}
+      </Stack>
+      <footer>
+        <Footer />
+      </footer>
+    </>
   </>
 )

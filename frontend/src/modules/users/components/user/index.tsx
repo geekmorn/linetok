@@ -1,4 +1,6 @@
 import { UserType } from 'common/types'
+import { Card } from 'components'
+import { Heading, Text } from '@chakra-ui/react'
 
 type UserProps = UserType & {
   onClick?: () => void
@@ -13,23 +15,12 @@ export const User: React.FC<UserProps> = ({
   // Props
   onClick
 }) => (
-  <div
-    onClick={onClick}
-    style={{
-      border: '1px solid black',
-      display: 'flex',
-      placeItems: 'center',
-      flexDirection: 'column',
-      padding: '10px',
-      gap: '15px',
-      minWidth: '200px'
-    }}
-  >
-    <h1>
-      User <span>{id}</span>
-    </h1>
-    <span>Name: {name}</span>
-    <span>Active: {active ? 'Yes' : 'No'}</span>
-    <span>Role: {role}</span>
-  </div>
+  <Card onClick={onClick}>
+    <Heading>
+      User <Text>{id}</Text>
+    </Heading>
+    <Text>Name: {name}</Text>
+    <Text>Active: {active ? 'Yes' : 'No'}</Text>
+    <Text>Role: {role}</Text>
+  </Card>
 )

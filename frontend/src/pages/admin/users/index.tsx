@@ -4,36 +4,39 @@ import { read } from 'common/utils'
 import { Users } from 'modules'
 import { useReadUsersQuery } from 'modules/users/hooks'
 import { GetServerSideProps, NextPage } from 'next'
-import { Center } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 
 export type UsersProps = {
+  initialData: UserType[]
   data?: UserType[]
   isLoading: boolean
   refetch: () => void
 }
 
-const UsersPage: NextPage<UsersProps> = ({ data: initialData }) => {
+const UsersPage: NextPage<UsersProps> = ({ initialData }) => {
   const { data, isLoading, refetch } = useReadUsersQuery({ initialData })
 
   const state = {
+    initialData: data,
     data,
     isLoading,
     refetch
   }
 
   return (
-    <Center sx={{ flexDirection: 'column' }}>
+    <Stack sx={{ flexDirection: 'column' }}>
       <Users {...state} />
-    </Center>
+    </Stack>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const data = (await read<UserType>(API.users)) ?? []
+  const initialData: UsersProps['initialData'] =
+    (await read<UserType[]>(API.users)) ?? []
 
   return {
     props: {
-      data
+      initialData
     }
   }
 }

@@ -3,9 +3,7 @@ import { ProductType } from 'common/types'
 import { read } from 'common/utils'
 import { useQuery } from '@tanstack/react-query'
 
-type ParametersType = {
-  id: number
-}
+type ParametersType = Pick<ProductType, 'id'>
 
 export const useReadProductQuery = ({ id }: ParametersType) =>
   useQuery(
