@@ -31,7 +31,11 @@ const UsersPage: NextPage<UsersProps> = ({ data: initialData }) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const data = (await read<UserType>(API.users)) ?? []
 
-  return { props: { data } }
+  return {
+    props: {
+      data
+    }
+  }
 }
 
 export default UsersPage

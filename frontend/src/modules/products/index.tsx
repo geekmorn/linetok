@@ -19,37 +19,35 @@ export const Products: React.FC<ProductsProps> = ({
 }) => {
   const toast = useToast()
 
-  const {
-    mutateAsync,
-    isLoading: isRemoveLoading,
-    isSuccess: isRemoveSuccess
-  } = useDestroyProductMutation()
+  const { mutateAsync, isLoading: isDestroyLoading } =
+    useDestroyProductMutation()
 
   const noDataReceived = !data || data.length === 0
 
   const remove = useCallback(
     async (id: number) => {
-      await mutateAsync(id)
-      refetch()
-      if (isRemoveSuccess) {
-        toast({
-          title: 'Product removed',
-          description: "We've just removed the product for you.",
-          status: 'success',
-          isClosable: true
-        })
-        return
-      }
-      toast({
-        title: 'Remove failed',
-        description:
-          'Something went wrong when we tried to remove the product.',
-        status: 'error',
-        isClosable: true
+      await mutateAsync(id, {
+        onSuccess: () => {
+          refetch()
+          toast({
+            title: 'Product removed',
+            description: "We've just removed the product for you.",
+            status: 'success',
+            isClosable: true
+          })
+        },
+        onError: () => {
+          toast({
+            title: 'Remove failed',
+            description:
+              'Something went wrong when we tried to remove the product.',
+            status: 'error',
+            isClosable: false
+          })
+        }
       })
-      return
     },
-    [mutateAsync, refetch, isRemoveSuccess, toast]
+    [mutateAsync, refetch, toast]
   )
 
   if (isLoading) {
@@ -70,7 +68,7 @@ export const Products: React.FC<ProductsProps> = ({
         <WrapItem key={`${product.id} <Product />`}>
           <Product
             onRemove={() => remove(product.id)}
-            loading={isRemoveLoading}
+            loading={isDestroyLoading}
             {...product}
           />
         </WrapItem>

@@ -35,11 +35,8 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
     formState: { errors }
   } = useForm<ProductType>()
 
-  const {
-    mutateAsync,
-    isLoading: isCreationLoading,
-    isSuccess: isCreationSuccess
-  } = useCreateProductMutation()
+  const { mutateAsync, isLoading: isCreationLoading } =
+    useCreateProductMutation()
 
   const onChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -50,27 +47,29 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
 
   const onSubmit = useCallback(
     async (payload: ProductType) => {
-      await mutateAsync(payload)
-      refetch()
-      if (isCreationSuccess) {
-        reset()
-        toast({
-          title: 'Product created',
-          description: "We've just created the product for you.",
-          status: 'success',
-          isClosable: true
-        })
-        return
-      }
-      toast({
-        title: 'Creation failed',
-        description:
-          'Something went wrong when we tried to create the product.',
-        status: 'error'
+      await mutateAsync(payload, {
+        onSuccess: () => {
+          refetch()
+          reset()
+          toast({
+            title: 'Product created',
+            description: "We've just created the product for you.",
+            status: 'success',
+            isClosable: true
+          })
+        },
+        onError: () => {
+          toast({
+            title: 'Creation failed',
+            description:
+              'Something went wrong when we tried to create the product.',
+            status: 'error',
+            isClosable: false
+          })
+        }
       })
-      return
     },
-    [toast, isCreationSuccess, mutateAsync, refetch, reset]
+    [toast, mutateAsync, refetch, reset]
   )
 
   return (
