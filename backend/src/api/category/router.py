@@ -7,57 +7,58 @@ from src.common.utils.exceptions import not_found, conflict
 
 
 router = APIRouter(
-    tags=["Category"]
+    tags=["Category"],
+    prefix="/categories"
 )
 
 
-@router.get("/category/{id}", response_model=Category)
+@router.get("/{id}", response_model=Category)
 async def get(id: str):
     category: Category | None = await read(
         CategoryModel,
         by(CategoryModel.id, id)
     )
     if category is None:
-        raise not_found("Category")
+        raise not_found()
 
     return category
 
 
-@router.get("/categories", response_model=list[Category])
+@router.get("/", response_model=list[Category])
 async def get_all(): return await read(CategoryModel)
 
 
-@router.post("/category", response_model=Category, status_code=201, dependencies=[Depends(get_current_user)])
+@router.post("/", response_model=Category, status_code=201)
 async def post(payload: CategoryCreate):
     category: Category | None = await read(
         CategoryModel,
-        by(CategoryModel.title, payload.title)
+        by(CategoryModel.name, payload.name)
     )
     if category:
-        raise conflict("Category")
+        raise conflict()
 
     return await create(CategoryModel, **payload.dict())
 
 
-@router.put("/category/{id}", response_model=Category, dependencies=[Depends(get_current_user)])
+@router.put("/{id}", response_model=Category, dependencies=[Depends(get_current_user)])
 async def put(id: str, payload: CategoryUpdate):
     category: Category | None = await read(
         CategoryModel,
         by(CategoryModel.id, id)
     )
     if category is None:
-        raise not_found("Category")
+        raise not_found()
 
     return await update(category, **payload.dict())
 
 
-@router.delete("/category/{id}", response_model=Category, dependencies=[Depends(get_current_user)])
+@router.delete("/{id}", response_model=Category)
 async def delete(id: str):
     category: Category | None = await read(
         CategoryModel,
         by(CategoryModel.id, id)
     )
     if category is None:
-        raise not_found("Category")
+        raise not_found()
 
     return await destroy(category)

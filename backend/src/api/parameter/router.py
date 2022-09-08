@@ -7,57 +7,58 @@ from src.common.utils.exceptions import not_found, conflict
 
 
 router = APIRouter(
-    tags=["Parameter"]
+    tags=["Parameter"],
+    prefix="/parameters"
 )
 
 
-@router.get("/parameter/{id}", response_model=Parameter)
+@router.get("/{id}", response_model=Parameter)
 async def get(id: str):
     parameter: Parameter | None = await read(
         ParameterModel,
         by(ParameterModel.id, id)
     )
     if parameter is None:
-        raise not_found("Parameter")
+        raise not_found()
 
     return parameter
 
 
-@router.get("/parameters", response_model=list[Parameter])
+@router.get("/", response_model=list[Parameter])
 async def get_all(): return await read(ParameterModel)
 
 
-@router.post("/parameter", response_model=Parameter, status_code=201, dependencies=[Depends(get_current_user)])
+@router.post("/", response_model=Parameter, status_code=201)
 async def post(payload: ParameterCreate):
     parameter: Parameter | None = await read(
         ParameterModel,
-        by(ParameterModel.title, payload.title)
+        by(ParameterModel.name, payload.name)
     )
     if parameter:
-        raise conflict("Parameter")
+        raise conflict()
 
     return await create(ParameterModel, **payload.dict())
 
 
-@ router.put("parameter/{id}", response_model=Parameter, dependencies=[Depends(get_current_user)])
+@ router.put("/{id}", response_model=Parameter, dependencies=[Depends(get_current_user)])
 async def put(id: str, payload: ParameterUpdate):
     parameter: Parameter | None = await read(
         ParameterModel,
         by(ParameterModel.id, id)
     )
     if parameter is None:
-        raise not_found("Parameter")
+        raise not_found()
 
     return await update(parameter, **payload.dict())
 
 
-@ router.delete("/parameter/{id}", response_model=Parameter, dependencies=[Depends(get_current_user)])
+@ router.delete("/{id}", response_model=Parameter)
 async def delete(id: str):
     parameter: Parameter | None = await read(
         ParameterModel,
         by(ParameterModel.id, id)
     )
     if parameter is None:
-        raise not_found("Parameter")
+        raise not_found()
 
     return await destroy(parameter)

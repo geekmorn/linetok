@@ -1,10 +1,10 @@
 from fastapi import HTTPException
 
 
-def not_found(message: str) -> HTTPException:
+def not_found() -> HTTPException:
     raise HTTPException(
         status_code=404,
-        detail=f"{message} not found"
+        detail=f"Not not found"
     )
 
 
@@ -15,15 +15,15 @@ def unauthorized(message="You are not authorized to access this resource") -> HT
     )
 
 
-def conflict(message: str) -> HTTPException:
+def conflict() -> HTTPException:
     raise HTTPException(
         status_code=409,
-        detail=f"{message} already exists"
+        detail=f"Already exists"
     )
 
 
-def unavailable(message="Service is temporarily unavailable") -> HTTPException:
+def not_acceptable() -> HTTPException:
     raise HTTPException(
-        status_code=503,
-        detail=message
+        status_code=406,
+        detail="Not acceptable"
     )

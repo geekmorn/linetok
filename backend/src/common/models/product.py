@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 class ProductModel(Base, BaseModel):
     __tablename__ = "product"
 
-    title = Column(String(200), unique=True, index=True)
+    name = Column(String(200), unique=True, index=True)
     price = Column(Float, default=10)
     # TODO Add media and description fields.
 

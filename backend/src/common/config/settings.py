@@ -23,5 +23,5 @@ class AuthConfig(BaseModel):
     authjwt_token_location: set = {"cookies"}
     authjwt_cookie_secure = False
     authjwt_cookie_csrf_protect = False
-    authjwt_access_token_expires = datetime.timedelta(minutes=1)
-    authjwt_refresh_token_expires = datetime.timedelta(days=15)
+    authjwt_access_token_expires = datetime.timedelta(minutes=30)
+    authjwt_refresh_token_expires = datetime.timedelta(days=20)

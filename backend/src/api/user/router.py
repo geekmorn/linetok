@@ -8,56 +8,57 @@ from src.common.utils.exceptions import not_found, conflict
 
 router = APIRouter(
     tags=["User"],
+    prefix="/users"
 )
 
 
-@router.get("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
+@router.get("/{id}", response_model=User, dependencies=[Depends(get_current_user)])
 async def get(id: str):
     user: User | None = await read(
         UserModel,
         by(UserModel.id, id)
     )
     if user is None:
-        raise not_found("User")
+        raise not_found()
 
     return user
 
 
-@router.get("/users", response_model=list[User], dependencies=[Depends(get_current_user)])
+@router.get("/", response_model=list[User], dependencies=[Depends(get_current_user)])
 async def get_all(): return await read(UserModel)
 
 
-@router.post("/user", response_model=User, status_code=201)
+@router.post("/", response_model=User, status_code=201)
 async def post(payload: UserCreate):
     user: User | None = await read(
         UserModel,
         by(UserModel.email, payload.email)
     )
     if user:
-        raise conflict("User")
+        raise conflict()
 
     return await create(UserModel, is_user=True, **payload.dict())
 
 
-@router.put("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
+@router.put("/{id}", response_model=User, dependencies=[Depends(get_current_user)])
 async def put(id: str, payload: UserUpdate):
     user: User | None = await read(
         UserModel,
         by(UserModel.id, id)
     )
     if user is None:
-        raise not_found("User")
+        raise not_found()
 
     return await update(user, is_user=True, **payload.dict())
 
 
-@router.delete("/user/{id}", response_model=User, dependencies=[Depends(get_current_user)])
+@router.delete("/{id}", response_model=User, dependencies=[Depends(get_current_user)])
 async def delete(id: str):
     user: User | None = await read(
         UserModel,
         by(UserModel.id, id)
     )
     if user is None:
-        raise not_found("User")
+        raise not_found()
 
     return await destroy(user)

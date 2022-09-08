@@ -25,8 +25,11 @@ app.include_router(api_router)
 
 @app.on_event("startup")
 async def startup():
-    db.create()
-    await db.create_table()
+    try:
+        db.create()
+        await db.create_table()
+    except Exception:
+        print("\n\033[91mErrod: \033[93mDatabase cannot connect\n")
 
 
 @app.on_event("shutdown")

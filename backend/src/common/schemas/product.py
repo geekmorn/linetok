@@ -3,19 +3,19 @@ from .base import Base
 
 
 class ProductCreate(BaseModel):
-    title: str
+    name: str
     parameter_id: str
     category_id: str
 
 
 class ProductUpdate(BaseModel):
-    title: str
+    name: str
     parameter_id: str
     category_id: str
 
 
 class Product(Base):
-    title: str
+    name: str
     parameter_id: str
     category_id: str
 

@@ -7,56 +7,57 @@ from src.common.utils.exceptions import not_found, conflict
 
 
 router = APIRouter(
-    tags=["Product"]
+    tags=["Product"],
+    prefix="/products"
 )
 
 
-@router.get("/product/{id}", response_model=Product)
+@router.get("/{id}", response_model=Product)
 async def get(id: str):
     product: Product | None = await read(
         ProductModel,
         by(ProductModel.id, id)
     )
     if product is None:
-        raise not_found("Product")
+        raise not_found()
 
     return product
 
 
-@router.get("/products", response_model=list[Product])
+@router.get("/", response_model=list[Product])
 async def get_all(): return await read(ProductModel)
 
 
-@router.post("/product", response_model=Product, status_code=201, dependencies=[Depends(get_current_user)])
+@router.post("/", response_model=Product, status_code=201)
 async def post(payload: ProductCreate):
     product: Product | None = await read(
         ProductModel,
-        by(ProductModel.title, payload.title)
+        by(ProductModel.name, payload.name)
     )
     if product:
-        raise conflict("Product")
+        raise conflict()
 
     return await create(ProductModel, **payload.dict())
 
 
-@ router.put("/product/{id}", response_model=Product, dependencies=[Depends(get_current_user)])
+@ router.put("/{id}", response_model=Product, dependencies=[Depends(get_current_user)])
 async def put(id: str, payload: ProductUpdate):
     product: Product | None = await read(
         ProductModel,
         by(ProductModel.id, id))
     if product is None:
-        raise not_found("Product")
+        raise not_found()
 
     return await update(product, **payload.dict())
 
 
-@ router.delete("/product/{id}", response_model=Product, dependencies=[Depends(get_current_user)])
+@ router.delete("/{id}", response_model=Product)
 async def delete(id: str):
     product: Product | None = await read(
         ProductModel,
         by(ProductModel.id, id)
     )
     if product is None:
-        raise not_found("Product")
+        raise not_found()
 
     return await destroy(product)

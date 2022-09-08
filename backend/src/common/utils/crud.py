@@ -3,7 +3,7 @@ from sqlalchemy.future import select
 from sqlalchemy import update as _update
 from src.common.config import db
 from sqlalchemy.exc import IntegrityError, DatabaseError
-from .exceptions import unavailable, HTTPException
+from .exceptions import not_acceptable, HTTPException
 from datetime import datetime
 from passlib.hash import bcrypt
 
@@ -12,8 +12,8 @@ async def commit_change() -> None:
     try:
         await db.commit()
     except DatabaseError:
-        db.rollback()
-        raise unavailable()
+        await db.rollback()
+        raise not_acceptable()
 
 
 def by(field_name, value) -> dict:

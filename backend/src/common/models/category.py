@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 class CategoryModel(Base, BaseModel):
     __tablename__ = "category"
 
-    title = Column(String(50), unique=True, index=True)
+    name = Column(String(50), unique=True, index=True)
     parameter_id = Column(String, ForeignKey("parameter.id"))
 
     parameter = relationship("ParameterModel", back_populates="category")

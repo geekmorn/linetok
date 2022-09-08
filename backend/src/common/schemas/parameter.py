@@ -3,15 +3,15 @@ from .base import Base
 
 
 class ParameterCreate(BaseModel):
-    title: str
+    name: str
 
 
 class ParameterUpdate(BaseModel):
-    title: str
+    name: str
 
 
 class Parameter(Base):
-    title: str
+    name: str
 
     class Config:
         orm_mode = True
