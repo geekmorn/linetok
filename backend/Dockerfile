@@ -1,7 +1,8 @@
-FROM python:3.9
-WORKDIR /backend
-COPY ./requirements.txt /backend/requirements.txt
+FROM python:3.10
+WORKDIR /app
+COPY ./ /app
+COPY ./requirements.txt /app
+COPY ./run.py /app
 
-RUN pip install --no-cache-dir --upgrade -r /backend/requirements.txt
-COPY . /backend
-CMD [ "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000" ]
+RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
+EXPOSE 8000
