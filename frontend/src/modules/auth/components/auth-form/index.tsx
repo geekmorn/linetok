@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
 import { AuthType } from 'common/types'
 import { InputPassword } from 'components'
+import { WebAuthn } from 'modules'
 import { useAuthorizeMutation } from 'modules/auth/hooks'
 import {
   Button,
@@ -91,7 +92,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             onChange={onChange}
             value={formData.email}
           />
-          {errors.email && <small>{errors.email.message}</small>}
         </InputGroup>
       </Stack>
 
@@ -107,17 +107,23 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           })}
           id="password"
           name="password"
-          placeholder="***"
           onChange={onChange}
           value={formData.password}
         />
-        {errors.password && <small>{errors.password.message}</small>}
       </Stack>
 
-      <Stack>
-        <Button type="submit" disabled={isMutationLoading}>
+      <Stack
+        sx={{
+          width: '100%',
+          placeItems: 'center',
+          gap: '5px',
+          flexDirection: 'row'
+        }}
+      >
+        <Button type="submit" h="50px" w="100%" disabled={isMutationLoading}>
           Войти
         </Button>
+        <WebAuthn />
       </Stack>
     </FormControl>
   )
