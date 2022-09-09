@@ -75,6 +75,7 @@ async def update(record, is_user=False, **kwargs):
         )
         await commit_change()
     except IntegrityError as e:
+        await db.rollback()
         raise HTTPException(409, {
             "error": f"A {Model.__tablename__} with the unique field already exists",
             "field": str(e.orig).split(".")[1]

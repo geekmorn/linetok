@@ -20,6 +20,7 @@ class UserUpdate(BaseModel):
     surname: str
     active: bool
     role: str
+    old_password: str
     password: str
 
 

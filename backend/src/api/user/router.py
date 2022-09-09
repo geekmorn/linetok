@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from src.common.models import UserModel
 from src.common.schemas.user import *
 from src.common.dependencies import get_current_user
-from src.common.utils.exceptions import not_found, conflict
+from src.common.utils.exceptions import not_found, conflict, unauthorized
 
 
 router = APIRouter(
@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get("/{id}", response_model=User, dependencies=[Depends(get_current_user)])
+@router.get("/{id}", response_model=User)
 async def get(id: str):
     user: User | None = await read(
         UserModel,
@@ -24,7 +24,7 @@ async def get(id: str):
     return user
 
 
-@router.get("/", response_model=list[User], dependencies=[Depends(get_current_user)])
+@router.get("/", response_model=list[User])
 async def get_all(): return await read(UserModel)
 
 
@@ -40,7 +40,7 @@ async def post(payload: UserCreate):
     return await create(UserModel, is_user=True, **payload.dict())
 
 
-@router.put("/{id}", response_model=User, dependencies=[Depends(get_current_user)])
+@router.put("/{id}", response_model=User)
 async def put(id: str, payload: UserUpdate):
     user: User | None = await read(
         UserModel,
@@ -48,6 +48,9 @@ async def put(id: str, payload: UserUpdate):
     )
     if user is None:
         raise not_found()
+    elif not user.verify_password(payload.old_password):
+        raise unauthorized("Password is not correct")
+    del payload.old_password
 
     return await update(user, is_user=True, **payload.dict())
 
