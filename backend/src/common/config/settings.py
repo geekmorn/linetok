@@ -11,7 +11,9 @@ class Settings(BaseSettings):
     PORT: int
     DEGUG = True
     ROUTE_PREFIX: str
-    DB_URL: str
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_DB: str
     JWT_SECRET: str
     DOCS_URL: str
     TITLE: str

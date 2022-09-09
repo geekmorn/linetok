@@ -10,6 +10,7 @@ class CategoryCreate(BaseModel):
 class CategoryUpdate(BaseModel):
     name: str
     parameter_id: str
+    active: bool
 
 
 class Category(Base):

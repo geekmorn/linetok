@@ -6,7 +6,6 @@ Base = declarative_base()
 
 
 class AsyncDatabaseSession:
-    settings = Settings()
 
     def __init__(self):
         self._session = None
@@ -16,8 +15,12 @@ class AsyncDatabaseSession:
         return getattr(self._session, name)
 
     def create(self):
+        settings = Settings()
+        user = settings.POSTGRES_USER
+        password = settings.POSTGRES_PASSWORD
+        db_name = settings.POSTGRES_DB
         self._engine = create_async_engine(
-            self.settings.DB_URL,
+            f"postgresql+asyncpg://{user}:{password}@localhost:5432/{db_name}",
             future=True,
             echo=False
         )

@@ -8,6 +8,7 @@ class ParameterCreate(BaseModel):
 
 class ParameterUpdate(BaseModel):
     name: str
+    active: bool
 
 
 class Parameter(Base):

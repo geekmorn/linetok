@@ -10,12 +10,19 @@ class ProductCreate(BaseModel):
 
 class ProductUpdate(BaseModel):
     name: str
+    description: str
+    active: bool
+    price: float
+    amount: int
     parameter_id: str
     category_id: str
 
 
 class Product(Base):
     name: str
+    description: str
+    price: float
+    amount: int
     parameter_id: str
     category_id: str
 

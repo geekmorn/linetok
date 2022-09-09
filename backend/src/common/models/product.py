@@ -1,6 +1,6 @@
 from .base import BaseModel
 from src.common.config import Base
-from sqlalchemy import Column, String, Float, ForeignKey
+from sqlalchemy import Column, String, Float, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 
@@ -9,7 +9,10 @@ class ProductModel(Base, BaseModel):
 
     name = Column(String(200), unique=True, index=True)
     price = Column(Float, default=10)
-    # TODO Add media and description fields.
+    amount = Column(Integer, default=1)
+    description = Column(String(2000), default="")
+
+    # TODO Add media field.
 
     parameter_id = Column(String, ForeignKey("parameter.id"))
     category_id = Column(String, ForeignKey("category.id"))
