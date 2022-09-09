@@ -14,7 +14,7 @@ const userAlreadyHasAccount = {
 } as const
 
 const LoginPage: NextPage = () => {
-  const [isRegistrationMode, toggle] = useToggle(false)
+  const [isRegistrationMode, toggle] = useToggle(true)
 
   return (
     <Center h="100vh">

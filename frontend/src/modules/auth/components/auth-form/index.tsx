@@ -21,9 +21,7 @@ type AuthFormProps = {
   isRegistrationMode: boolean
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({
-  isRegistrationMode = false
-}) => {
+export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
   const [formData, setFormData] = useState<AuthType>({
     email: '',
     password: ''
@@ -59,14 +57,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({
       as="form"
       onSubmit={handleSubmit((formData: AuthType) => onSubmit(formData))}
       sx={{
-        width: '275px',
+        maxWidth: '300px',
         margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
         gap: '25px'
       }}
     >
-      <Heading>{isRegistrationMode ? 'Регистрация' : 'Авторизация'}</Heading>
+      <Heading>{isRegistrationMode ? 'Регистрация' : 'Войти'}</Heading>
 
       <Stack>
         <FormLabel htmlFor="email">Почта</FormLabel>
@@ -120,10 +118,16 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           flexDirection: 'row'
         }}
       >
-        <Button type="submit" h="50px" w="100%" disabled={isMutationLoading}>
-          Войти
+        <Button
+          variant="outline"
+          type="submit"
+          h="50px"
+          w="100%"
+          disabled={isMutationLoading}
+        >
+          {isRegistrationMode ? 'Зарегистрироваться' : 'Войти'}
         </Button>
-        <WebAuthn />
+        <WebAuthn isRegistrationMode={isRegistrationMode} />
       </Stack>
     </FormControl>
   )

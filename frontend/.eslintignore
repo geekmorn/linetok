@@ -1,3 +1,5 @@
+/*.config.ts
+*.config.js
 /build
 *.yaml
 pnpm-lock.yaml
