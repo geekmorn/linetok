@@ -3,7 +3,7 @@ import { UserType } from 'common/types'
 import { read } from 'common/utils'
 import { Users } from 'modules'
 import { useReadUsersQuery } from 'modules/users/hooks'
-import { GetServerSideProps, NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import { Stack } from '@chakra-ui/react'
 
 export type UsersProps = {
@@ -30,7 +30,7 @@ const UsersPage: NextPage<UsersProps> = ({ initialData }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const initialData: UsersProps['initialData'] =
     (await read<UserType[]>(API.users)) ?? []
 

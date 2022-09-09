@@ -4,7 +4,7 @@ import { read } from 'common/utils'
 import { Products } from 'modules'
 import { ProductCreationForm } from 'modules/products/components'
 import { useReadProductsQuery } from 'modules/products/hooks'
-import { GetServerSideProps, NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import { Stack } from '@chakra-ui/react'
 
 export type ProductsProps = {
@@ -31,7 +31,7 @@ const ProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const initialData: ProductsProps['initialData'] =
     (await read<ProductType[]>(API.products)) ?? []
 
