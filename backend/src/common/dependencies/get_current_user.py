@@ -2,7 +2,7 @@ import jwt
 from jwt.exceptions import DecodeError, ExpiredSignatureError
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
-from src.common.config import Settings
+from src.common.config import settings
 from src.common.models import UserModel
 from src.common.utils.crud import read, by
 from src.common.utils.exceptions import unauthorized
@@ -16,7 +16,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(
             token,
-            Settings().JWT_SECRET,
+            settings.JWT_SECRET,
             algorithms=['HS256']
         )
         id = payload.get("sub")

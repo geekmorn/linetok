@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..common.config import Settings
+from ..common.config import settings
 from .user import user_router
 from .auth import auth_router
 from .parameter import parameter_router
@@ -7,7 +7,7 @@ from .category import category_router
 from .product import product_router
 
 api_router = APIRouter(
-    prefix=Settings().ROUTE_PREFIX
+    prefix=settings.ROUTE_PREFIX
 )
 
 

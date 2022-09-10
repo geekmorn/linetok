@@ -1,4 +1,4 @@
-from .settings import Settings
+from .settings import settings
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
@@ -15,12 +15,11 @@ class AsyncDatabaseSession:
         return getattr(self._session, name)
 
     def create(self):
-        settings = Settings()
         user = settings.POSTGRES_USER
         password = settings.POSTGRES_PASSWORD
         db_name = settings.POSTGRES_DB
         self._engine = create_async_engine(
-            f"postgresql+asyncpg://{user}:{password}@localhost:5432/{db_name}",
+            f"postgresql+asyncpg://{user}:{password}@postgres:5432/{db_name}",
             future=True,
             echo=False
         )
