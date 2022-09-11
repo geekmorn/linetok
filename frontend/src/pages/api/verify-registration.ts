@@ -28,6 +28,7 @@ export default async function handler(
       requireUserVerification: true
     }
     verification = await verifyRegistrationResponse(opts)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error(error)
     return res.status(400).send({ error: error.message })

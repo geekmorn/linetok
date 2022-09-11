@@ -5,7 +5,7 @@ import {
 import { NextApiRequest, NextApiResponse } from 'next'
 import { inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(_: NextApiRequest, res: NextApiResponse) {
   const user = inMemoryUserDeviceDB[loggedInUserId]
 
   const { username, devices } = user

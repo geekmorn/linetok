@@ -25,6 +25,7 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
         description: 'Something went wrong. Try again.',
         status: 'warning'
       })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast({
         title: `${error.name}`,
