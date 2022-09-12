@@ -4,16 +4,24 @@ import { Center } from '@chakra-ui/react'
 export const routes = [
   {
     path: '/',
-    name: 'Home'
+    name: ''
   },
   {
-    path: '/admin/users',
-    name: 'Users'
-  },
-  {
-    path: '/admin/products',
+    path: '/products',
     name: 'Products'
+  },
+  {
+    path: '/contact',
+    name: 'Contact'
   }
+  // {
+  //   path: '/admin/users',
+  //   name: 'Users'
+  // },
+  // {
+  //   path: '/admin/products',
+  //   name: 'Products'
+  // }
 ] as const
 
 export const Navigation: React.FC = () => (

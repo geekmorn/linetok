@@ -11,7 +11,7 @@ export type UsersProps = {
   refetch: () => void
 }
 
-const UsersPage: NextPage<UsersProps> = ({ initialData }) => {
+const AdminUsersPage: NextPage<UsersProps> = ({ initialData }) => {
   const { data, refetch } = useReadUsersQuery({ initialData })
 
   const state = {
@@ -37,4 +37,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default UsersPage
+export default AdminUsersPage

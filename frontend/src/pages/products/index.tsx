@@ -1,18 +1,13 @@
+import { Stack } from '@chakra-ui/react'
 import { API } from 'common/constants'
 import { ProductType } from 'common/types'
-import { read } from 'common/utils'
+import { read } from 'common/utils/crud'
 import { Products } from 'modules'
-import { ProductCreationForm } from 'modules/products/components'
 import { useReadProductsQuery } from 'modules/products/hooks'
 import { GetStaticProps, NextPage } from 'next'
-import { Stack } from '@chakra-ui/react'
+import { ProductsProps } from 'pages/admin/products'
 
-export type ProductsProps = {
-  initialData?: ProductType[]
-  refetch: () => void
-}
-
-const AdminProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
+const ProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
   const { data, refetch } = useReadProductsQuery({ initialData })
 
   const state = {
@@ -22,7 +17,6 @@ const AdminProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
 
   return (
     <Stack sx={{ flexDirection: 'column', gap: '15px', width: '100%' }}>
-      <ProductCreationForm {...state} />
       <Products {...state} />
     </Stack>
   )
@@ -39,4 +33,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default AdminProductsPage
+export default ProductsPage

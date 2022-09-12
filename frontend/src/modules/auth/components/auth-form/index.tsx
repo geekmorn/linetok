@@ -106,6 +106,17 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
         />
       </Stack>
 
+      {isRegistrationMode && (
+        <Stack>
+          <FormLabel htmlFor="passwordConfirm">Подтверждение</FormLabel>
+          <InputPassword
+            id="passwordConfirm"
+            name="passwordConfirm"
+            onChange={onChange}
+          />
+        </Stack>
+      )}
+
       <Stack
         sx={{
           width: '100%',

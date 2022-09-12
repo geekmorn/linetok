@@ -1,7 +1,7 @@
-import { Fingerprint } from 'react-bootstrap-icons'
-import { Button, Tooltip, useToast } from '@chakra-ui/react'
-import { useBiometrics } from 'modules/auth'
+import { useToast } from '@chakra-ui/react'
+import { useBiometrics, useBrowserSupportsWebAuthn } from 'modules/auth'
 import useEvent from 'react-use-event-hook'
+import { ButtonFingerprint } from 'components'
 
 type WebAuthnProps = {
   isRegistrationMode: boolean
@@ -10,6 +10,7 @@ type WebAuthnProps = {
 export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
   const toast = useToast()
   const { authorize } = useBiometrics()
+  const supports = useBrowserSupportsWebAuthn()
 
   const onAuthorize = async () => {
     try {
@@ -37,25 +38,5 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
 
   const onClick = useEvent(() => onAuthorize())
 
-  return (
-    <Tooltip
-      hasArrow
-      label="Войти с помощью биометрических данных"
-      aria-label="A tooltip"
-      sx={{
-        color: 'white'
-      }}
-    >
-      <Button
-        onClick={onClick}
-        variant="outline"
-        sx={{
-          h: '50px',
-          mt: '0!important'
-        }}
-      >
-        <Fingerprint width={30} height={30} />
-      </Button>
-    </Tooltip>
-  )
+  return <ButtonFingerprint onClick={onClick} isVisible={supports} />
 }
