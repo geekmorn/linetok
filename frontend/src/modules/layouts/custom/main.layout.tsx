@@ -9,8 +9,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
     <Navigation />
     <header></header>
     <>{children}</>
-    <footer>
-      <Footer />
-    </footer>
+    <Footer />
   </BaseLayout>
 )

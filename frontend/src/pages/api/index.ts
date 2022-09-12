@@ -1,5 +1,3 @@
-/* eslint-disable no-duplicate-imports */
-
 import type { AuthenticatorDevice } from '@simplewebauthn/typescript-types'
 
 interface LoggedInUser {

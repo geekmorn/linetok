@@ -1,35 +1,49 @@
 import { useToggle } from 'common/hooks'
 import { AuthForm } from 'modules'
 import { NextPage } from 'next'
-import { Center, Stack, Text, Button } from '@chakra-ui/react'
+import { Center, Stack, Button, Text, Highlight } from '@chakra-ui/react'
 
 const userHasNoAccount = {
-  question: 'У Вас еще нет аккаунта?',
+  question: 'Ещё нет аккаунта?',
   tip: 'Зарегистрируйтесь'
 } as const
 
 const userAlreadyHasAccount = {
-  question: 'У Вас уже есть аккаунт?',
+  question: 'Уже есть аккаунт?',
   tip: 'Войдите'
 } as const
 
 const LoginPage: NextPage = () => {
   const [isRegistrationMode, toggle] = useToggle(true)
 
+  const question = isRegistrationMode
+    ? userAlreadyHasAccount.question
+    : userHasNoAccount.question
+
+  const tip = isRegistrationMode
+    ? userAlreadyHasAccount.tip
+    : userHasNoAccount.tip
+
   return (
     <Center h="100vh">
-      <Stack gap="80px">
+      <Stack gap="80px" sx={{ justifyContent: 'center', alignItems: 'center' }}>
         <AuthForm isRegistrationMode={isRegistrationMode} />
-        <Stack sx={{ textAlign: 'center' }}>
-          <Text>
-            {isRegistrationMode
-              ? userAlreadyHasAccount.question
-              : userHasNoAccount.question}
+        <Stack w="65%" sx={{ textAlign: 'center' }}>
+          <Text fontSize="xs" lineHeight="tall">
+            <Highlight
+              query={['есть', 'нет']}
+              styles={{
+                px: '2',
+                py: '1',
+                rounded: 'full',
+                bg: isRegistrationMode ? 'green.100' : 'red.100'
+              }}
+            >
+              {question}
+            </Highlight>
           </Text>
-          <Button onClick={toggle}>
-            {isRegistrationMode
-              ? userAlreadyHasAccount.tip
-              : userHasNoAccount.tip}
+          <Button onClick={toggle} variant="link">
+            {tip}
           </Button>
         </Stack>
       </Stack>

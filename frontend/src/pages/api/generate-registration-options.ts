@@ -10,22 +10,22 @@ export default function handler(_: NextApiRequest, res: NextApiResponse) {
 
   const { username, devices } = user
 
-  const opts: GenerateRegistrationOptionsOpts = {
-    rpName: 'SimpleWebAuthn Example',
+  const _options: GenerateRegistrationOptionsOpts = {
+    rpName: 'Linetok',
     rpID,
     userID: loggedInUserId,
     userName: username,
     timeout: 60000,
     attestationType: 'none',
-    excludeCredentials: devices.map((dev) => ({
-      id: dev.credentialID,
+    excludeCredentials: devices.map((device) => ({
+      id: device.credentialID,
       type: 'public-key',
-      transports: dev.transports
+      transports: device.transports
     })),
     supportedAlgorithmIDs: [-7, -257]
   }
 
-  const options = generateRegistrationOptions(opts)
+  const options = generateRegistrationOptions(_options)
   inMemoryUserDeviceDB[loggedInUserId].currentChallenge = options.challenge
 
   res.send(options)

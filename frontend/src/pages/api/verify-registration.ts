@@ -17,21 +17,20 @@ export default async function handler(
   const body: RegistrationCredentialJSON = req.body
   const user = inMemoryUserDeviceDB[loggedInUserId]
   const expectedChallenge = user.currentChallenge
-  let verification: VerifiedRegistrationResponse
 
+  let verification: VerifiedRegistrationResponse
   try {
-    const opts: VerifyRegistrationResponseOpts = {
+    const options: VerifyRegistrationResponseOpts = {
       credential: body,
       expectedChallenge: `${expectedChallenge}`,
       expectedOrigin,
       expectedRPID: rpID,
       requireUserVerification: true
     }
-    verification = await verifyRegistrationResponse(opts)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    console.error(error)
-    return res.status(400).send({ error: error.message })
+    verification = await verifyRegistrationResponse(options)
+  } catch (e: any) {
+    console.error(e)
+    return res.status(400).send({ error: e.message })
   }
 
   const { verified, registrationInfo } = verification

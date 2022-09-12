@@ -115,7 +115,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
         }}
       >
         <Button
-          variant="outline"
+          variant="solid"
           type="submit"
           h="50px"
           w="100%"

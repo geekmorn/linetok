@@ -1,4 +1,4 @@
-import { useCallback, useId, useState } from 'react'
+import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
@@ -33,7 +33,9 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<ProductType>()
+  } = useForm<ProductType>({
+    defaultValues: formData
+  })
 
   const { mutateAsync, isLoading: isCreationLoading } =
     useCreateProductMutation()
@@ -45,37 +47,36 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
     })
   })
 
-  const onSubmit = useCallback(
-    async (payload: ProductType) => {
-      await mutateAsync(payload, {
-        onSuccess: () => {
-          refetch()
-          reset()
-          toast({
-            title: 'Product created',
-            description: "We've just created the product for you.",
-            status: 'success',
-            isClosable: true
-          })
-        },
-        onError: () => {
-          toast({
-            title: 'Creation failed',
-            description:
-              'Something went wrong when we tried to create the product.',
-            status: 'error',
-            isClosable: false
-          })
-        }
-      })
-    },
-    [toast, mutateAsync, refetch, reset]
-  )
+  const submit = async (payload: ProductType) => {
+    await mutateAsync(payload, {
+      onSuccess: () => {
+        refetch()
+        reset()
+        toast({
+          title: 'Product created',
+          description: "We've just created the product for you.",
+          status: 'success',
+          isClosable: true
+        })
+      },
+      onError: () => {
+        toast({
+          title: 'Creation failed',
+          description:
+            'Something went wrong when we tried to create the product.',
+          status: 'error',
+          isClosable: false
+        })
+      }
+    })
+  }
+
+  const onSubmit = useEvent((formData: FormDataType) => submit(formData))
 
   return (
     <FormControl
       as="form"
-      onSubmit={handleSubmit((formData: ProductType) => onSubmit(formData))}
+      onSubmit={handleSubmit((formData) => onSubmit(formData))}
       sx={{
         maxWidth: '250px',
         margin: '0 auto'

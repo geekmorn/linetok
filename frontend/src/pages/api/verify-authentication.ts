@@ -19,22 +19,20 @@ export default async function handler(
   let dbAuthenticator
   const bodyCredIDBuffer = base64url.toBuffer(body.rawId)
 
-  for (const dev of user.devices) {
-    if (dev.credentialID.equals(bodyCredIDBuffer)) {
-      dbAuthenticator = dev
+  for (const device of user.devices) {
+    if (device.credentialID.equals(bodyCredIDBuffer)) {
+      dbAuthenticator = device
       break
     }
   }
 
   if (!dbAuthenticator) {
-    return res
-      .status(400)
-      .send({ error: 'Authenticator is not registered with this site' })
+    return res.status(400).send({ error: 'Authenticator is not registered' })
   }
 
   let verification: VerifiedAuthenticationResponse
   try {
-    const opts: VerifyAuthenticationResponseOpts = {
+    const options: VerifyAuthenticationResponseOpts = {
       credential: body,
       expectedChallenge: `${expectedChallenge}`,
       expectedOrigin,
@@ -42,11 +40,10 @@ export default async function handler(
       authenticator: dbAuthenticator,
       requireUserVerification: true
     }
-    verification = await verifyAuthenticationResponse(opts)
-  } catch (error) {
-    const _error = error as Error
-    console.error(_error)
-    return res.status(400).send({ error: _error.message })
+    verification = await verifyAuthenticationResponse(options)
+  } catch (e: any) {
+    console.error(e)
+    return res.status(400).send({ error: e.message })
   }
 
   const { verified, authenticationInfo } = verification
