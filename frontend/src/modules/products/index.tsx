@@ -1,20 +1,12 @@
-import { useCallback } from 'react'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
-import {
-  Spinner,
-  Stack,
-  Text,
-  Wrap,
-  WrapItem,
-  useToast
-} from '@chakra-ui/react'
+import { Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 import { Product } from './components'
 import { useDestroyProductMutation } from './hooks'
+import useEvent from 'react-use-event-hook'
 
 export const Products: React.FC<ProductsProps> = ({
   initialData: data,
-  isLoading,
   refetch
 }) => {
   const toast = useToast()
@@ -24,30 +16,21 @@ export const Products: React.FC<ProductsProps> = ({
 
   const noDataReceived = !data || data.length === 0
 
-  const remove = useCallback(
-    async (id: string) => {
-      await mutateAsync(id, {
-        onSuccess: () => {
-          refetch()
-          toast({
-            title: 'Product removed',
-            description: "We've just removed the product for you.",
-            status: 'success',
-            isClosable: true
-          })
-        }
-      })
-    },
-    [mutateAsync, refetch, toast]
-  )
-
-  if (isLoading) {
-    return (
-      <Stack style={{ fontSize: '75px' }}>
-        <Spinner />
-      </Stack>
-    )
+  const remove = async (id: string) => {
+    await mutateAsync(id, {
+      onSuccess: () => {
+        refetch()
+        toast({
+          title: 'Product removed',
+          description: "We've just removed the product for you.",
+          status: 'success',
+          isClosable: true
+        })
+      }
+    })
   }
+
+  const onRemove = useEvent((id: string) => remove(id))
 
   if (noDataReceived) {
     return <Text>No products found. Please, come later! 🤩</Text>
@@ -58,7 +41,7 @@ export const Products: React.FC<ProductsProps> = ({
       {data?.map((product: ProductType) => (
         <WrapItem key={`${product.id} <Product />`}>
           <Product
-            onRemove={() => remove(product.id)}
+            onRemove={() => onRemove(product.id)}
             loading={isDestroyLoading}
             {...product}
           />

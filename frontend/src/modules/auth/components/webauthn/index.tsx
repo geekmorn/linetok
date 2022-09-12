@@ -9,11 +9,11 @@ type WebAuthnProps = {
 
 export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
   const toast = useToast()
-  const { authorize } = useBiometrics({ isRegistrationMode })
+  const { authorize } = useBiometrics()
 
-  const onClick = useEvent(async () => {
+  const onAuthorize = async () => {
     try {
-      const verified = await authorize()
+      const verified = await authorize({ isRegistrationMode })
       if (verified) {
         toast({
           description: 'Successfully authorized using biometry.',
@@ -33,7 +33,9 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
         status: 'error'
       })
     }
-  })
+  }
+
+  const onClick = useEvent(() => onAuthorize())
 
   return (
     <Button

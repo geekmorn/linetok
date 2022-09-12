@@ -6,6 +6,7 @@ import {
 } from '@simplewebauthn/browser'
 import {
   AuthenticationCredentialJSON,
+  PublicKeyCredentialCreationOptionsJSON,
   RegistrationCredentialJSON
 } from '@simplewebauthn/typescript-types'
 import axios from 'axios'
@@ -14,10 +15,12 @@ type Parameters = {
   isRegistrationMode: boolean
 }
 
-export const useBiometrics = ({ isRegistrationMode }: Parameters) => {
+export const useBiometrics = () => {
   const toast = useToast()
 
-  const authorize = async (): Promise<boolean> => {
+  const authorize = async (parameters: Parameters): Promise<boolean> => {
+    const { isRegistrationMode } = parameters
+
     if (!browserSupportsWebAuthn()) {
       toast({
         description: "Your browser doesn't support biometry.",
@@ -26,7 +29,7 @@ export const useBiometrics = ({ isRegistrationMode }: Parameters) => {
       return false
     }
 
-    const options = await axios
+    const options: PublicKeyCredentialCreationOptionsJSON = await axios
       .get(
         isRegistrationMode
           ? 'api/generate-registration-options'
@@ -48,6 +51,10 @@ export const useBiometrics = ({ isRegistrationMode }: Parameters) => {
         credentials
       )
       .then((response) => response.data.verified)
+      .catch((e) => {
+        console.error(e)
+        return false
+      })
 
     return verified
   }

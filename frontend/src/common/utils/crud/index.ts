@@ -1,4 +1,4 @@
-import { _delete, all, post, put, selected } from 'common/utils/methods'
+import { all, selected, post, put, _delete } from 'common/utils/methods'
 
 export const create = async <Interface>(endpoint: string, payload: Interface) =>
   await post<Interface>(endpoint)(payload)
@@ -15,6 +15,3 @@ export const update = async <Interface extends { id: string }>(
 
 export const destroy = async <Interface>(endpoint: string, id: string) =>
   await _delete<Interface>(endpoint)(id)
-
-// Useful:
-//* https://www.codecademy.com/article/what-is-crud

@@ -21,9 +21,7 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <>
-      <Stack minH="100vh" w="100%">
-        {children}
-      </Stack>
+      <Stack w="100%">{children}</Stack>
     </>
   </>
 )

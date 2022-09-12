@@ -3,16 +3,29 @@ import { API_URL } from 'common/constants'
 import { getToken } from 'common/utils'
 import { compose } from 'common/utils/fp'
 
-const getAuthorizationHeaders = () => ({
-  Authorization: `Bearer ${getToken()}`
-})
+type CustomHeaders = {
+  Authorization: string | null
+}
+
+const createCustomHeaders = (headers: CustomHeaders) => {
+  const { Authorization: token } = headers
+
+  if (!token) return null
+
+  return {
+    Authorization: `Bearer ${token}`
+  }
+}
 
 const withRequestInterceptor = (client: AxiosInstance) => {
   client.interceptors.request.use((config) => {
-    config.headers = {
-      ...config.headers,
-      ...getAuthorizationHeaders()
-    }
+    const customHeaders = createCustomHeaders({
+      Authorization: getToken()
+    })
+
+    if (!customHeaders) return config
+
+    config.headers = { ...config.headers, ...customHeaders }
     return config
   })
   return client
@@ -39,7 +52,3 @@ const withInterceptors = compose(
 const createClient = (baseURL: string) => axios.create({ baseURL })
 
 export const httpClient = withInterceptors(createClient(API_URL))
-
-// Useful:
-//* https://jwt.io/introduction
-//* https://refactoring.guru/design-patterns/singleton

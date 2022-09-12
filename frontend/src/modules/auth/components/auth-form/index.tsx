@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { EnvelopeFill } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
@@ -27,12 +27,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
     password: ''
   })
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<AuthType>()
+  const { register, handleSubmit, reset } = useForm<AuthType>({
+    defaultValues: formData
+  })
 
   const { mutateAsync, isLoading: isMutationLoading } = useAuthorizeMutation()
 
@@ -43,19 +40,18 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
     })
   )
 
-  const onSubmit = useCallback(
-    async (payload: AuthType) => {
-      await mutateAsync(payload)
-      reset()
-      return
-    },
-    [mutateAsync, reset]
-  )
+  const submit = async (payload: AuthType) => {
+    await mutateAsync(payload)
+    reset()
+    return
+  }
+
+  const onSubmit = useEvent(() => submit(formData))
 
   return (
     <FormControl
       as="form"
-      onSubmit={handleSubmit((formData: AuthType) => onSubmit(formData))}
+      onSubmit={handleSubmit(onSubmit)}
       sx={{
         maxWidth: '300px',
         margin: '0 auto',

@@ -8,18 +8,14 @@ import { Stack } from '@chakra-ui/react'
 
 export type UsersProps = {
   initialData: UserType[]
-  data?: UserType[]
-  isLoading: boolean
   refetch: () => void
 }
 
 const UsersPage: NextPage<UsersProps> = ({ initialData }) => {
-  const { data, isLoading, refetch } = useReadUsersQuery({ initialData })
+  const { data, refetch } = useReadUsersQuery({ initialData })
 
   const state = {
     initialData: data,
-    data,
-    isLoading,
     refetch
   }
 

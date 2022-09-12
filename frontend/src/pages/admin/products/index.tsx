@@ -9,17 +9,14 @@ import { Stack } from '@chakra-ui/react'
 
 export type ProductsProps = {
   initialData?: ProductType[]
-  data?: ProductType[]
-  isLoading: boolean
   refetch: () => void
 }
 
 const ProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
-  const { data, isLoading, refetch } = useReadProductsQuery({ initialData })
+  const { data, refetch } = useReadProductsQuery({ initialData })
 
   const state = {
     initialData: data,
-    isLoading,
     refetch
   }
 

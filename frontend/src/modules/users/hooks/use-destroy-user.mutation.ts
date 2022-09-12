@@ -6,5 +6,5 @@ import { useMutation } from '@tanstack/react-query'
 export const useDestroyUserMutation = () =>
   useMutation(
     ['Destroy the user'],
-    async (id: number) => await destroy<UserType>(API.users, id)
+    async (id: string) => await destroy<UserType>(API.users, id)
   )

@@ -18,8 +18,3 @@ export const storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> = {
   setItem,
   removeItem
 }
-
-// We use
-// Dependency Inversion Principle
-// of SOLID principles to separate the interface of the browser localStorage implementation.
-//* https://en.wikipedia.org/wiki/Dependency_inversion_principle
