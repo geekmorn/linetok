@@ -40,7 +40,7 @@ async def post(payload: ProductCreate):
     return await create(ProductModel, **payload.dict())
 
 
-@ router.put("/{id}", response_model=Product, dependencies=[Depends(get_current_user)])
+@router.put("/{id}", response_model=Product, dependencies=[Depends(get_current_user)])
 async def put(id: str, payload: ProductUpdate):
     product: Product | None = await read(
         ProductModel,
@@ -51,7 +51,7 @@ async def put(id: str, payload: ProductUpdate):
     return await update(product, **payload.dict())
 
 
-@ router.delete("/{id}", response_model=Product)
+@router.delete("/{id}", response_model=Product, dependencies=[Depends(get_current_user)])
 async def delete(id: str):
     product: Product | None = await read(
         ProductModel,

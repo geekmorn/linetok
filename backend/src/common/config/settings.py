@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     ROUTE_PREFIX: str
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
+    POSTGRES_HOST: str
     POSTGRES_DB: str
     JWT_SECRET: str
     DOCS_URL: str

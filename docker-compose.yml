@@ -7,15 +7,25 @@ services:
     command: python -m run
     external_links:
       - postgres:postgres
+      - storage:storage
     env_file:
-      - ./.env
+      - .env
     ports:
       - "8000:8000"
+
+  storage:
+    image: storage
+    container_name: storage
+    command: python -m run
+    env_file:
+      - .env-storage
+    ports:
+      - 80:80
 
   database:
     image: postgres
     container_name: postgres
     env_file:
-      - ./.env
+      - .env
     ports:
       - "5432:5432"

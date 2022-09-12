@@ -30,6 +30,7 @@ fastapi-jwt-auth = "*"
 starlette-csrf = "*"
 aiofiles = "*"
 requests = "*"
+asyncpg = "*"
 
 [dev-packages]
 

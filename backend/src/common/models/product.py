@@ -1,6 +1,7 @@
+from multiprocessing.dummy import Array
 from .base import BaseModel
 from src.common.config import Base
-from sqlalchemy import Column, String, Float, ForeignKey, Integer
+from sqlalchemy import Column, String, Float, ForeignKey, Integer, ARRAY
 from sqlalchemy.orm import relationship
 
 
@@ -11,6 +12,7 @@ class ProductModel(Base, BaseModel):
     price = Column(Float, default=10)
     amount = Column(Integer, default=1)
     description = Column(String(2000), default="")
+    images = Column(ARRAY(String), nullable=True, default=None)
 
     # TODO Add media field.
 

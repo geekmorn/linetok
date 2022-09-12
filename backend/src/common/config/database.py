@@ -17,9 +17,10 @@ class AsyncDatabaseSession:
     def create(self):
         user = settings.POSTGRES_USER
         password = settings.POSTGRES_PASSWORD
+        db_host = settings.POSTGRES_HOST
         db_name = settings.POSTGRES_DB
         self._engine = create_async_engine(
-            f"postgresql+asyncpg://{user}:{password}@postgres:5432/{db_name}",
+            f"postgresql+asyncpg://{user}:{password}@{db_host}:5432/{db_name}",
             future=True,
             echo=False
         )
