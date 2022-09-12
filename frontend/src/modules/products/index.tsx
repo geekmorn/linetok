@@ -1,7 +1,7 @@
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
 import { Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
-import { Product } from './components'
+import { EditableProduct } from './components'
 import { useDestroyProductMutation } from './hooks'
 import useEvent from 'react-use-event-hook'
 
@@ -40,7 +40,7 @@ export const Products: React.FC<ProductsProps> = ({
     <Wrap>
       {data?.map((product: ProductType) => (
         <WrapItem key={`${product.id} <Product />`}>
-          <Product
+          <EditableProduct
             onRemove={() => onRemove(product.id)}
             loading={isDestroyLoading}
             {...product}

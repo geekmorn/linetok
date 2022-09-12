@@ -13,6 +13,6 @@ export const Footer: React.FC = () => (
       color: 'white'
     }}
   >
-    <Text>&copy; {new Date().getFullYear()}, linetok.com ❤️</Text>
+    <Text>&copy; {new Date().getFullYear()} linetok.com ❤️</Text>
   </Center>
 )

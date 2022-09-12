@@ -1,6 +1,6 @@
 import { ProductType } from 'common/types'
 import { AlertButton, Card, EditableInput } from 'components'
-import { Heading, Stack, Text } from '@chakra-ui/react'
+import { Stack, Text } from '@chakra-ui/react'
 
 type ProductProps = ProductType & {
   loading?: boolean
@@ -8,12 +8,14 @@ type ProductProps = ProductType & {
   onRemove?: () => void
 }
 
-export const Product: React.FC<ProductProps> = ({
+export const EditableProduct: React.FC<ProductProps> = ({
   // ProductType
   id,
   name,
   price,
-  available,
+  amount,
+  description,
+  images,
   // Props
   loading,
   onClick,
@@ -29,9 +31,9 @@ export const Product: React.FC<ProductProps> = ({
         alertBody="This action can not be undone."
       />
     </Stack>
-    <Heading sx={{ textAlign: 'center' }}>Product {id}</Heading>
     <EditableInput value={name} />
+    <EditableInput value={description} />
     <EditableInput value={price} />
-    <Text>Available: {available ? 'Yes' : 'No'}</Text>
+    <Text>На складе: {amount}шт.</Text>
   </Card>
 )

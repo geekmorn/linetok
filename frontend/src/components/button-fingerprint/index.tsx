@@ -1,4 +1,5 @@
 import { Button, ButtonProps, Tooltip } from '@chakra-ui/react'
+import { Label } from 'components'
 import { Fingerprint } from 'react-bootstrap-icons'
 
 type ButtonFingerprintProps = ButtonProps & {
@@ -14,9 +15,10 @@ export const ButtonFingerprint: React.FC<ButtonFingerprintProps> = ({
       hasArrow
       placement="bottom-end"
       aria-label="A tooltip"
-      label="Войти с помощью биометрических данных"
+      label={<Label text="Войти с помощью биометрических данных" />}
       sx={{
-        color: 'white'
+        mt: 3,
+        p: 2
       }}
     >
       <Button

@@ -1,2 +1,2 @@
-export * from './product'
+export * from './editable-product'
 export * from './product-creation-form'
