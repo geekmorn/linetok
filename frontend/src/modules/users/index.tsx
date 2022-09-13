@@ -1,6 +1,6 @@
 import { UserType } from 'common/types'
 import { UsersProps } from 'pages/admin/users'
-import { Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react'
+import { Center, Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react'
 import { User } from './components'
 
 export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
@@ -19,7 +19,11 @@ export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
   }
 
   if (noDataReceived) {
-    return <Text>No users found :(</Text>
+    return (
+      <Center>
+        <Text>No users found :(</Text>
+      </Center>
+    )
   }
 
   return (
