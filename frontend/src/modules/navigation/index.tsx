@@ -24,6 +24,8 @@ export const routes = [
   // }
 ] as const
 
+export const HOME_ROUTE = routes[0]
+
 export const Navigation: React.FC = () => (
   <Stack
     direction="row"
