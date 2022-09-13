@@ -1,7 +1,7 @@
-import { useToast } from '@chakra-ui/react'
-import { useBiometrics, useBrowserSupportsWebAuthn } from 'modules/auth'
 import useEvent from 'react-use-event-hook'
 import { ButtonFingerprint } from 'components'
+import { useBiometrics, useBrowserSupportsWebAuthn } from 'modules/auth'
+import { useToast } from '@chakra-ui/react'
 
 type WebAuthnProps = {
   isRegistrationMode: boolean

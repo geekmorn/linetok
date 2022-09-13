@@ -1,13 +1,13 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import {
   VerifiedRegistrationResponse,
-  verifyRegistrationResponse,
-  VerifyRegistrationResponseOpts
+  VerifyRegistrationResponseOpts,
+  verifyRegistrationResponse
 } from '@simplewebauthn/server'
 import {
   AuthenticatorDevice,
   RegistrationCredentialJSON
 } from '@simplewebauthn/typescript-types'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { expectedOrigin, inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
 export default async function handler(

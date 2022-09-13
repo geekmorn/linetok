@@ -27,8 +27,7 @@ const AdminUsersPage: NextPage<UsersProps> = ({ initialData }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const initialData: UsersProps['initialData'] =
-    (await read<UserType[]>(API.users)) ?? []
+  const initialData = await read<UserType[]>(API.users)
 
   return {
     props: {

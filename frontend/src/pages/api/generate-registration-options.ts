@@ -1,8 +1,8 @@
-import {
-  generateRegistrationOptions,
-  GenerateRegistrationOptionsOpts
-} from '@simplewebauthn/server'
 import { NextApiRequest, NextApiResponse } from 'next'
+import {
+  GenerateRegistrationOptionsOpts,
+  generateRegistrationOptions
+} from '@simplewebauthn/server'
 import { inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
 export default function handler(_: NextApiRequest, res: NextApiResponse) {

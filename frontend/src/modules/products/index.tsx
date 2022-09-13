@@ -1,9 +1,9 @@
+import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
-import { Text, Wrap, WrapItem, useToast, Center } from '@chakra-ui/react'
+import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 import { EditableProduct } from './components'
 import { useDestroyProductMutation } from './hooks'
-import useEvent from 'react-use-event-hook'
 
 export const Products: React.FC<ProductsProps> = ({
   initialData: data,

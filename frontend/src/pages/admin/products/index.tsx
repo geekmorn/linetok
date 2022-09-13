@@ -29,8 +29,7 @@ const AdminProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const initialData: ProductsProps['initialData'] =
-    (await read<ProductType[]>(API.products)) ?? []
+  const initialData = await read<ProductType[]>(API.products)
 
   return {
     props: {

@@ -1,4 +1,4 @@
-import { Highlight, Button, Box, Text } from '@chakra-ui/react'
+import { Box, Button, Highlight, Text } from '@chakra-ui/react'
 
 type QuestionProps = {
   isRegistrationMode: boolean
