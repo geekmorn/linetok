@@ -1,7 +1,17 @@
 import { useToggle } from 'common/hooks'
-import { AuthForm } from 'modules'
+import { AuthForm, routes } from 'modules'
 import { NextPage } from 'next'
-import { Center, Stack, Button, Text, Highlight } from '@chakra-ui/react'
+import {
+  Center,
+  Stack,
+  Button,
+  Text,
+  Highlight,
+  Box,
+  Tooltip
+} from '@chakra-ui/react'
+import Link from 'next/link'
+import { Arrow90degLeft } from 'react-bootstrap-icons'
 
 const userHasNoAccount = {
   question: 'Ещё нет аккаунта?',
@@ -25,10 +35,17 @@ const LoginPage: NextPage = () => {
     : userHasNoAccount.tip
 
   return (
-    <Center h="100vh">
-      <Stack gap="80px" sx={{ justifyContent: 'center', alignItems: 'center' }}>
+    <Center h="100vh" sx={{ justifyContent: 'space-evenly' }}>
+      <Stack sx={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Tooltip label="Вернуться домой">
+          <Button sx={{ alignSelf: 'flex-start', mb: '20px' }}>
+            <Link href={routes[0].path}>
+              <Arrow90degLeft />
+            </Link>
+          </Button>
+        </Tooltip>
         <AuthForm isRegistrationMode={isRegistrationMode} />
-        <Stack w="65%" sx={{ textAlign: 'center' }}>
+        <Box w="65%" sx={{ textAlign: 'center', mt: '80px !important' }}>
           <Text fontSize="xs" lineHeight="tall">
             <Highlight
               query={['есть', 'нет']}
@@ -45,7 +62,7 @@ const LoginPage: NextPage = () => {
           <Button onClick={toggle} variant="link">
             {tip}
           </Button>
-        </Stack>
+        </Box>
       </Stack>
     </Center>
   )
