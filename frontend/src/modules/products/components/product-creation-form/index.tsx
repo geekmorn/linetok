@@ -6,7 +6,6 @@ import { useCreateProductMutation } from 'modules/products/hooks'
 import { ProductsProps } from 'pages/admin/products'
 import {
   Button,
-  Checkbox,
   FormControl,
   FormLabel,
   Input,
@@ -16,16 +15,19 @@ import {
   useToast
 } from '@chakra-ui/react'
 
-type FormDataType = Omit<ProductType, 'id'>
+type FormDataType = ProductType
 
 export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
   const uid = useId()
   const toast = useToast()
 
   const [formData, setFormData] = useState<FormDataType>({
+    id: uid,
     name: '',
     price: 0,
-    available: true
+    amount: 0,
+    description: '',
+    images: []
   })
 
   const {
@@ -47,8 +49,8 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
     })
   })
 
-  const submit = async (payload: ProductType) => {
-    await mutateAsync(payload, {
+  const onSubmit = useEvent((formData: FormDataType) => async () => {
+    await mutateAsync(formData, {
       onSuccess: () => {
         refetch()
         reset()
@@ -69,9 +71,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
         })
       }
     })
-  }
-
-  const onSubmit = useEvent((formData: FormDataType) => submit(formData))
+  })
 
   return (
     <FormControl
@@ -103,6 +103,17 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
       />
       {errors.name && <p>Name is required</p>}
 
+      <FormLabel htmlFor="description">Description</FormLabel>
+      <Input
+        {...register('description')}
+        name="description"
+        id={`product_description_${uid}`}
+        placeholder="Apple is a fruit."
+        onChange={onChange}
+        value={formData.description}
+      />
+      {errors.description && <p>Description is required</p>}
+
       <FormLabel htmlFor="price">Price</FormLabel>
       <InputGroup>
         <InputLeftElement>$</InputLeftElement>
@@ -117,22 +128,19 @@ export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
       </InputGroup>
       {errors.price && <p>Price is required</p>}
 
-      <Checkbox
-        {...register('available')}
-        name="available"
-        id={`product_available_${uid}`}
-        type="checkbox"
-        defaultChecked={true}
+      <FormLabel htmlFor="price">Amount</FormLabel>
+      <Input
+        {...register('amount')}
+        name="amount"
+        id={`product_amount_${uid}`}
+        type="number"
         onChange={onChange}
-        checked={formData.available}
         sx={{
           display: 'flex',
           width: '100%',
           margin: '15px 0'
         }}
-      >
-        Available
-      </Checkbox>
+      />
 
       <Stack>
         <Button type="submit" disabled={isCreationLoading}>

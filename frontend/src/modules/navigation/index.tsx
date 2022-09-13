@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Stack } from '@chakra-ui/react'
+import { Button, Stack } from '@chakra-ui/react'
 
 export const routes = [
   {
@@ -36,13 +36,24 @@ export const Navigation: React.FC = () => (
       padding: '50px'
     }}
   >
-    <Stack direction="row" sx={{ gap: '50px', width: '100%', margin: 0 }}>
+    <Stack
+      direction="row"
+      sx={{
+        gap: '50px',
+        width: '100%',
+        margin: 0,
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+      }}
+    >
       {routes.map((route) => (
         <Link key={`${route.path} <Link />`} href={route.path}>
           {route.name}
         </Link>
       ))}
+      <Link href="/login">
+        <Button>Войти</Button>
+      </Link>
     </Stack>
-    <Link href="/login">Логин</Link>
   </Stack>
 )

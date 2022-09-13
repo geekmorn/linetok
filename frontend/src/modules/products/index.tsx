@@ -16,7 +16,7 @@ export const Products: React.FC<ProductsProps> = ({
 
   const noDataReceived = !data || data.length === 0
 
-  const remove = async (id: string) => {
+  const onRemove = useEvent((id: string) => async () => {
     await mutateAsync(id, {
       onSuccess: () => {
         refetch()
@@ -28,9 +28,7 @@ export const Products: React.FC<ProductsProps> = ({
         })
       }
     })
-  }
-
-  const onRemove = useEvent((id: string) => remove(id))
+  })
 
   if (noDataReceived) {
     return (

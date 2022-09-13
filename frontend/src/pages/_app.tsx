@@ -1,5 +1,6 @@
 import { queryClient } from 'common/clients'
 import { usePageLoading } from 'common/hooks'
+import { AnimatePresence } from 'framer-motion'
 import { LoginLayout, MainLayout } from 'modules'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
@@ -14,29 +15,31 @@ const Linetok = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
-        {pathname === '/login' ? (
-          <>
-            {loading ? (
-              <>
-                <Progress size="xs" isIndeterminate />
-              </>
-            ) : (
-              <LoginLayout>
+        <AnimatePresence exitBeforeEnter initial={false}>
+          {pathname === '/login' ? (
+            <>
+              {loading ? (
+                <>
+                  <Progress size="xs" isIndeterminate />
+                </>
+              ) : (
+                <LoginLayout>
+                  <Component {...pageProps} />
+                </LoginLayout>
+              )}
+            </>
+          ) : (
+            <MainLayout>
+              {loading ? (
+                <>
+                  <Progress size="xs" isIndeterminate />
+                </>
+              ) : (
                 <Component {...pageProps} />
-              </LoginLayout>
-            )}
-          </>
-        ) : (
-          <MainLayout>
-            {loading ? (
-              <>
-                <Progress size="xs" isIndeterminate />
-              </>
-            ) : (
-              <Component {...pageProps} />
-            )}
-          </MainLayout>
-        )}
+              )}
+            </MainLayout>
+          )}
+        </AnimatePresence>
         <ReactQueryDevtools initialIsOpen={false} />
       </ChakraProvider>
     </QueryClientProvider>

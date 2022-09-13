@@ -1,21 +1,13 @@
 import { UserType } from 'common/types'
 import { UsersProps } from 'pages/admin/users'
-import { Center, Spinner, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react'
+import { Center, Text, Wrap, WrapItem } from '@chakra-ui/react'
 import { User } from './components'
 
-export const Users: React.FC<UsersProps> = ({ data, isLoading }) => {
+export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
   const noDataReceived = !data || data.length === 0
 
   const openUser = (id: string, name: string) => {
     alert(`User with id '${id}' and name '${name}' clicked`)
-  }
-
-  if (isLoading) {
-    return (
-      <Stack style={{ fontSize: '75px' }}>
-        <Spinner />
-      </Stack>
-    )
   }
 
   if (noDataReceived) {

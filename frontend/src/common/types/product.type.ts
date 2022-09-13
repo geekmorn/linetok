@@ -4,8 +4,8 @@ export type ProductType = {
   price: number
   amount: number
   description: string
-  images: string[]
+  images?: string[]
 
-  parameter_id: string
-  category_id: string
+  parameter_id?: string
+  category_id?: string
 }

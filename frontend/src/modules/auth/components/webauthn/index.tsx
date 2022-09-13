@@ -12,7 +12,7 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
   const { authorize } = useBiometrics()
   const supports = useBrowserSupportsWebAuthn()
 
-  const onAuthorize = async () => {
+  const onClick = useEvent(() => async () => {
     try {
       const verified = await authorize({ isRegistrationMode })
       if (verified) {
@@ -34,9 +34,7 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
         status: 'error'
       })
     }
-  }
-
-  const onClick = useEvent(() => onAuthorize())
+  })
 
   return <ButtonFingerprint onClick={onClick} isVisible={supports} />
 }

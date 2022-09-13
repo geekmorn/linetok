@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react'
 import { SEO } from 'common/constants'
+import { motion } from 'framer-motion'
 import Head from 'next/head'
 import { Stack } from '@chakra-ui/react'
 
@@ -22,7 +23,13 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
     </Head>
     <>
       <Stack w="100%" minH="100vh">
-        {children}
+        <motion.div
+          key="layoutChangeAnimation"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ y: 0, opacity: 1 }}
+        >
+          {children}
+        </motion.div>
       </Stack>
     </>
   </>
