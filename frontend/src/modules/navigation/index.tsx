@@ -31,29 +31,21 @@ export const Navigation: React.FC = () => (
     direction="row"
     as="nav"
     sx={{
-      justifyContent: 'space-between',
+      padding: '50px',
+      gap: '50px',
+      width: '100%',
+      margin: 0,
       alignItems: 'center',
-      padding: '50px'
+      justifyContent: 'flex-end'
     }}
   >
-    <Stack
-      direction="row"
-      sx={{
-        gap: '50px',
-        width: '100%',
-        margin: 0,
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-      }}
-    >
-      {routes.map((route) => (
-        <Link key={`${route.path} <Link />`} href={route.path}>
-          {route.name}
-        </Link>
-      ))}
-      <Link href="/login">
-        <Button>Войти</Button>
+    {routes.map((route) => (
+      <Link key={route.path} href={route.path}>
+        {route.name}
       </Link>
-    </Stack>
+    ))}
+    <Link href="/login">
+      <Button>Войти</Button>
+    </Link>
   </Stack>
 )

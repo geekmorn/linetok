@@ -22,14 +22,15 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <>
-      <Stack w="100%" minH="100vh">
-        <motion.div
-          key="layoutChangeAnimation"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ y: 0, opacity: 1 }}
-        >
-          {children}
-        </motion.div>
+      <Stack
+        key="layoutChangeAnimation"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ y: 0, opacity: 1 }}
+        as={motion.div}
+        w="100%"
+        minH="100vh"
+      >
+        {children}
       </Stack>
     </>
   </>

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Fingerprint } from 'react-bootstrap-icons'
 import { Label } from 'components'
 import { Button, ButtonProps, Tooltip } from '@chakra-ui/react'
