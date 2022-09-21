@@ -1,6 +1,6 @@
 import { ProductType } from 'common/types'
 import { AlertButton, Card, EditableInput } from 'components'
-import { Stack, Text } from '@chakra-ui/react'
+import { Image, Stack, Text } from '@chakra-ui/react'
 
 type ProductProps = ProductType & {
   loading?: boolean
@@ -10,7 +10,6 @@ type ProductProps = ProductType & {
 
 export const EditableProduct: React.FC<ProductProps> = ({
   // ProductType
-  id,
   name,
   price,
   amount,
@@ -35,5 +34,8 @@ export const EditableProduct: React.FC<ProductProps> = ({
     <EditableInput value={description} />
     <EditableInput value={price} />
     <Text>На складе: {amount}шт.</Text>
+    {images?.map((image, index) => (
+      <Image src={image} alt="Product" key={`${index} product`} />
+    ))}
   </Card>
 )

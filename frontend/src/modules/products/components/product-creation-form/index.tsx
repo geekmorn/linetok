@@ -4,7 +4,7 @@ import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
 import {
   useCreateProductMutation,
-  useReadProductQuery
+  useReadProductsQuery
 } from 'modules/products/hooks'
 import { ProductsProps } from 'pages/admin/products'
 import {
@@ -24,7 +24,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
   const uid = useId()
   const toast = useToast()
 
-  const { refetch } = useReadProductQuery({})
+  const { refetch } = useReadProductsQuery({})
 
   const [formData, setFormData] = useState<FormDataType>({
     id: uid,
