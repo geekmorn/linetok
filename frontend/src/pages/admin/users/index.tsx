@@ -8,20 +8,14 @@ import { Stack } from '@chakra-ui/react'
 
 export type UsersProps = {
   initialData: UserType[]
-  refetch: () => void
 }
 
 const AdminUsersPage: NextPage<UsersProps> = ({ initialData }) => {
-  const { data, refetch } = useReadUsersQuery({ initialData })
-
-  const state = {
-    initialData: data,
-    refetch
-  }
+  const { data } = useReadUsersQuery({ initialData })
 
   return (
     <Stack sx={{ flexDirection: 'column' }}>
-      <Users {...state} />
+      <Users initialData={data} />
     </Stack>
   )
 }

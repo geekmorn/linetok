@@ -57,15 +57,15 @@ Example: runs prettier, eslint before you pushed your changes to git.
 
 ## Storage / state
 
-We use [Context API](https://reactjs.org/docs/context.html) to share state of the app.
+To handle data over the app we use Server Side State, and [React Query](https://react-query.tanstack.com/) helps us with it.
 
-If you're looking for some data in the app, `/src/pages/` is an entry point for this, because the app uses SSR.
+If you're looking for some data in the app, `/src/pages/` is an entry point for this, because the app uses Next SSG and static props.
 
 ## API queries
 
 ### `/src/common/utils/crud.ts`
 
-We use CRUD to call to API.
+We use CRUD to call API.
 
 Example usage:
 
@@ -74,7 +74,7 @@ export const useCreateProductMutation = () =>
     useMutation(
         ['Create a product'],
         async (product: ProductType) =>
-            // Here we are
+            // Here we are.
             await create<ProductType>(API.products)(product)
     )
 ```

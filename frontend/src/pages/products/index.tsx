@@ -8,16 +8,11 @@ import { ProductsProps } from 'pages/admin/products'
 import { Stack } from '@chakra-ui/react'
 
 const ProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
-  const { data, refetch } = useReadProductsQuery({ initialData })
-
-  const state = {
-    initialData: data,
-    refetch
-  }
+  const { data } = useReadProductsQuery({ initialData })
 
   return (
     <Stack sx={{ flexDirection: 'column', gap: '15px', width: '100%' }}>
-      <Products {...state} />
+      <Products initialData={data} />
     </Stack>
   )
 }

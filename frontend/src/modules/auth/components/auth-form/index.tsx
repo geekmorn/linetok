@@ -40,7 +40,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
     })
   )
 
-  const onSubmit = useEvent(() => async (payload: AuthType) => {
+  const onSubmit = useEvent(async (payload: AuthType) => {
     await mutateAsync(payload)
     reset()
   })

@@ -3,13 +3,11 @@ import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
 import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 import { EditableProduct } from './components'
-import { useDestroyProductMutation } from './hooks'
+import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
 
-export const Products: React.FC<ProductsProps> = ({
-  initialData: data,
-  refetch
-}) => {
+export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   const toast = useToast()
+  const { refetch } = useReadProductsQuery({})
 
   const { mutateAsync, isLoading: isDestroyLoading } =
     useDestroyProductMutation()

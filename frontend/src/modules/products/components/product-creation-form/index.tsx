@@ -2,7 +2,10 @@ import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
-import { useCreateProductMutation } from 'modules/products/hooks'
+import {
+  useCreateProductMutation,
+  useReadProductQuery
+} from 'modules/products/hooks'
 import { ProductsProps } from 'pages/admin/products'
 import {
   Button,
@@ -17,9 +20,11 @@ import {
 
 type FormDataType = ProductType
 
-export const ProductCreationForm: React.FC<ProductsProps> = ({ refetch }) => {
+export const ProductCreationForm: React.FC<ProductsProps> = () => {
   const uid = useId()
   const toast = useToast()
+
+  const { refetch } = useReadProductQuery({})
 
   const [formData, setFormData] = useState<FormDataType>({
     id: uid,

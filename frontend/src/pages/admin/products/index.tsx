@@ -9,21 +9,15 @@ import { Stack } from '@chakra-ui/react'
 
 export type ProductsProps = {
   initialData?: ProductType[]
-  refetch: () => void
 }
 
 const AdminProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
-  const { data, refetch } = useReadProductsQuery({ initialData })
-
-  const state = {
-    initialData: data,
-    refetch
-  }
+  const { data } = useReadProductsQuery({ initialData })
 
   return (
     <Stack sx={{ flexDirection: 'column', gap: '15px', width: '100%' }}>
-      <ProductCreationForm {...state} />
-      <Products {...state} />
+      <ProductCreationForm />
+      <Products initialData={data} />
     </Stack>
   )
 }

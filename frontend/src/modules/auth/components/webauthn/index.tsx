@@ -12,25 +12,24 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
   const { authorize } = useBiometrics()
   const supports = useBrowserSupportsWebAuthn()
 
-  const onClick = useEvent(() => async () => {
+  const onClick = useEvent(async () => {
     try {
       const verified = await authorize({ isRegistrationMode })
-      if (verified) {
+      if (!verified) {
         toast({
-          description: 'Successfully authorized using biometry.',
-          status: 'success'
+          description: 'Something went wrong. Try again.',
+          status: 'warning'
         })
         return
       }
       toast({
-        description: 'Something went wrong. Try again.',
-        status: 'warning'
+        description: 'Successfully authorized using biometry.',
+        status: 'success'
       })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch ({ name, message }) {
       toast({
-        title: `${error.name}`,
-        description: `${error.message}`,
+        title: `${name}`,
+        description: `${message}`,
         status: 'error'
       })
     }

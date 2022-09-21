@@ -27,7 +27,7 @@ export const AlertButton: React.FC<AlertProps> = ({
   onYes
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef(null)
+  const cancelRef = React.useRef<HTMLButtonElement>(null)
 
   return (
     <>
