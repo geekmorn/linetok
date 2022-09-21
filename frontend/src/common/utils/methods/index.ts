@@ -25,7 +25,7 @@ export const post =
   <Interface>(endpoint: string) =>
     (payload: Interface) =>
       httpClient
-        .post<Interface>(endpoint, payload)
+        .post(endpoint, payload)
         .then((response) => response.data)
         .catch((e) => e)
 

@@ -26,7 +26,7 @@ export const usePageLoading = (): boolean => {
   useEffect(() => {
     enableEvents()
     return () => disableEvents()
-  }, [enableEvents, disableEvents])
+  })
 
   return loading
 }
