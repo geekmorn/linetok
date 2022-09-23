@@ -3,7 +3,7 @@ import { storage } from 'common/utils/local-storage'
 const TOKEN_KEY = 'access-token'
 
 export const getToken = (tokenKey = TOKEN_KEY) =>
-  // Get token from local storage.
+  // Get token from localStorage.
   storage.getItem(tokenKey)
 
 export const setToken = (payload: string, tokenKey = TOKEN_KEY) =>

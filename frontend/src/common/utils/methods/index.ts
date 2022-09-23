@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { httpClient } from 'common/clients'
 
 export const all = async <Interface>(endpoint: string) =>
@@ -6,7 +5,7 @@ export const all = async <Interface>(endpoint: string) =>
     .get<Interface>(endpoint)
     .then((response) => response.data)
     .catch((e) => {
-      console.log(e)
+      console.error(e)
       return []
     })
 
@@ -17,7 +16,7 @@ export const selected =
         .get<Interface>(`${endpoint}/${parameter}`)
         .then((response) => response.data)
         .catch((e) => {
-          console.log(e)
+          console.error(e)
           return []
         })
 
