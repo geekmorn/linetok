@@ -55,20 +55,7 @@ rules:
   import/no-named-as-default: error
   import/no-named-as-default-member: 'off'
   import/no-unresolved: 'off'
-  import/order:
-    - warn
-    - alphabetize:
-        caseInsensitive: true
-        order: asc
-      groups:
-        - builtin
-        - external
-        - internal
-        - parent
-        - sibling
-        - index
-        - object
-      newlines-between: never
+  import/order: 'off'
 
 settings:
   import/parsers:
