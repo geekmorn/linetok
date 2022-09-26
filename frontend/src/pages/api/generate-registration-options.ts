@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import {
   GenerateRegistrationOptionsOpts,
   generateRegistrationOptions
 } from '@simplewebauthn/server'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
 export default function handler(_: NextApiRequest, res: NextApiResponse) {
@@ -11,18 +11,18 @@ export default function handler(_: NextApiRequest, res: NextApiResponse) {
   const { username, devices } = user
 
   const _options: GenerateRegistrationOptionsOpts = {
-    rpName: 'Linetok',
-    rpID,
-    userID: loggedInUserId,
-    userName: username,
-    timeout: 60000,
     attestationType: 'none',
     excludeCredentials: devices.map((device) => ({
       id: device.credentialID,
-      type: 'public-key',
-      transports: device.transports
+      transports: device.transports,
+      type: 'public-key'
     })),
-    supportedAlgorithmIDs: [-7, -257]
+    rpID,
+    rpName: 'Linetok',
+    supportedAlgorithmIDs: [-7, -257],
+    timeout: 60000,
+    userID: loggedInUserId,
+    userName: username
   }
 
   const options = generateRegistrationOptions(_options)

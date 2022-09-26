@@ -1,8 +1,7 @@
-import { useToggle } from 'common/hooks'
-import { useIsPresent } from 'framer-motion'
-import { AuthForm } from 'modules'
-import { NextPage } from 'next'
 import { Center, Stack } from '@chakra-ui/react'
+import { NextPage } from 'next'
+import { useToggle } from 'common/hooks'
+import { AuthForm } from 'modules'
 import { BackHome } from './back-home'
 import { Question } from './question'
 
@@ -17,7 +16,6 @@ const userAlreadyHasAccount = {
 } as const
 
 const LoginPage: NextPage = () => {
-  const isPresent = useIsPresent()
   const [isRegistrationMode, toggle] = useToggle(false)
 
   const question = isRegistrationMode
@@ -30,7 +28,7 @@ const LoginPage: NextPage = () => {
 
   return (
     <Center h="100vh" sx={{ justifyContent: 'space-evenly' }}>
-      <Stack sx={{ justifyContent: 'center', alignItems: 'center' }}>
+      <Stack sx={{ alignItems: 'center', justifyContent: 'center' }}>
         <BackHome />
         <AuthForm isRegistrationMode={isRegistrationMode} />
         <Question

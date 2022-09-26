@@ -4,13 +4,13 @@ export const Footer: React.FC = () => (
   <Center
     as="footer"
     sx={{
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      height: '400px',
-      width: '100%',
       backgroundColor: 'black',
-      color: 'white'
+      bottom: 0,
+      color: 'white',
+      height: '400px',
+      left: 0,
+      position: 'absolute',
+      width: '100%'
     }}
   >
     <Text>&copy; {new Date().getFullYear()} linetok.com ❤️</Text>

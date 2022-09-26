@@ -1,6 +1,6 @@
+import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 import { UserType } from 'common/types'
 import { UsersProps } from 'pages/admin/users'
-import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 import { User } from './components'
 
 export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
@@ -9,10 +9,10 @@ export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
 
   const openUser = (id: string, name: string) => {
     toast({
-      title: 'User clicked',
       description: `User with id '${id}' and name '${name}' clicked`,
+      isClosable: true,
       status: 'info',
-      isClosable: true
+      title: 'User clicked'
     })
   }
 

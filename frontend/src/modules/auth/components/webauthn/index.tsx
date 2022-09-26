@@ -1,7 +1,7 @@
+import { useToast } from '@chakra-ui/react'
 import useEvent from 'react-use-event-hook'
 import { ButtonFingerprint } from 'components'
 import { useBiometrics, useBrowserSupportsWebAuthn } from 'modules/auth'
-import { useToast } from '@chakra-ui/react'
 
 type WebAuthnProps = {
   isRegistrationMode: boolean
@@ -28,9 +28,9 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
       })
     } catch ({ name, message }) {
       toast({
-        title: `${name}`,
         description: `${message}`,
-        status: 'error'
+        status: 'error',
+        title: `${name}`
       })
     }
   })

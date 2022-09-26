@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react'
 import { Text } from '@chakra-ui/react'
+import { PropsWithChildren } from 'react'
 
 type LabelProps = PropsWithChildren & {
   text: string

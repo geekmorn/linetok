@@ -21,7 +21,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
   },
   "include": [
     "src",

@@ -16,18 +16,18 @@ export const Question: React.FC<QuestionProps> = ({
   <Box
     w="65%"
     sx={{
-      textAlign: 'center',
-      mt: '80px !important'
+      mt: '80px !important',
+      textAlign: 'center'
     }}
   >
     <Text fontSize="xs" lineHeight="tall">
       <Highlight
         query={['есть', 'нет']}
         styles={{
+          bg: isRegistrationMode ? 'green.100' : 'red.100',
           px: '2',
           py: '1',
-          rounded: 'full',
-          bg: isRegistrationMode ? 'green.100' : 'red.100'
+          rounded: 'full'
         }}
       >
         {question}

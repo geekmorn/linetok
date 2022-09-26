@@ -1,7 +1,7 @@
+import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
-import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 import { EditableProduct } from './components'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
 
@@ -19,10 +19,10 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
       onSuccess: () => {
         refetch()
         toast({
-          title: 'Product removed',
           description: "We've just removed the product for you.",
+          isClosable: true,
           status: 'success',
-          isClosable: true
+          title: 'Product removed'
         })
       }
     })

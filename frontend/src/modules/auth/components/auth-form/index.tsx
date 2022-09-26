@@ -1,11 +1,3 @@
-import { useState } from 'react'
-import { EnvelopeFill } from 'react-bootstrap-icons'
-import { useForm } from 'react-hook-form'
-import useEvent from 'react-use-event-hook'
-import { AuthType } from 'common/types'
-import { InputPassword } from 'components'
-import { WebAuthn } from 'modules'
-import { useAuthorizeMutation } from 'modules/auth/hooks'
 import {
   Button,
   FormControl,
@@ -16,6 +8,14 @@ import {
   InputLeftElement,
   Stack
 } from '@chakra-ui/react'
+import { useState } from 'react'
+import { EnvelopeFill } from 'react-bootstrap-icons'
+import { useForm } from 'react-hook-form'
+import useEvent from 'react-use-event-hook'
+import { AuthType } from 'common/types'
+import { InputPassword } from 'components'
+import { WebAuthn } from 'modules'
+import { useAuthorizeMutation } from 'modules/auth/hooks'
 
 type AuthFormProps = {
   isRegistrationMode: boolean
@@ -50,11 +50,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
       as="form"
       onSubmit={handleSubmit(onSubmit)}
       sx={{
-        maxWidth: '300px',
-        margin: '0 auto',
         display: 'flex',
         flexDirection: 'column',
-        gap: '25px'
+        gap: '25px',
+        margin: '0 auto',
+        maxWidth: '300px'
       }}
     >
       <Heading>{isRegistrationMode ? 'Регистрация' : 'Войти'}</Heading>
@@ -67,15 +67,15 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
           </InputLeftElement>
           <Input
             {...register('email', {
-              required: true,
-              minLength: {
-                value: 3,
-                message: 'Email must be at least 3 characters long'
-              },
               maxLength: {
-                value: 20,
-                message: 'Email must be at most 20 characters long'
-              }
+                message: 'Email must be at most 20 characters long',
+                value: 20
+              },
+              minLength: {
+                message: 'Email must be at least 3 characters long',
+                value: 3
+              },
+              required: true
             })}
             id="email"
             name="email"
@@ -90,11 +90,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
         <FormLabel htmlFor="password">Пароль</FormLabel>
         <InputPassword
           {...register('password', {
-            required: true,
             minLength: {
-              value: 3,
-              message: 'Password must be at least 8 characters long'
-            }
+              message: 'Password must be at least 8 characters long',
+              value: 3
+            },
+            required: true
           })}
           id="password"
           name="password"
@@ -116,10 +116,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
 
       <Stack
         sx={{
-          width: '100%',
-          placeItems: 'center',
+          flexDirection: 'row',
           gap: '5px',
-          flexDirection: 'row'
+          placeItems: 'center',
+          width: '100%'
         }}
       >
         <Button

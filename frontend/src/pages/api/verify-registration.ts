@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import {
   VerifiedRegistrationResponse,
   VerifyRegistrationResponseOpts,
@@ -8,6 +7,7 @@ import {
   AuthenticatorDevice,
   RegistrationCredentialJSON
 } from '@simplewebauthn/typescript-types'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { expectedOrigin, inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
 export default async function handler(
@@ -44,9 +44,9 @@ export default async function handler(
 
     if (!existingDevice) {
       const newDevice: AuthenticatorDevice = {
-        credentialPublicKey,
-        credentialID,
         counter,
+        credentialID,
+        credentialPublicKey,
         transports: body.transports
       }
       user.devices.push(newDevice)

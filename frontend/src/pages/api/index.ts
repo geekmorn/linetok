@@ -16,9 +16,9 @@ export const loggedInUserId = 'internalUserId'
 export const inMemoryUserDeviceDB: { [loggedInUserId: string]: LoggedInUser } =
   {
     [loggedInUserId]: {
-      id: loggedInUserId,
-      username: `user@${rpID}`,
+      currentChallenge: undefined,
       devices: [],
-      currentChallenge: undefined
+      id: loggedInUserId,
+      username: `user@${rpID}`
     }
   }

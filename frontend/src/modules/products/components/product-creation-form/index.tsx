@@ -1,12 +1,3 @@
-import { useId, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import useEvent from 'react-use-event-hook'
-import { ProductType } from 'common/types'
-import {
-  useCreateProductMutation,
-  useReadProductsQuery
-} from 'modules/products/hooks'
-import { ProductsProps } from 'pages/admin/products'
 import {
   Button,
   FormControl,
@@ -17,6 +8,15 @@ import {
   Stack,
   useToast
 } from '@chakra-ui/react'
+import { useId, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import useEvent from 'react-use-event-hook'
+import { ProductType } from 'common/types'
+import {
+  useCreateProductMutation,
+  useReadProductsQuery
+} from 'modules/products/hooks'
+import { ProductsProps } from 'pages/admin/products'
 
 type FormDataType = ProductType
 
@@ -27,12 +27,12 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
   const { refetch } = useReadProductsQuery({})
 
   const [formData, setFormData] = useState<FormDataType>({
-    id: uid,
-    name: '',
-    price: 0,
     amount: 0,
     description: '',
-    images: []
+    id: uid,
+    images: [],
+    name: '',
+    price: 0
   })
 
   const {
@@ -56,23 +56,23 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
 
   const onSubmit = useEvent((formData: FormDataType) => async () => {
     await mutateAsync(formData, {
+      onError: () => {
+        toast({
+          description:
+            'Something went wrong when we tried to create the product.',
+          isClosable: false,
+          status: 'error',
+          title: 'Creation failed'
+        })
+      },
       onSuccess: () => {
         refetch()
         reset()
         toast({
-          title: 'Product created',
           description: "We've just created the product for you.",
+          isClosable: true,
           status: 'success',
-          isClosable: true
-        })
-      },
-      onError: () => {
-        toast({
-          title: 'Creation failed',
-          description:
-            'Something went wrong when we tried to create the product.',
-          status: 'error',
-          isClosable: false
+          title: 'Product created'
         })
       }
     })
@@ -83,22 +83,22 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
       as="form"
       onSubmit={handleSubmit((formData) => onSubmit(formData))}
       sx={{
-        maxWidth: '250px',
-        margin: '0 auto'
+        margin: '0 auto',
+        maxWidth: '250px'
       }}
     >
       <FormLabel htmlFor="name">Product name</FormLabel>
       <Input
         {...register('name', {
-          required: true,
-          minLength: {
-            value: 3,
-            message: 'Name must be at least 3 characters long'
-          },
           maxLength: {
-            value: 20,
-            message: 'Name must be at most 20 characters long'
-          }
+            message: 'Name must be at most 20 characters long',
+            value: 20
+          },
+          minLength: {
+            message: 'Name must be at least 3 characters long',
+            value: 3
+          },
+          required: true
         })}
         name="name"
         id={`product_name_${uid}`}
@@ -142,8 +142,8 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
         onChange={onChange}
         sx={{
           display: 'flex',
-          width: '100%',
-          margin: '15px 0'
+          margin: '15px 0',
+          width: '100%'
         }}
       />
 

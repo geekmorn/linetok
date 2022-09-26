@@ -15,10 +15,10 @@ export const EditableInput: React.FC<EditableInputProps> = ({ value }) => (
   <Editable textAlign="center" value={value as string}>
     <Stack
       sx={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 3
+        flexDirection: 'row',
+        gap: 3,
+        justifyContent: 'space-between'
       }}
     >
       <EditablePreview />

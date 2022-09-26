@@ -1,5 +1,5 @@
-import { Check, PencilSquare, XCircleFill } from 'react-bootstrap-icons'
 import { ButtonGroup, IconButton, useEditableControls } from '@chakra-ui/react'
+import { Check, PencilSquare, XCircleFill } from 'react-bootstrap-icons'
 
 export const EditableControls = () => {
   const {

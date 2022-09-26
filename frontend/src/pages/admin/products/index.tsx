@@ -1,11 +1,11 @@
+import { Stack } from '@chakra-ui/react'
+import { GetStaticProps, NextPage } from 'next'
 import { API } from 'common/constants'
 import { ProductType } from 'common/types'
 import { read } from 'common/utils'
 import { Products } from 'modules'
 import { ProductCreationForm } from 'modules/products/components'
 import { useReadProductsQuery } from 'modules/products/hooks'
-import { GetStaticProps, NextPage } from 'next'
-import { Stack } from '@chakra-ui/react'
 
 export type ProductsProps = {
   initialData?: ProductType[]

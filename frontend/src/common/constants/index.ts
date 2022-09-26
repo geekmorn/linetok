@@ -6,12 +6,12 @@ const description = `Интернет-магазин Linetok.by в г. Рога�
 export const API_URL = 'http://localhost:8000/api/' as const
 
 export const API = {
+  auth: '/auth/token',
   products: '/products',
-  users: '/users',
-  auth: '/auth/token'
+  users: '/users'
 } as const
 
 export const SEO = {
-  title,
-  description
+  description,
+  title
 } as const

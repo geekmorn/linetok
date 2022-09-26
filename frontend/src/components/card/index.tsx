@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react'
 import { Stack } from '@chakra-ui/react'
+import { PropsWithChildren } from 'react'
 
 type CardProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren
 
@@ -10,12 +10,12 @@ export const Card: React.FC<CardProps> = ({ children }) => {
       sx={{
         border: '1px solid #c1c1c1',
         borderRadius: '10px',
-        padding: '5px',
-        minWidth: '300px',
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'wrap',
-        margin: '5px'
+        margin: '5px',
+        minWidth: '300px',
+        padding: '5px'
       }}
     >
       {children}

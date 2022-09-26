@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   AlertDialog,
   AlertDialogBody,
@@ -10,6 +9,7 @@ import {
   Button,
   useDisclosure
 } from '@chakra-ui/react'
+import React from 'react'
 
 type AlertProps = {
   buttonHeader: string | React.ReactNode

@@ -1,5 +1,5 @@
-import { NextPage } from 'next'
 import { Center } from '@chakra-ui/react'
+import { NextPage } from 'next'
 
 const ContactPage: NextPage = () => (
   <Center>

@@ -10,6 +10,6 @@ const removeItem = (key: string) =>
 
 export const storage: Pick<Storage, 'getItem' | 'setItem' | 'removeItem'> = {
   getItem,
-  setItem,
-  removeItem
+  removeItem,
+  setItem
 }

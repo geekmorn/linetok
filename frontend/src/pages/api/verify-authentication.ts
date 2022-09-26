@@ -1,11 +1,11 @@
-import base64url from 'base64url'
-import { NextApiRequest, NextApiResponse } from 'next'
 import {
   VerifiedAuthenticationResponse,
   VerifyAuthenticationResponseOpts,
   verifyAuthenticationResponse
 } from '@simplewebauthn/server'
 import { AuthenticationCredentialJSON } from '@simplewebauthn/typescript-types'
+import base64url from 'base64url'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { expectedOrigin, inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
 export default async function handler(
@@ -33,11 +33,11 @@ export default async function handler(
   let verification: VerifiedAuthenticationResponse
   try {
     const options: VerifyAuthenticationResponseOpts = {
+      authenticator: dbAuthenticator,
       credential: body,
       expectedChallenge: `${expectedChallenge}`,
       expectedOrigin,
       expectedRPID: rpID,
-      authenticator: dbAuthenticator,
       requireUserVerification: true
     }
     verification = await verifyAuthenticationResponse(options)

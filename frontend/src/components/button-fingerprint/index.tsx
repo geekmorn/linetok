@@ -1,7 +1,7 @@
+import { Button, ButtonProps, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { Fingerprint } from 'react-bootstrap-icons'
 import { Label } from 'components'
-import { Button, ButtonProps, Tooltip } from '@chakra-ui/react'
 
 type ButtonFingerprintProps = ButtonProps & {
   isVisible?: boolean

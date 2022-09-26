@@ -1,18 +1,18 @@
-import Link from 'next/link'
 import { Button, Stack } from '@chakra-ui/react'
+import Link from 'next/link'
 
 export const routes = [
   {
-    path: '/',
-    name: ''
+    name: '',
+    path: '/'
   },
   {
-    path: '/products',
-    name: 'Продукты'
+    name: 'Продукты',
+    path: '/products'
   },
   {
-    path: '/contact',
-    name: 'Связь'
+    name: 'Связь',
+    path: '/contact'
   }
   // {
   //   path: '/admin/users',
@@ -31,12 +31,12 @@ export const Navigation: React.FC = () => (
     direction="row"
     as="nav"
     sx={{
-      padding: '50px',
-      gap: '50px',
-      width: '100%',
-      margin: 0,
       alignItems: 'center',
-      justifyContent: 'flex-end'
+      gap: '50px',
+      justifyContent: 'flex-end',
+      margin: 0,
+      padding: '50px',
+      width: '100%'
     }}
   >
     {routes.map((route) => (

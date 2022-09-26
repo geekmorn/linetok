@@ -1,10 +1,10 @@
+import { Stack } from '@chakra-ui/react'
+import { GetStaticProps, NextPage } from 'next'
 import { API } from 'common/constants'
 import { UserType } from 'common/types'
 import { read } from 'common/utils'
 import { Users } from 'modules'
 import { useReadUsersQuery } from 'modules/users/hooks'
-import { GetStaticProps, NextPage } from 'next'
-import { Stack } from '@chakra-ui/react'
 
 export type UsersProps = {
   initialData: UserType[]
