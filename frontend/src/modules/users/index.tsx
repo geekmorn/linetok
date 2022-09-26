@@ -1,7 +1,7 @@
-import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
+import { User } from './components'
 import { UserType } from 'common/types'
 import { UsersProps } from 'pages/admin/users'
-import { User } from './components'
+import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 
 export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
   const toast = useToast()

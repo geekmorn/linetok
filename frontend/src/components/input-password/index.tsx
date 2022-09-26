@@ -1,3 +1,5 @@
+import { Eye, EyeSlash } from 'react-bootstrap-icons'
+import { useToggle } from 'common/hooks'
 import {
   Button,
   Input,
@@ -5,8 +7,6 @@ import {
   InputProps,
   InputRightElement
 } from '@chakra-ui/react'
-import { Eye, EyeSlash } from 'react-bootstrap-icons'
-import { useToggle } from 'common/hooks'
 
 type InputPasswordProps = InputProps
 

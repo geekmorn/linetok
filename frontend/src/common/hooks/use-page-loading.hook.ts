@@ -1,5 +1,5 @@
-import Router from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
+import Router from 'next/router'
 
 export const usePageLoading = (): boolean => {
   const [loading, setLoading] = useState(false)

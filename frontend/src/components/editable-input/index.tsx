@@ -1,3 +1,4 @@
+import { EditableControls } from './components/editable-controls'
 import {
   EditableInput as ChakraEditableInput,
   Editable,
@@ -5,7 +6,6 @@ import {
   Input,
   Stack
 } from '@chakra-ui/react'
-import { EditableControls } from './components/editable-controls'
 
 type EditableInputProps = {
   value: string | number

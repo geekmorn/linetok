@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react'
 import { BaseLayout } from '../base.layout'
+import { PropsWithChildren } from 'react'
 
 type LoginLayoutProps = PropsWithChildren
 

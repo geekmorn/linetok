@@ -1,8 +1,8 @@
-import { Stack, Tooltip } from '@chakra-ui/react'
-import Link from 'next/link'
 import { Arrow90degLeft } from 'react-bootstrap-icons'
 import { Label } from 'components'
 import { HOME_ROUTE } from 'modules/navigation'
+import Link from 'next/link'
+import { Stack, Tooltip } from '@chakra-ui/react'
 
 export const BackHome: React.FC = () => (
   <Tooltip

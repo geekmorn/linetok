@@ -1,9 +1,9 @@
+import { inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
+import { NextApiRequest, NextApiResponse } from 'next'
 import {
   GenerateAuthenticationOptionsOpts,
   generateAuthenticationOptions
 } from '@simplewebauthn/server'
-import { NextApiRequest, NextApiResponse } from 'next'
-import { inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
 export default function handler(_: NextApiRequest, res: NextApiResponse) {
   const user = inMemoryUserDeviceDB[loggedInUserId]

@@ -1,7 +1,7 @@
-import { useMutation } from '@tanstack/react-query'
 import { API } from 'common/constants'
 import { UserType } from 'common/types'
 import { destroy } from 'common/utils'
+import { useMutation } from '@tanstack/react-query'
 
 export const useDestroyUserMutation = () =>
   useMutation(

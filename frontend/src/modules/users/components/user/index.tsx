@@ -1,6 +1,6 @@
-import { Heading, Text } from '@chakra-ui/react'
 import { UserType } from 'common/types'
 import { Card } from 'components'
+import { Heading, Text } from '@chakra-ui/react'
 
 type EventsType = {
   onClick?: () => void

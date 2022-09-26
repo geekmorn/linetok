@@ -1,6 +1,6 @@
-import { Image, Stack, Text } from '@chakra-ui/react'
 import { ProductType } from 'common/types'
 import { AlertButton, Card, EditableInput } from 'components'
+import { Image, Stack, Text } from '@chakra-ui/react'
 
 type ProductProps = ProductType & {
   loading?: boolean

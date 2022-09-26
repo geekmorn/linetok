@@ -1,12 +1,12 @@
+import { expectedOrigin, inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
+import base64url from 'base64url'
+import { NextApiRequest, NextApiResponse } from 'next'
 import {
   VerifiedAuthenticationResponse,
   VerifyAuthenticationResponseOpts,
   verifyAuthenticationResponse
 } from '@simplewebauthn/server'
 import { AuthenticationCredentialJSON } from '@simplewebauthn/typescript-types'
-import base64url from 'base64url'
-import { NextApiRequest, NextApiResponse } from 'next'
-import { expectedOrigin, inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 
 export default async function handler(
   req: NextApiRequest,

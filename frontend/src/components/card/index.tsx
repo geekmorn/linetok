@@ -1,5 +1,5 @@
-import { Stack } from '@chakra-ui/react'
 import { PropsWithChildren } from 'react'
+import { Stack } from '@chakra-ui/react'
 
 type CardProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren
 

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
@@ -5,7 +6,6 @@ import {
   FormErrorMessage,
   FormLabel
 } from '@chakra-ui/react'
-import { useState } from 'react'
 
 type InputProps = ChakraInputProps & {
   label: string

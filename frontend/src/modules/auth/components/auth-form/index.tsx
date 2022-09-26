@@ -1,3 +1,11 @@
+import { useState } from 'react'
+import { EnvelopeFill } from 'react-bootstrap-icons'
+import { useForm } from 'react-hook-form'
+import useEvent from 'react-use-event-hook'
+import { AuthType } from 'common/types'
+import { InputPassword } from 'components'
+import { WebAuthn } from 'modules'
+import { useAuthorizeMutation } from 'modules/auth/hooks'
 import {
   Button,
   FormControl,
@@ -8,14 +16,6 @@ import {
   InputLeftElement,
   Stack
 } from '@chakra-ui/react'
-import { useState } from 'react'
-import { EnvelopeFill } from 'react-bootstrap-icons'
-import { useForm } from 'react-hook-form'
-import useEvent from 'react-use-event-hook'
-import { AuthType } from 'common/types'
-import { InputPassword } from 'components'
-import { WebAuthn } from 'modules'
-import { useAuthorizeMutation } from 'modules/auth/hooks'
 
 type AuthFormProps = {
   isRegistrationMode: boolean

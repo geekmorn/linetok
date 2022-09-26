@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useToast } from '@chakra-ui/react'
 import {
   browserSupportsWebAuthn,
@@ -9,7 +10,6 @@ import {
   PublicKeyCredentialCreationOptionsJSON,
   RegistrationCredentialJSON
 } from '@simplewebauthn/typescript-types'
-import axios from 'axios'
 
 type Parameters = {
   isRegistrationMode: boolean

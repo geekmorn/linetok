@@ -1,9 +1,9 @@
-import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
+import { EditableProduct } from './components'
+import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
 import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
-import { EditableProduct } from './components'
-import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
+import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 
 export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   const toast = useToast()

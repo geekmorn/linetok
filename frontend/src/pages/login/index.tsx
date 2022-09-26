@@ -1,9 +1,9 @@
-import { Center, Stack } from '@chakra-ui/react'
-import { NextPage } from 'next'
-import { useToggle } from 'common/hooks'
-import { AuthForm } from 'modules'
 import { BackHome } from './back-home'
 import { Question } from './question'
+import { useToggle } from 'common/hooks'
+import { AuthForm } from 'modules'
+import { NextPage } from 'next'
+import { Center, Stack } from '@chakra-ui/react'
 
 const userHasNoAccount = {
   question: 'Ещё нет аккаунта?',

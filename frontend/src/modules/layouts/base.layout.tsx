@@ -1,8 +1,8 @@
-import { Stack } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-import Head from 'next/head'
 import { PropsWithChildren } from 'react'
 import { SEO } from 'common/constants'
+import { motion } from 'framer-motion'
+import Head from 'next/head'
+import { Stack } from '@chakra-ui/react'
 
 type BaseLayoutProps = PropsWithChildren & {
   title?: string
