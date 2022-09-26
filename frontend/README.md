@@ -4,9 +4,11 @@ This project was bootstrapped with [Create Next App](https://github.com/vercel/n
 
 ## Available Scripts
 
+We use **pnpm**, but you can use npm or yarn if you want.
+
 In the project directory, you can run:
 
-### `npm start`
+### `pnpm dev`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,7 +16,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm run build`
+### `pnpm build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -24,15 +26,15 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run lint`
+### `pnpm lint`
 
 Runs linter. It checks for lint errors and lint warnings in your code.
 
-### `npm run format`
+### `pnpm format`
 
 Runs formatter. It formats your code according to the [ESLint](https://eslint.org/) rules.
 
-### `npm run prepare`
+### `pnpm prepare`
 
 Runs husky. It runs pre-commit hooks for git.\
 Example: runs prettier, eslint before you pushed your changes to git.
@@ -69,12 +71,18 @@ We use CRUD to call API.
 
 Example usage:
 
-```ts
-export const useCreateProductMutation = () =>
-    useMutation(
-        ['Create a product'],
-        async (product: ProductType) =>
-            // Here we are.
-            await create<ProductType>(API.products)(product)
-    )
+```typescript
+import { useMutation } from '@tanstack/react-query'
+import { API } from 'common/constants'
+import { ProductType } from 'common/types'
+import { create } from 'common/utils'
+
+export const useCreateProductMutation = () => {
+  return useMutation(
+    ['Create a product'],
+    async (payload: ProductType) =>
+      await create<ProductType>(API.products, payload)
+  )
+}
+
 ```
