@@ -1,4 +1,4 @@
-import { _delete, all, post, put, selected } from 'common/utils/methods'
+import { all, selected, post, put, _delete } from 'common/utils/methods'
 
 export const create = async <Interface>(endpoint: string, payload: Interface) =>
   await post<Interface>(endpoint)(payload)
