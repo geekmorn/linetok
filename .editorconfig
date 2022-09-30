@@ -8,17 +8,20 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
+indent_style = space
+charset = utf-8
 
 # Matches multiple files with brace expansion notation
 # Set default charset
 [*.{js,jsx,ts,tsx}]
-charset = utf-8
-indent_style = space
 indent_size = 2
 
 # 4 space indentation
 [*.py]
-indent_style = space
+indent_size = 4
+
+# 4 space indentation
+[*.json]
 indent_size = 4
 
 # Tab indentation (no size specified)
@@ -27,5 +30,4 @@ indent_style = tab
 
 # Matches the exact files either package.json or .travis.yml
 [{package.json,.travis.yml}]
-indent_style = space
 indent_size = 2
