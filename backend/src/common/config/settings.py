@@ -7,18 +7,15 @@ load_dotenv(find_dotenv())
 
 
 class Settings(BaseSettings):
-    HOST: str
-    PORT: int
-    DEGUG = True
+    BACKEND_PORT: int
     ROUTE_PREFIX: str
+    TITLE: str
+    VERSION: str
+    JWT_SECRET: str
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
     POSTGRES_DB: str
-    JWT_SECRET: str
-    DOCS_URL: str
-    TITLE: str
-    VERSION: str
 
 
 settings = Settings()

@@ -2,11 +2,20 @@
 
 ## Run
 
-*todo...*
+- Create env from template (only once)
+```bash
+cp example.env .env
+```
+
+- Run docker stack 
+```bash
+docker-compose up
+```
 
 ## Deploy
 
 *todo...*
+
 
 ## Frontend tech stack
 

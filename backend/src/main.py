@@ -7,7 +7,7 @@ from fastapi_jwt_auth.exceptions import AuthJWTException
 
 
 app = FastAPI(
-    docs_url=settings.DOCS_URL,
+    docs_url="/",
     title=settings.TITLE,
     version=settings.VERSION,
 )

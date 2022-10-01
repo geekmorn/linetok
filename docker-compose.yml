@@ -1,31 +1,23 @@
-version: '3.10'
+version: '3.8'
 
 services:
+  database:
+    image: postgres
+    container_name: ${POSTGRES_HOST}
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+
   backend:
     build: ./backend
     container_name: backend
-    command: python -m run
+    command: poetry run app
+    env_file:
+      - .env
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    volumes:
+      - ./backend:/app/backend
     external_links:
       - postgres:postgres
-      - storage:storage
-    env_file:
-      - .env
-    ports:
-      - "8000:8000"
-
-  storage:
-    image: storage
-    container_name: storage
-    command: python -m run
-    env_file:
-      - .env-storage
-    ports:
-      - 80:80
-
-  database:
-    image: postgres
-    container_name: postgres
-    env_file:
-      - .env
-    ports:
-      - "5432:5432"
