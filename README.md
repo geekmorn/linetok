@@ -1,13 +1,14 @@
 # Linetok Monorepo
 
-## Run
+## Installation and usage
 
-- Create env from template (only once)
+
+- Create env from [template](/.env.example)
 ```bash
-cp example.env .env
+cp .env.example .env
 ```
 
-- Run docker stack 
+- Run [docker](https://docs.docker.com/compose/) stack
 ```bash
 docker-compose up
 ```
