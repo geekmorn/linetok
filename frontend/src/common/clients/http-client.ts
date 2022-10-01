@@ -1,31 +1,21 @@
 import axios, { AxiosInstance } from 'axios'
 import { API_URL } from 'common/constants'
-import { getToken } from 'common/utils'
+import { getToken, removeToken } from 'common/utils'
 import { compose } from 'common/utils/fp'
 
-type CustomHeaders = {
-  Authorization: string | null
-}
-
-const createCustomHeaders = (headers: CustomHeaders) => {
-  const { Authorization: token } = headers
-
-  if (!token) return null
-
-  return {
+const createAuthHeaders = (token: string | null) =>
+  token && {
     Authorization: `Bearer ${token}`
   }
-}
 
 const withRequestInterceptor = (client: AxiosInstance) => {
-  client.interceptors.request.use((config) => {
-    const customHeaders = createCustomHeaders({
-      Authorization: getToken()
-    })
+  client.interceptors.request.use(async (config) => {
+    const token = getToken()
+    const authHeaders = createAuthHeaders(token)
 
-    if (!customHeaders) return config
+    if (!authHeaders) return config
 
-    config.headers = { ...config.headers, ...customHeaders }
+    config.headers = { ...config.headers, ...authHeaders }
     return config
   })
   return client
@@ -33,9 +23,10 @@ const withRequestInterceptor = (client: AxiosInstance) => {
 
 const withResponseInterceptor = (client: AxiosInstance) => {
   client.interceptors.response.use(
-    (response) => response,
-    (error) => {
+    async (response) => response,
+    async (error) => {
       if (error.response?.status === 401) {
+        removeToken()
         window.location.href = '/login'
       }
       return Promise.reject(error)
