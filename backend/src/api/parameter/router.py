@@ -7,7 +7,7 @@ from src.common.utils.exceptions import not_found, conflict
 
 
 router = APIRouter(
-    tags=["Parameter"],
+    tags=["Parameters"],
     prefix="/parameters"
 )
 
@@ -40,7 +40,7 @@ async def post(payload: ParameterCreate):
     return await create(ParameterModel, **payload.dict())
 
 
-@ router.put("/{id}", response_model=Parameter, dependencies=[Depends(get_current_user)])
+@router.put("/{id}", response_model=Parameter)
 async def put(id: str, payload: ParameterUpdate):
     parameter: Parameter | None = await read(
         ParameterModel,
@@ -52,7 +52,7 @@ async def put(id: str, payload: ParameterUpdate):
     return await update(parameter, **payload.dict())
 
 
-@ router.delete("/{id}", response_model=Parameter)
+@router.delete("/{id}", response_model=Parameter)
 async def delete(id: str):
     parameter: Parameter | None = await read(
         ParameterModel,

@@ -11,13 +11,13 @@ api_router = APIRouter(
 )
 
 
-ROUTERS = [
-    user_router,
-    auth_router,
-    parameter_router,
-    category_router,
-    product_router,
-]
+ROUTERS = {
+    "user": user_router,
+    "auth": auth_router,
+    "parameters": parameter_router,
+    "category": category_router,
+    "product": product_router,
+}
 
-for router in ROUTERS:
+for name, router in ROUTERS.items():
     api_router.include_router(router)

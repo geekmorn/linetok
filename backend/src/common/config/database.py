@@ -33,6 +33,3 @@ class AsyncDatabaseSession:
     async def create_table(self):
         async with self._engine.begin() as connection:
             await connection.run_sync(Base.metadata.create_all)
-
-
-db = AsyncDatabaseSession()
