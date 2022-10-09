@@ -17,7 +17,7 @@ class UserModel(Base, BaseModel):
     refresh_token = relationship("TokenModel", back_populates="user")
 
     def verify_password(self, password):
-        return bcrypt.verify(password, self.password)
+        return bcrypt.verify(password, str(self.password))
 
     def __repr__(self):
         return f"{self.name}"

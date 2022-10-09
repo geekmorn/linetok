@@ -5,14 +5,11 @@ from src.common.models import UserModel
 from src.common.schemas.user import *
 
 
-async def authorize(email: str, password: str) -> User | HTTPException:
-    user: User | None = await read(
+async def authorize(email: str, password: str) -> User:
+    user: User = await read(
         UserModel,
         by(UserModel.email, email)
     )
     authorized = user and user.verify_password(password)
-    return (
-        user
-        if authorized
-        else unauthorized("User with these credentials does not exist")
-    )
+    if not authorized: raise unauthorized()
+    return user

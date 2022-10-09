@@ -30,5 +30,7 @@ class User(Base):
     surname: str
     role: str
 
+    def verify_password(self, password: str) -> bool: ...
+
     class Config:
         orm_mode = True
