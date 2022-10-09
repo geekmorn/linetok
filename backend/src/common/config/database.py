@@ -1,35 +1,45 @@
-from .settings import settings
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncEngine
+from sqlalchemy.orm import sessionmaker, declarative_base
+
 
 Base = declarative_base()
 
 
-class AsyncDatabaseSession:
+class PostgresqlManager:
+    """Implements PostgreSQL database manager.
 
-    def __init__(self):
-        self._session = None
-        self._engine = None
+    Args:
+        username (str): username of a user
+        password (str): password of a user
+        host (str): host of a database
+        port (int): port of a database
+        name (str): name of a database
+    """
 
-    def __getattr__(self, name):
-        return getattr(self._session, name)
-
-    def create(self):
-        user = settings.POSTGRES_USER
-        password = settings.POSTGRES_PASSWORD
-        db_host = settings.POSTGRES_HOST
-        db_name = settings.POSTGRES_DB
-        self._engine = create_async_engine(
-            f"postgresql+asyncpg://{user}:{password}@{db_host}:5432/{db_name}",
+    def __init__(self, username: str, password: str, host: str, port: int, name: str):
+        self.path = f"postgresql+asyncpg://{username}:{password}@{host}:{port}/{name}"
+        self._engine: AsyncEngine = create_async_engine(
+            self.path,
             future=True,
             echo=False
         )
-        self._session = sessionmaker(
+        self._session: AsyncSession = sessionmaker(
             self._engine,
             expire_on_commit=False,
             class_=AsyncSession,
         )()
 
-    async def create_table(self):
-        async with self._engine.begin() as connection:
+    @property
+    def session(self):
+        return self._session
+
+    @property
+    def engine(self):
+        return self._engine
+
+    def __getattr__(self, name):
+        return getattr(self.session, name)
+
+    async def open_connection(self):
+        async with self.engine.begin() as connection:
             await connection.run_sync(Base.metadata.create_all)

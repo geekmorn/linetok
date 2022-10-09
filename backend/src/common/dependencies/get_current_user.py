@@ -1,6 +1,6 @@
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
-from src.common.config import settings
+from src.common.config import config
 from src.common.models import UserModel
 from src.common.utils.crud import read, by
 from fastapi_jwt_auth.auth_jwt import jwt
@@ -14,7 +14,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl=tokenUrl)
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     payload = jwt.decode(
         token,
-        settings.JWT_SECRET,
+        config.jwt_secret,
         algorithms=['HS256']
     )
     id = payload.get("sub")

@@ -1,12 +1,12 @@
 import uvicorn
-from src.common.config import settings
+from src.common.config import config
 
 
 def start_app():
     uvicorn.run(
         "src.main:app",
         host="0.0.0.0",
-        port=settings.BACKEND_PORT,
+        port=config.backend_port,
         reload=True
     )
 

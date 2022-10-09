@@ -10,7 +10,6 @@ from src.common.models import TokenModel
 
 router = APIRouter(
     tags=['Auth'],
-    prefix="/auth",
 )
 
 

@@ -24,7 +24,7 @@ bcrypt = "^4.0.0"
 requests = "^2.28.1"
 
 [tool.poetry.scripts]
-app = "run:start_app"
+app = "src:start_app"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"

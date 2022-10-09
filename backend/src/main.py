@@ -1,15 +1,15 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from .api.routers import api_router
-from .common.config import settings, db
+from .common.config import config, db
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_jwt_auth.exceptions import AuthJWTException
 
 
 app = FastAPI(
     docs_url="/",
-    title=settings.TITLE,
-    version=settings.VERSION,
+    title=config.title,
+    version=config.version,
 )
 
 app.add_middleware(
@@ -25,16 +25,8 @@ app.include_router(api_router)
 
 @app.on_event("startup")
 async def startup():
-    try:
-        db.create()
-        await db.create_table()
-    except Exception:
-        print("\n\033[91mErrod: \033[93mDatabase cannot connect\n")
+    await db.open_connection()
 
-
-@app.on_event("shutdown")
-async def shutdown():
-    await db.close()
 
 
 @app.exception_handler(AuthJWTException)

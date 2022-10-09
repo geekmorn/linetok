@@ -1,5 +1,11 @@
-from .database import Base, AsyncDatabaseSession
-from .settings import settings, AuthConfig
+from .database import Base, PostgresqlManager
+from .settings import config, AuthConfig
 
 
-db = AsyncDatabaseSession()
+db = PostgresqlManager(
+    username=config.postgres_user,
+    password=config.postgres_password,
+    host=config.postgres_host,
+    port=config.postgres_port,
+    name=config.postgres_db
+)

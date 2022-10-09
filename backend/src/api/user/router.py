@@ -8,7 +8,6 @@ from src.common.utils.exceptions import not_found, conflict, unauthorized
 
 router = APIRouter(
     tags=["User"],
-    prefix="/users"
 )
 
 

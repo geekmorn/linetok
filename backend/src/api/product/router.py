@@ -8,7 +8,6 @@ from src.common.utils.exceptions import not_found, conflict
 
 router = APIRouter(
     tags=["Product"],
-    prefix="/products"
 )
 
 
