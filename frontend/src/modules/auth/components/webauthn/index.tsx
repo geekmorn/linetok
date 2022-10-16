@@ -1,7 +1,9 @@
+import { useLayoutEffect } from 'react'
 import useEvent from 'react-use-event-hook'
 import { ButtonFingerprint } from 'components'
-import { useBiometrics, useBrowserSupportsWebAuthn } from 'modules/auth'
+import { useBiometrics } from 'modules/auth'
 import { useToast } from '@chakra-ui/react'
+import { browserSupportsWebAuthn } from '@simplewebauthn/browser'
 
 type WebAuthnProps = {
   isRegistrationMode: boolean
@@ -10,7 +12,12 @@ type WebAuthnProps = {
 export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
   const toast = useToast()
   const { authorize } = useBiometrics()
-  const supports = useBrowserSupportsWebAuthn()
+
+  let supports = false
+
+  useLayoutEffect(() => {
+    supports = browserSupportsWebAuthn()
+  }, [])
 
   const onClick = useEvent(async () => {
     try {

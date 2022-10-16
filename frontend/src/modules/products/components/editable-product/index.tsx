@@ -2,11 +2,16 @@ import { ProductType } from 'common/types'
 import { AlertButton, Card, EditableInput } from 'components'
 import { Image, Stack, Text } from '@chakra-ui/react'
 
-type ProductProps = ProductType & {
-  loading?: boolean
+type ProductEventsType = {
   onClick?: () => void
   onRemove?: () => void
 }
+
+type ProductStateType = {
+  loading?: boolean
+}
+
+type ProductProps = ProductType & ProductEventsType & ProductStateType
 
 export const EditableProduct: React.FC<ProductProps> = ({
   // ProductType

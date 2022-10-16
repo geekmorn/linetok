@@ -43,3 +43,4 @@ const withInterceptors = compose(
 const createClient = (baseURL: string) => axios.create({ baseURL })
 
 export const httpClient = withInterceptors(createClient(API_URL))
+export const nextAPIClient = withInterceptors(createClient('/api'))

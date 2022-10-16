@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEvent } from 'react-use-event-hook';
+import {useEffect, useState } from 'react'
 import Router from 'next/router'
 
 export const usePageLoading = (): boolean => {
@@ -11,17 +12,17 @@ export const usePageLoading = (): boolean => {
     setLoading(false)
   }
 
-  const enableEvents = useCallback(() => {
+  const enableEvents = useEvent(() => {
     Router.events.on('routeChangeStart', routeEventStart)
     Router.events.on('routeChangeComplete', routeEventEnd)
     Router.events.on('routeChangeError', routeEventEnd)
-  }, [])
+  })
 
-  const disableEvents = useCallback(() => {
+  const disableEvents = useEvent(() => {
     Router.events.off('routeChangeStart', routeEventStart)
     Router.events.off('routeChangeComplete', routeEventEnd)
     Router.events.off('routeChangeError', routeEventEnd)
-  }, [])
+  })
 
   useEffect(() => {
     enableEvents()

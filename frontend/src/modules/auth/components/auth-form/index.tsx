@@ -33,12 +33,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
 
   const { mutateAsync, isLoading: isMutationLoading } = useAuthorizeMutation()
 
-  const onChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = useEvent((e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
-  )
+  })
 
   const onSubmit = useEvent(async (payload: AuthType) => {
     await mutateAsync(payload)

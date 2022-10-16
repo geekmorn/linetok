@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { useToast } from '@chakra-ui/react'
+import { nextAPIClient } from 'common/clients'
+import { useToast, UseToastOptions } from '@chakra-ui/react'
 import {
   browserSupportsWebAuthn,
   startAuthentication,
@@ -15,6 +15,11 @@ type Parameters = {
   isRegistrationMode: boolean
 }
 
+const BIOMETRY_UNSUPPORTED: UseToastOptions = {
+  description: "Your browser doesn't support biometry.",
+  status: 'warning'
+}
+
 export const useBiometrics = () => {
   const toast = useToast()
 
@@ -22,18 +27,15 @@ export const useBiometrics = () => {
     const { isRegistrationMode } = parameters
 
     if (!browserSupportsWebAuthn()) {
-      toast({
-        description: "Your browser doesn't support biometry.",
-        status: 'warning'
-      })
+      toast(BIOMETRY_UNSUPPORTED)
       return false
     }
 
-    const options: PublicKeyCredentialCreationOptionsJSON = await axios
+    const options: PublicKeyCredentialCreationOptionsJSON = await nextAPIClient
       .get(
         isRegistrationMode
-          ? 'api/generate-registration-options'
-          : 'api/generate-authentication-options'
+          ? '/generate-registration-options'
+          : '/generate-authentication-options'
       )
       .then((response) => response.data)
 
@@ -43,11 +45,11 @@ export const useBiometrics = () => {
       ? await startRegistration(options)
       : await startAuthentication(options)
 
-    const verified = await axios
+    const verified: boolean = await nextAPIClient
       .post(
         isRegistrationMode
-          ? 'api/verify-registration'
-          : 'api/verify-authentication',
+          ? '/verify-registration'
+          : '/verify-authentication',
         credentials
       )
       .then((response) => response.data.verified)

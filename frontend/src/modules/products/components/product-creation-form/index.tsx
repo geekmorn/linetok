@@ -15,10 +15,25 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
-  useToast
+  useToast,
+  UseToastOptions
 } from '@chakra-ui/react'
 
 type FormDataType = ProductType
+
+const ERROR_WHILE_CREATING_PRODUCT: UseToastOptions = {
+  description: 'Something went wrong when we tried to create the product.',
+  isClosable: false,
+  status: 'error',
+  title: 'Creation failed'
+}
+
+const SUCCESSFULLY_CREATED_PRODUCT: UseToastOptions = {
+  description: "We've just created the product for you.",
+  isClosable: true,
+  status: 'success',
+  title: 'Product created'
+}
 
 export const ProductCreationForm: React.FC<ProductsProps> = () => {
   const uid = useId()
@@ -57,23 +72,12 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
   const onSubmit = useEvent((formData: FormDataType) => async () => {
     await mutateAsync(formData, {
       onError: () => {
-        toast({
-          description:
-            'Something went wrong when we tried to create the product.',
-          isClosable: false,
-          status: 'error',
-          title: 'Creation failed'
-        })
+        toast(ERROR_WHILE_CREATING_PRODUCT)
       },
       onSuccess: () => {
         refetch()
         reset()
-        toast({
-          description: "We've just created the product for you.",
-          isClosable: true,
-          status: 'success',
-          title: 'Product created'
-        })
+        toast(SUCCESSFULLY_CREATED_PRODUCT)
       }
     })
   })

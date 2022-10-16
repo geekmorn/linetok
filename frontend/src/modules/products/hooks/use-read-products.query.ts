@@ -10,5 +10,7 @@ export const useReadProductsQuery = ({ initialData }: ParametersType) =>
   useQuery(
     ['Read all products'],
     async () => await read<ProductType[]>(API.products),
-    { initialData }
+    {
+      initialData
+    }
   )
