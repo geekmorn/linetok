@@ -1,38 +1,36 @@
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import useEvent from 'react-use-event-hook'
 import { ButtonFingerprint } from 'components'
 import { useBiometrics } from 'modules/auth'
-import { useToast } from '@chakra-ui/react'
+import { useToast, UseToastOptions } from '@chakra-ui/react'
 import { browserSupportsWebAuthn } from '@simplewebauthn/browser'
 
 type WebAuthnProps = {
   isRegistrationMode: boolean
 }
 
+const WARNING_SOMETHING_WENT_WRONG: UseToastOptions = {
+  description: 'Something went wrong. Try again.',
+  status: 'warning'
+}
+
+const SUCCESSFULLY_AUTHORIZED: UseToastOptions = {
+  description: 'Successfully authorized using biometry.',
+  status: 'success'
+}
+
 export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
   const toast = useToast()
   const { authorize } = useBiometrics()
-
-  let supports = false
-
-  useLayoutEffect(() => {
-    supports = browserSupportsWebAuthn()
-  }, [])
 
   const onClick = useEvent(async () => {
     try {
       const verified = await authorize({ isRegistrationMode })
       if (!verified) {
-        toast({
-          description: 'Something went wrong. Try again.',
-          status: 'warning'
-        })
+        toast(WARNING_SOMETHING_WENT_WRONG)
         return
       }
-      toast({
-        description: 'Successfully authorized using biometry.',
-        status: 'success'
-      })
+      toast(SUCCESSFULLY_AUTHORIZED)
     } catch ({ name, message }) {
       toast({
         description: `${message}`,
@@ -42,5 +40,5 @@ export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
     }
   })
 
-  return <ButtonFingerprint onClick={onClick} isVisible={supports} />
+  return <ButtonFingerprint onClick={onClick} isVisible={true} />
 }

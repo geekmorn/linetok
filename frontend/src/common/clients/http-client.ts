@@ -12,10 +12,9 @@ const withRequestInterceptor = (client: AxiosInstance) => {
   client.interceptors.request.use(async (config) => {
     const token = getToken()
     const authHeaders = createAuthHeaders(token)
-
-    if (!authHeaders) return config
-
-    config.headers = { ...config.headers, ...authHeaders }
+    if (authHeaders) {
+      config.headers = { ...config.headers, ...authHeaders }
+    }
     return config
   })
   return client
@@ -42,5 +41,7 @@ const withInterceptors = compose(
 
 const createClient = (baseURL: string) => axios.create({ baseURL })
 
+// This client is responsible for the Linetok API, which is made with FastAPI
 export const httpClient = withInterceptors(createClient(API_URL))
-export const nextAPIClient = withInterceptors(createClient('/api'))
+// This client is the client for Next.js API, that is located at src/pages/api
+export const nextAPIClient = createClient('/api')

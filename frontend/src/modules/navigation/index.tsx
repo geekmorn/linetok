@@ -13,15 +13,15 @@ export const routes = [
   {
     name: 'Связь',
     path: '/contact'
+  },
+  {
+    name: 'Пользователи (Администратор)',
+    path: '/admin/users'
+  },
+  {
+    name: 'Продукты (Администратор)',
+    path: '/admin/products'
   }
-  // {
-  //   path: '/admin/users',
-  //   name: 'Users'
-  // },
-  // {
-  //   path: '/admin/products',
-  //   name: 'Products'
-  // }
 ] as const
 
 export const HOME_ROUTE = routes[0]

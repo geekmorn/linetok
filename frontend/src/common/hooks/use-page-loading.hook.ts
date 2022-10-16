@@ -1,5 +1,5 @@
-import { useEvent } from 'react-use-event-hook';
-import {useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useEvent } from 'react-use-event-hook'
 import Router from 'next/router'
 
 export const usePageLoading = (): boolean => {

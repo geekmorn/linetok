@@ -3,7 +3,21 @@ import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
 import useEvent from 'react-use-event-hook'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
-import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
+import {
+  Center,
+  Text,
+  Wrap,
+  WrapItem,
+  useToast,
+  UseToastOptions
+} from '@chakra-ui/react'
+
+const SUCCESSFULLY_REMOVED_PRODUCT: UseToastOptions = {
+  description: "We've just removed the product for you.",
+  isClosable: true,
+  status: 'success',
+  title: 'Product removed'
+}
 
 export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   const toast = useToast()
@@ -18,12 +32,7 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
     await mutateAsync(id, {
       onSuccess: () => {
         refetch()
-        toast({
-          description: "We've just removed the product for you.",
-          isClosable: true,
-          status: 'success',
-          title: 'Product removed'
-        })
+        toast(SUCCESSFULLY_REMOVED_PRODUCT)
       }
     })
   })

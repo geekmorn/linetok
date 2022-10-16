@@ -15,7 +15,7 @@ type Parameters = {
   isRegistrationMode: boolean
 }
 
-const BIOMETRY_UNSUPPORTED: UseToastOptions = {
+const WARNING_BIOMETRY_UNSUPPORTED: UseToastOptions = {
   description: "Your browser doesn't support biometry.",
   status: 'warning'
 }
@@ -27,7 +27,7 @@ export const useBiometrics = () => {
     const { isRegistrationMode } = parameters
 
     if (!browserSupportsWebAuthn()) {
-      toast(BIOMETRY_UNSUPPORTED)
+      toast(WARNING_BIOMETRY_UNSUPPORTED)
       return false
     }
 
@@ -47,9 +47,7 @@ export const useBiometrics = () => {
 
     const verified: boolean = await nextAPIClient
       .post(
-        isRegistrationMode
-          ? '/verify-registration'
-          : '/verify-authentication',
+        isRegistrationMode ? '/verify-registration' : '/verify-authentication',
         credentials
       )
       .then((response) => response.data.verified)

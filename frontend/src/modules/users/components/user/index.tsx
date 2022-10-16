@@ -2,11 +2,11 @@ import { UserType } from 'common/types'
 import { Card } from 'components'
 import { Heading, Text } from '@chakra-ui/react'
 
-type EventsType = {
+type UserEventsType = {
   onClick?: () => void
 }
 
-type UserProps = UserType & EventsType
+type UserProps = UserType & UserEventsType
 
 export const User: React.FC<UserProps> = ({
   // UserType

@@ -1,7 +1,7 @@
 import { httpClient } from 'common/clients'
 
-export const all = async <Interface>(endpoint: string) =>
-  await httpClient
+export const all = async <Interface>(endpoint: string, client = httpClient) =>
+  await client
     .get<Interface>(endpoint)
     .then((response) => response.data)
     .catch((e) => {
@@ -10,9 +10,9 @@ export const all = async <Interface>(endpoint: string) =>
     })
 
 export const selected =
-  <Interface>(endpoint: string) =>
+  <Interface>(endpoint: string, client = httpClient) =>
   async (parameter: unknown) =>
-    await httpClient
+    await client
       .get<Interface>(`${endpoint}/${parameter}`)
       .then((response) => response.data)
       .catch((e) => {
@@ -21,25 +21,25 @@ export const selected =
       })
 
 export const post =
-  <Interface>(endpoint: string) =>
+  <Interface>(endpoint: string, client = httpClient) =>
   (payload: Interface) =>
-    httpClient
+    client
       .post(endpoint, payload)
       .then((response) => response.data)
       .catch((e) => e)
 
 export const put =
-  <Interface>(endpoint: string) =>
+  <Interface>(endpoint: string, client = httpClient) =>
   (payload: Interface & { id: string }) =>
-    httpClient
+    client
       .put<Interface>(`${endpoint}/${payload.id}`, payload)
       .then((response) => response.data)
       .catch((e) => e)
 
 export const _delete =
-  <Interface>(endpoint: string) =>
+  <Interface>(endpoint: string, client = httpClient) =>
   (id: string) =>
-    httpClient
+    client
       .delete<Interface>(`${endpoint}/${id}`)
       .then((response) => response.data)
       .catch((e) => e)
