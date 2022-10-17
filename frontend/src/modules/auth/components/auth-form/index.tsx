@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { EnvelopeFill } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import useEvent from 'react-use-event-hook'
 import { AuthType } from 'common/types'
 import { InputPassword } from 'components'
+import { t } from 'i18next'
 import { WebAuthn } from 'modules'
 import { useAuthorizeMutation } from 'modules/auth/hooks'
 import {
@@ -22,6 +24,8 @@ type AuthFormProps = {
 }
 
 export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
+  const { t } = useTranslation()
+
   const [formData, setFormData] = useState<AuthType>({
     email: '',
     password: ''
@@ -57,10 +61,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
         maxWidth: '400px'
       }}
     >
-      <Heading>{isRegistrationMode ? 'Зарэгістравацца' : 'Увайсці'}</Heading>
+      <Heading>{isRegistrationMode ? t('register') : t('enter')}</Heading>
 
       <Stack>
-        <FormLabel htmlFor="email">Пошта</FormLabel>
+        <FormLabel htmlFor="email">{t('email.title')}</FormLabel>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <EnvelopeFill color="gray.300" />
@@ -68,13 +72,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
           <Input
             {...register('email', {
               maxLength: {
-                message:
-                  'Даўжыня электроннай пошты павінна быць не больш за 20 сімвалаў',
+                message: t('email.maxLength'),
                 value: 20
               },
               minLength: {
-                message:
-                  'Даўжыня электроннай пошты павінна быць не менш за 3 сімвалы',
+                message: t('email.minLength'),
                 value: 3
               },
               required: true
@@ -89,12 +91,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
       </Stack>
 
       <Stack>
-        <FormLabel htmlFor="password">Пароль</FormLabel>
+        <FormLabel htmlFor="password">{t('password.title')}</FormLabel>
         <InputPassword
           {...register('password', {
             minLength: {
-              message: 'Пароль павінен быць не менш за 8 сімвалаў',
-              value: 3
+              message: t('password.minLength'),
+              value: 8
             },
             required: true
           })}
@@ -107,7 +109,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
 
       {isRegistrationMode && (
         <Stack>
-          <FormLabel htmlFor="passwordConfirm">Пацвярджэнне</FormLabel>
+          <FormLabel htmlFor="passwordConfirm">{t('password.confirm')}</FormLabel>
           <InputPassword
             id="passwordConfirm"
             name="passwordConfirm"
@@ -131,7 +133,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
           w="100%"
           disabled={isMutationLoading}
         >
-          {isRegistrationMode ? 'Зарэгістравацца' : 'Увайсці'}
+          {isRegistrationMode ? t('register') : t('enter')}
         </Button>
         <WebAuthn isRegistrationMode={isRegistrationMode} />
       </Stack>

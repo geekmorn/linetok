@@ -1,41 +1,40 @@
-import { UseToastOptions } from "@chakra-ui/react"
+import { UseToastOptions } from '@chakra-ui/react'
+import { t } from 'i18next'
+import { ReactNode } from 'react'
 
-
-// Successes.
+// Successes
 
 export const SUCCESSFULLY_AUTHORIZED: UseToastOptions = {
-  description: 'Паспяхова аўтарызаваны з дапамогай біяметрыі.',
+  description: t('auth.biometry.successfullyAuthorized') as ReactNode,
   status: 'success'
 }
 
 export const SUCCESSFULLY_CREATED_PRODUCT: UseToastOptions = {
-  description: 'Мы толькі што стварылі прадукт для вас.',
+  description: t('products.successfullyCreated') as ReactNode,
   isClosable: true,
   status: 'success',
-  title: 'Прадукт створаны'
+  title: t('product.created') as ReactNode
 }
 
 export const SUCCESSFULLY_REMOVED_PRODUCT: UseToastOptions = {
-  description: "We've just removed the product for you.",
+  description: t('products.successfullyRemoved') as ReactNode,
   isClosable: true,
   status: 'success',
-  title: 'Product removed'
+  title: t('product.removed') as ReactNode
 }
 
-// Warnings.
+// Warnings
 
 export const WARNING_SOMETHING_WENT_WRONG: UseToastOptions = {
-  description: 'Нешта пайшло не так. Паспрабуй яшчэ.',
+  description:  t('somethingWentWrong') as ReactNode,
   status: 'warning'
 }
 
-// Errors.
+// Errors
 
 export const ERROR_WHILE_CREATING_PRODUCT: UseToastOptions = {
-  description: 'Нешта пайшло не так, калі мы спрабавалі стварыць прадукт.',
+  description: t("products.errorWhileCreating") as ReactNode,
   isClosable: false,
   status: 'error',
-  title: 'Стварэнне не атрымалася'
+  title: t('product.notRemoved') as ReactNode
 }
-
-

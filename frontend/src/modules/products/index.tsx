@@ -1,5 +1,6 @@
 import { EditableProduct } from './components'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
+import { useTranslation } from 'react-i18next'
 import useEvent from 'react-use-event-hook'
 import { SUCCESSFULLY_REMOVED_PRODUCT } from 'common/i18n'
 import { ProductType } from 'common/types'
@@ -14,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 
 export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
+  const { t } = useTranslation()
   const toast = useToast()
   const { refetch } = useReadProductsQuery()
 
@@ -36,10 +38,10 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
       <Center>
         <Text>
           <Highlight
-            query="прыходзьце пазней"
-            styles={{ px: '1', py: '1', bg: 'orange.100' }}
+            query={['прыходзьце пазней', 'come later']}
+            styles={{ bg: 'orange.100', px: '1', py: '1' }}
           >
-            Прадукты не знойдзены. Калі ласка, прыходзьце пазней.
+            {t('products.notFound')}
           </Highlight>
         </Text>
       </Center>

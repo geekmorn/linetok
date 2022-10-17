@@ -1,9 +1,11 @@
 import { User } from './components'
+import { useTranslation } from 'react-i18next'
 import { UserType } from 'common/types'
 import { UsersProps } from 'pages/admin/users'
 import { Center, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react'
 
 export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
+  const { t } = useTranslation()
   const toast = useToast()
   const noDataReceived = !data || data.length === 0
 
@@ -19,7 +21,7 @@ export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
   if (noDataReceived) {
     return (
       <Center>
-        <Text>Карыстальнікі не знойдзены.</Text>
+        <Text>{t('users.notFound')}</Text>
       </Center>
     )
   }

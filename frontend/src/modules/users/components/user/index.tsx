@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { UserType } from 'common/types'
 import { Card } from 'components'
 import { Heading, Text } from '@chakra-ui/react'
@@ -16,13 +17,23 @@ export const User: React.FC<UserProps> = ({
   role,
   // Props
   onClick
-}) => (
-  <Card onClick={onClick}>
-    <Heading>
-      Карыстальнік <Text>{id}</Text>
-    </Heading>
-    <Text>Імя: {name}</Text>
-    <Text>Чы актыўны: {active ? 'Yes' : 'No'}</Text>
-    <Text>Роля: {role}</Text>
-  </Card>
-)
+}) => {
+  const { t } = useTranslation()
+
+  return (
+    <Card onClick={onClick}>
+      <Heading>
+        {t('user.title')} <Text>{id}</Text>
+      </Heading>
+      <Text>
+        {t('user.name')}: {name}
+      </Text>
+      <Text>
+        {t('user.active')}: {active ? 'Yes' : 'No'}
+      </Text>
+      <Text>
+        {t('user.role')}: {role}
+      </Text>
+    </Card>
+  )
+}

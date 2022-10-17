@@ -1,5 +1,6 @@
 import { queryClient } from 'common/clients'
 import { usePageLoading } from 'common/hooks'
+import 'common/i18n'
 import { AnimatePresence } from 'framer-motion'
 import { LoginLayout, MainLayout } from 'modules'
 import type { AppProps } from 'next/app'

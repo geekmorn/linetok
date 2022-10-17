@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import useEvent from 'react-use-event-hook'
 import {
   ERROR_WHILE_CREATING_PRODUCT,
@@ -25,6 +26,7 @@ import {
 type FormDataType = ProductType
 
 export const ProductCreationForm: React.FC<ProductsProps> = () => {
+  const { t } = useTranslation()
   const uid = useId()
   const toast = useToast()
 
@@ -80,15 +82,15 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
         maxWidth: '250px'
       }}
     >
-      <FormLabel htmlFor="name">Назва прадукту</FormLabel>
+      <FormLabel htmlFor="name">{t('product.name.title')}</FormLabel>
       <Input
         {...register('name', {
           maxLength: {
-            message: 'Назва павінна быць не больш за 20 сімвалаў',
+            message: t('product.name.maxLength'),
             value: 20
           },
           minLength: {
-            message: 'Назва павінна быць не менш за 3 сімвалы',
+            message: t('product.name.minLength'),
             value: 3
           },
           required: true
@@ -99,20 +101,20 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
         onChange={onChange}
         value={formData.name}
       />
-      {errors.name && <p>Name is required</p>}
+      {errors.name && <p>{t('product.name.required')}</p>}
 
-      <FormLabel htmlFor="description">Апісанне</FormLabel>
+      <FormLabel htmlFor="description">{t('product.description.title')}</FormLabel>
       <Input
         {...register('description')}
         name="description"
         id={`product_description_${uid}`}
-        placeholder="Яблык - гэта фрукт."
+        placeholder={t('product.description.placeholder')}
         onChange={onChange}
         value={formData.description}
       />
-      {errors.description && <p>Апісанне ёсць абавязковым</p>}
+      {errors.description && <p>{t('product.description.required')}</p>}
 
-      <FormLabel htmlFor="price">Цана</FormLabel>
+      <FormLabel htmlFor="price">{t('product.price.title')}</FormLabel>
       <InputGroup>
         <InputLeftElement>$</InputLeftElement>
         <Input
@@ -124,9 +126,9 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
           value={formData.price}
         />
       </InputGroup>
-      {errors.price && <p>Цана ёсць абавязковай</p>}
+      {errors.price && <p>{t('product.price.required')}</p>}
 
-      <FormLabel htmlFor="price">Колькасць</FormLabel>
+      <FormLabel htmlFor="price">{t('product.amount')}</FormLabel>
       <Input
         {...register('amount')}
         name="amount"
@@ -142,7 +144,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
 
       <Stack>
         <Button type="submit" disabled={isCreationLoading}>
-          Стварыць
+          {t('create')}
         </Button>
       </Stack>
     </FormControl>
