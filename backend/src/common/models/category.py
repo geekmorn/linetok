@@ -1,6 +1,6 @@
 from inspect import Parameter
 from .base import BaseModel
-from src.common.config import Base
+from src.common.database import Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 

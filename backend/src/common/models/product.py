@@ -1,6 +1,6 @@
 from multiprocessing.dummy import Array
 from .base import BaseModel
-from src.common.config import Base
+from src.common.database import Base
 from sqlalchemy import Column, String, Float, ForeignKey, Integer, ARRAY
 from sqlalchemy.orm import relationship
 

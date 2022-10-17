@@ -1,5 +1,4 @@
-from tkinter import N
-from ..config import Base
+from src.common.database import Base
 from passlib.hash import bcrypt
 from sqlalchemy import Column, String
 from .base import BaseModel

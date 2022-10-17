@@ -1,7 +1,7 @@
 from uuid import uuid4
 from sqlalchemy.future import select
 from sqlalchemy import update as _update
-from src.common.config import db
+from src.common.database import db
 from sqlalchemy.exc import IntegrityError, DatabaseError
 from .exceptions import not_acceptable, HTTPException
 from datetime import datetime

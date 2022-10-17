@@ -1,12 +1,11 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncEngine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-
 Base = declarative_base()
 
 
-class PostgresqlManager:
-    """Implements PostgreSQL database manager.
+class PostgresqlConnector:
+    """Implements PostgreSQL database connector.
 
     Args:
         username (str): username of a user
