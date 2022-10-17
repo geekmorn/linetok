@@ -1,5 +1,15 @@
 export const English = {
+  backHome: 'Get back home',
   cannotBeCancelled: 'This action cannot be undone.',
+  auth: {
+    biometry: {
+      enter: 'Authorize using biometry',
+      successfullyAuthorized: 'Successfully authorized using biometry.'
+    }
+  },
+  contact: {
+    title: 'Contact'
+  },
   contactPageWillBeHereInFuture: 'Contact page will be here in future.',
   create: 'Create',
   email: {
@@ -8,27 +18,15 @@ export const English = {
     title: 'Email'
   },
   enter: 'Sign in',
-  backHome: 'Get back home',
   errorSomethingWentWrong: 'Something went wrong, try again.',
-  inStore: 'In store',
   hasAccountAlready: 'Already have an account?',
+  inStore: 'In store',
   noAccountYet: 'No account yet?',
-  contact: {
-    title: 'Contact'
-  },
-  welcome: 'Welcome in Linetok',
-  auth: {
-    biometry: {
-      enter: 'Authorize using biometry',
-      successfullyAuthorized: 'Successfully authorized using biometry.'
-    }
-  },
   password: {
     confirm: 'Confirmation',
     minLength: 'Password must be at least 8 characters long',
     title: 'Password'
   },
-  register: 'Sign up',
   product: {
     amount: 'Amount',
     created: 'Product created',
@@ -40,8 +38,8 @@ export const English = {
     name: {
       maxLength: 'Product name must be no longer than 20 characters',
       minLength: 'Product name must be at least 3 characters long',
-      title: 'Product name',
-      required: 'Name is required'
+      required: 'Name is required',
+      title: 'Product name'
     },
     notRemoved: 'Product was not removed',
     price: {
@@ -61,6 +59,7 @@ export const English = {
     title: 'Products'
   },
   quantity: ' units',
+  register: 'Sign up',
   user: {
     active: 'Active',
     name: 'Name',
@@ -70,5 +69,6 @@ export const English = {
   users: {
     adminTitle: 'Users (Admin)',
     notFound: 'Users not found.'
-  }
+  },
+  welcome: 'Welcome in Linetok'
 }

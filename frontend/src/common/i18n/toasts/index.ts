@@ -11,14 +11,14 @@ export const SUCCESSFULLY_AUTHORIZED: UseToastOptions = {
 export const SUCCESSFULLY_CREATED_PRODUCT: UseToastOptions = {
   // description: t.products.successfullyCreated as ReactNode,
   isClosable: true,
-  status: 'success',
+  status: 'success'
   // title: t.product.created as ReactNode
 }
 
 export const SUCCESSFULLY_REMOVED_PRODUCT: UseToastOptions = {
   // description: t.products.successfullyRemoved as ReactNode,
   isClosable: true,
-  status: 'success',
+  status: 'success'
   // title: t.product.removed as ReactNode
 }
 
@@ -34,6 +34,6 @@ export const WARNING_SOMETHING_WENT_WRONG: UseToastOptions = {
 export const ERROR_WHILE_CREATING_PRODUCT: UseToastOptions = {
   // description: t.products.errorWhileCreating as ReactNode,
   isClosable: false,
-  status: 'error',
+  status: 'error'
   // title: t.product.notRemoved as ReactNode
 }

@@ -1,5 +1,15 @@
 export const Belarusian = {
+  backHome: 'Вярнуцца на галоўную',
   cannotBeCancelled: 'Гэта дзеянне нельга адмяніць.',
+  auth: {
+    biometry: {
+      enter: 'Увайсці з дапамогай біяметрычных дадзеных',
+      successfullyAuthorized: 'Паспяхова аўтарызаваны з дапамогай біяметрыі.'
+    }
+  },
+  contact: {
+    title: 'Сувязь'
+  },
   contactPageWillBeHereInFuture: 'Кантактная старонка будзе тут у будучым.',
   create: 'Стварыць',
   email: {
@@ -8,27 +18,15 @@ export const Belarusian = {
     title: 'Пошта'
   },
   enter: 'Увайсці',
-  backHome: 'Вярнуцца на галоўную',
   errorSomethingWentWrong: 'Штосці пайшло не так. Паспрабуй яшчэ.',
-  inStore: 'На складзе: ',
   hasAccountAlready: 'Ужо ёсць акаўнт?',
+  inStore: 'На складзе: ',
   noAccountYet: 'Яшчэ няма акаўнта?',
-  contact: {
-    title: 'Сувязь'
-  },
-  welcome: 'Вітаем ў Linetok',
-  auth: {
-    biometry: {
-      enter: 'Увайсці з дапамогай біяметрычных дадзеных',
-      successfullyAuthorized: 'Паспяхова аўтарызаваны з дапамогай біяметрыі.'
-    }
-  },
   password: {
     confirm: 'Пацвярджэнне',
     minLength: 'Даўжыня пароля павінна быць не менш за 8 сімвалаў',
     title: 'Пароль'
   },
-  register: 'Зарэгістравацца',
   product: {
     amount: 'Колькасць',
     created: 'Прадукт створаны',
@@ -40,8 +38,8 @@ export const Belarusian = {
     name: {
       maxLength: 'Назва павінна быць не больш за 20 сімвалаў',
       minLength: 'Назва павінна быць не менш за 3 сімвалы',
-      title: 'Назва прадукту',
-      required: 'Назва ёсць абавязковай'
+      required: 'Назва ёсць абавязковай',
+      title: 'Назва прадукту'
     },
     notRemoved: 'Стварэнне не атрымалася',
     price: {
@@ -61,6 +59,7 @@ export const Belarusian = {
     title: 'Прадукты'
   },
   quantity: 'шт.',
+  register: 'Зарэгістравацца',
   user: {
     active: 'Чы актыўны',
     name: 'Імя',
@@ -70,5 +69,6 @@ export const Belarusian = {
   users: {
     adminTitle: 'Карыстальнікі (Адміністратар)',
     notFound: 'Карыстальнікі не знойдзены.'
-  }
+  },
+  welcome: 'Вітаем ў Linetok'
 }
