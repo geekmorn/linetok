@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/hooks'
 import { UserType } from 'common/types'
 import { Card } from 'components'
 import { Heading, Text } from '@chakra-ui/react'
@@ -23,16 +23,16 @@ export const User: React.FC<UserProps> = ({
   return (
     <Card onClick={onClick}>
       <Heading>
-        {t('user.title')} <Text>{id}</Text>
+        {t.user.title} <Text>{id}</Text>
       </Heading>
       <Text>
-        {t('user.name')}: {name}
+        {t.user.name}: {name}
       </Text>
       <Text>
-        {t('user.active')}: {active ? 'Yes' : 'No'}
+        {t.user.active}: {active ? 'Yes' : 'No'}
       </Text>
       <Text>
-        {t('user.role')}: {role}
+        {t.user.role}: {role}
       </Text>
     </Card>
   )

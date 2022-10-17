@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { EnvelopeFill } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import useEvent from 'react-use-event-hook'
+import { useTranslation } from 'common/hooks'
 import { AuthType } from 'common/types'
 import { InputPassword } from 'components'
-import { t } from 'i18next'
 import { WebAuthn } from 'modules'
 import { useAuthorizeMutation } from 'modules/auth/hooks'
 import {
@@ -61,10 +60,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
         maxWidth: '400px'
       }}
     >
-      <Heading>{isRegistrationMode ? t('register') : t('enter')}</Heading>
+      <Heading>{isRegistrationMode ? t.register : t.enter}</Heading>
 
       <Stack>
-        <FormLabel htmlFor="email">{t('email.title')}</FormLabel>
+        <FormLabel htmlFor="email">{t.email.title}</FormLabel>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <EnvelopeFill color="gray.300" />
@@ -72,11 +71,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
           <Input
             {...register('email', {
               maxLength: {
-                message: t('email.maxLength'),
+                message: t.email.maxLength,
                 value: 20
               },
               minLength: {
-                message: t('email.minLength'),
+                message: t.email.minLength,
                 value: 3
               },
               required: true
@@ -91,11 +90,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
       </Stack>
 
       <Stack>
-        <FormLabel htmlFor="password">{t('password.title')}</FormLabel>
+        <FormLabel htmlFor="password">{t.password.title}</FormLabel>
         <InputPassword
           {...register('password', {
             minLength: {
-              message: t('password.minLength'),
+              message: t.password.minLength,
               value: 8
             },
             required: true
@@ -109,7 +108,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
 
       {isRegistrationMode && (
         <Stack>
-          <FormLabel htmlFor="passwordConfirm">{t('password.confirm')}</FormLabel>
+          <FormLabel htmlFor="passwordConfirm">{t.password.confirm}</FormLabel>
           <InputPassword
             id="passwordConfirm"
             name="passwordConfirm"
@@ -133,7 +132,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
           w="100%"
           disabled={isMutationLoading}
         >
-          {isRegistrationMode ? t('register') : t('enter')}
+          {isRegistrationMode ? t.register : t.enter}
         </Button>
         <WebAuthn isRegistrationMode={isRegistrationMode} />
       </Stack>

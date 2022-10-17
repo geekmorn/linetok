@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/hooks'
 import { NextPage } from 'next'
 import { Center } from '@chakra-ui/react'
 
@@ -7,7 +7,7 @@ const ContactPage: NextPage = () => {
 
   return (
     <Center>
-      <span>{t('contactPageWillBeHereInFuture')}</span>
+      <span>{t.contactPageWillBeHereInFuture}</span>
     </Center>
   )
 }

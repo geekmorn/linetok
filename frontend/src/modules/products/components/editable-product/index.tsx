@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/hooks'
 import { ProductType } from 'common/types'
 import { AlertButton, Card, EditableInput } from 'components'
 import { Image, Stack, Text } from '@chakra-ui/react'
@@ -35,17 +35,16 @@ export const EditableProduct: React.FC<ProductProps> = ({
           loading={loading}
           onYes={onRemove}
           buttonHeader="X"
-          alertHeader={t('product.remove')}
-          alertBody={t('cannotBeCanceled')}
+          alertHeader={t.product.remove}
+          alertBody={t.cannotBeCancelled}
         />
       </Stack>
       <EditableInput value={name} />
       <EditableInput value={description} />
       <EditableInput value={price} />
       <Text>
-        {t('inStore')}:
-        {amount}
-        {t('quantity')}
+        {t.inStore}:{amount}
+        {t.quantity}
       </Text>
       {images?.map((image, index) => (
         <Image src={image} alt="Product" key={`${index} product`} />

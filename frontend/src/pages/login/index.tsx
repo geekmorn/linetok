@@ -1,19 +1,18 @@
 import { BackHome } from './back-home'
 import { Question } from './question'
 import { useToggle } from 'common/hooks'
-import { t } from 'i18next'
 import { AuthForm } from 'modules'
 import { NextPage } from 'next'
 import { Center, Stack } from '@chakra-ui/react'
 
 const userHasNoAccount = {
-  question: t('noAccountYet'),
-  tip: t('register')
+  question: 'No account yet?',
+  tip: 'Sign up'
 } as const
 
 const userAlreadyHasAccount = {
-  question: t('hasAccountAlready'),
-  tip: t('enter')
+  question: 'Already has an account?',
+  tip: 'Sign in'
 } as const
 
 const LoginPage: NextPage = () => {

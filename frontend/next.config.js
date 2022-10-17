@@ -6,5 +6,9 @@ const withTM = require('next-transpile-modules')(['@simplewebauthn/browser']) //
 
 module.exports = withTM({
   reactStrictMode: true,
-  swcMinify: true
+  swcMinify: true,
+  i18n: {
+    locales: ["en-US", "by-BY"],
+    defaultLocale: "en-US",
+  },
 })

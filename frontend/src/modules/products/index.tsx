@@ -1,7 +1,7 @@
 import { EditableProduct } from './components'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
-import { useTranslation } from 'react-i18next'
 import useEvent from 'react-use-event-hook'
+import { useTranslation } from 'common/hooks'
 import { SUCCESSFULLY_REMOVED_PRODUCT } from 'common/i18n'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
@@ -41,7 +41,7 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
             query={['прыходзьце пазней', 'come later']}
             styles={{ bg: 'orange.100', px: '1', py: '1' }}
           >
-            {t('products.notFound')}
+            {t.products.notFound}
           </Highlight>
         </Text>
       </Center>

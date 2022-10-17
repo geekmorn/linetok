@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/hooks'
 import type { NextPage } from 'next'
 import { Center, Heading } from '@chakra-ui/react'
 
@@ -7,7 +7,7 @@ export const Home: NextPage = () => {
 
   return (
     <Center>
-      <Heading>{t('welcome')}</Heading>
+      <Heading>{t.welcome}</Heading>
     </Center>
   )
 }
