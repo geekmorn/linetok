@@ -54,13 +54,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
         flexDirection: 'column',
         gap: '25px',
         margin: '0 auto',
-        maxWidth: '300px'
+        maxWidth: '400px'
       }}
     >
-      <Heading>{isRegistrationMode ? 'Регистрация' : 'Войти'}</Heading>
+      <Heading>{isRegistrationMode ? 'Зарэгістравацца' : 'Увайсці'}</Heading>
 
       <Stack>
-        <FormLabel htmlFor="email">Почта</FormLabel>
+        <FormLabel htmlFor="email">Пошта</FormLabel>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <EnvelopeFill color="gray.300" />
@@ -68,11 +68,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
           <Input
             {...register('email', {
               maxLength: {
-                message: 'Email must be at most 20 characters long',
+                message:
+                  'Даўжыня электроннай пошты павінна быць не больш за 20 сімвалаў',
                 value: 20
               },
               minLength: {
-                message: 'Email must be at least 3 characters long',
+                message:
+                  'Даўжыня электроннай пошты павінна быць не менш за 3 сімвалы',
                 value: 3
               },
               required: true
@@ -91,7 +93,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
         <InputPassword
           {...register('password', {
             minLength: {
-              message: 'Password must be at least 8 characters long',
+              message: 'Пароль павінен быць не менш за 8 сімвалаў',
               value: 3
             },
             required: true
@@ -105,7 +107,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
 
       {isRegistrationMode && (
         <Stack>
-          <FormLabel htmlFor="passwordConfirm">Подтверждение</FormLabel>
+          <FormLabel htmlFor="passwordConfirm">Пацвярджэнне</FormLabel>
           <InputPassword
             id="passwordConfirm"
             name="passwordConfirm"
@@ -129,7 +131,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
           w="100%"
           disabled={isMutationLoading}
         >
-          {isRegistrationMode ? 'Зарегистрироваться' : 'Войти'}
+          {isRegistrationMode ? 'Зарэгістравацца' : 'Увайсці'}
         </Button>
         <WebAuthn isRegistrationMode={isRegistrationMode} />
       </Stack>

@@ -19,7 +19,7 @@ export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
   if (noDataReceived) {
     return (
       <Center>
-        <Text>No users found :(</Text>
+        <Text>Карыстальнікі не знойдзены.</Text>
       </Center>
     )
   }

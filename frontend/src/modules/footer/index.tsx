@@ -5,11 +5,8 @@ export const Footer: React.FC = () => (
     as="footer"
     sx={{
       backgroundColor: 'black',
-      bottom: 0,
       color: 'white',
-      height: '400px',
-      left: 0,
-      position: 'absolute',
+      minHeight: '50vh',
       width: '100%'
     }}
   >

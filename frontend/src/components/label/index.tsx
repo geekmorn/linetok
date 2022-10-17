@@ -5,6 +5,6 @@ type LabelProps = PropsWithChildren & {
   text: string
 }
 
-export const Label: React.FC<LabelProps> = ({ text }) => {
-  return <Text sx={{ color: 'white' }}>{text}</Text>
-}
+export const Label: React.FC<LabelProps> = ({ text }) => (
+  <Text sx={{ color: 'white' }}>{text}</Text>
+)

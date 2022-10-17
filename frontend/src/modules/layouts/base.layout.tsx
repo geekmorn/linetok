@@ -27,8 +27,6 @@ export const BaseLayout: React.FC<BaseLayoutProps> = ({
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         as={motion.div}
-        w="100%"
-        minH="100vh"
       >
         {children}
       </Stack>

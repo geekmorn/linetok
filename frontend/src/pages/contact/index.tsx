@@ -4,7 +4,7 @@ import { Center } from '@chakra-ui/react'
 const ContactPage: NextPage = () => (
   <Center>
     <span>
-      Contact page will be here in <i>future.</i>
+      Кантактная старонка будзе тут у <i>будучым</i>.
     </span>
   </Center>
 )

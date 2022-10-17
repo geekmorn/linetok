@@ -6,12 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 
 type ParametersType = Pick<UsersProps, 'initialData'>
 
-export const useReadUsersQuery = ({ initialData }: ParametersType) =>
-  useQuery(
-    //
-    ['Read all users'],
-    async () => await read<UserType[]>(API.users),
-    {
-      initialData
-    }
-  )
+export const useReadUsersQuery = (parameters: ParametersType) =>
+  useQuery(['Read all users'], async () => await read<UserType[]>(API.users), {
+    initialData: parameters.initialData
+  })

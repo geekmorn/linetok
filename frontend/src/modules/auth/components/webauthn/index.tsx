@@ -1,22 +1,14 @@
-import { useEffect } from 'react'
 import useEvent from 'react-use-event-hook'
+import {
+  SUCCESSFULLY_AUTHORIZED,
+  WARNING_SOMETHING_WENT_WRONG
+} from 'common/i18n'
 import { ButtonFingerprint } from 'components'
 import { useBiometrics } from 'modules/auth'
-import { useToast, UseToastOptions } from '@chakra-ui/react'
-import { browserSupportsWebAuthn } from '@simplewebauthn/browser'
+import { useToast } from '@chakra-ui/react'
 
 type WebAuthnProps = {
   isRegistrationMode: boolean
-}
-
-const WARNING_SOMETHING_WENT_WRONG: UseToastOptions = {
-  description: 'Something went wrong. Try again.',
-  status: 'warning'
-}
-
-const SUCCESSFULLY_AUTHORIZED: UseToastOptions = {
-  description: 'Successfully authorized using biometry.',
-  status: 'success'
 }
 
 export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {

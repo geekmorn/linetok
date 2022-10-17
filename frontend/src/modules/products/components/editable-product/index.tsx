@@ -31,14 +31,14 @@ export const EditableProduct: React.FC<ProductProps> = ({
         loading={loading}
         onYes={onRemove}
         buttonHeader="X"
-        alertHeader="Remove this product?"
-        alertBody="This action can not be undone."
+        alertHeader="Выдаліць гэты прадукт?"
+        alertBody="Гэта дзеянне нельга адмяніць."
       />
     </Stack>
     <EditableInput value={name} />
     <EditableInput value={description} />
     <EditableInput value={price} />
-    <Text>На складе: {amount}шт.</Text>
+    <Text>На складзе: {amount}шт.</Text>
     {images?.map((image, index) => (
       <Image src={image} alt="Product" key={`${index} product`} />
     ))}

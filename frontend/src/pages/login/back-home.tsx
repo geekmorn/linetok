@@ -9,7 +9,7 @@ export const BackHome: React.FC = () => (
     hasArrow
     placement="end"
     aria-label="A tooltip"
-    label={<Label text="Вернуться на главную" />}
+    label={<Label text="Вярнуцца на галоўную" />}
     sx={{
       ml: 3,
       p: 2
@@ -21,8 +21,8 @@ export const BackHome: React.FC = () => (
           transform: 'translateY(5px)'
         },
         '&:hover': {
-          boxShadow: `20px 20px 60px #bebebe,
-                     -20px -20px 60px #ffffff`,
+          boxShadow: `10px 10px 60px #ccc,
+                     -10px -10px 60px #ffffff`,
           transform: 'rotate(-360deg)'
         },
         alignSelf: 'flex-start',
@@ -31,7 +31,7 @@ export const BackHome: React.FC = () => (
         mb: '20px',
 
         p: 5,
-        transition: 'all 0.3s ease-out'
+        transition: 'all 0.25s ease-out'
       }}
     >
       <Link href={HOME_ROUTE.path}>

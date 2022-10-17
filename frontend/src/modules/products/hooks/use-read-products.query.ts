@@ -6,11 +6,11 @@ import { useQuery } from '@tanstack/react-query'
 
 type ParametersType = Pick<ProductsProps, 'initialData'>
 
-export const useReadProductsQuery = ({ initialData }: ParametersType) =>
+export const useReadProductsQuery = (parameters?: ParametersType) =>
   useQuery(
     ['Read all products'],
     async () => await read<ProductType[]>(API.products),
     {
-      initialData
+      initialData: parameters?.initialData
     }
   )

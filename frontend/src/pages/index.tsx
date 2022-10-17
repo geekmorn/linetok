@@ -4,7 +4,7 @@ import { Center, Heading } from '@chakra-ui/react'
 export const Home: NextPage = () => {
   return (
     <Center>
-      <Heading>Добро пожаловать в Linetok</Heading>
+      <Heading>Вітаем ў Linetok</Heading>
     </Center>
   )
 }

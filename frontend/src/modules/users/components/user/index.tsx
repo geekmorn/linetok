@@ -19,10 +19,10 @@ export const User: React.FC<UserProps> = ({
 }) => (
   <Card onClick={onClick}>
     <Heading>
-      User <Text>{id}</Text>
+      Карыстальнік <Text>{id}</Text>
     </Heading>
-    <Text>Name: {name}</Text>
-    <Text>Active: {active ? 'Yes' : 'No'}</Text>
-    <Text>Role: {role}</Text>
+    <Text>Імя: {name}</Text>
+    <Text>Чы актыўны: {active ? 'Yes' : 'No'}</Text>
+    <Text>Роля: {role}</Text>
   </Card>
 )

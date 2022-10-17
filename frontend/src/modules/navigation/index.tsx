@@ -7,19 +7,19 @@ export const routes = [
     path: '/'
   },
   {
-    name: 'Продукты',
+    name: 'Прадукты',
     path: '/products'
   },
   {
-    name: 'Связь',
+    name: 'Сувязь',
     path: '/contact'
   },
   {
-    name: 'Пользователи (Администратор)',
+    name: 'Карыстальнікі (Адміністратар)',
     path: '/admin/users'
   },
   {
-    name: 'Продукты (Администратор)',
+    name: 'Прадукты (Адміністратар)',
     path: '/admin/products'
   }
 ] as const
@@ -45,7 +45,7 @@ export const Navigation: React.FC = () => (
       </Link>
     ))}
     <Link href="/login">
-      <Button>Войти</Button>
+      <Button>Увайсці</Button>
     </Link>
   </Stack>
 )

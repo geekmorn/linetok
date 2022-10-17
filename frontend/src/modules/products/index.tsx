@@ -1,6 +1,7 @@
 import { EditableProduct } from './components'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
 import useEvent from 'react-use-event-hook'
+import { SUCCESSFULLY_REMOVED_PRODUCT } from 'common/i18n'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
 import {
@@ -9,19 +10,12 @@ import {
   Wrap,
   WrapItem,
   useToast,
-  UseToastOptions
+  Highlight
 } from '@chakra-ui/react'
-
-const SUCCESSFULLY_REMOVED_PRODUCT: UseToastOptions = {
-  description: "We've just removed the product for you.",
-  isClosable: true,
-  status: 'success',
-  title: 'Product removed'
-}
 
 export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   const toast = useToast()
-  const { refetch } = useReadProductsQuery({})
+  const { refetch } = useReadProductsQuery()
 
   const { mutateAsync, isLoading: isDestroyLoading } =
     useDestroyProductMutation()
@@ -40,7 +34,14 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   if (noDataReceived) {
     return (
       <Center>
-        <Text>No products found. Please, come later! 🤩</Text>
+        <Text>
+          <Highlight
+            query="прыходзьце пазней"
+            styles={{ px: '1', py: '1', bg: 'orange.100' }}
+          >
+            Прадукты не знойдзены. Калі ласка, прыходзьце пазней.
+          </Highlight>
+        </Text>
       </Center>
     )
   }

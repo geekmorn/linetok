@@ -6,13 +6,13 @@ import { NextPage } from 'next'
 import { Center, Stack } from '@chakra-ui/react'
 
 const userHasNoAccount = {
-  question: 'Ещё нет аккаунта?',
-  tip: 'Зарегистрируйтесь'
+  question: 'Яшчэ няма акаўнта?',
+  tip: 'Зарэгістравацца'
 } as const
 
 const userAlreadyHasAccount = {
-  question: 'Уже есть аккаунт?',
-  tip: 'Войдите'
+  question: 'Ужо ёсць акаўнт?',
+  tip: 'Увайсці'
 } as const
 
 const LoginPage: NextPage = () => {

@@ -14,12 +14,12 @@ export const ButtonFingerprint: React.FC<ButtonFingerprintProps> = ({
   isVisible ? (
     <Tooltip
       hasArrow
-      placement="bottom-end"
+      placement="right"
       aria-label="A tooltip"
-      label={<Label text="Войти с помощью биометрических данных" />}
+      label={<Label text="Увайсці з дапамогай біяметрычных дадзеных" />}
       sx={{
         mt: 3,
-        p: 2
+        p: 3
       }}
     >
       <Button
@@ -27,7 +27,7 @@ export const ButtonFingerprint: React.FC<ButtonFingerprintProps> = ({
         variant="outline"
         sx={{
           h: '50px',
-          mt: '0!important'
+          mt: '0 !important'
         }}
       >
         <Fingerprint width={30} height={30} />

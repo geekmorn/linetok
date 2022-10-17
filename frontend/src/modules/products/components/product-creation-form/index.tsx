@@ -1,6 +1,10 @@
 import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
+import {
+  ERROR_WHILE_CREATING_PRODUCT,
+  SUCCESSFULLY_CREATED_PRODUCT
+} from 'common/i18n'
 import { ProductType } from 'common/types'
 import {
   useCreateProductMutation,
@@ -15,31 +19,16 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
-  useToast,
-  UseToastOptions
+  useToast
 } from '@chakra-ui/react'
 
 type FormDataType = ProductType
-
-const ERROR_WHILE_CREATING_PRODUCT: UseToastOptions = {
-  description: 'Something went wrong when we tried to create the product.',
-  isClosable: false,
-  status: 'error',
-  title: 'Creation failed'
-}
-
-const SUCCESSFULLY_CREATED_PRODUCT: UseToastOptions = {
-  description: "We've just created the product for you.",
-  isClosable: true,
-  status: 'success',
-  title: 'Product created'
-}
 
 export const ProductCreationForm: React.FC<ProductsProps> = () => {
   const uid = useId()
   const toast = useToast()
 
-  const { refetch } = useReadProductsQuery({})
+  const { refetch } = useReadProductsQuery()
 
   const [formData, setFormData] = useState<FormDataType>({
     amount: 0,
@@ -91,39 +80,39 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
         maxWidth: '250px'
       }}
     >
-      <FormLabel htmlFor="name">Product name</FormLabel>
+      <FormLabel htmlFor="name">Назва прадукту</FormLabel>
       <Input
         {...register('name', {
           maxLength: {
-            message: 'Name must be at most 20 characters long',
+            message: 'Назва павінна быць не больш за 20 сімвалаў',
             value: 20
           },
           minLength: {
-            message: 'Name must be at least 3 characters long',
+            message: 'Назва павінна быць не менш за 3 сімвалы',
             value: 3
           },
           required: true
         })}
         name="name"
         id={`product_name_${uid}`}
-        placeholder="Papuga"
+        placeholder={`Apple Macbook 13"`}
         onChange={onChange}
         value={formData.name}
       />
       {errors.name && <p>Name is required</p>}
 
-      <FormLabel htmlFor="description">Description</FormLabel>
+      <FormLabel htmlFor="description">Апісанне</FormLabel>
       <Input
         {...register('description')}
         name="description"
         id={`product_description_${uid}`}
-        placeholder="Apple is a fruit."
+        placeholder="Яблык - гэта фрукт."
         onChange={onChange}
         value={formData.description}
       />
-      {errors.description && <p>Description is required</p>}
+      {errors.description && <p>Апісанне ёсць абавязковым</p>}
 
-      <FormLabel htmlFor="price">Price</FormLabel>
+      <FormLabel htmlFor="price">Цана</FormLabel>
       <InputGroup>
         <InputLeftElement>$</InputLeftElement>
         <Input
@@ -135,9 +124,9 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
           value={formData.price}
         />
       </InputGroup>
-      {errors.price && <p>Price is required</p>}
+      {errors.price && <p>Цана ёсць абавязковай</p>}
 
-      <FormLabel htmlFor="price">Amount</FormLabel>
+      <FormLabel htmlFor="price">Колькасць</FormLabel>
       <Input
         {...register('amount')}
         name="amount"
@@ -153,7 +142,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
 
       <Stack>
         <Button type="submit" disabled={isCreationLoading}>
-          Submit
+          Стварыць
         </Button>
       </Stack>
     </FormControl>
