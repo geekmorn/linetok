@@ -11,6 +11,13 @@ export const API = {
   users: '/users'
 } as const
 
+export const NEXT_API = {
+  generateRegistrationOptions: '/generate-registration-options',
+  generateAuthenticationOptions: '/generate-authentication-options',
+  verifyRegistration: '/verify-registration',
+  verifyAuthentication: '/verify-authentication'
+}
+
 export const SEO = {
   description,
   title

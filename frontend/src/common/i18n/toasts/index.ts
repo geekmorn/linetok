@@ -24,6 +24,11 @@ export const SUCCESSFULLY_REMOVED_PRODUCT: UseToastOptions = {
 
 // Warnings
 
+export const WARNING_BIOMETRY_UNSUPPORTED: UseToastOptions = {
+  description: "Your browser doesn't support biometry.",
+  status: 'warning'
+}
+
 export const WARNING_SOMETHING_WENT_WRONG: UseToastOptions = {
   // description: t.somethingWentWrong as ReactNode,
   status: 'warning'

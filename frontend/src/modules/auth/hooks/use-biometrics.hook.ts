@@ -1,5 +1,7 @@
 import { nextAPIClient } from 'common/clients'
-import { useToast, UseToastOptions } from '@chakra-ui/react'
+import { NEXT_API } from 'common/constants'
+import { WARNING_BIOMETRY_UNSUPPORTED } from 'common/i18n'
+import { useToast } from '@chakra-ui/react'
 import {
   browserSupportsWebAuthn,
   startAuthentication,
@@ -13,11 +15,6 @@ import {
 
 type Parameters = {
   isRegistrationMode: boolean
-}
-
-const WARNING_BIOMETRY_UNSUPPORTED: UseToastOptions = {
-  description: "Your browser doesn't support biometry.",
-  status: 'warning'
 }
 
 export const useBiometrics = () => {
@@ -34,8 +31,8 @@ export const useBiometrics = () => {
     const options: PublicKeyCredentialCreationOptionsJSON = await nextAPIClient
       .get(
         isRegistrationMode
-          ? '/generate-registration-options'
-          : '/generate-authentication-options'
+          ? NEXT_API.generateRegistrationOptions
+          : NEXT_API.generateAuthenticationOptions
       )
       .then((response) => response.data)
 
@@ -47,7 +44,9 @@ export const useBiometrics = () => {
 
     const verified: boolean = await nextAPIClient
       .post(
-        isRegistrationMode ? '/verify-registration' : '/verify-authentication',
+        isRegistrationMode
+          ? NEXT_API.verifyRegistration
+          : NEXT_API.verifyAuthentication,
         credentials
       )
       .then((response) => response.data.verified)
