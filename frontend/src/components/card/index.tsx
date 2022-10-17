@@ -6,22 +6,21 @@ type CardProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren
 export const Card: React.FC<CardProps> = ({ children }) => (
   <Stack
     w="400px"
-    minH="70vh"
+    minH="60vh"
+    _hover={{
+      boxShadow: 'rgba(107, 66, 66, 0.3) -4px 9px 25px -6px;'
+    }}
     sx={{
-      borderRadius: '10px',
+      borderRadius: '1rem',
+      boxShadow: 'rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-eve',
       flexWrap: 'wrap',
-      margin: '5px',
+      justifyContent: 'space-eve',
       minWidth: '300px',
-      padding: '20px',
-      transition: 'all .5s ease-out',
-      boxShadow: 'rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;',
+      padding: '2rem',
 
-      '&:hover': {
-        boxShadow: 'rgba(0, 0, 0, 0.2) -4px 9px 25px -6px;'
-      }
+      transition: 'all .5s ease-out'
     }}
   >
     {children}

@@ -32,10 +32,10 @@ function percentage(x, y) {
 const MotionFlex = motion(Flex)
 
 const transitionProps = {
-  stiffness: 400,
-  type: 'spring',
   damping: 60,
-  mass: 3
+  mass: 3,
+  stiffness: 400,
+  type: 'spring'
 }
 
 const Carousel: React.FC<CarouselProps> = ({ children, gap }) => {
@@ -84,38 +84,38 @@ const Carousel: React.FC<CarouselProps> = ({ children, gap }) => {
   }, [isBetweenBaseAndMd, isBetweenMdAndXl, isGreaterThanXL, sliderWidth, gap])
 
   const sliderProps = {
-    setTrackIsActive,
-    initSliderWidth,
-    setActiveItem,
     activeItem,
     constraint,
+    gap,
+    initSliderWidth,
     itemWidth,
     positions,
-    gap
+    setActiveItem,
+    setTrackIsActive
   }
 
   const trackProps = {
-    setTrackIsActive,
-    trackIsActive,
-    setActiveItem,
-    sliderWidth,
     activeItem,
     constraint,
-    multiplier,
+    gap,
     itemWidth,
+    multiplier,
     positions,
-    gap
+    setActiveItem,
+    setTrackIsActive,
+    sliderWidth,
+    trackIsActive
   }
 
   const itemProps = {
-    setTrackIsActive,
-    trackIsActive,
-    setActiveItem,
     activeItem,
     constraint,
+    gap,
     itemWidth,
     positions,
-    gap
+    setActiveItem,
+    setTrackIsActive,
+    trackIsActive
   }
 
   return (
@@ -174,23 +174,23 @@ const Slider = ({
         overflow="hidden"
         _before={{
           bgGradient: 'linear(to-r, base.d400, transparent)',
-          position: 'absolute',
-          w: `${gap / 2}px`,
           content: "''",
-          zIndex: 1,
           h: '100%',
           left: 0,
-          top: 0
+          position: 'absolute',
+          top: 0,
+          w: `${gap / 2}px`,
+          zIndex: 1
         }}
         _after={{
           bgGradient: 'linear(to-l, base.d400, transparent)',
-          position: 'absolute',
-          w: `${gap / 2}px`,
           content: "''",
-          zIndex: 1,
           h: '100%',
+          position: 'absolute',
           right: 0,
-          top: 0
+          top: 0,
+          w: `${gap / 2}px`,
+          zIndex: 1
         }}
       >
         {children}
@@ -276,20 +276,20 @@ const Track = ({
     if (!(closestPosition < positions[positions.length - constraint])) {
       setActiveItem(positions.indexOf(closestPosition))
       controls.start({
-        x: closestPosition,
         transition: {
           velocity: info.velocity.x,
           ...transitionProps
-        }
+        },
+        x: closestPosition
       })
     } else {
       setActiveItem(positions.length - constraint)
       controls.start({
-        x: positions[positions.length - constraint],
         transition: {
           velocity: info.velocity.x,
           ...transitionProps
-        }
+        },
+        x: positions[positions.length - constraint]
       })
     }
   }
@@ -297,10 +297,10 @@ const Track = ({
   const handleResize = useCallback(
     () =>
       controls.start({
-        x: positions[activeItem],
         transition: {
           ...transitionProps
-        }
+        },
+        x: positions[activeItem]
       }),
     [activeItem, controls, positions]
   )

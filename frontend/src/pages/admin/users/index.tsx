@@ -1,8 +1,7 @@
 import { API } from 'common/constants'
 import { UserType } from 'common/types'
 import { read } from 'common/utils'
-import { Users } from 'modules'
-import { useReadUsersQuery } from 'modules/users/hooks'
+import { Users, useReadUsersQuery } from 'modules'
 import { GetStaticProps, NextPage } from 'next'
 import { Stack } from '@chakra-ui/react'
 

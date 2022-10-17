@@ -1,4 +1,5 @@
-import { useId, useState } from 'react'
+import { useId, useState, useRef } from 'react'
+import { BagPlusFill } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
 import { useTranslation } from 'common/hooks'
@@ -13,13 +14,26 @@ import {
 } from 'modules/products/hooks'
 import { ProductsProps } from 'pages/admin/products'
 import {
+  Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
   FormControl,
   FormLabel,
   Input,
   InputGroup,
+  InputLeftAddon,
   InputLeftElement,
+  InputRightAddon,
+  Select,
   Stack,
+  Textarea,
+  useDisclosure,
   useToast
 } from '@chakra-ui/react'
 
@@ -73,80 +87,75 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
     })
   })
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const firstField = useRef(null)
+
   return (
-    <FormControl
-      as="form"
-      onSubmit={handleSubmit((formData) => onSubmit(formData))}
-      sx={{
-        margin: '0 auto',
-        maxWidth: '250px'
-      }}
-    >
-      <FormLabel htmlFor="name">{t.product.name.title}</FormLabel>
-      <Input
-        {...register('name', {
-          maxLength: {
-            message: t.product.name.maxLength,
-            value: 20
-          },
-          minLength: {
-            message: t.product.name.minLength,
-            value: 3
-          },
-          required: true
-        })}
-        name="name"
-        id={`product_name_${uid}`}
-        placeholder={`Apple Macbook 13"`}
-        onChange={onChange}
-        value={formData.name}
-      />
-      {errors.name && <p>{t.product.name.required}</p>}
+    <>
+      <Button leftIcon={<BagPlusFill />} colorScheme="orange" onClick={onOpen}>
+        Create a new product
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        size="lg"
+        placement="right"
+        initialFocusRef={firstField}
+        onClose={onClose}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px">
+            Create a new product
+          </DrawerHeader>
 
-      <FormLabel htmlFor="description">{t.product.description.title}</FormLabel>
-      <Input
-        {...register('description')}
-        name="description"
-        id={`product_description_${uid}`}
-        placeholder={t.product.description.placeholder}
-        onChange={onChange}
-        value={formData.description}
-      />
-      {errors.description && <p>{t.product.description.required}</p>}
+          <DrawerBody>
+            <Stack spacing="24px">
+              <Box>
+                <FormLabel htmlFor="username">Name</FormLabel>
+                <Input
+                  ref={firstField}
+                  id="username"
+                  placeholder="Please enter a product name"
+                />
+              </Box>
 
-      <FormLabel htmlFor="price">{t.product.price.title}</FormLabel>
-      <InputGroup>
-        <InputLeftElement>$</InputLeftElement>
-        <Input
-          {...register('price', { required: true })}
-          id={`product_price_${uid}`}
-          type="number"
-          placeholder="666"
-          onChange={onChange}
-          value={formData.price}
-        />
-      </InputGroup>
-      {errors.price && <p>{t.product.price.required}</p>}
+              <Box>
+                <FormLabel htmlFor="url">Url</FormLabel>
+                <InputGroup>
+                  <InputLeftAddon>http://</InputLeftAddon>
+                  <Input
+                    type="url"
+                    id="url"
+                    placeholder="Please enter domain"
+                  />
+                  <InputRightAddon>.com</InputRightAddon>
+                </InputGroup>
+              </Box>
 
-      <FormLabel htmlFor="price">{t.product.amount}</FormLabel>
-      <Input
-        {...register('amount')}
-        name="amount"
-        id={`product_amount_${uid}`}
-        type="number"
-        onChange={onChange}
-        sx={{
-          display: 'flex',
-          margin: '15px 0',
-          width: '100%'
-        }}
-      />
+              <Box>
+                <FormLabel htmlFor="owner">Select Owner</FormLabel>
+                <Select id="owner" defaultValue="segun">
+                  <option value="segun">Segun Adebayo</option>
+                  <option value="kola">Kola Tioluwani</option>
+                </Select>
+              </Box>
 
-      <Stack>
-        <Button type="submit" disabled={isCreationLoading}>
-          {t.create}
-        </Button>
-      </Stack>
-    </FormControl>
+              <Box>
+                <FormLabel htmlFor="desc">Description</FormLabel>
+                <Textarea id="desc" />
+              </Box>
+            </Stack>
+          </DrawerBody>
+
+          <DrawerFooter borderTopWidth="1px">
+            <Button variant="outline" mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme="blue">Submit</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   )
 }

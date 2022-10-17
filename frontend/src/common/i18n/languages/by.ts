@@ -1,4 +1,5 @@
 export const Belarusian = {
+  Linetok: 'Лінеток',
   auth: {
     biometry: {
       enter: 'Увайсці з дапамогай біяметрыі',

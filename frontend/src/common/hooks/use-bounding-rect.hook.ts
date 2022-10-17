@@ -1,56 +1,56 @@
-import { useState, useCallback, useLayoutEffect } from "react";
+import { useState, useCallback, useLayoutEffect } from 'react'
 
 const debounce = (limit, callback) => {
-  let timeoutId;
+  let timeoutId
   return (...args) => {
     if (timeoutId) {
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutId)
     }
-    timeoutId = setTimeout(callback, limit, args);
-  };
-};
+    timeoutId = setTimeout(callback, limit, args)
+  }
+}
 
 function getDimensionObject(node) {
-  const rect = node.getBoundingClientRect();
+  const rect = node.getBoundingClientRect()
   return {
-    width: rect.width,
+    bottom: rect.bottom,
     height: rect.height,
-    top: rect.top,
     left: rect.left,
-    x: rect.x,
-    y: rect.y,
     right: rect.right,
-    bottom: rect.bottom
-  };
+    top: rect.top,
+    width: rect.width,
+    x: rect.x,
+    y: rect.y
+  }
 }
 
 export function useBoundingRect(limit) {
-  const [dimensions, setDimensions] = useState({});
-  const [node, setNode] = useState(null);
+  const [dimensions, setDimensions] = useState({})
+  const [node, setNode] = useState(null)
 
   const ref = useCallback((node) => {
-    setNode(node);
-  }, []);
+    setNode(node)
+  }, [])
 
   useLayoutEffect(() => {
-    if ("undefined" !== typeof window && node) {
+    if ('undefined' !== typeof window && node) {
       const measure = () =>
         window.requestAnimationFrame(() =>
           setDimensions(getDimensionObject(node))
-        );
+        )
 
-      measure();
+      measure()
 
-      const listener = debounce(limit ? limit : 100, measure);
+      const listener = debounce(limit ? limit : 100, measure)
 
-      window.addEventListener("resize", listener);
-      window.addEventListener("scroll", listener);
+      window.addEventListener('resize', listener)
+      window.addEventListener('scroll', listener)
       return () => {
-        window.removeEventListener("resize", listener);
-        window.removeEventListener("scroll", listener);
-      };
+        window.removeEventListener('resize', listener)
+        window.removeEventListener('scroll', listener)
+      }
     }
-  }, [node, limit]);
+  }, [node, limit])
 
-  return [ref, dimensions, node];
+  return [ref, dimensions, node]
 }

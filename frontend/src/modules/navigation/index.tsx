@@ -1,8 +1,19 @@
+import { Sidebar } from './components'
+import { useState, useEffect } from 'react'
+import { PersonCircle } from 'react-bootstrap-icons'
 import useEvent from 'react-use-event-hook'
 import { useTranslation } from 'common/hooks'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Button, Select, Stack } from '@chakra-ui/react'
+import {
+  Button,
+  Heading,
+  IconButton,
+  Select,
+  Stack,
+  useColorMode,
+  Text
+} from '@chakra-ui/react'
 
 export const routes = [
   {
@@ -30,8 +41,22 @@ export const routes = [
 export const HOME_ROUTE = routes[0]
 
 export const Navigation: React.FC = () => {
-  const router = useRouter()
   const { t } = useTranslation()
+  const router = useRouter()
+  const { toggleColorMode, colorMode } = useColorMode()
+
+  const [scrollPosition, setScrollPosition] = useState(0)
+  const handleScroll = () => {
+    const position = window.pageYOffset
+    setScrollPosition(position)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const changeLanguage = useEvent((event: any) => {
     const locale = event.target.value
@@ -44,27 +69,72 @@ export const Navigation: React.FC = () => {
       as="nav"
       sx={{
         alignItems: 'center',
+        background: 'white',
+        borderBottom: '1px solid black',
         gap: '50px',
-        justifyContent: 'flex-end',
-        margin: 0,
-        padding: '50px',
+        justifyContent: 'space-between',
+        transition: '0.2s ease-out all',
+        padding: scrollPosition > 1 ? '0 2.1rem' : '2rem 2.1rem',
+        position: 'sticky',
+        zIndex: '10',
+        top: 0,
         width: '100%'
       }}
     >
-      {routes.map((route) => (
-        <Link key={route.path} href={route.path}>
-          {route.name}
-        </Link>
-      ))}
-      <Stack>
-        <Select onChange={changeLanguage} value={router.locale}>
-          <option value="en-US">🇺🇸 English</option>
-          <option value="by-BY">Беларуская</option>
-        </Select>
+      <Stack
+        direction="row"
+        gap={5}
+        sx={{
+          placeItems: 'center'
+        }}
+      >
+        <Sidebar />
+        <Heading>
+          <Link href="/">{t.Linetok}</Link>
+        </Heading>
       </Stack>
-      <Link href="/login">
-        <Button>{t.enter}</Button>
-      </Link>
+      <Stack
+        direction="row"
+        gap={3}
+        sx={{
+          placeItems: 'center'
+        }}
+      >
+        <Select
+          onChange={changeLanguage}
+          value={router.locale}
+          borderColor="transparent"
+          sx={{
+            border: 'none'
+          }}
+        >
+          <option value="en-US">🇺🇸</option>
+          <option value="by-BY">❤️</option>
+        </Select>
+        <Stack
+          direction="row"
+          sx={{
+            color: 'black'
+          }}
+        >
+          <IconButton
+            background={colorMode === 'dark' ? 'black' : 'white'}
+            border={
+              colorMode === 'dark' ? '2px solid black' : '2px solid black'
+            }
+            aria-label="Toggle theme"
+            rounded="full"
+            size="xs"
+            onClick={toggleColorMode}
+          />
+          <Text>{colorMode === 'dark' ? 'Dark' : 'Bright'}</Text>
+        </Stack>
+        <Link href="/login">
+          <Button variant="link">
+            <PersonCircle fontSize="1.5rem" color="black" />
+          </Button>
+        </Link>
+      </Stack>
     </Stack>
   )
 }

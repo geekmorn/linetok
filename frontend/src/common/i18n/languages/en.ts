@@ -1,4 +1,5 @@
 export const English = {
+  Linetok: 'Linetok',
   auth: {
     biometry: {
       enter: 'Authorize using biometry',

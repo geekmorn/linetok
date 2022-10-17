@@ -7,13 +7,11 @@ type MainLayoutProps = PropsWithChildren
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
   <BaseLayout>
-    <header>
-      <Navigation />
-    </header>
+    <Navigation />
     <Stack
       sx={{
-        p: '0 2%',
         minHeight: '85vh',
+        p: '2rem 2%',
         width: '100%'
       }}
     >
