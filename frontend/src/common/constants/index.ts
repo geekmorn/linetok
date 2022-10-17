@@ -12,10 +12,10 @@ export const API = {
 } as const
 
 export const NEXT_API = {
-  generateRegistrationOptions: '/generate-registration-options',
   generateAuthenticationOptions: '/generate-authentication-options',
-  verifyRegistration: '/verify-registration',
-  verifyAuthentication: '/verify-authentication'
+  generateRegistrationOptions: '/generate-registration-options',
+  verifyAuthentication: '/verify-authentication',
+  verifyRegistration: '/verify-registration'
 }
 
 export const SEO = {
