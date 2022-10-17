@@ -1,8 +1,8 @@
 export const Belarusian = {
   auth: {
     biometry: {
-      enter: 'Увайсці з дапамогай біяметрычных дадзеных',
-      successfullyAuthorized: 'Паспяхова аўтарызаваны з дапамогай біяметрыі.'
+      enter: 'Увайсці з дапамогай біяметрыі',
+      successfullyAuthorized: 'Паспяхова аўтарызаваны з дапамогай біяметрыі'
     }
   },
   backHome: 'Вярнуцца на галоўную',
