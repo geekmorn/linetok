@@ -11,7 +11,7 @@ const userHasNoAccount = {
 } as const
 
 const userAlreadyHasAccount = {
-  question: 'Already has an account?',
+  question: 'Already have an account?',
   tip: 'Sign in'
 } as const
 
