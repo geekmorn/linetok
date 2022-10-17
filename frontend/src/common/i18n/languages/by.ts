@@ -1,12 +1,12 @@
 export const Belarusian = {
-  backHome: 'Вярнуцца на галоўную',
-  cannotBeCancelled: 'Гэта дзеянне нельга адмяніць.',
   auth: {
     biometry: {
       enter: 'Увайсці з дапамогай біяметрычных дадзеных',
       successfullyAuthorized: 'Паспяхова аўтарызаваны з дапамогай біяметрыі.'
     }
   },
+  backHome: 'Вярнуцца на галоўную',
+  cannotBeCancelled: 'Гэта дзеянне нельга адмяніць.',
   contact: {
     title: 'Сувязь'
   },

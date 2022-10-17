@@ -1,12 +1,12 @@
 export const English = {
-  backHome: 'Get back home',
-  cannotBeCancelled: 'This action cannot be undone.',
   auth: {
     biometry: {
       enter: 'Authorize using biometry',
       successfullyAuthorized: 'Successfully authorized using biometry.'
     }
   },
+  backHome: 'Get back home',
+  cannotBeCancelled: 'This action cannot be undone.',
   contact: {
     title: 'Contact'
   },
