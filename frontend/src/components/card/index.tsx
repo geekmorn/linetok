@@ -19,8 +19,11 @@ export const Card: React.FC<CardProps> = ({ children }) => (
       justifyContent: 'space-eve',
       minWidth: '300px',
       padding: '2rem',
+      transition: 'all .5s ease-out',
 
-      transition: 'all .5s ease-out'
+      '@media (max-width: 860px)': {
+        width: '100%'
+      }
     }}
   >
     {children}

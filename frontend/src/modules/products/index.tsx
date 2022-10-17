@@ -51,7 +51,12 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   // }
 
   return (
-    <Center sx={{ flexWrap: 'wrap', gap: '1rem' }}>
+    <Center
+      sx={{
+        flexWrap: 'wrap',
+        gap: '1rem'
+      }}
+    >
       {data?.map((product: ProductType) => (
         <EditableProduct
           key={`${product.id} <Product />`}

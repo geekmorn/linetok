@@ -73,12 +73,12 @@ export const Navigation: React.FC = () => {
         borderBottom: '1px solid black',
         gap: '50px',
         justifyContent: 'space-between',
-        transition: '0.2s ease-out all',
         padding: scrollPosition > 1 ? '0 2.1rem' : '2rem 2.1rem',
         position: 'sticky',
-        zIndex: '10',
         top: 0,
-        width: '100%'
+        transition: '0.2s ease-out all',
+        width: '100%',
+        zIndex: '10'
       }}
     >
       <Stack
