@@ -43,7 +43,7 @@ export const EditableProduct: React.FC<ProductProps> = ({
       <EditableInput value={description} />
       <EditableInput value={price} />
       <Text>
-        {t.inStore}:{amount}
+        {t.inStore}: {amount}
         {t.quantity}
       </Text>
       {images?.map((image, index) => (

@@ -20,7 +20,7 @@ export const Belarusian = {
   enter: 'Увайсці',
   errorSomethingWentWrong: 'Штосці пайшло не так. Паспрабуй яшчэ.',
   hasAccountAlready: 'Ужо ёсць акаўнт?',
-  inStore: 'На складзе: ',
+  inStore: 'На складзе',
   noAccountYet: 'Яшчэ няма акаўнта?',
   password: {
     confirm: 'Пацвярджэнне',

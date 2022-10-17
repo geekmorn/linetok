@@ -5,16 +5,11 @@ import { Products } from 'modules'
 import { useReadProductsQuery } from 'modules/products/hooks'
 import { GetStaticProps, NextPage } from 'next'
 import { ProductsProps } from 'pages/admin/products'
-import { Stack } from '@chakra-ui/react'
 
 const ProductsPage: NextPage<ProductsProps> = ({ initialData }) => {
   const { data } = useReadProductsQuery({ initialData })
 
-  return (
-    <Stack sx={{ flexDirection: 'column', gap: '15px', width: '100%' }}>
-      <Products initialData={data} />
-    </Stack>
-  )
+  return <Products initialData={data} />
 }
 
 export const getStaticProps: GetStaticProps = async () => {
