@@ -25,8 +25,8 @@ export const Footer: React.FC = () => {
         }}
         sx={{
           opacity: 0.8,
-          transition: '0.5s ease all',
-          textTransform: 'uppercase'
+          textTransform: 'uppercase',
+          transition: '0.5s ease all'
         }}
       >
         <Routes />
@@ -81,8 +81,8 @@ export const Footer: React.FC = () => {
         }}
         sx={{
           maxWidth: '80px',
-          position: 'relative',
           opacity: 0.8,
+          position: 'relative',
           transition: '0.5s ease-out all'
         }}
       >
