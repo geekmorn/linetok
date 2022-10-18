@@ -20,17 +20,42 @@ export const Footer: React.FC = () => {
     >
       <Stack
         direction="row"
+        _hover={{
+          opacity: 1
+        }}
         sx={{
+          opacity: 0.8,
+          transition: '0.5s ease all',
           textTransform: 'uppercase'
         }}
       >
         <Routes />
       </Stack>
-      <Heading as="h3" fontSize={64}>
+      <Heading
+        as="h3"
+        fontSize={64}
+        _hover={{
+          opacity: 1
+        }}
+        sx={{
+          opacity: 0.8,
+          transition: '.5s ease-out all'
+        }}
+      >
         {t.Linetok}
       </Heading>
       <Stack direction="row" gap={5}>
-        <Text>&copy; {new Date().getFullYear()} linetok.com</Text>
+        <Text
+          _hover={{
+            opacity: 1
+          }}
+          sx={{
+            opacity: 0.8,
+            transition: '0.5s ease-out all'
+          }}
+        >
+          &copy; {new Date().getFullYear()} linetok.com
+        </Text>
         <NextLink passHref href="#">
           <Link
             isExternal
@@ -39,7 +64,7 @@ export const Footer: React.FC = () => {
               textDecoration: 'wavy underline orange 2px'
             }}
             sx={{
-              opacity: 0.7,
+              opacity: 0.8,
               textDecoration: 'wavy underline orange 2px',
               textUnderlineOffset: '10px',
               transition: '0.5s opacity ease-out'
@@ -51,9 +76,14 @@ export const Footer: React.FC = () => {
       </Stack>
       <Text
         fontSize="xs"
+        _hover={{
+          opacity: 1
+        }}
         sx={{
           maxWidth: '80px',
-          position: 'relative'
+          position: 'relative',
+          opacity: 0.8,
+          transition: '0.5s ease-out all'
         }}
       >
         Designed in 🇵🇱 by 🇺🇦 and

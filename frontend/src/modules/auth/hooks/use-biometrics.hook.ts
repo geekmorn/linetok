@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { nextAPIClient } from 'common/clients'
 import { NEXT_API } from 'common/constants'
 import { WARNING_BIOMETRY_UNSUPPORTED } from 'common/i18n'
@@ -19,11 +20,12 @@ type Parameters = {
 
 export const useBiometrics = () => {
   const toast = useToast()
+  const [isBrowserSupported, setIsBrowserSupported] = useState(false)
 
   const authorize = async (parameters: Parameters): Promise<boolean> => {
     const { isRegistrationMode } = parameters
 
-    if (!browserSupportsWebAuthn()) {
+    if (!isBrowserSupported) {
       toast(WARNING_BIOMETRY_UNSUPPORTED)
       return false
     }
@@ -58,5 +60,9 @@ export const useBiometrics = () => {
     return verified
   }
 
-  return { authorize }
+  useEffect(() => {
+    setIsBrowserSupported(browserSupportsWebAuthn())
+  }, [])
+
+  return { authorize, isBrowserSupported }
 }
