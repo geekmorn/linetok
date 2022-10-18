@@ -33,10 +33,16 @@ export const Footer: React.FC = () => {
         {t.Linetok}
       </Heading>
       <Stack direction="row" gap={5}>
-        <Text>&copy; {new Date().getFullYear()} linetok.com ❤️</Text>
+        <Text>&copy; {new Date().getFullYear()} linetok.com</Text>
         <Link href="#" isExternal>
           Public Offering
         </Link>
+      </Stack>
+      <Stack>
+        <Text fontSize="xs">
+          Designed in 🇵🇱 <br />
+          by 🇺🇦 and 🤍❤️🤍
+        </Text>
       </Stack>
     </Stack>
   )

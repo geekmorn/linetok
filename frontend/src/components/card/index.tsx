@@ -11,6 +11,9 @@ export const Card: React.FC<CardProps> = ({ children }) => (
       boxShadow: 'rgba(107, 66, 66, 0.3) -4px 9px 25px -6px;'
     }}
     sx={{
+      '@media (max-width: 860px)': {
+        width: '100%'
+      },
       borderRadius: '1rem',
       boxShadow: 'rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;',
       display: 'flex',
@@ -19,11 +22,8 @@ export const Card: React.FC<CardProps> = ({ children }) => (
       justifyContent: 'space-eve',
       minWidth: '300px',
       padding: '2rem',
-      transition: 'all .5s ease-out',
 
-      '@media (max-width: 860px)': {
-        width: '100%'
-      }
+      transition: 'all .5s ease-out'
     }}
   >
     {children}
