@@ -24,7 +24,7 @@ const Linetok = ({ Component, pageProps }: AppProps) => {
             </MainLayout>
           )}
         </AnimatePresence>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
       </ChakraProvider>
     </QueryClientProvider>
   )

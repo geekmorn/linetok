@@ -1,2 +1,5 @@
 export * from './breadcrumbs'
 export * from './sidebar'
+export * from './routes'
+export * from './user-panel'
+export * from './menu'

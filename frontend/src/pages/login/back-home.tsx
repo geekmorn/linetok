@@ -1,7 +1,7 @@
 import { Arrow90degLeft } from 'react-bootstrap-icons'
 import { useTranslation } from 'common/hooks'
 import { Label } from 'components'
-import { HOME_ROUTE } from 'modules/navigation'
+import { HOME_ROUTE } from 'modules'
 import Link from 'next/link'
 import { Stack, Tooltip } from '@chakra-ui/react'
 
