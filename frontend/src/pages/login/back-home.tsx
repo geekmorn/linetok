@@ -2,8 +2,8 @@ import { Arrow90degLeft } from 'react-bootstrap-icons'
 import { useTranslation } from 'common/hooks'
 import { Label } from 'components'
 import { HOME_ROUTE } from 'modules'
-import Link from 'next/link'
-import { Stack, Tooltip } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import { Stack, Tooltip, Link } from '@chakra-ui/react'
 
 export const BackHome: React.FC = () => {
   const { t } = useTranslation()
@@ -21,26 +21,29 @@ export const BackHome: React.FC = () => {
     >
       <Stack
         sx={{
-          '&:active': {
-            transform: 'translateY(5px)'
-          },
-          '&:hover': {
-            boxShadow: `10px 10px 60px #ccc,
-                     -10px -10px 60px #ffffff`,
-            transform: 'rotate(-360deg)'
-          },
           alignSelf: 'flex-start',
           borderRadius: '50%',
           cursor: 'pointer',
           mb: '20px',
-
           p: 5,
-          transition: 'all 0.25s ease-out'
+          transition: 'all 0.25s ease-out',
+
+          '&:active': {
+            transform: 'translateY(5px)'
+          },
+
+          '&:hover': {
+            boxShadow: `10px 10px 60px #ccc,
+                     -10px -10px 60px #ffffff`,
+            transform: 'rotate(-360deg)'
+          }
         }}
       >
-        <Link href={HOME_ROUTE.path}>
-          <Arrow90degLeft />
-        </Link>
+        <NextLink passHref href={HOME_ROUTE.path}>
+          <Link>
+            <Arrow90degLeft />
+          </Link>
+        </NextLink>
       </Stack>
     </Tooltip>
   )
