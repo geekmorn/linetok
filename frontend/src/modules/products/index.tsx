@@ -1,22 +1,13 @@
-import { EditableProduct, ProductCard } from './components'
+import { EditableProduct, Loader, ProductCard } from './components'
 import { ProductProvider } from './context'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
-import { Loader } from './loader'
 import { mockProducts } from './mocks'
 import useEvent from 'react-use-event-hook'
 import { useTranslation } from 'common/hooks'
 import { SUCCESSFULLY_REMOVED_PRODUCT } from 'common/i18n'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
-import {
-  Center,
-  useToast,
-  Text,
-  Highlight,
-  Skeleton,
-  Spinner,
-  Stack
-} from '@chakra-ui/react'
+import { Center, useToast, Text, Highlight, Skeleton } from '@chakra-ui/react'
 
 export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   const toast = useToast()

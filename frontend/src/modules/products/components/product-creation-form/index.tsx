@@ -1,3 +1,4 @@
+import { FileUpload } from './components'
 import { useId, useState, useRef } from 'react'
 import { BagPlusFill } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
@@ -23,15 +24,19 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  FormControl,
   FormLabel,
   Input,
   InputGroup,
   InputLeftAddon,
-  InputLeftElement,
   InputRightAddon,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Select,
   Stack,
+  Text,
   Textarea,
   useDisclosure,
   useToast
@@ -60,7 +65,7 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<ProductType>({
+  } = useForm<FormDataType>({
     defaultValues: formData
   })
 
@@ -90,14 +95,19 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const firstField = useRef(null)
 
+  const format = (value: string) => `$` + value
+  const parse = (value: string) => value.replace(/^\$/, '')
+
+  const [value, setValue] = useState('1.53')
+
   return (
     <>
       <Button leftIcon={<BagPlusFill />} colorScheme="orange" onClick={onOpen}>
-        Create a new product
+        Create a product
       </Button>
       <Drawer
         isOpen={isOpen}
-        size="lg"
+        size="sm"
         placement="right"
         initialFocusRef={firstField}
         onClose={onClose}
@@ -105,46 +115,86 @@ export const ProductCreationForm: React.FC<ProductsProps> = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">
-            Create a new product
-          </DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">Create a product</DrawerHeader>
 
           <DrawerBody>
             <Stack spacing="24px">
-              <Box>
-                <FormLabel htmlFor="username">Name</FormLabel>
-                <Input
-                  ref={firstField}
-                  id="username"
-                  placeholder="Please enter a product name"
-                />
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor="url">Url</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon>http://</InputLeftAddon>
-                  <Input
-                    type="url"
-                    id="url"
-                    placeholder="Please enter domain"
-                  />
-                  <InputRightAddon>.com</InputRightAddon>
-                </InputGroup>
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor="owner">Select Owner</FormLabel>
-                <Select id="owner" defaultValue="segun">
-                  <option value="segun">Segun Adebayo</option>
-                  <option value="kola">Kola Tioluwani</option>
-                </Select>
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor="desc">Description</FormLabel>
-                <Textarea id="desc" />
-              </Box>
+              <FormLabel
+                htmlFor="name"
+                fontSize="xs"
+                sx={{
+                  letterSpacing: '1px',
+                  lineHeight: 0,
+                  m: 0,
+                  pt: 5,
+                  textTransform: 'uppercase'
+                }}
+              >
+                Name
+              </FormLabel>
+              <Input
+                ref={firstField}
+                id="username"
+                placeholder="Please enter a product name"
+              />
+              <FormLabel
+                htmlFor="price"
+                fontSize="xs"
+                sx={{
+                  letterSpacing: '1px',
+                  lineHeight: 0,
+                  m: 0,
+                  pt: 5,
+                  textTransform: 'uppercase'
+                }}
+              >
+                Price
+              </FormLabel>
+              <NumberInput
+                onChange={(valueString) => setValue(parse(valueString))}
+                value={format(value)}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              <FormLabel
+                htmlFor="amount"
+                fontSize="xs"
+                sx={{
+                  letterSpacing: '1px',
+                  lineHeight: 0,
+                  m: 0,
+                  pt: 5,
+                  textTransform: 'uppercase'
+                }}
+              >
+                Amount
+              </FormLabel>
+              <NumberInput value={formData.amount}>
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              <FormLabel
+                htmlFor="description"
+                fontSize="xs"
+                sx={{
+                  letterSpacing: '1px',
+                  lineHeight: 0,
+                  m: 0,
+                  pt: 5,
+                  textTransform: 'uppercase'
+                }}
+              >
+                Description
+              </FormLabel>
+              <Textarea id="description" />
+              <FileUpload />
             </Stack>
           </DrawerBody>
 

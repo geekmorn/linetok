@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
           opacity: 1
         }}
         sx={{
-          maxWidth: '80px',
+          maxWidth: '70px',
           opacity: 0.8,
           position: 'relative',
           transition: '0.5s ease-out all'
@@ -92,12 +92,12 @@ export const Footer: React.FC = () => {
           src="/Belarus.png"
           boxSize="1.5rem"
           sx={{
-            bottom: '-2.5px',
+            bottom: '-3px',
             lineHeight: 0,
             m: 0,
             p: 0,
             position: 'absolute',
-            right: -3
+            right: -5
           }}
         />
       </Text>
