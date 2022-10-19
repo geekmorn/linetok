@@ -22,7 +22,6 @@ export const Card: React.FC<CardProps> = ({ children }) => (
       justifyContent: 'space-eve',
       minWidth: '300px',
       padding: '2rem',
-
       transition: 'all .5s ease-out'
     }}
   >

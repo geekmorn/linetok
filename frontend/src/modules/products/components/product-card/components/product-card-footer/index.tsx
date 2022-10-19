@@ -1,16 +1,11 @@
+import { memo } from 'react'
 import { useTranslation } from 'common/hooks'
-import { Badge, Stack, Text } from '@chakra-ui/react'
+import { useProductContext } from 'modules/products/context'
+import { Stack, Text } from '@chakra-ui/react'
 
-type ProductCardFooterProps = {
-  price: number
-  amount: number
-}
-
-export const ProductCardFooter: React.FC<ProductCardFooterProps> = ({
-  price,
-  amount
-}) => {
+export const ProductCardFooter: React.FC = memo(function ProductCardFooter() {
   const { t } = useTranslation()
+  const { price, amount } = useProductContext()
 
   return (
     <Stack
@@ -41,4 +36,6 @@ export const ProductCardFooter: React.FC<ProductCardFooterProps> = ({
       </Text>
     </Stack>
   )
-}
+})
+
+ProductCardFooter.displayName = 'ProductCardFooter'

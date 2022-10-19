@@ -1,4 +1,4 @@
-import { Heading, Button, Stack, Highlight, Divider } from '@chakra-ui/react'
+import { Heading, Button, Stack, Highlight } from '@chakra-ui/react'
 
 export const Banner: React.FC = () => (
   <Stack

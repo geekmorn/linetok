@@ -3,41 +3,49 @@ import {
   ProductCardImages,
   ProductCardFooter
 } from './components'
-import { ProductType } from 'common/types'
+import { memo } from 'react'
 import { Card } from 'components'
+import { useProductContext } from 'modules/products/context'
 import { Badge, Button, Heading, Stack } from '@chakra-ui/react'
 
-type ProductEventsType = {
+type ProductProps = {
   onClick?: () => void
 }
 
-type ProductProps = ProductType & ProductEventsType
-
-export const ProductCard: React.FC<ProductProps> = ({
-  // ProductType
-  name,
-  price,
-  amount,
-  description,
-  images,
-  // Props
+export const ProductCard: React.FC<ProductProps> = memo(function ProductCard({
   onClick
-}) => (
-  <Card onClick={onClick}>
-    <Badge ml="auto" colorScheme="green">
-      Available
-    </Badge>
-    <ProductCardImages data={images} />
-    <Heading size="md">{name}</Heading>
-    <ProductCardDetails description={description} />
-    <ProductCardFooter price={price} amount={amount} />
-    <Button
-      _hover={{
-        background: 'rgba(0, 0, 0, 0.8)'
-      }}
-      sx={{ background: 'black', color: 'white', transition: '0.5s ease all' }}
-    >
-      Buy
-    </Button>
-  </Card>
-)
+}) {
+  const { name } = useProductContext()
+
+  return (
+    <Card onClick={onClick}>
+      <Badge ml="auto" colorScheme="green">
+        Available
+      </Badge>
+      <ProductCardImages />
+      <Heading size="md">{name}</Heading>
+      <Stack
+        sx={{
+          justifyContent: 'flex-end'
+        }}
+      >
+        <ProductCardDetails />
+        <ProductCardFooter />
+        <Button
+          _hover={{
+            background: 'rgba(0, 0, 0, 0.8)'
+          }}
+          sx={{
+            background: 'black',
+            color: 'white',
+            transition: '0.5s ease all'
+          }}
+        >
+          Buy
+        </Button>
+      </Stack>
+    </Card>
+  )
+})
+
+ProductCard.displayName = 'ProductCard'
