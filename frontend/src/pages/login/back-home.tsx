@@ -21,22 +21,22 @@ export const BackHome: React.FC = () => {
     >
       <Stack
         sx={{
-          alignSelf: 'flex-start',
-          borderRadius: '50%',
-          cursor: 'pointer',
-          mb: '20px',
-          p: 5,
-          transition: 'all 0.25s ease-out',
-
           '&:active': {
             transform: 'translateY(5px)'
           },
-
           '&:hover': {
             boxShadow: `10px 10px 60px #ccc,
                      -10px -10px 60px #ffffff`,
             transform: 'rotate(-360deg)'
-          }
+          },
+          alignSelf: 'flex-start',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          mb: '20px',
+
+          p: 5,
+
+          transition: 'all 0.25s ease-out'
         }}
       >
         <NextLink passHref href={HOME_ROUTE.path}>
