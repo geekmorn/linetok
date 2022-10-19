@@ -1,13 +1,22 @@
 import { EditableProduct, ProductCard } from './components'
 import { ProductProvider } from './context'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
+import { Loader } from './loader'
 import { mockProducts } from './mocks'
 import useEvent from 'react-use-event-hook'
 import { useTranslation } from 'common/hooks'
 import { SUCCESSFULLY_REMOVED_PRODUCT } from 'common/i18n'
 import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
-import { Center, useToast, Text, Highlight } from '@chakra-ui/react'
+import {
+  Center,
+  useToast,
+  Text,
+  Highlight,
+  Skeleton,
+  Spinner,
+  Stack
+} from '@chakra-ui/react'
 
 export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   const toast = useToast()
@@ -17,6 +26,7 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   const { mutateAsync, isLoading: isDestroyLoading } =
     useDestroyProductMutation()
 
+  const dataReceived = Boolean(data?.length)
   const noDataReceived = !data || data.length === 0
 
   const onRemove = useEvent((id: string) => async () => {
@@ -45,25 +55,39 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
   }
 
   return (
-    <Center
-      sx={{
-        flexWrap: 'wrap',
-        gap: '1rem'
-      }}
-    >
-      {data?.map((product: ProductType) => (
-        <EditableProduct
-          key={`${product.id} <Product />`}
-          onRemove={() => onRemove(product.id)}
-          loading={isDestroyLoading}
-          {...product}
-        />
-      ))}
-      {mockProducts.map((mockProduct) => (
-        <ProductProvider context={mockProduct} key={mockProduct.id}>
-          <ProductCard />
-        </ProductProvider>
-      ))}
-    </Center>
+    <>
+      <Loader loading={noDataReceived} />
+      <Center
+        sx={{
+          flexWrap: 'wrap',
+          gap: '1rem'
+        }}
+      >
+        {data?.map((product: ProductType) => (
+          <ProductProvider context={product} key={product.id}>
+            <EditableProduct
+              onRemove={() => onRemove(product.id)()}
+              loading={isDestroyLoading}
+            />
+          </ProductProvider>
+        ))}
+        {mockProducts.map((mockProduct) => (
+          <Skeleton
+            key={mockProduct.id}
+            isLoaded={dataReceived}
+            fadeDuration={1}
+            speed={1}
+            endColor="#ccc"
+            sx={{
+              borderRadius: '1rem'
+            }}
+          >
+            <ProductProvider context={mockProduct}>
+              <ProductCard />
+            </ProductProvider>
+          </Skeleton>
+        ))}
+      </Center>
+    </>
   )
 }

@@ -1,4 +1,5 @@
 import { List } from 'react-bootstrap-icons'
+import useEvent from 'react-use-event-hook'
 import { HOME_ROUTE, Routes } from 'modules'
 import NextLink from 'next/link'
 import {
@@ -14,21 +15,21 @@ import {
   Link
 } from '@chakra-ui/react'
 
-export const Sidebar = () => {
+export const Sidebar: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const handleClick = () => {
+  const onClick = useEvent(() => {
     onOpen()
-  }
+  })
 
-  const handleLinkClick = () => {
+  const onChangeRoute = useEvent(() => {
     onClose()
-  }
+  })
 
   return (
     <>
       <Button
-        onClick={handleClick}
+        onClick={onClick}
         variant="unstyled"
         sx={{
           display: 'grid',
@@ -44,13 +45,13 @@ export const Sidebar = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader onClick={handleLinkClick}>
+          <DrawerHeader onClick={onChangeRoute}>
             <NextLink passHref href={HOME_ROUTE.path}>
               <Link>Linetok</Link>
             </NextLink>
           </DrawerHeader>
           <DrawerBody as={Stack} sx={{ fontSize: '4rem', fontWeight: 'bold' }}>
-            <Routes onClick={handleLinkClick} />
+            <Routes onClick={onChangeRoute} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
