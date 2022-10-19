@@ -13,12 +13,12 @@ type Setter = Dispatch<SetStateAction<ProductType>>
 type Props = PropsWithChildren & { context: ProductType }
 
 const initialData: ProductType = {
-  id: '',
-  name: '',
-  price: 0,
   amount: 0,
   description: '',
-  images: []
+  id: '',
+  images: [],
+  name: '',
+  price: 0
 }
 
 const ProductContext = createContext<ProductType>(initialData)
