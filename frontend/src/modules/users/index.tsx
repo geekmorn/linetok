@@ -39,28 +39,32 @@ export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
 
   return (
     <TableContainer
-      sx={{ border: '1px solid black', borderRadius: '1rem', p: '50px 0' }}
+      sx={{
+        border: '1px solid black',
+        borderRadius: '1rem',
+        p: '50px 0'
+      }}
     >
       <Table variant="simple">
         <TableCaption>List of Linetok users</TableCaption>
         <Thead>
           <Tr>
-            <Th>Active</Th>
-            <Th>Email</Th>
-            <Th>Name</Th>
-            <Th>Surname</Th>
-            <Th>Role</Th>
-            <Th>Actions</Th>
+            <Th textAlign="center">Active</Th>
+            <Th textAlign="center">Email</Th>
+            <Th textAlign="center">Name</Th>
+            <Th textAlign="center">Surname</Th>
+            <Th textAlign="center">Role</Th>
+            <Th textAlign="center">Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
           {data?.map((user: UserType) => (
             <Tr key={user.id}>
-              <Td>{!user.active ? <Check2 color="green" /> : <BagX />}</Td>
-              <Td>{user.email}</Td>
-              <Td>{user.name}</Td>
-              <Td>{user.surname}</Td>
-              <Td>{user.role}</Td>
+              <Td>{user.active ? <Check2 color="green" /> : <BagX />}</Td>
+              <Td textAlign="center">{user.email}</Td>
+              <Td textAlign="center">{user.name}</Td>
+              <Td textAlign="center">{user.surname}</Td>
+              <Td textAlign="center">{user.role}</Td>
               <Td>
                 <Stack direction="row" maxW="75px">
                   <IconButton aria-label="Edit" icon={<PencilSquare />} />
@@ -73,12 +77,12 @@ export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
         </Tbody>
         <Tfoot>
           <Tr>
-            <Th>Active</Th>
-            <Th>Email</Th>
-            <Th>Name</Th>
-            <Th>Surname</Th>
-            <Th>Role</Th>
-            <Th>Actions</Th>
+            <Th textAlign="center">Active</Th>
+            <Th textAlign="center">Email</Th>
+            <Th textAlign="center">Name</Th>
+            <Th textAlign="center">Surname</Th>
+            <Th textAlign="center">Role</Th>
+            <Th textAlign="center">Actions</Th>
           </Tr>
         </Tfoot>
       </Table>

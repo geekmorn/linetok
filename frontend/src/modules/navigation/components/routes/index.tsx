@@ -15,12 +15,8 @@ export const routes = [
     path: '/contact'
   },
   {
-    name: 'Users (Admin)',
-    path: '/admin/users'
-  },
-  {
-    name: 'Products (Admin)',
-    path: '/admin/products'
+    name: 'Admin',
+    path: '/admin'
   }
 ] as const
 
@@ -29,8 +25,7 @@ export type RoutesType = typeof routes
 export const HOME_ROUTE = routes[0]
 export const PRODUCTS_ROUTE = routes[1]
 export const CONTACT_ROUTE = routes[2]
-export const USERS_ADMIN_ROUTE = routes[3]
-export const PRODUCTS_ADMIN_ROUTE = routes[4]
+export const ADMIN_ROUTE = routes[3]
 
 type RoutesProps = { onClick?: () => void }
 
