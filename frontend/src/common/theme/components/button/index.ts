@@ -2,6 +2,6 @@ import { ComponentStyleConfig } from '@chakra-ui/react'
 
 export const Button: ComponentStyleConfig = {
   baseStyle: {
-    borderRadius: '1rem',
+    borderRadius: '1rem'
   }
 }
