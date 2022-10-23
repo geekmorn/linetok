@@ -1,12 +1,12 @@
 import { localeCodes } from 'common/constants'
 import { English, Belarusian } from 'common/i18n/languages'
-import { useRouter } from 'next/router'
+import { useLanguage } from 'common/hooks'
 
 export const useTranslation = () => {
-  const { locale } = useRouter()
-  let t
+  const [currentLocaleCode] = useLanguage()
+  let t: typeof English = English
 
-  switch (locale) {
+  switch (currentLocaleCode) {
     case localeCodes.Belarusian:
       t = Belarusian
       break
@@ -18,5 +18,5 @@ export const useTranslation = () => {
       break
   }
 
-  return { t }
+  return { t, currentLocaleCode }
 }
