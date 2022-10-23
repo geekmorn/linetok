@@ -68,10 +68,6 @@ export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
             isLoaded={dataReceived}
             fadeDuration={1}
             speed={1}
-            endColor="#ccc"
-            sx={{
-              borderRadius: '1rem'
-            }}
           >
             <ProductProvider context={mockProduct}>
               <ProductCard />

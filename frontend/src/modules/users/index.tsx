@@ -38,13 +38,7 @@ export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
   }
 
   return (
-    <TableContainer
-      sx={{
-        border: '1px solid black',
-        borderRadius: '1rem',
-        p: '50px 0'
-      }}
-    >
+    <TableContainer>
       <Table variant="simple">
         <TableCaption>List of Linetok users</TableCaption>
         <Thead>

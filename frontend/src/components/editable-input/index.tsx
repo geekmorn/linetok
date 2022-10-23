@@ -22,7 +22,6 @@ export const EditableInput: React.FC<EditableInputProps> = ({ value }) => (
       }}
     >
       <EditablePreview />
-
       <Input as={ChakraEditableInput} />
       <EditableControls />
     </Stack>

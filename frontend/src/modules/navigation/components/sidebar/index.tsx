@@ -12,7 +12,8 @@ import {
   DrawerHeader,
   DrawerBody,
   Stack,
-  Link
+  Link,
+  IconButton
 } from '@chakra-ui/react'
 
 export const Sidebar: React.FC = () => {
@@ -28,7 +29,8 @@ export const Sidebar: React.FC = () => {
 
   return (
     <>
-      <Button
+      <IconButton
+        aria-label="Menu"
         onClick={onClick}
         variant="unstyled"
         sx={{
@@ -39,8 +41,8 @@ export const Sidebar: React.FC = () => {
           transform: 'rotate(90deg)'
         }}
       >
-        <List fontSize="1.75rem" color="black" />
-      </Button>
+        <List fontSize="1.6rem" color="black" />
+      </IconButton>
       <Drawer onClose={onClose} isOpen={isOpen} size="xl" placement="left">
         <DrawerOverlay />
         <DrawerContent>

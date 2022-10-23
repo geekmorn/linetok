@@ -1,4 +1,5 @@
 import { queryClient } from 'common/clients'
+import { theme } from 'common/theme'
 import { AnimatePresence } from 'framer-motion'
 import { LoginLayout, MainLayout } from 'modules'
 import type { AppProps } from 'next/app'
@@ -12,7 +13,7 @@ const Linetok = ({ Component, pageProps }: AppProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <AnimatePresence mode="wait" initial={false}>
           {pathname === '/login' ? (
             <LoginLayout>
