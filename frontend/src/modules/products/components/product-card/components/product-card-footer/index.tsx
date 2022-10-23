@@ -3,7 +3,7 @@ import { useTranslation } from 'common/hooks'
 import { useProductContext } from 'modules/products/context'
 import { Stack, Text } from '@chakra-ui/react'
 
-export const ProductCardFooter: React.FC = memo(function ProductCardFooter() {
+export const ProductCardFooter: React.FC = memo(() => {
   const { t } = useTranslation()
   const { price, amount } = useProductContext()
 

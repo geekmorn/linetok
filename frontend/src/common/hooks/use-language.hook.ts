@@ -3,13 +3,13 @@ import useEvent from 'react-use-event-hook'
 import { useRouter } from 'next/router'
 
 type CurrentLanguage = string | undefined
-type LanguageSetter = (event: any) => void
+type LanguageSetter = (e: ChangeEvent<HTMLSelectElement>) => void
 
 export const useLanguage = (): [CurrentLanguage, LanguageSetter] => {
   const router = useRouter()
 
-  const changeLanguage = useEvent((event: ChangeEvent<HTMLSelectElement>) => {
-    const locale = event.target.value
+  const changeLanguage: LanguageSetter = useEvent((e) => {
+    const locale = e.target.value
     router.push(router.route, router.asPath, { locale })
   })
 

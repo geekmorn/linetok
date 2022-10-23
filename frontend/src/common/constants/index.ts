@@ -3,6 +3,11 @@ const description = `Интернет-магазин Linetok.by в г. Рога�
 онлайн площадка бытовой техники, электроники, товаров для дома и дачи.
 Следите за нашими акциями и промокодами. С нами выгодно!` as const
 
+export const localeCodes = {
+  Belarusian: 'by-BY',
+  English: 'en-EN'
+}
+
 export const API_URL = 'http://localhost:8000/api/' as const
 
 export const API = {

@@ -12,9 +12,7 @@ type ProductProps = {
   onClick?: () => void
 }
 
-export const ProductCard: React.FC<ProductProps> = memo(function ProductCard({
-  onClick
-}) {
+export const ProductCard: React.FC<ProductProps> = memo(({ onClick }) => {
   const { name } = useProductContext()
 
   return (

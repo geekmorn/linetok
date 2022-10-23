@@ -26,7 +26,9 @@ export const post =
     client
       .post(endpoint, payload)
       .then((response) => response.data)
-      .catch((e) => e)
+      .catch((e) => {
+        console.error(e)
+      })
 
 export const put =
   <Interface>(endpoint: string, client = httpClient) =>
@@ -34,7 +36,9 @@ export const put =
     client
       .put<Interface>(`${endpoint}/${payload.id}`, payload)
       .then((response) => response.data)
-      .catch((e) => e)
+      .catch((e) => {
+        console.error(e)
+      })
 
 export const _delete =
   <Interface>(endpoint: string, client = httpClient) =>
@@ -42,4 +46,6 @@ export const _delete =
     client
       .delete<Interface>(`${endpoint}/${id}`)
       .then((response) => response.data)
-      .catch((e) => e)
+      .catch((e) => {
+        console.error(e)
+      })

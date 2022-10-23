@@ -10,7 +10,7 @@ import {
   Text
 } from '@chakra-ui/react'
 
-export const ProductCardDetails: React.FC = memo(function ProductCardDetails() {
+export const ProductCardDetails: React.FC = memo(() => {
   const { description } = useProductContext()
 
   return (

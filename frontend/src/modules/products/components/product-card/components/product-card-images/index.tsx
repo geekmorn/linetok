@@ -3,7 +3,7 @@ import ChakraCarousel from 'components/carousel'
 import { useProductContext } from 'modules/products/context'
 import { Stack, Image } from '@chakra-ui/react'
 
-export const ProductCardImages: React.FC = memo(function ProductCardImages() {
+export const ProductCardImages: React.FC = memo(() => {
   const { images } = useProductContext()
 
   return (

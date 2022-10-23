@@ -1,16 +1,14 @@
 import { useState, useCallback, useLayoutEffect } from 'react'
 
-const debounce = (limit, callback) => {
-  let timeoutId
-  return (...args) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-    }
+const debounce = (limit: number, callback: () => void) => {
+  let timeoutId: string | number | NodeJS.Timeout | undefined
+  return (...args: unknown[]) => {
+    if (timeoutId) clearTimeout(timeoutId)
     timeoutId = setTimeout(callback, limit, args)
   }
 }
 
-function getDimensionObject(node) {
+const getDimensionObject = (node: HTMLElement) => {
   const rect = node.getBoundingClientRect()
   return {
     bottom: rect.bottom,
@@ -24,11 +22,11 @@ function getDimensionObject(node) {
   }
 }
 
-export function useBoundingRect(limit) {
+export const useBoundingRect = (limit: number) => {
   const [dimensions, setDimensions] = useState({})
-  const [node, setNode] = useState(null)
+  const [node, setNode] = useState<HTMLElement | null>(null)
 
-  const ref = useCallback((node) => {
+  const ref = useCallback((node: HTMLElement | null) => {
     setNode(node)
   }, [])
 

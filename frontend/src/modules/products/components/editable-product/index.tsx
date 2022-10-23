@@ -16,7 +16,7 @@ type ProductStateType = {
 type ProductProps = ProductEventsType & ProductStateType
 
 export const EditableProduct: React.FC<ProductProps> = memo(
-  function EditableProduct({ loading, onClick, onRemove }) {
+  ({ loading, onClick, onRemove }) => {
     const { t } = useTranslation()
     const { name, description, price, amount, images } = useProductContext()
 
