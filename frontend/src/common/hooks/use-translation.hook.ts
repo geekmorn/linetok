@@ -1,6 +1,6 @@
 import { localeCodes } from 'common/constants'
-import { English, Belarusian } from 'common/i18n/languages'
 import { useLanguage } from 'common/hooks'
+import { English, Belarusian } from 'common/i18n/languages'
 
 export const useTranslation = () => {
   const [currentLocaleCode] = useLanguage()
@@ -18,5 +18,5 @@ export const useTranslation = () => {
       break
   }
 
-  return { t, currentLocaleCode }
+  return { currentLocaleCode, t }
 }
