@@ -4,7 +4,7 @@ import { English, Belarusian } from 'common/i18n/languages'
 
 export const useTranslation = () => {
   const [currentLocaleCode] = useLanguage()
-  let t: typeof English = English
+  let t = English
 
   switch (currentLocaleCode) {
     case localeCodes.Belarusian:
