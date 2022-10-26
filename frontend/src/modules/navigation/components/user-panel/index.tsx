@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { PersonCircle } from 'react-bootstrap-icons'
 import { useLanguage } from 'common/hooks'
 import Link from 'next/link'
@@ -10,7 +11,7 @@ import {
   Text
 } from '@chakra-ui/react'
 
-export const UserPanel: React.FC = () => {
+export const UserPanel: FC = () => {
   const [currentLanguage, changeLanguage] = useLanguage()
   const { toggleColorMode, colorMode } = useColorMode()
 

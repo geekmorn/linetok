@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { EnvelopeFill } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import useEvent from 'react-use-event-hook'
@@ -22,7 +22,7 @@ type AuthFormProps = {
   isRegistrationMode: boolean
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({ isRegistrationMode }) => {
+export const AuthForm: FC<AuthFormProps> = ({ isRegistrationMode }) => {
   const { t } = useTranslation()
 
   const [formData, setFormData] = useState<AuthType>({

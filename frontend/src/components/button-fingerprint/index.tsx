@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import { Fingerprint } from 'react-bootstrap-icons'
 import { useTranslation } from 'common/hooks'
 import { Label } from 'components'
@@ -8,7 +8,7 @@ type ButtonFingerprintProps = ButtonProps & {
   isVisible?: boolean
 }
 
-export const ButtonFingerprint: React.FC<ButtonFingerprintProps> = ({
+export const ButtonFingerprint: FC<ButtonFingerprintProps> = ({
   onClick,
   isVisible
 }) => {

@@ -1,5 +1,5 @@
 import { FileUpload } from './components'
-import { useState, useRef } from 'react'
+import { useState, useRef, FC } from 'react'
 import { BagPlusFill } from 'react-bootstrap-icons'
 import { ProductsProps } from 'pages/admin/products'
 import {
@@ -23,7 +23,7 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 
-export const ProductCreationForm: React.FC<ProductsProps> = () => {
+export const ProductCreationForm: FC<ProductsProps> = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const firstField = useRef(null)
 

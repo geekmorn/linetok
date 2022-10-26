@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import Link from 'next/link'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 
-export const Breadcrumbs: React.FC = () => (
+export const Breadcrumbs: FC = () => (
   <Breadcrumb fontWeight="medium" fontSize="sm">
     <BreadcrumbItem>
       <BreadcrumbLink as={Link} href="/">

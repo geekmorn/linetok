@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { SEO } from 'common/constants'
 import { motion } from 'framer-motion'
 import Head from 'next/head'
@@ -9,7 +9,7 @@ type BaseLayoutProps = PropsWithChildren & {
   description?: string
 }
 
-export const BaseLayout: React.FC<BaseLayoutProps> = ({
+export const BaseLayout: FC<BaseLayoutProps> = ({
   children,
   title = SEO.title,
   description = SEO.description

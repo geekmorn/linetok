@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { Box, Button, Highlight, Text } from '@chakra-ui/react'
 
 type QuestionProps = {
@@ -7,7 +8,7 @@ type QuestionProps = {
   toggle: () => void
 }
 
-export const Question: React.FC<QuestionProps> = ({
+export const Question: FC<QuestionProps> = ({
   isRegistrationMode,
   question,
   toggle,

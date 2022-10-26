@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { List } from 'react-bootstrap-icons'
 import useEvent from 'react-use-event-hook'
 import { HOME_ROUTE, Routes } from 'modules'
@@ -15,7 +16,7 @@ import {
   IconButton
 } from '@chakra-ui/react'
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const onClick = useEvent(() => {

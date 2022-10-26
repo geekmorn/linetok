@@ -1,7 +1,8 @@
 import { FooterLinks, Watermark, FooterContent } from './components'
+import { FC } from 'react'
 import { Stack } from '@chakra-ui/react'
 
-export const Footer: React.FC = () => (
+export const Footer: FC = () => (
   <Stack
     as="footer"
     sx={{

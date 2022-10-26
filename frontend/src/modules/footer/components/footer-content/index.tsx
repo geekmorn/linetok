@@ -1,8 +1,9 @@
+import { FC } from 'react'
 import { useTranslation } from 'common/hooks'
 import NextLink from 'next/link'
 import { Heading, Stack, Link, Text } from '@chakra-ui/react'
 
-export const FooterContent = () => {
+export const FooterContent: FC = () => {
   const { t } = useTranslation()
 
   return (

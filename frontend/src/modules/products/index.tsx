@@ -2,6 +2,7 @@ import { EditableProduct, Loader, ProductCard } from './components'
 import { ProductProvider } from './context'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
 import { mockProducts } from './mocks'
+import { FC } from 'react'
 import useEvent from 'react-use-event-hook'
 import { useTranslation } from 'common/hooks'
 import { SUCCESSFULLY_REMOVED_PRODUCT } from 'common/i18n'
@@ -9,7 +10,7 @@ import { ProductType } from 'common/types'
 import { ProductsProps } from 'pages/admin/products'
 import { Center, useToast, Text, Highlight, Skeleton } from '@chakra-ui/react'
 
-export const Products: React.FC<ProductsProps> = ({ initialData: data }) => {
+export const Products: FC<ProductsProps> = ({ initialData: data }) => {
   const toast = useToast()
   const { t } = useTranslation()
   const { refetch } = useReadProductsQuery()

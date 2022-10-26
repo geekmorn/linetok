@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import useEvent from 'react-use-event-hook'
 import { motion, useAnimation } from 'framer-motion'
 import {
@@ -103,7 +104,7 @@ const PreviewImage = forwardRef<BoxProps, typeof Box>((props, ref) => (
   />
 ))
 
-export const FileUpload: React.FC = () => {
+export const FileUpload: FC = () => {
   const controls = useAnimation()
   const startAnimation = useEvent(() => controls.start('hover'))
   const stopAnimation = useEvent(() => controls.stop())

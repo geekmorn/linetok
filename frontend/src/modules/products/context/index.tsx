@@ -1,6 +1,7 @@
 import {
   createContext,
   Dispatch,
+  FC,
   PropsWithChildren,
   SetStateAction,
   useCallback,
@@ -24,7 +25,7 @@ const initialData: ProductType = {
 const ProductContext = createContext<ProductType>(initialData)
 const ProductSetter = createContext<Setter>(() => null)
 
-export const ProductProvider: React.FC<Props> = ({ children, context }) => {
+export const ProductProvider: FC<Props> = ({ children, context }) => {
   const [product, setProduct] = useState(context ?? initialData)
 
   return (

@@ -1,9 +1,10 @@
 import { Sidebar } from '../sidebar'
+import { FC } from 'react'
 import { useTranslation } from 'common/hooks'
 import Link from 'next/link'
 import { Heading, Stack } from '@chakra-ui/react'
 
-export const Menu: React.FC = () => {
+export const Menu: FC = () => {
   const { t } = useTranslation()
 
   return (

@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { useTranslation } from 'common/hooks'
 import { UserType } from 'common/types'
 import { Card } from 'components'
@@ -9,7 +10,7 @@ type UserEventsType = {
 
 type UserProps = UserType & UserEventsType
 
-export const User: React.FC<UserProps> = ({
+export const User: FC<UserProps> = ({
   // UserType
   id,
   name,

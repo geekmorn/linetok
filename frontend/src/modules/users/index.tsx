@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import {
   BagX,
   Check2,
@@ -24,7 +25,7 @@ import {
   Stack
 } from '@chakra-ui/react'
 
-export const Users: React.FC<UsersProps> = ({ initialData: data }) => {
+export const Users: FC<UsersProps> = ({ initialData: data }) => {
   const { t } = useTranslation()
 
   const noDataReceived = !data || data.length === 0

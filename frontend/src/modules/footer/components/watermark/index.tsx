@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import { Text, Image } from '@chakra-ui/react'
 
-export const Watermark = () => (
+export const Watermark: FC = () => (
   <Text
     fontSize="xs"
     _hover={{

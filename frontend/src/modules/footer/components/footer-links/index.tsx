@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import { Routes } from 'modules'
 import { Stack } from '@chakra-ui/react'
 
-export const FooterLinks: React.FC = () => (
+export const FooterLinks: FC = () => (
   <Stack
     direction="row"
     _hover={{

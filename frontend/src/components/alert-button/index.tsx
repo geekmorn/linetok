@@ -19,7 +19,7 @@ type AlertProps = {
   onYes?: () => void
 }
 
-export const AlertButton: React.FC<AlertProps> = ({
+export const AlertButton: FC<AlertProps> = ({
   buttonHeader,
   alertHeader,
   alertBody,

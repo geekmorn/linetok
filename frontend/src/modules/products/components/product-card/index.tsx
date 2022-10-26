@@ -3,7 +3,7 @@ import {
   ProductCardImages,
   ProductCardFooter
 } from './components'
-import { memo } from 'react'
+import { FC, memo } from 'react'
 import { Card } from 'components'
 import { useProductContext } from 'modules/products/context'
 import { Badge, Button, Heading, Stack } from '@chakra-ui/react'
@@ -12,7 +12,7 @@ type ProductProps = {
   onClick?: () => void
 }
 
-export const ProductCard: React.FC<ProductProps> = memo(({ onClick }) => {
+export const ProductCard: FC<ProductProps> = memo(({ onClick }) => {
   const { name } = useProductContext()
 
   return (

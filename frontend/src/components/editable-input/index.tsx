@@ -11,7 +11,7 @@ type EditableInputProps = {
   value: string | number
 }
 
-export const EditableInput: React.FC<EditableInputProps> = ({ value }) => (
+export const EditableInput: FC<EditableInputProps> = ({ value }) => (
   <Editable textAlign="center" value={value as string}>
     <Stack
       sx={{

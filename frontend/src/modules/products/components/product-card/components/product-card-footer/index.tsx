@@ -1,9 +1,9 @@
-import { memo } from 'react'
+import { FC, memo } from 'react'
 import { useTranslation } from 'common/hooks'
 import { useProductContext } from 'modules/products/context'
 import { Stack, Text } from '@chakra-ui/react'
 
-export const ProductCardFooter: React.FC = memo(() => {
+export const ProductCardFooter: FC = memo(() => {
   const { t } = useTranslation()
   const { price, amount } = useProductContext()
 

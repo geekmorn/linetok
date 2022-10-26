@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { FC, memo } from 'react'
 import { useProductContext } from 'modules/products/context'
 import {
   Accordion,
@@ -10,7 +10,7 @@ import {
   Text
 } from '@chakra-ui/react'
 
-export const ProductCardDetails: React.FC = memo(() => {
+export const ProductCardDetails: FC = memo(() => {
   const { description } = useProductContext()
 
   return (

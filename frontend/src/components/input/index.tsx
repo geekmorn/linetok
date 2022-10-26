@@ -11,7 +11,7 @@ type InputProps = ChakraInputProps & {
   label: string
 }
 
-export const Input: React.FC<InputProps> = ({ label, type, placeholder }) => {
+export const Input: FC<InputProps> = ({ label, type, placeholder }) => {
   const [value, setValue] = useState('')
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>

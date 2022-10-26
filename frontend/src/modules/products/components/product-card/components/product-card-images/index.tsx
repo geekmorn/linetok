@@ -1,8 +1,8 @@
-import { memo } from 'react'
+import { FC, memo } from 'react'
 import { useProductContext } from 'modules/products/context'
 import { Stack, Image } from '@chakra-ui/react'
 
-export const ProductCardImages: React.FC = memo(() => {
+export const ProductCardImages: FC = memo(() => {
   const { images } = useProductContext()
 
   return (

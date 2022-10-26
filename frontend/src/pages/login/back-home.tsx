@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { Arrow90degLeft } from 'react-bootstrap-icons'
 import { useTranslation } from 'common/hooks'
 import { Label } from 'components'
@@ -5,7 +6,7 @@ import { HOME_ROUTE } from 'modules'
 import NextLink from 'next/link'
 import { Stack, Tooltip, Link, SystemStyleObject } from '@chakra-ui/react'
 
-export const BackHome: React.FC = () => {
+export const BackHome: FC = () => {
   const { t } = useTranslation()
 
   return (

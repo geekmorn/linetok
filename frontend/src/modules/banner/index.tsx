@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import { Heading, Button, Stack, Highlight } from '@chakra-ui/react'
 
-export const Banner: React.FC = () => (
+export const Banner: FC = () => (
   <Stack
     direction="row"
     sx={{

@@ -3,7 +3,7 @@ import { Stack } from '@chakra-ui/react'
 
 type CardProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren
 
-export const Card: React.FC<CardProps> = ({ children }) => (
+export const Card: FC<CardProps> = ({ children }) => (
   <Stack
     w="400px"
     minH="60vh"

@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import useEvent from 'react-use-event-hook'
 import {
   SUCCESSFULLY_AUTHORIZED,
@@ -11,7 +12,7 @@ type WebAuthnProps = {
   isRegistrationMode: boolean
 }
 
-export const WebAuthn: React.FC<WebAuthnProps> = ({ isRegistrationMode }) => {
+export const WebAuthn: FC<WebAuthnProps> = ({ isRegistrationMode }) => {
   const toast = useToast()
   const { authorize, isBrowserSupported } = useBiometrics()
 

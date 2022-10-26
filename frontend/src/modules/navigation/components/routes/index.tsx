@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import NextLink from 'next/link'
 import { Link } from '@chakra-ui/react'
 
@@ -29,7 +30,7 @@ export const ADMIN_ROUTE = routes[3]
 
 type RoutesProps = { onClick?: () => void }
 
-export const Routes: React.FC<RoutesProps> = ({ onClick }) => (
+export const Routes: FC<RoutesProps> = ({ onClick }) => (
   <>
     {routes.map((route) => (
       <NextLink passHref key={route.path} href={route.path}>

@@ -1,8 +1,9 @@
 import { UserPanel, Menu } from './components'
+import { FC } from 'react'
 import { useScrollPosition } from 'common/hooks'
 import { Stack } from '@chakra-ui/react'
 
-export const Navigation: React.FC = () => {
+export const Navigation: FC = () => {
   const scrollPosition = useScrollPosition()
 
   return (

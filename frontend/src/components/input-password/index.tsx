@@ -10,9 +10,7 @@ import {
 
 type InputPasswordProps = InputProps
 
-export const InputPassword: React.FC<InputPasswordProps> = ({
-  ...inputProps
-}) => {
+export const InputPassword: FC<InputPasswordProps> = ({ ...inputProps }) => {
   const [showPassword, toggle] = useToggle(false)
 
   return (

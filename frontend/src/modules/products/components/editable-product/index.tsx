@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { FC, memo } from 'react'
 import { useTranslation } from 'common/hooks'
 import { AlertButton, Card, EditableInput } from 'components'
 import { useProductContext } from 'modules/products/context'
@@ -15,7 +15,7 @@ type ProductStateType = {
 
 type ProductProps = ProductEventsType & ProductStateType
 
-export const EditableProduct: React.FC<ProductProps> = memo(
+export const EditableProduct: FC<ProductProps> = memo(
   ({ loading, onClick, onRemove }) => {
     const { t } = useTranslation()
     const { name, description, price, amount, images } = useProductContext()
