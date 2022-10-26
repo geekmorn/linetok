@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useEffect, useState } from 'react'
 import { nextAPIClient } from 'common/clients'
 import { NEXT_API } from 'common/constants'

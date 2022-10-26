@@ -1,10 +1,12 @@
-*.config.js
+next.config.js
+tsconfig.json
+next-env.d.ts
+tsconfig.json
 /build
 *.yaml
 pnpm-lock.yaml
 /dist
 /mock
-tsconfig.json
 /node_modules
 *.d.ts
 .next

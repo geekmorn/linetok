@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createStandaloneToast } from '@chakra-ui/react'
 import { QueryCache, QueryClient } from '@tanstack/react-query'
 

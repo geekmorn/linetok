@@ -4,7 +4,6 @@ import { HOME_ROUTE, Routes } from 'modules'
 import NextLink from 'next/link'
 import {
   useDisclosure,
-  Button,
   Drawer,
   DrawerOverlay,
   DrawerContent,

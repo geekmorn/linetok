@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { expectedOrigin, inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
@@ -28,9 +29,9 @@ export default async function handler(
       requireUserVerification: true
     }
     verification = await verifyRegistrationResponse(options)
-  } catch (e: any) {
-    console.error(e)
-    return res.status(400).send({ error: e.message })
+  } catch ({ message }) {
+    console.error(message)
+    return res.status(400).send({ error: message })
   }
 
   const { verified, registrationInfo } = verification

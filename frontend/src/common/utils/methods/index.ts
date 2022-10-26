@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { httpClient } from 'common/clients'
 
 export const all = async <Interface>(endpoint: string, client = httpClient) =>

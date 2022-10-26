@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { expectedOrigin, inMemoryUserDeviceDB, loggedInUserId, rpID } from '.'
 import base64url from 'base64url'
 import { NextApiRequest, NextApiResponse } from 'next'
@@ -41,9 +42,9 @@ export default async function handler(
       requireUserVerification: true
     }
     verification = await verifyAuthenticationResponse(options)
-  } catch (e: any) {
-    console.error(e)
-    return res.status(400).send({ error: e.message })
+  } catch ({ message }) {
+    console.error(message)
+    return res.status(400).send({ error: message })
   }
 
   const { verified, authenticationInfo } = verification

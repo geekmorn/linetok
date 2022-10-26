@@ -14,7 +14,7 @@ export const useScrollPosition = (): number => {
     return () => {
       window.removeEventListener('scroll', onScroll)
     }
-  }, [])
+  }, [onScroll])
 
   return scrollPosition
 }
