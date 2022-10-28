@@ -8,7 +8,7 @@ export const localeCodes = {
   English: 'en-EN'
 }
 
-export const API_URL = 'http://localhost:8000/api/' as const
+export const API_URL = new URL('http://localhost:8000/api/')
 
 export const API = {
   auth: '/auth/token',
