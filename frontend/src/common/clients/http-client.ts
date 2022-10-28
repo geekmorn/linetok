@@ -42,6 +42,6 @@ const withInterceptors = compose(
 const createClient = (baseURL: string) => axios.create({ baseURL })
 
 // This client is responsible for the Linetok API, which is made with FastAPI
-export const httpClient = withInterceptors(createClient(API_URL))
+export const httpClient = withInterceptors(createClient(API_URL.toString()))
 // This client is the Next.js API client, that is located at src/pages/api
 export const nextAPIClient = createClient('/api')
