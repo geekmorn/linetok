@@ -7,6 +7,7 @@ export * from './users'
 export * from './products'
 export * from './auth'
 export * from './banner'
+export * from './debug'
 // Logic
 export * from './navigation/components'
 export * from './products/components'

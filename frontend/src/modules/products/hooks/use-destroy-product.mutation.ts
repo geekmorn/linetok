@@ -6,5 +6,5 @@ import { useMutation } from '@tanstack/react-query'
 export const useDestroyProductMutation = () =>
   useMutation(
     ['Destroy the product'],
-    async (id: string) => await destroy<ProductType>(API.products, id)
+    async (id: number) => await destroy<ProductType>(API.products, id)
   )

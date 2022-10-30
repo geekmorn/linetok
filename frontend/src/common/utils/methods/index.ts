@@ -29,24 +29,27 @@ export const post =
       .then((response) => response.data)
       .catch((e) => {
         console.error(e)
+        return []
       })
 
 export const put =
   <Interface>(endpoint: string, client = httpClient) =>
-  (payload: Interface & { id: string }) =>
+  (payload: Interface & { id: number }) =>
     client
       .put<Interface>(`${endpoint}/${payload.id}`, payload)
       .then((response) => response.data)
       .catch((e) => {
         console.error(e)
+        return []
       })
 
 export const _delete =
   <Interface>(endpoint: string, client = httpClient) =>
-  (id: string) =>
+  (id: number) =>
     client
       .delete<Interface>(`${endpoint}/${id}`)
       .then((response) => response.data)
       .catch((e) => {
         console.error(e)
+        return []
       })

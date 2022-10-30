@@ -8,10 +8,10 @@ export const read = async <Interface>(endpoint: string, parameter?: unknown) =>
     ? await selected<Interface>(endpoint)(parameter)
     : await all<Interface>(endpoint)
 
-export const update = async <Interface extends { id: string }>(
+export const update = async <Interface extends { id: number }>(
   endpoint: string,
   payload: Interface
 ) => await put<Interface>(endpoint)(payload)
 
-export const destroy = async <Interface>(endpoint: string, id: string) =>
+export const destroy = async <Interface>(endpoint: string, id: number) =>
   await _delete<Interface>(endpoint)(id)

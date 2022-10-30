@@ -1,16 +1,20 @@
-import { EditableProduct, Loader, ProductCard } from './components'
+import { EditableProduct, Loader } from './components'
 import { ProductProvider } from './context'
 import { useDestroyProductMutation, useReadProductsQuery } from './hooks'
 import { mockProducts } from './mocks'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import useEvent from 'react-use-event-hook'
 import { useTranslation } from 'common/hooks'
 import { SUCCESSFULLY_REMOVED_PRODUCT } from 'common/i18n'
 import { ProductType } from 'common/types'
+import { Debug, DebugModeType } from 'modules'
 import { ProductsProps } from 'pages/admin/products'
-import { Center, useToast, Text, Highlight, Skeleton } from '@chakra-ui/react'
+import { Center, useToast, Text, Highlight } from '@chakra-ui/react'
+
+const isProductionMode = process.env.NODE_ENV === 'production'
 
 export const Products: FC<ProductsProps> = ({ initialData: data }) => {
+  const [debugMode] = useState<DebugModeType>('skeletons')
   const toast = useToast()
   const { t } = useTranslation()
   const { refetch } = useReadProductsQuery()
@@ -21,7 +25,7 @@ export const Products: FC<ProductsProps> = ({ initialData: data }) => {
   const dataReceived = Boolean(data?.length)
   const noDataReceived = !data || data.length === 0
 
-  const onRemove = useEvent((id: string) => async () => {
+  const onRemove = useEvent((id: number) => async () => {
     await mutateAsync(id, {
       onSuccess: () => {
         refetch()
@@ -29,9 +33,8 @@ export const Products: FC<ProductsProps> = ({ initialData: data }) => {
       }
     })
   })
-  // TODO remove
-  // && !mockProducts
-  if (noDataReceived && !mockProducts) {
+
+  if (noDataReceived && isProductionMode) {
     return (
       <Center>
         <Text>
@@ -63,18 +66,15 @@ export const Products: FC<ProductsProps> = ({ initialData: data }) => {
             />
           </ProductProvider>
         ))}
-        {mockProducts.map((mockProduct) => (
-          <Skeleton
-            key={mockProduct.id}
-            isLoaded={dataReceived}
-            fadeDuration={1}
-            speed={1}
-          >
-            <ProductProvider context={mockProduct}>
-              <ProductCard />
-            </ProductProvider>
-          </Skeleton>
-        ))}
+        {!isProductionMode &&
+          mockProducts.map((mockProduct) => (
+            <Debug
+              mode={debugMode}
+              data={mockProduct}
+              dataReceived={dataReceived}
+              key={mockProduct.id}
+            />
+          ))}
       </Center>
     </>
   )
