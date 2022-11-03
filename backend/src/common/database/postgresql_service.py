@@ -1,7 +1,8 @@
 from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import DatabaseError
-from sqlmodel import update, select
+from sqlalchemy.future import select
+from sqlalchemy import update
 
 
 class PostgreSQLService:
