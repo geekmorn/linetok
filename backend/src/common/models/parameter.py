@@ -1,13 +1,12 @@
-from .base import BaseModel
 from src.common.database import Base
-from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, Integer
 
 
-class ParameterModel(Base, BaseModel):
+class ParameterModel(Base):
     __tablename__ = "parameter"
 
-    name = Column(String(50), unique=True, index=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)
 
-    category = relationship("CategoryModel", back_populates="parameter")
-    product = relationship("ProductModel", back_populates="parameter")
+    def __repr__(self):
+        return self.name

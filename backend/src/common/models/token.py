@@ -1,10 +1,9 @@
 from src.common.database import Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
-from .base import BaseModel
 
 
-class TokenModel(Base, BaseModel):
+class TokenModel(Base):
     __tablename__ = "refresh_token"
 
     id = Column(String, primary_key=True, index=True)

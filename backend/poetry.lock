@@ -43,6 +43,18 @@ tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900
 tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
+name = "autopep8"
+version = "1.7.0"
+description = "A tool that automatically formats Python code to conform to the PEP 8 style guide"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pycodestyle = ">=2.9.1"
+toml = "*"
+
+[[package]]
 name = "bcrypt"
 version = "4.0.0"
 description = "Modern password hashing for your software and your servers"
@@ -245,6 +257,14 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "pycodestyle"
+version = "2.9.1"
+description = "Python style guide checker"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "pydantic"
 version = "1.10.2"
 description = "Data validation and settings management using python type hints"
@@ -392,6 +412,30 @@ pymysql = ["pymysql", "pymysql (<1)"]
 sqlcipher = ["sqlcipher3_binary"]
 
 [[package]]
+name = "sqlalchemy2-stubs"
+version = "0.0.2a29"
+description = "Typing Stubs for SQLAlchemy 1.4"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+typing-extensions = ">=3.7.4"
+
+[[package]]
+name = "sqlmodel"
+version = "0.0.8"
+description = "SQLModel, SQL databases in Python, designed for simplicity, compatibility, and robustness."
+category = "main"
+optional = false
+python-versions = ">=3.6.1,<4.0.0"
+
+[package.dependencies]
+pydantic = ">=1.8.2,<2.0.0"
+SQLAlchemy = ">=1.4.17,<=1.4.41"
+sqlalchemy2-stubs = "*"
+
+[[package]]
 name = "starlette"
 version = "0.20.4"
 description = "The little ASGI library that shines."
@@ -404,6 +448,14 @@ anyio = ">=3.4.0,<5"
 
 [package.extras]
 full = ["itsdangerous", "jinja2", "python-multipart", "pyyaml", "requests"]
+
+[[package]]
+name = "toml"
+version = "0.10.2"
+description = "Python Library for Tom's Obvious, Minimal Language"
+category = "dev"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "tomli"
@@ -452,7 +504,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.4.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "537499fa986a2f7150096b29cba80f323f9968339f4ce879a0ef4a93c79835ad"
+content-hash = "8b15a307f4e8f5a173ac8c55ad7dab69b919446421eeb7314d1c5dd7dd9ec795"
 
 [metadata.files]
 anyio = [
@@ -490,6 +542,10 @@ asyncpg = [
 attrs = [
     {file = "attrs-22.1.0-py2.py3-none-any.whl", hash = "sha256:86efa402f67bf2df34f51a335487cf46b1ec130d02b8d39fd248abfd30da551c"},
     {file = "attrs-22.1.0.tar.gz", hash = "sha256:29adc2665447e5191d0e7c568fde78b21f9672d344281d0c6e1ab085429b22b6"},
+]
+autopep8 = [
+    {file = "autopep8-1.7.0-py2.py3-none-any.whl", hash = "sha256:6f09e90a2be784317e84dc1add17ebfc7abe3924239957a37e5040e27d812087"},
+    {file = "autopep8-1.7.0.tar.gz", hash = "sha256:ca9b1a83e53a7fad65d731dc7a2a2d50aa48f43850407c59f6a1a306c4201142"},
 ]
 bcrypt = [
     {file = "bcrypt-4.0.0-cp36-abi3-macosx_10_10_universal2.whl", hash = "sha256:845b1daf4df2dd94d2fdbc9454953ca9dd0e12970a0bfc9f3dcc6faea3fa96e4"},
@@ -625,6 +681,10 @@ py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
     {file = "py-1.11.0.tar.gz", hash = "sha256:51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"},
 ]
+pycodestyle = [
+    {file = "pycodestyle-2.9.1-py2.py3-none-any.whl", hash = "sha256:d1735fc58b418fd7c5f658d28d943854f8a849b01a5d0a1e6f3f3fdd0166804b"},
+    {file = "pycodestyle-2.9.1.tar.gz", hash = "sha256:2c9607871d58c76354b697b42f5d57e1ada7d261c261efac224b664affdc5785"},
+]
 pydantic = [
     {file = "pydantic-1.10.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:bb6ad4489af1bac6955d38ebcb95079a836af31e4c4f74aba1ca05bb9f6027bd"},
     {file = "pydantic-1.10.2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:a1f5a63a6dfe19d719b1b6e6106561869d2efaca6167f84f5ab9347887d78b98"},
@@ -737,9 +797,21 @@ SQLAlchemy = [
     {file = "SQLAlchemy-1.4.41-cp39-cp39-win_amd64.whl", hash = "sha256:f5fa526d027d804b1f85cdda1eb091f70bde6fb7d87892f6dd5a48925bc88898"},
     {file = "SQLAlchemy-1.4.41.tar.gz", hash = "sha256:0292f70d1797e3c54e862e6f30ae474014648bc9c723e14a2fda730adb0a9791"},
 ]
+sqlalchemy2-stubs = [
+    {file = "sqlalchemy2-stubs-0.0.2a29.tar.gz", hash = "sha256:1bbc6aebd76db7c0351a9f45cc1c4e8ac335ba150094c2af091e8b87b9118419"},
+    {file = "sqlalchemy2_stubs-0.0.2a29-py3-none-any.whl", hash = "sha256:ece266cdabf3797b13ddddba27561b67ae7dedc038942bf66e045e978a5e3a66"},
+]
+sqlmodel = [
+    {file = "sqlmodel-0.0.8-py3-none-any.whl", hash = "sha256:0fd805719e0c5d4f22be32eb3ffc856eca3f7f20e8c7aa3e117ad91684b518ee"},
+    {file = "sqlmodel-0.0.8.tar.gz", hash = "sha256:3371b4d1ad59d2ffd0c530582c2140b6c06b090b32af9b9c6412986d7b117036"},
+]
 starlette = [
     {file = "starlette-0.20.4-py3-none-any.whl", hash = "sha256:c0414d5a56297d37f3db96a84034d61ce29889b9eaccf65eb98a0b39441fcaa3"},
     {file = "starlette-0.20.4.tar.gz", hash = "sha256:42fcf3122f998fefce3e2c5ad7e5edbf0f02cf685d646a83a08d404726af5084"},
+]
+toml = [
+    {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
+    {file = "toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},

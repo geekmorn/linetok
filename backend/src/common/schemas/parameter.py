@@ -1,24 +1,20 @@
-from pydantic import BaseModel, validator
-from .base import Base
-from fastapi import HTTPException
+from pydantic import BaseModel
 
 
-class ParameterCreate(BaseModel):
+class BaseParameter(BaseModel):
     name: str
 
-    @validator("name")
-    def is_null(cls, value):
-        if value == "":
-            raise HTTPException(400, "Name cannot be empty")
-        return value
 
-class ParameterUpdate(BaseModel):
-    name: str
-    active: bool = True
+class ParameterCreate(BaseParameter):
+    pass
 
 
-class Parameter(Base):
-    name: str
+class ParameterUpdate(BaseParameter):
+    pass
+
+
+class Parameter(BaseParameter):
+    id: int
 
     class Config:
         orm_mode = True

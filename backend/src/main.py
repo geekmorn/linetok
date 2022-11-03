@@ -29,6 +29,10 @@ async def startup():
     await db.open_connection()
 
 
+@app.on_event("shutdown")
+async def shutdown():
+    await db.session.close()
+
 
 @app.exception_handler(AuthJWTException)
 def authjwt_exception_handler(request: Request, exc: AuthJWTException):

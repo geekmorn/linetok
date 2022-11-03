@@ -1,15 +1,9 @@
-from inspect import Parameter
-from .base import BaseModel
 from src.common.database import Base
-from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, Integer
 
 
-class CategoryModel(Base, BaseModel):
+class CategoryModel(Base):
     __tablename__ = "category"
 
-    name = Column(String(50), unique=True, index=True)
-    parameter_id = Column(String, ForeignKey("parameter.id"))
-
-    parameter = relationship("ParameterModel", back_populates="category")
-    product = relationship("ProductModel", back_populates="category")
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)

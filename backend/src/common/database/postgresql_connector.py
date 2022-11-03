@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncEngine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
+
 Base = declarative_base()
 
 
@@ -41,4 +42,6 @@ class PostgresqlConnector:
 
     async def open_connection(self):
         async with self.engine.begin() as connection:
+            # TODO remove
+            # await connection.run_sync(Base.metadata.drop_all)
             await connection.run_sync(Base.metadata.create_all)

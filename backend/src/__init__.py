@@ -1,3 +1,4 @@
+import os
 import uvicorn
 from src.common.config import config
 
@@ -10,6 +11,5 @@ def start_app():
         reload=True
     )
 
-
-if __name__ == "__main__":
-    start_app()
+def run_tests():
+    return os.system("pytest -s -v")
