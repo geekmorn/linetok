@@ -15,7 +15,7 @@ router = APIRouter()
 async def get_all():
     categories: list[Category] | None = await db.get_all(CategoryModel)
     if len(categories) == 0:
-        raise HTTPException(404)
+        raise HTTPException(404, "No categories entries found in the database")
 
     return categories
 
@@ -28,7 +28,7 @@ async def get(id: int):
         id
     )
     if category is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No categories entries found in the database")
 
     return category
 
@@ -54,7 +54,7 @@ async def update(id: int, payload: CategoryUpdate):
         id
     )
     if category is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No categories entries found in the database")
 
     return await db.put(category, **payload.dict())
 
@@ -70,6 +70,6 @@ async def delete(id: int):
         id
     )
     if category is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No categories entries found in the database")
 
     return await db.delete(category)

@@ -15,7 +15,7 @@ router = APIRouter()
 async def get_all():
     parameters: list[Parameter] | None = await db.get_all(ParameterModel)
     if len(parameters) == 0:
-        raise HTTPException(404)
+        raise HTTPException(404, "No parameters entries found in the database")
 
     return parameters
 
@@ -28,7 +28,7 @@ async def get(id: int):
         id
     )
     if parameter is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No parameters entries found in the database")
 
     return parameter
 
@@ -53,7 +53,7 @@ async def update(id: int, payload: ParameterUpdate):
         id
     )
     if parameter is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No parameters entries found in the database")
 
     return await db.put(parameter, **payload.dict())
 
@@ -68,6 +68,6 @@ async def delete(id: int):
         id
     )
     if parameter is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No parameters entries found in the database")
 
     return await db.delete(parameter)

@@ -15,8 +15,8 @@ router = APIRouter()
 @router.get("/", response_model=list[Product])
 async def get_all():
     products: list[Product] | None = await db.get_all(ProductModel)
-    if products is None:
-        raise HTTPException(404)
+    if len(products) == 0:
+        raise HTTPException(404, "No products entries found in the database")
 
     return products
 
@@ -25,7 +25,7 @@ async def get_all():
 async def get(id: int):
     product: Product | None = await db.get(ProductModel, ProductModel.id, id)
     if product is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No products entries found in the database")
 
     return product
 
@@ -52,7 +52,7 @@ async def update(id: int, payload: ProductUpdate):
     failed_parameters = await validate_parameters(payload.parameters)
 
     if product is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No products entries found in the database")
     elif category is None and payload.category_id is not None:
         raise HTTPException(404, "Category not found")
     elif failed_parameters:
@@ -67,6 +67,6 @@ async def update(id: int, payload: ProductUpdate):
 async def delete(id: int):
     product: Product | None = await db.get(ProductModel, ProductModel.id, id)
     if product is None:
-        raise HTTPException(404)
+        raise HTTPException(404, "No products entries found in the database")
 
     return await db.delete(product)
