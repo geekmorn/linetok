@@ -14,11 +14,10 @@ import { Center, useToast, Text, Highlight } from '@chakra-ui/react'
 const isProductionMode = process.env.NODE_ENV === 'production'
 
 export const Products: FC<ProductsProps> = ({ initialData: data }) => {
-  const [debugMode] = useState<DebugModeType>('skeletons')
+  const [debugMode] = useState<DebugModeType>('mock')
   const toast = useToast()
   const { t } = useTranslation()
   const { refetch } = useReadProductsQuery()
-
   const { mutateAsync, isLoading: isDestroyLoading } =
     useDestroyProductMutation()
 
@@ -34,30 +33,22 @@ export const Products: FC<ProductsProps> = ({ initialData: data }) => {
     })
   })
 
-  if (noDataReceived && isProductionMode) {
+  if (isProductionMode) {
     return (
-      <Center>
-        <Text>
-          <Highlight
-            query={['прыходзьце пазней', 'come later']}
-            styles={{ bg: 'orange.100', px: '1', py: '1' }}
-          >
-            {t.products.notFound}
-          </Highlight>
-        </Text>
-      </Center>
-    )
-  }
-
-  return (
-    <>
-      <Loader loading={noDataReceived} />
-      <Center
-        sx={{
-          flexWrap: 'wrap',
-          gap: '1rem'
-        }}
-      >
+      <>
+        <Loader loading={noDataReceived} />
+        {noDataReceived && (
+          <Center>
+            <Text>
+              <Highlight
+                query={['прыходзьце пазней', 'come later']}
+                styles={{ bg: 'orange.100', px: '1', py: '1' }}
+              >
+                {t.products.notFound}
+              </Highlight>
+            </Text>
+          </Center>
+        )}
         {data?.map((product: ProductType) => (
           <ProductProvider context={product} key={product.id}>
             <EditableProduct
@@ -66,15 +57,26 @@ export const Products: FC<ProductsProps> = ({ initialData: data }) => {
             />
           </ProductProvider>
         ))}
-        {!isProductionMode &&
-          mockProducts.map((mockProduct) => (
-            <Debug
-              mode={debugMode}
-              data={mockProduct}
-              dataReceived={dataReceived}
-              key={mockProduct.id}
-            />
-          ))}
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Center
+        sx={{
+          flexWrap: 'wrap',
+          gap: '1rem'
+        }}
+      >
+        {mockProducts.map((mockProduct) => (
+          <Debug
+            mode={debugMode}
+            data={mockProduct}
+            dataReceived={dataReceived}
+            key={mockProduct.id}
+          />
+        ))}
       </Center>
     </>
   )

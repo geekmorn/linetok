@@ -5,7 +5,7 @@ type Environment = {
 }
 
 export const environment: Environment = {
-  NODE_ENV: process.env.NODE_ENV,
   API_URL: String(process.env.NEXT_PUBLIC_API_URL),
+  NODE_ENV: process.env.NODE_ENV,
   PUBLIC_URL: String(process.env.PUBLIC_URL)
 }
