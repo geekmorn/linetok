@@ -1,7 +1,11 @@
 from fastapi import APIRouter, HTTPException
 from src.common.database import db
-from src.common.utils import validate_parameters, validate_category
 from src.common.models import ProductModel
+from src.common.utils import (
+    validate_parameters,
+    validate_category,
+    not_found
+)
 from src.common.schemas import (
     Product,
     ProductCreate,
@@ -16,7 +20,7 @@ router = APIRouter()
 async def get_all():
     products: list[Product] | None = await db.get_all(ProductModel)
     if len(products) == 0:
-        raise HTTPException(404, "No products entries found in the database")
+        raise not_found("products", many=True)
 
     return products
 
@@ -25,7 +29,7 @@ async def get_all():
 async def get(id: int):
     product: Product | None = await db.get(ProductModel, ProductModel.id, id)
     if product is None:
-        raise HTTPException(404, "No products entries found in the database")
+        raise not_found("product")
 
     return product
 
@@ -36,7 +40,8 @@ async def create(payload: ProductCreate):
     category = await validate_category(payload.category_id)
 
     if category is None and payload.category_id is not None:
-        raise HTTPException(404, "Category not found")
+        raise not_found("category")
+
     elif failed_parameters:
         raise HTTPException(
             409, {"Fields with these names cannot be created": failed_parameters}
@@ -52,9 +57,9 @@ async def update(id: int, payload: ProductUpdate):
     failed_parameters = await validate_parameters(payload.parameters)
 
     if product is None:
-        raise HTTPException(404, "No products entries found in the database")
+        raise not_found("product")
     elif category is None and payload.category_id is not None:
-        raise HTTPException(404, "Category not found")
+        raise not_found("category")
     elif failed_parameters:
         raise HTTPException(
             409, {"Fields with these names cannot be updated": failed_parameters}
@@ -67,6 +72,6 @@ async def update(id: int, payload: ProductUpdate):
 async def delete(id: int):
     product: Product | None = await db.get(ProductModel, ProductModel.id, id)
     if product is None:
-        raise HTTPException(404, "No products entries found in the database")
+        raise not_found("product")
 
     return await db.delete(product)

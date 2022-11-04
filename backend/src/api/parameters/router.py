@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from src.common.database import db
 from src.common.models import ParameterModel, ProductModel
+from src.common.utils import not_found, already_exist
 from src.common.schemas import (
     Product,
     Parameter,
@@ -17,7 +18,7 @@ router = APIRouter()
 async def get_all():
     parameters: list[Parameter] | None = await db.get_all(ParameterModel)
     if len(parameters) == 0:
-        raise HTTPException(404, "No parameters entries found in the database")
+        raise not_found("parameters", many=True)
 
     return parameters
 
@@ -30,7 +31,7 @@ async def get(id: int):
         id
     )
     if parameter is None:
-        raise HTTPException(404, "No parameters entries found in the database")
+        raise not_found("parameter")
 
     return parameter
 
@@ -43,7 +44,8 @@ async def create(payload: ParameterCreate):
         payload.name
     )
     if parameter:
-        raise HTTPException(409, "Parameter with this name already exist")
+        raise already_exist("parameter")
+
     return await db.post(ParameterModel, **payload.dict())
 
 
@@ -55,7 +57,7 @@ async def update(id: int, payload: ParameterUpdate):
         id
     )
     if parameter is None:
-        raise HTTPException(404, "No parameters entries found in the database")
+        not_found("parameter")
 
     products: list[Product] | None = await db.get_all(ProductModel)
     for product in products:
@@ -77,7 +79,7 @@ async def delete(id: int):
         id
     )
     if parameter is None:
-        raise HTTPException(404, "No parameters entries found in the database")
+        not_found("parameter")
 
     products: list[Product] | None = await db.get_all(ProductModel)
     for product in products:

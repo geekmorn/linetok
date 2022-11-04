@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from src.common.database import db
 from src.common.models import CategoryModel, ProductModel
+from src.common.utils import not_found, already_exist
 from src.common.schemas import (
     Product,
     Category,
@@ -17,7 +18,7 @@ router = APIRouter()
 async def get_all():
     categories: list[Category] | None = await db.get_all(CategoryModel)
     if len(categories) == 0:
-        raise HTTPException(404, "No categories entries found in the database")
+        raise not_found("categories", many=True)
 
     return categories
 
@@ -30,7 +31,7 @@ async def get(id: int):
         id
     )
     if category is None:
-        raise HTTPException(404, "No categories entries found in the database")
+        raise not_found("category")
 
     return category
 
@@ -43,7 +44,7 @@ async def create(payload: CategoryCreate):
         payload.name
     )
     if category:
-        raise HTTPException(409, "Category with this name already exist")
+        raise already_exist("category")
 
     return await db.post(CategoryModel, **payload.dict())
 
@@ -56,7 +57,7 @@ async def update(id: int, payload: CategoryUpdate):
         id
     )
     if category is None:
-        raise HTTPException(404, "No categories entries found in the database")
+        raise not_found("category")
 
     return await db.put(category, **payload.dict())
 
@@ -69,7 +70,7 @@ async def delete(id: int):
         id
     )
     if category is None:
-        raise HTTPException(404, "No categories entries found in the database")
+        raise not_found("category")
 
     products: list[Product] | None = await db.get_all(ProductModel)
     for product in products:

@@ -6,6 +6,12 @@ from sqlalchemy import update
 
 
 class PostgreSQLService:
+    """Implements HTTP -> PostgreSQL service.
+
+    Args:
+        session (AsyncSession): a database session.
+    """
+
     def __init__(self, session: AsyncSession):
         self.session = session
 
