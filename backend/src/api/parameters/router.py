@@ -1,10 +1,12 @@
 from fastapi import APIRouter, HTTPException
 from src.common.database import db
-from src.common.models import ParameterModel
+from src.common.models import ParameterModel, ProductModel
 from src.common.schemas import (
+    Product,
     Parameter,
     ParameterCreate,
-    ParameterUpdate
+    ParameterUpdate,
+    ProductUpdate
 )
 
 
@@ -55,9 +57,16 @@ async def update(id: int, payload: ParameterUpdate):
     if parameter is None:
         raise HTTPException(404, "No parameters entries found in the database")
 
-    return await db.put(parameter, **payload.dict())
+    products: list[Product] | None = await db.get_all(ProductModel)
+    for product in products:
+        parameters = product.parameters
+        if str(parameter) in parameters:
+            parameters[payload.name] = parameters[str(parameter)]
+            del parameters[str(parameter)]
+            await db.put(product, **ProductUpdate(
+                parameters=parameters).dict(exclude_unset=True))
 
-# TODO Logic when deleting parameter
+    return await db.put(parameter, **payload.dict())
 
 
 @router.delete("/{id}", response_model=Parameter)
@@ -69,5 +78,13 @@ async def delete(id: int):
     )
     if parameter is None:
         raise HTTPException(404, "No parameters entries found in the database")
+
+    products: list[Product] | None = await db.get_all(ProductModel)
+    for product in products:
+        parameters = product.parameters
+        if str(parameter) in parameters:
+            del parameters[str(parameter)]
+            await db.put(product, **ProductUpdate(
+                parameters=parameters).dict(exclude_unset=True))
 
     return await db.delete(parameter)

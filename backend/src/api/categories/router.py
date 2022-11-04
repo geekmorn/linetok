@@ -1,10 +1,12 @@
 from fastapi import APIRouter, HTTPException
 from src.common.database import db
-from src.common.models import CategoryModel
+from src.common.models import CategoryModel, ProductModel
 from src.common.schemas import (
+    Product,
     Category,
     CategoryCreate,
-    CategoryUpdate
+    CategoryUpdate,
+    ProductUpdate
 )
 
 
@@ -59,9 +61,6 @@ async def update(id: int, payload: CategoryUpdate):
     return await db.put(category, **payload.dict())
 
 
-# TODO Logic when deleting parameter
-
-
 @router.delete("/{id}", response_model=Category)
 async def delete(id: int):
     category: Category | None = await db.get(
@@ -71,5 +70,11 @@ async def delete(id: int):
     )
     if category is None:
         raise HTTPException(404, "No categories entries found in the database")
+
+    products: list[Product] | None = await db.get_all(ProductModel)
+    for product in products:
+        if product.category_id == id:
+            await db.put(product, **ProductUpdate(
+                categoruId=None).dict(exclude_unset=True))
 
     return await db.delete(category)
