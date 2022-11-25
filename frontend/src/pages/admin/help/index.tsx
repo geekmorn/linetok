@@ -1,16 +1,6 @@
+import { HelpBreadcrumb } from './help-breadcrumb'
 import type { NextPage } from 'next'
-import NextLink from 'next/link'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Divider,
-  Heading,
-  Highlight,
-  Link,
-  Stack,
-  Text
-} from '@chakra-ui/react'
+import { Divider, Heading, Highlight, Stack, Text } from '@chakra-ui/react'
 
 const AdminProductsPage: NextPage = () => (
   <Stack
@@ -24,25 +14,7 @@ const AdminProductsPage: NextPage = () => (
       width: '100%'
     }}
   >
-    <Breadcrumb fontWeight="medium" fontSize="sm">
-      <BreadcrumbItem>
-        <NextLink passHref href="/">
-          <BreadcrumbLink as={Link}>Home</BreadcrumbLink>
-        </NextLink>
-      </BreadcrumbItem>
-      <BreadcrumbItem>
-        <NextLink passHref href="/admin">
-          <BreadcrumbLink as={Link}>Admin</BreadcrumbLink>
-        </NextLink>
-      </BreadcrumbItem>
-      <BreadcrumbItem>
-        <NextLink passHref href="/admin/help">
-          <BreadcrumbLink as={Link} isCurrentPage>
-            Help
-          </BreadcrumbLink>
-        </NextLink>
-      </BreadcrumbItem>
-    </Breadcrumb>
+    <HelpBreadcrumb />
     <Heading>Help is here</Heading>
     <Stack>
       <Text>

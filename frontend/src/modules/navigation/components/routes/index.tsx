@@ -4,7 +4,7 @@ import { Link } from '@chakra-ui/react'
 
 export const routes = [
   {
-    name: '',
+    name: 'Home',
     path: '/'
   },
   {

@@ -28,7 +28,7 @@ import {
 export const Users: FC<UsersProps> = ({ initialData: data }) => {
   const { t } = useTranslation()
 
-  const noDataReceived = !data || data.length === 0
+  const noDataReceived = !data || data?.length === 0
 
   if (noDataReceived) {
     return (

@@ -22,7 +22,7 @@ export const Products: FC<ProductsProps> = ({ initialData: data }) => {
     useDestroyProductMutation()
 
   const dataReceived = Boolean(data?.length)
-  const noDataReceived = !data || data.length === 0
+  const noDataReceived = !data || data?.length === 0
 
   const onRemove = useEvent((id: number) => async () => {
     await mutateAsync(id, {
@@ -66,7 +66,7 @@ export const Products: FC<ProductsProps> = ({ initialData: data }) => {
       <Center
         sx={{
           flexWrap: 'wrap',
-          gap: '1rem'
+          gap: '0.5rem'
         }}
       >
         {mockProducts.map((mockProduct) => (
